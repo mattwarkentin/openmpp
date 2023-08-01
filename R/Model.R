@@ -10,15 +10,18 @@
 #' @md
 #'
 #' @export
-get_model_list <- function() {
-  api_path <- 'api/model-list/text'
+get_model <- function(model) {
+  if (!rlang::is_scalar_character(model)) {
+    rlang::abort('`model` must be a string.')
+  }
+  api_path <- glue::glue('api/model/{model}/text')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_list
+#' @rdname get_model
 #' @export
 get_models <- function() {
   get_model_list() |>
@@ -26,13 +29,10 @@ get_models <- function() {
     tidyr::unnest(tidyr::everything())
 }
 
-#' @rdname get_model_list
+#' @rdname get_model
 #' @export
-get_model <- function(model) {
-  if (!rlang::is_scalar_character(model)) {
-    rlang::abort('`model` must be a string.')
-  }
-  api_path <- glue::glue('api/model/{model}/text')
+get_models_list <- function() {
+  api_path <- 'api/model-list/text'
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

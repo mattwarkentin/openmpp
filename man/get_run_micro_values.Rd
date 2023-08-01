@@ -4,7 +4,7 @@
 \alias{get_run_micro_values}
 \alias{get_model_mirco_value}
 \alias{get_model_mirco_value_csv}
-\title{Parameters, Output Tables, or Microdata}
+\title{Microdata}
 \usage{
 get_run_micro_values(model, run, data)
 

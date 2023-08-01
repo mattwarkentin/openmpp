@@ -9,7 +9,17 @@
 #' @return A `list` from a JSON response object.
 #'
 #' @export
-get_model_task_list <- function(model) {
+get_model_task <- function(model, task) {
+  api_path <- glue::glue('/api/model/{model}/task/{task}/text')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_model_task
+#' @export
+get_model_tasks_list <- function(model) {
   api_path <- glue::glue('api/model/{model}/task-list')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
@@ -17,7 +27,18 @@ get_model_task_list <- function(model) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_task_list
+#' @rdname get_model_task
+#' @export
+get_model_tasks <- function(model) {
+  api_path <- glue::glue('api/model/{model}/task-list')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json() |>
+    tibblify::tibblify()
+}
+
+#' @rdname get_model_task
 #' @export
 get_model_task_worksets <- function(model, task) {
   api_path <- glue::glue('api/model/{model}/task/{task}/sets')
@@ -27,7 +48,7 @@ get_model_task_worksets <- function(model, task) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_task_list
+#' @rdname get_model_task
 #' @export
 get_model_task_hist <- function(model, task) {
   api_path <- glue::glue('api/model/{model}/task/{task}/runs')
@@ -37,7 +58,7 @@ get_model_task_hist <- function(model, task) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_task_list
+#' @rdname get_model_task
 #' @export
 get_model_task_status <- function(model, task, run) {
   api_path <- glue::glue('api/model/{model}/task/{task}/run-status/run/{run}')
@@ -47,7 +68,7 @@ get_model_task_status <- function(model, task, run) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_task_list
+#' @rdname get_model_task
 #' @export
 get_model_task_run_list_status <- function(model, task, run) {
   api_path <- glue::glue('api/model/{model}/task/{task}/run-status/list/{run}')
@@ -57,7 +78,7 @@ get_model_task_run_list_status <- function(model, task, run) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_task_list
+#' @rdname get_model_task
 #' @export
 get_model_task_run_first <- function(model, task) {
   api_path <- glue::glue('api/model/{model}/task/{task}/run-status/first')
@@ -67,7 +88,7 @@ get_model_task_run_first <- function(model, task) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_task_list
+#' @rdname get_model_task
 #' @export
 get_model_task_run_last <- function(model, task) {
   api_path <- glue::glue('api/model/{model}/task/{task}/run-status/last')
@@ -77,20 +98,10 @@ get_model_task_run_last <- function(model, task) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_model_task_list
+#' @rdname get_model_task
 #' @export
 get_model_task_run_compl <- function(model, task) {
   api_path <- glue::glue('api/model/{model}/task/{task}/run-status/last-completed')
-  httr2::request(api_url()) |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
-}
-
-#' @rdname get_model_task_list
-#' @export
-get_model_task <- function(model, task) {
-  api_path <- glue::glue('/api/model/{model}/task/{task}/text')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

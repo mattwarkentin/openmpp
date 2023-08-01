@@ -1,6 +1,6 @@
 #' OncoSimX Model Class
 #'
-#' @inheritParams get_model_list
+#' @inheritParams get_model
 #' @param ... Not currently used.
 #'
 #' @importFrom R6 R6Class

@@ -11,7 +11,7 @@
 \alias{get_run_table_calc_csv}
 \alias{get_model_table_acc_csv}
 \alias{get_model_table_all_acc_csv}
-\title{Parameters, Output Tables, or Microdata}
+\title{Output Tables}
 \usage{
 get_run_table_values(model, run, data)
 

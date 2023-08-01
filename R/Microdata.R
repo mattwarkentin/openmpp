@@ -1,4 +1,4 @@
-#' Parameters, Output Tables, or Microdata
+#' Microdata
 #'
 #' Functions for retrieving parameters, output tables, and microdata from
 #'   models, model runs, and worksets.

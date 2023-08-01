@@ -1,6 +1,6 @@
 #' OncoSimX Workset Class
 #'
-#' @inheritParams get_model_list
+#' @inheritParams get_model
 #' @inheritParams get_param_values
 #' @param ... Not currently used.
 #'
