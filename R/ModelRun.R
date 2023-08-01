@@ -40,7 +40,6 @@ get_model_run_list_status <- function(model, run) {
 #' @export
 get_model_run_status_first <- function(model) {
   api_path <- glue::glue('api/model/{model}/run/status/first')
-  rlang::check_dots_empty()
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

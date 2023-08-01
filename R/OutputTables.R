@@ -81,7 +81,6 @@ get_model_table_all_acc <- function(model, run, name, data) {
 #' @export
 get_run_table_expr_csv <- function(model, run, name) {
   api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/expr/csv')
-  rlang::check_dots_empty()
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
