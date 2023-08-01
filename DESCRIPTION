@@ -1,11 +1,25 @@
 Package: oncosim
-Title: What the Package Does (One Line, Title Case)
+Title: Programmatic interface to the OncoSimX Web Platform
 Version: 0.0.0.9000
 Authors@R: 
     person("Matthew T.", "Warkentin", , "warkentin@lunenfeld.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8730-3511"))
-Description: What the package does (one paragraph).
+Description: This package provides a programmatic interfact to the OncoSimX
+  web-based platform. OncoSim is a free, web-based simulation tool that
+  can be used to evaluate cancer control strategies.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Depends:
+  R (>= 4.1.0)
+Imports: 
+    cli,
+    glue,
+    httr2,
+    purrr,
+    R6,
+    readr,
+    rlang,
+    tibblify,
+    tidyr
