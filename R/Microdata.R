@@ -12,7 +12,7 @@
 #'
 #' @export
 get_run_microdata <- function(model, run, name, data) {
-  api_path <- glue::glue('api/model/{model}/run/{run}/microdata/{name}/value')
+  api_path <- glue::glue('api/model/{model}/run/{run}/microdata/{name}/valuestart/0/count/0')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_body_json(data = data) |>

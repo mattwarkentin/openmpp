@@ -16,6 +16,8 @@ OncoSimXModelRun <-
   R6::R6Class(
     classname = 'OncoSimXModelRun',
     inherit = OncoSimXModel,
+    cloneable = FALSE,
+    portable = FALSE,
     public = list(
 
       #' @field RunName Run name.
@@ -50,12 +52,15 @@ OncoSimXModelRun <-
       #' @description
       #' Load all tables.
       #' @return Self, invisibly.
-      populate_tables = function() {
-        tbl_names <- names(self$Tables)
-        self$Tables = purrr::map(tbl_names, \(x) {
-          get_run_table_csv(self$ModelDigest, self$RunDigest, x)
-        }, .progress = TRUE)
-        self$Tables <- rlang::set_names(self$Tables, tbl_names)
+      load_tables = function() {
+        if (!private$.tables_loaded) {
+          tbl_names <- names(self$Tables)
+          self$Tables = purrr::map(tbl_names, \(x) {
+            get_run_table_csv(self$ModelDigest, self$RunDigest, x)
+          }, .progress = TRUE)
+          self$Tables <- rlang::set_names(self$Tables, tbl_names)
+          private$.tables_loaded <- TRUE
+        }
         invisible(self)
       },
 
@@ -74,12 +79,15 @@ OncoSimXModelRun <-
       #' @description
       #' Load all parameters.
       #' @return Self, invisibly.
-      populate_params = function() {
-        par_names <- names(self$Params)
-        self$Params = purrr::map(par_names, \(x) {
-          get_run_param_csv(self$ModelDigest, self$RunDigest, x)
-        }, .progress = TRUE)
-        self$Params <- rlang::set_names(self$Params, par_names)
+      load_params = function() {
+        if (!private$.params_loaded) {
+          par_names <- names(self$Params)
+          self$Params = purrr::map(par_names, \(x) {
+            get_run_param_csv(self$ModelDigest, self$RunDigest, x)
+          }, .progress = TRUE)
+          self$Params <- rlang::set_names(self$Params, par_names)
+          private$.params_loaded <- TRUE
+        }
         invisible(self)
       },
 
@@ -103,10 +111,30 @@ OncoSimXModelRun <-
         super$print()
         cli::cli_alert(paste0('RunName: ', self$RunName))
         cli::cli_alert(paste0('RunDigest: ', self$RunDigest))
+      },
+
+      #' @description
+      #' Write a parameter to disk (CSV).
+      #' @param name Parameter name.
+      #' @param file Not currently used.
+      #' @return  `name`, invisibly.
+      extract_param = function(name, file) {
+        readr::write_csv(self$get_param(name), file)
+      },
+
+      #' @description
+      #' Write an output table to disk (CSV).
+      #' @param name Table name.
+      #' @param file Not currently used.
+      #' @return  `name`, invisibly.
+      extract_table = function(name, file) {
+        readr::write_csv(self$get_table(name), file)
       }
     ),
     private = list(
-      .run = NULL
+      .run = NULL,
+      .params_loaded = FALSE,
+      .tables_loaded = FALSE
     ),
     active = list()
   )

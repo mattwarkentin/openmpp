@@ -30,7 +30,8 @@ get_model_runs_list <- function(model) {
 #' @export
 get_model_runs <- function(model) {
   get_model_runs_list(model) |>
-    tibblify::tibblify()
+    tibblify::tibblify() |>
+    suppressMessages()
 }
 
 #' @rdname get_model_run

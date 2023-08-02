@@ -23,14 +23,13 @@ OncoSimX Workset Class
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXModelTask-new}{\code{OncoSimXModelTask$new()}}
-\item \href{#method-OncoSimXModelTask-clone}{\code{OncoSimXModelTask$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelTask-new"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXModelTask-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new OncoSimXModelTask object.
+Create a new \code{OncoSimXModelTask} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelTask$new(model, task)}\if{html}{\out{</div>}}
 }
@@ -40,29 +39,12 @@ Create a new OncoSimXModelTask object.
 \describe{
 \item{\code{model}}{Model digest or name.}
 
-\item{\code{task}}{Taks name.}
+\item{\code{task}}{Task name.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new \code{OncoSimXModel} object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelTask-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelTask-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelTask$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
+A new \code{OncoSimXModelTask} object.
 }
 }
 }
@@ -80,14 +62,21 @@ The objects of this class are cloneable with this method.
 }
 \if{html}{\out{</div>}}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{ReadOnly}}{Workset read-only status.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXWorkset-new}{\code{OncoSimXWorkset$new()}}
-\item \href{#method-OncoSimXWorkset-populate_params}{\code{OncoSimXWorkset$populate_params()}}
+\item \href{#method-OncoSimXWorkset-load_params}{\code{OncoSimXWorkset$load_params()}}
 \item \href{#method-OncoSimXWorkset-get_param}{\code{OncoSimXWorkset$get_param()}}
 \item \href{#method-OncoSimXWorkset-print}{\code{OncoSimXWorkset$print()}}
-\item \href{#method-OncoSimXWorkset-clone}{\code{OncoSimXWorkset$clone()}}
+\item \href{#method-OncoSimXWorkset-extract_param}{\code{OncoSimXWorkset$extract_param()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -113,12 +102,12 @@ A new \code{OncoSimXModel} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-populate_params"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-populate_params}{}}}
-\subsection{Method \code{populate_params()}}{
+\if{html}{\out{<a id="method-OncoSimXWorkset-load_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-load_params}{}}}
+\subsection{Method \code{load_params()}}{
 Load all parameters.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$populate_params()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$load_params()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
@@ -166,20 +155,25 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
+\if{html}{\out{<a id="method-OncoSimXWorkset-extract_param"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-extract_param}{}}}
+\subsection{Method \code{extract_param()}}{
+Write a parameter to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$extract_param(name, file)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{deep}}{Whether to make a deep clone.}
+\item{\code{name}}{Parameter name.}
+
+\item{\code{file}}{Not currently used.}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{name}, invisibly.
 }
 }
 }

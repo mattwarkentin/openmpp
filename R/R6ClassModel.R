@@ -17,6 +17,8 @@ load_model <- function(model) {
 OncoSimXModel <-
   R6::R6Class(
     classname = 'OncoSimXModel',
+    cloneable = FALSE,
+    portable = FALSE,
     public = list(
       #' @field Type Object type (used for `print()`).
       Type = 'Model',
@@ -64,13 +66,15 @@ OncoSimXModel <-
             purrr::discard_at(x, 'ParamDimsTxt') |>
             purrr::list_flatten(name_spec = '{inner}')
           }) |>
-          tibblify::tibblify()
+          tibblify::tibblify() |>
+          suppressMessages()
         self$TableInfo <-
           purrr::map(private$.model$TableTxt, \(x) {
             purrr::discard_at(x,  c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')) |>
               purrr::list_flatten(name_spec = '{inner}')
           }) |>
-          tibblify::tibblify()
+          tibblify::tibblify() |>
+          suppressMessages()
       },
 
       #' @description
@@ -89,13 +93,13 @@ OncoSimXModel <-
       .model = NULL
     ),
     active = list(
+      #' @field workset_list List of worksets.
+      workset_list = function() get_worksets(self$ModelDigest),
+
       #' @field run_list List of model runs.
       run_list = function() get_model_runs(self$ModelDigest),
 
       #' @field task_list List of model tasks.
-      task_list = function() get_model_tasks(self$ModelDigest),
-
-      #' @field workset_list List of worksets.
-      workset_list = function() get_worksets(self$ModelDigest)
+      task_list = function() get_model_tasks(self$ModelDigest)
     )
   )

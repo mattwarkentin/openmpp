@@ -28,7 +28,8 @@ get_model <- function(model) {
 get_models <- function() {
   get_models_list() |>
     purrr::map(\(x) x$Model) |>
-    tibblify::tibblify()
+    tibblify::tibblify() |>
+    suppressMessages()
 }
 
 #' @rdname get_model

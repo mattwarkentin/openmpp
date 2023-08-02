@@ -6,6 +6,7 @@
 \alias{get_worksets}
 \alias{get_workset_status}
 \alias{get_workset_status_default}
+\alias{set_workset_readonly}
 \alias{create_workset}
 \alias{replace_workset}
 \alias{delete_workset}
@@ -26,6 +27,8 @@ get_worksets(model)
 get_workset_status(model, set)
 
 get_workset_status_default(model, set)
+
+set_workset_readonly(model, set, readonly)
 
 create_workset(data)
 
@@ -49,6 +52,8 @@ merge_param_workset_to_workset(model, set, name, from)
 \item{model}{Model digest or model name.}
 
 \item{set}{Name of workset (input set of model parameters).}
+
+\item{readonly}{Boolean. Should workset be read-only?}
 
 \item{data}{Data used for the body of the POST request.}
 

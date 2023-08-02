@@ -4,6 +4,7 @@
 #'   worksets.
 #'
 #' @param from Source workset name.
+#' @param readonly Boolean. Should workset be read-only?
 #' @inheritParams get_workset_param
 #' @inheritParams get_model
 #' @inheritParams get_run_microdata
@@ -33,7 +34,8 @@ get_worksets_list <- function(model) {
 #' @export
 get_worksets <- function(model) {
   get_worksets_list(model) |>
-    tibblify::tibblify()
+    tibblify::tibblify() |>
+    suppressMessages()
 }
 
 #' @rdname get_workset
@@ -54,6 +56,15 @@ get_workset_status_default <- function(model, set) {
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
+}
+
+#' @rdname get_workset
+#' @export
+set_workset_readonly <- function(model, set, readonly) {
+  api_path <- glue::glue('/api/model/{model}/workset/{set}/readonly/{readonly}')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform()
 }
 
 #' @rdname get_workset

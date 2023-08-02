@@ -11,7 +11,7 @@
 #'
 #' @export
 get_run_table <- function(model, run, name) {
-  api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/expr')
+  api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/exprstart/0/count/0')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

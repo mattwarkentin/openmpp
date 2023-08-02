@@ -41,12 +41,13 @@ OncoSimX Model Run Class
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXModelRun-new}{\code{OncoSimXModelRun$new()}}
-\item \href{#method-OncoSimXModelRun-populate_tables}{\code{OncoSimXModelRun$populate_tables()}}
+\item \href{#method-OncoSimXModelRun-load_tables}{\code{OncoSimXModelRun$load_tables()}}
 \item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
-\item \href{#method-OncoSimXModelRun-populate_params}{\code{OncoSimXModelRun$populate_params()}}
+\item \href{#method-OncoSimXModelRun-load_params}{\code{OncoSimXModelRun$load_params()}}
 \item \href{#method-OncoSimXModelRun-get_param}{\code{OncoSimXModelRun$get_param()}}
 \item \href{#method-OncoSimXModelRun-print}{\code{OncoSimXModelRun$print()}}
-\item \href{#method-OncoSimXModelRun-clone}{\code{OncoSimXModelRun$clone()}}
+\item \href{#method-OncoSimXModelRun-extract_param}{\code{OncoSimXModelRun$extract_param()}}
+\item \href{#method-OncoSimXModelRun-extract_table}{\code{OncoSimXModelRun$extract_table()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -72,12 +73,12 @@ A new \code{OncoSimXModel} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-populate_tables"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-populate_tables}{}}}
-\subsection{Method \code{populate_tables()}}{
+\if{html}{\out{<a id="method-OncoSimXModelRun-load_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_tables}{}}}
+\subsection{Method \code{load_tables()}}{
 Load all tables.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$populate_tables()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_tables()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
@@ -105,12 +106,12 @@ A \code{tibble}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-populate_params"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-populate_params}{}}}
-\subsection{Method \code{populate_params()}}{
+\if{html}{\out{<a id="method-OncoSimXModelRun-load_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_params}{}}}
+\subsection{Method \code{load_params()}}{
 Load all parameters.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$populate_params()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_params()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
@@ -158,20 +159,47 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
+\if{html}{\out{<a id="method-OncoSimXModelRun-extract_param"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-extract_param}{}}}
+\subsection{Method \code{extract_param()}}{
+Write a parameter to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$extract_param(name, file)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{deep}}{Whether to make a deep clone.}
+\item{\code{name}}{Parameter name.}
+
+\item{\code{file}}{Not currently used.}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{name}, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-extract_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-extract_table}{}}}
+\subsection{Method \code{extract_table()}}{
+Write an output table to disk (CSV).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$extract_table(name, file)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+
+\item{\code{file}}{Not currently used.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{name}, invisibly.
 }
 }
 }

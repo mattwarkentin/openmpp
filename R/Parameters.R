@@ -12,7 +12,7 @@
 #'
 #' @export
 get_workset_param <- function(model, set, name) {
-  api_path <- glue::glue('api/model/{model}/workset/{set}/parameter/{name}/value')
+  api_path <- glue::glue('api/model/{model}/workset/{set}/parameter/{name}/value/start/0/count/0')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
@@ -33,7 +33,7 @@ get_workset_param_csv <- function(model, set, name) {
 #' @rdname get_workset_param
 #' @export
 get_run_param <- function(model, run, name) {
-  api_path <- glue::glue('api/model/{model}/run/{run}/parameter/{name}/value')
+  api_path <- glue::glue('api/model/{model}/run/{run}/parameter/{name}/value/start/0/count/0')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

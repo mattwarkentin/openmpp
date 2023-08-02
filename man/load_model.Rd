@@ -42,11 +42,11 @@ OncoSimX Model Class
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
+\item{\code{workset_list}}{List of worksets.}
+
 \item{\code{run_list}}{List of model runs.}
 
 \item{\code{task_list}}{List of model tasks.}
-
-\item{\code{workset_list}}{List of worksets.}
 }
 \if{html}{\out{</div>}}
 }
@@ -55,7 +55,6 @@ OncoSimX Model Class
 \itemize{
 \item \href{#method-OncoSimXModel-new}{\code{OncoSimXModel$new()}}
 \item \href{#method-OncoSimXModel-print}{\code{OncoSimXModel$print()}}
-\item \href{#method-OncoSimXModel-clone}{\code{OncoSimXModel$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -96,23 +95,6 @@ Print a OncoSimXModel object.
 }
 \subsection{Returns}{
 Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModel-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModel-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModel$clone(deep = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
 }
 }
 }

@@ -33,7 +33,8 @@ get_model_tasks_list <- function(model) {
 #' @export
 get_model_tasks <- function(model) {
   get_model_tasks_list(model) |>
-    tibblify::tibblify()
+    tibblify::tibblify() |>
+    suppressMessages()
 }
 
 #' @rdname get_model_task

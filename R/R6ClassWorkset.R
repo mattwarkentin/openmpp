@@ -16,6 +16,8 @@ OncoSimXWorkset <-
   R6::R6Class(
     classname = 'OncoSimXWorkset',
     inherit = OncoSimXModel,
+    cloneable = FALSE,
+    portable = FALSE,
     public = list(
       #' @field WorksetName Workset name.
       WorksetName = NULL,
@@ -41,12 +43,15 @@ OncoSimXWorkset <-
       #' @description
       #' Load all parameters.
       #' @return Self, invisibly.
-      populate_params = function() {
-        par_names <- names(self$Params)
-        self$Params = purrr::map(par_names, \(x) {
-          get_workset_param_csv(self$ModelDigest, self$WorksetName, x)
-        }, .progress = TRUE)
-        self$Params <- rlang::set_names(self$Params, par_names)
+      load_params = function() {
+        if (!private$.params_loaded) {
+          par_names <- names(self$Params)
+          self$Params = purrr::map(par_names, \(x) {
+            get_workset_param_csv(self$ModelDigest, self$WorksetName, x)
+          }, .progress = TRUE)
+          self$Params <- rlang::set_names(self$Params, par_names)
+          private$.params_loaded <- TRUE
+        }
         invisible(self)
       },
 
@@ -69,10 +74,27 @@ OncoSimXWorkset <-
       print = function(...) {
         super$print()
         cli::cli_alert(paste0('WorksetName: ', self$WorksetName))
+      },
+
+      #' @description
+      #' Write a parameter to disk (CSV).
+      #' @param name Parameter name.
+      #' @param file Not currently used.
+      #' @return  `name`, invisibly.
+      extract_param = function(name, file) {
+        readr::write_csv(self$get_param(name), file)
       }
     ),
     private = list(
-      .workset = NULL
+      .workset = NULL,
+      .params_loaded = FALSE
     ),
-    active = list()
+    active = list(
+      #' @field ReadOnly Workset read-only status.
+      ReadOnly = function(x) {
+        if (missing(x)) return(self$WorksetMetadata$IsReadonly)
+        set_workset_readonly(self$ModelDigest, self$WorksetName, x)
+        x
+      }
+    )
   )
