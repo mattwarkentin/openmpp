@@ -6,20 +6,15 @@
 \alias{OncoSimXWorkset}
 \title{OncoSimX Workset Class}
 \usage{
-load_workset(model, set, ...)
+load_workset(model, set)
 }
 \arguments{
 \item{model}{Model digest or model name.}
 
 \item{set}{Name of workset (input set of model parameters).}
-
-\item{...}{Not currently used.}
 }
 \description{
 OncoSimX Workset Class
-}
-\section{Super classes}{
-\code{\link[oncosim:OncoSimXModel]{oncosim::OncoSimXModel}} -> \code{\link[oncosim:OncoSimXModelRun]{oncosim::OncoSimXModelRun}} -> \code{OncoSimXModelTask}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -28,21 +23,27 @@ OncoSimX Workset Class
 \item \href{#method-OncoSimXModelTask-clone}{\code{OncoSimXModelTask$clone()}}
 }
 }
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
-<ul>
-<li><span class="pkg-link" data-pkg="oncosim" data-topic="OncoSimXModel" data-id="print"><a href='../../oncosim/html/OncoSimXModel.html#method-OncoSimXModel-print'><code>oncosim::OncoSimXModel$print()</code></a></span></li>
-</ul>
-</details>
-}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelTask-new"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXModelTask-new}{}}}
 \subsection{Method \code{new()}}{
+Create a new OncoSimXModelTask object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelTask$new(model, task)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{model}}{Model digest or name.}
+
+\item{\code{task}}{Taks name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A new \code{OncoSimXModel} object.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelTask-clone"></a>}}
@@ -63,30 +64,103 @@ The objects of this class are cloneable with this method.
 }
 }
 \section{Super class}{
-\code{\link[oncosim:OncoSimXModel]{oncosim::OncoSimXModel}} -> \code{OncoSimXWorkset}
+\code{\link[oncosimx:OncoSimXModel]{oncosimx::OncoSimXModel}} -> \code{OncoSimXWorkset}
+}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{WorksetName}}{Workset name.}
+
+\item{\code{WorksetMetadata}}{Workset metadata.}
+
+\item{\code{Type}}{Object type (used for \code{print()}).}
+}
+\if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXWorkset-new}{\code{OncoSimXWorkset$new()}}
+\item \href{#method-OncoSimXWorkset-populate_params}{\code{OncoSimXWorkset$populate_params()}}
+\item \href{#method-OncoSimXWorkset-get_param}{\code{OncoSimXWorkset$get_param()}}
+\item \href{#method-OncoSimXWorkset-print}{\code{OncoSimXWorkset$print()}}
 \item \href{#method-OncoSimXWorkset-clone}{\code{OncoSimXWorkset$clone()}}
 }
 }
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
-<ul>
-<li><span class="pkg-link" data-pkg="oncosim" data-topic="OncoSimXModel" data-id="print"><a href='../../oncosim/html/OncoSimXModel.html#method-OncoSimXModel-print'><code>oncosim::OncoSimXModel$print()</code></a></span></li>
-</ul>
-</details>
-}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXWorkset-new"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-new}{}}}
 \subsection{Method \code{new()}}{
+Create a new OncoSimXWorkset object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$new(model, set)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{model}}{Model digest or name.}
+
+\item{\code{set}}{Workset name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A new \code{OncoSimXModel} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-populate_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-populate_params}{}}}
+\subsection{Method \code{populate_params()}}{
+Load all parameters.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$populate_params()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-get_param"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-get_param}{}}}
+\subsection{Method \code{get_param()}}{
+Retrieve a parameter.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$get_param(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Parameter name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-print"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-print}{}}}
+\subsection{Method \code{print()}}{
+Print a OncoSimXWorkset object.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$print(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Not currently used.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXWorkset-clone"></a>}}

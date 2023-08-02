@@ -6,6 +6,15 @@
 \alias{get_worksets}
 \alias{get_workset_status}
 \alias{get_workset_status_default}
+\alias{create_workset}
+\alias{replace_workset}
+\alias{delete_workset}
+\alias{delete_workset_param}
+\alias{update_workset_param}
+\alias{copy_param_run_to_workset}
+\alias{merge_param_run_to_workset}
+\alias{copy_param_workset_to_workset}
+\alias{merge_param_workset_to_workset}
 \title{Model Worksets}
 \usage{
 get_workset(model, set)
@@ -17,11 +26,38 @@ get_worksets(model)
 get_workset_status(model, set)
 
 get_workset_status_default(model, set)
+
+create_workset(data)
+
+replace_workset(data)
+
+delete_workset(model, set)
+
+delete_workset_param(model, set, name)
+
+update_workset_param(model, set, name, data)
+
+copy_param_run_to_workset(model, set, name, run)
+
+merge_param_run_to_workset(model, set, name, run)
+
+copy_param_workset_to_workset(model, set, name, from)
+
+merge_param_workset_to_workset(model, set, name, from)
 }
 \arguments{
 \item{model}{Model digest or model name.}
 
 \item{set}{Name of workset (input set of model parameters).}
+
+\item{data}{Data used for the body of the POST request.}
+
+\item{name}{Output table name.}
+
+\item{run}{Model run digest, run stamp or run name, modeling task run
+stamp or task run name.}
+
+\item{from}{Source workset name.}
 }
 \value{
 A \code{list} from a JSON response object.

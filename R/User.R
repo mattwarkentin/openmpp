@@ -3,7 +3,8 @@
 #' Functions for getting, setting, and deleting user configuration settings.
 #'
 #' @inheritParams get_model
-#' @inheritParams get_param_values
+#' @inheritParams get_workset_param
+#' @inheritParams get_run_microdata
 #'
 #' @return A `list` from JSON response object.
 #'

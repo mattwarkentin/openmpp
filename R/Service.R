@@ -58,7 +58,7 @@ get_hist_job_state <- function(job) {
 
 #' @rdname get_service_config
 #' @export
-set_queue_job_pos <- function(job, pos) {
+set_queue_job_pos <- function(pos, job) {
   api_path <- glue::glue('api/service/job/move/{pos}/{job}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
@@ -74,8 +74,8 @@ del_job_hist <- function(job) {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
+  invisible(job)
 }
 
 #' @rdname get_service_config

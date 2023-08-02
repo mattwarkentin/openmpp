@@ -1,7 +1,7 @@
 #' OncoSimX Model Task Class
 #'
 #' @inheritParams get_model
-#' @inheritParams get_param_values
+#' @inheritParams get_workset_param
 #' @param task Modeling task name.
 #'
 #' @export
@@ -14,11 +14,14 @@ load_model_task <- function(model, task) {
 OncoSimXModelTask <-
   R6::R6Class(
     classname = 'OncoSimXModelTask',
-    inherit = OncoSimXModelRun,
     public = list(
+      #' @description
+      #' Create a new OncoSimXModelTask object.
+      #' @param model Model digest or name.
+      #' @param task Taks name.
+      #' @return A new `OncoSimXModel` object.
       initialize = function(model, task) {
-        super$initialize(model, set)
-        get_model_task(model, task)
+        private$.task = get_model_task(model, task)
       }
     ),
     private = list(

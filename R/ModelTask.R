@@ -3,7 +3,8 @@
 #' Functions for getting information about model tasks.
 #'
 #' @inheritParams get_model
-#' @inheritParams get_param_values
+#' @inheritParams get_workset_param
+#' @inheritParams get_run_microdata
 #' @param task Modeling task.
 #'
 #' @return A `list` from a JSON response object.
@@ -30,11 +31,7 @@ get_model_tasks_list <- function(model) {
 #' @rdname get_model_task
 #' @export
 get_model_tasks <- function(model) {
-  api_path <- glue::glue('api/model/{model}/task-list')
-  httr2::request(api_url()) |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json() |>
+  get_model_tasks_list(model) |>
     tibblify::tibblify()
 }
 
@@ -106,4 +103,38 @@ get_model_task_run_compl <- function(model, task) {
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
+}
+
+#' @rdname get_model_task
+#' @export
+create_task <- function(model, task, data) {
+  api_path <- glue::glue('/api/task-new')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_body_json(data) |>
+    httr2::req_method('PUT') |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_model_task
+#' @export
+update_task <- function(model, task, data) {
+  api_path <- glue::glue('/api/task')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_body_json(data) |>
+    httr2::req_method('PATCH') |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_model_task
+#' @export
+delete_task <- function(model, task) {
+  api_path <- glue::glue(' /api/model/{model}/task/{task}')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('DELETE') |>
+    httr2::req_perform()
 }

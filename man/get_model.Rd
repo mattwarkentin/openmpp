@@ -4,6 +4,8 @@
 \alias{get_model}
 \alias{get_models}
 \alias{get_models_list}
+\alias{run_model}
+\alias{stop_model}
 \title{Model}
 \usage{
 get_model(model)
@@ -11,9 +13,17 @@ get_model(model)
 get_models()
 
 get_models_list()
+
+run_model(data)
+
+stop_model(model, stamp)
 }
 \arguments{
 \item{model}{Model digest or model name.}
+
+\item{data}{Data used for the body of the POST request.}
+
+\item{stamp}{Model run stamp or modeling task run stamp.}
 }
 \value{
 A \code{list} or \code{tibble}.

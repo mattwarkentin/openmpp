@@ -4,6 +4,8 @@
 #'   a specific model.
 #'
 #' @param model Model digest or model name.
+#' @param stamp Model run stamp or modeling task run stamp.
+#' @inheritParams get_run_microdata
 #'
 #' @return A `list` or `tibble`.
 #'
@@ -24,9 +26,9 @@ get_model <- function(model) {
 #' @rdname get_model
 #' @export
 get_models <- function() {
-  get_model_list() |>
-    tibblify::tibblify() |>
-    tidyr::unnest(tidyr::everything())
+  get_models_list() |>
+    purrr::map(\(x) x$Model) |>
+    tibblify::tibblify()
 }
 
 #' @rdname get_model
@@ -35,6 +37,29 @@ get_models_list <- function() {
   api_path <- 'api/model-list/text'
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_model
+#' @export
+run_model <- function(data) {
+  api_path <- '/api/run'
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_body_json(data) |>
+    httr2::req_method('POST') |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_model
+#' @export
+stop_model <- function(model, stamp) {
+  api_path <- '/api/run/stop/model/{model}/stamp/{stamp}'
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('PUT') |>
     httr2::req_perform() |>
     httr2::resp_body_json()
 }

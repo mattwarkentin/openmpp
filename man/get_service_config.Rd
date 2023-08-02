@@ -21,7 +21,7 @@ get_queue_job_state(job)
 
 get_hist_job_state(job)
 
-set_queue_job_pos(job, pos)
+set_queue_job_pos(pos, job)
 
 del_job_hist(job)
 

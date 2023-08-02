@@ -3,7 +3,8 @@
 #' Functions for creating, modifying, and deleting profiles and profile options.
 #'
 #' @inheritParams get_model
-#' @inheritParams get_param_values
+#' @inheritParams get_workset_param
+#' @inheritParams get_run_microdata
 #' @param profile Profile name.
 #' @param key Option key.
 #' @param value Option value.

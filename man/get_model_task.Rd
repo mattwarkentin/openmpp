@@ -11,6 +11,9 @@
 \alias{get_model_task_run_first}
 \alias{get_model_task_run_last}
 \alias{get_model_task_run_compl}
+\alias{create_task}
+\alias{update_task}
+\alias{delete_task}
 \title{Model Task}
 \usage{
 get_model_task(model, task)
@@ -32,6 +35,12 @@ get_model_task_run_first(model, task)
 get_model_task_run_last(model, task)
 
 get_model_task_run_compl(model, task)
+
+create_task(model, task, data)
+
+update_task(model, task, data)
+
+delete_task(model, task)
 }
 \arguments{
 \item{model}{Model digest or model name.}
@@ -40,6 +49,8 @@ get_model_task_run_compl(model, task)
 
 \item{run}{Model run digest, run stamp or run name, modeling task run
 stamp or task run name.}
+
+\item{data}{Data used for the body of the POST request.}
 }
 \value{
 A \code{list} from a JSON response object.

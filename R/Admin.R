@@ -12,8 +12,7 @@ admin_refresh_models <- function() {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
 }
 
 #' @rdname admin_refresh_models
@@ -23,8 +22,7 @@ admin_close_models <- function() {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
 }
 
 #' @rdname admin_refresh_models
@@ -37,8 +35,7 @@ admin_pause_models <- function(pause) {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
 }
 
 #' @rdname admin_refresh_models
@@ -48,6 +45,5 @@ admin_shutdown_service <- function() {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
 }

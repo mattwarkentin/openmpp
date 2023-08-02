@@ -5,12 +5,10 @@
 \alias{OncoSimXModel}
 \title{OncoSimX Model Class}
 \usage{
-load_model(model, ...)
+load_model(model)
 }
 \arguments{
 \item{model}{Model digest or model name.}
-
-\item{...}{Not currently used.}
 }
 \description{
 OncoSimX Model Class
@@ -18,26 +16,34 @@ OncoSimX Model Class
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{digest}}{Model digest.}
+\item{\code{Type}}{Object type (used for \code{print()}).}
 
-\item{\code{name}}{Model name.}
+\item{\code{ModelDigest}}{Model digest.}
 
-\item{\code{version}}{Model version.}
+\item{\code{ModelName}}{Model name.}
 
-\item{\code{params}}{Character vector of model parameters.}
+\item{\code{ModelVersion}}{Model version.}
 
-\item{\code{tables}}{Character vector of output tables.}
+\item{\code{ModelMetadata}}{Model metadata.}
+
+\item{\code{Params}}{List of parameters.}
+
+\item{\code{Tables}}{List of output tables.}
+
+\item{\code{ParamInfo}}{Parameter information.}
+
+\item{\code{TableInfo}}{Table information.}
 }
 \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{digest}}{Model digest.}
+\item{\code{run_list}}{List of model runs.}
 
-\item{\code{name}}{Model name.}
+\item{\code{task_list}}{List of model tasks.}
 
-\item{\code{version}}{Model version.}
+\item{\code{workset_list}}{List of worksets.}
 }
 \if{html}{\out{</div>}}
 }
@@ -86,7 +92,7 @@ Print a OncoSimXModel object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-Nothing, invisibly.
+Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}

@@ -3,7 +3,7 @@ api_url <- function() {
   'http://localhost:4077'
 }
 
-#' Are data compatible
+#' Are data frames compatible?
 #' @param x New parameters.
 #' @param y Old parameters
 is_compatible <- function(x, y) {

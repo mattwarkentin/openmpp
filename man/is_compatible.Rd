@@ -2,7 +2,7 @@
 % Please edit documentation in R/Utils.R
 \name{is_compatible}
 \alias{is_compatible}
-\title{Are data compatible}
+\title{Are data frames compatible?}
 \usage{
 is_compatible(x, y)
 }
@@ -12,5 +12,5 @@ is_compatible(x, y)
 \item{y}{Old parameters}
 }
 \description{
-Are data compatible
+Are data frames compatible?
 }

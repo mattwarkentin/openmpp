@@ -17,30 +17,142 @@ stamp or task run name.}
 OncoSimX Model Run Class
 }
 \section{Super class}{
-\code{\link[oncosim:OncoSimXModel]{oncosim::OncoSimXModel}} -> \code{OncoSimXModelRun}
+\code{\link[oncosimx:OncoSimXModel]{oncosimx::OncoSimXModel}} -> \code{OncoSimXModelRun}
+}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{RunName}}{Run name.}
+
+\item{\code{RunDigest}}{Run digest.}
+
+\item{\code{RunStatus}}{Run status.}
+
+\item{\code{RunMetadata}}{Run metadata.}
+
+\item{\code{Type}}{Object type (used for \code{print()}).}
+}
+\if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXModelRun-new}{\code{OncoSimXModelRun$new()}}
+\item \href{#method-OncoSimXModelRun-populate_tables}{\code{OncoSimXModelRun$populate_tables()}}
+\item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
+\item \href{#method-OncoSimXModelRun-populate_params}{\code{OncoSimXModelRun$populate_params()}}
+\item \href{#method-OncoSimXModelRun-get_param}{\code{OncoSimXModelRun$get_param()}}
+\item \href{#method-OncoSimXModelRun-print}{\code{OncoSimXModelRun$print()}}
 \item \href{#method-OncoSimXModelRun-clone}{\code{OncoSimXModelRun$clone()}}
 }
 }
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
-<ul>
-<li><span class="pkg-link" data-pkg="oncosim" data-topic="OncoSimXModel" data-id="print"><a href='../../oncosim/html/OncoSimXModel.html#method-OncoSimXModel-print'><code>oncosim::OncoSimXModel$print()</code></a></span></li>
-</ul>
-</details>
-}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelRun-new"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXModelRun-new}{}}}
 \subsection{Method \code{new()}}{
+Create a new OncoSimXModelRun object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$new(model, run)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{model}}{Model digest or name.}
+
+\item{\code{run}}{Run digest, run stamp, or run name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A new \code{OncoSimXModel} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-populate_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-populate_tables}{}}}
+\subsection{Method \code{populate_tables()}}{
+Load all tables.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$populate_tables()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-get_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_table}{}}}
+\subsection{Method \code{get_table()}}{
+Retrieve a table.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_table(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-populate_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-populate_params}{}}}
+\subsection{Method \code{populate_params()}}{
+Load all parameters.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$populate_params()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-get_param"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_param}{}}}
+\subsection{Method \code{get_param()}}{
+Retrieve a parameter.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_param(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Parameter name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-print"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-print}{}}}
+\subsection{Method \code{print()}}{
+Print a OncoSimXModelRun object.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$print(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Not currently used.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelRun-clone"></a>}}
