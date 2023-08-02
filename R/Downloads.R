@@ -6,7 +6,7 @@
 #' @inheritParams get_workset_param
 #' @param folder Download folder file name.
 #'
-#' @return A `list` or `tibble`.
+#' @return Nothing, invisibly.
 #'
 #' @export
 initiate_model_download <- function(model) {
@@ -22,6 +22,7 @@ initiate_model_download <- function(model) {
     ) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname initiate_model_download
@@ -39,6 +40,7 @@ initiate_run_download <- function(model, run) {
     ) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname initiate_model_download
@@ -56,6 +58,7 @@ initiate_workset_download <- function(model, set) {
     ) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname initiate_model_download
@@ -66,5 +69,6 @@ delete_download_files <- function(folder) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()
+  invisible()
 }
 

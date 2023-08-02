@@ -5,7 +5,7 @@
 \alias{del_model_profile}
 \alias{set_model_profile_opt}
 \alias{del_model_profile_opt}
-\title{Model Profile}
+\title{OncoSimX Model Profile}
 \usage{
 touch_model_profile(model, data)
 
@@ -27,7 +27,7 @@ del_model_profile_opt(model, profile, key)
 \item{value}{Option value.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list} from a JSON response object or nothing (invisibly).
 }
 \description{
 Functions for creating, modifying, and deleting profiles and profile options.

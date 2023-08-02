@@ -1,12 +1,12 @@
-#' Upload model run or workset
+#' Upload model runs or worksets
 #'
-#' Functions to download model, model run results, or input parameters.
+#' Functions to upload model run results or input parameters (worksets).
 #'
-#' @param folder Download folder file name.
+#' @param folder Upload folder file name.
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
-#' @return A `list` or `tibble`.
+#' @return Nothing, invisibly.
 #'
 #' @export
 initiate_run_upload <- function(model, run, data) {
@@ -16,6 +16,7 @@ initiate_run_upload <- function(model, run, data) {
     httr2::req_body_json(data) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname initiate_run_upload
@@ -27,6 +28,7 @@ initiate_workset_upload <- function(model, set, data) {
     httr2::req_body_json(data) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname initiate_run_upload
@@ -37,4 +39,5 @@ delete_upload_files <- function(folder) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()
+  invisible()
 }

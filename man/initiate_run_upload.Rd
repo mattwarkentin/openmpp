@@ -4,7 +4,7 @@
 \alias{initiate_run_upload}
 \alias{initiate_workset_upload}
 \alias{delete_upload_files}
-\title{Upload model run or workset}
+\title{Upload model runs or worksets}
 \usage{
 initiate_run_upload(model, run, data)
 
@@ -22,11 +22,11 @@ stamp or task run name.}
 
 \item{set}{Name of workset (input set of model parameters).}
 
-\item{folder}{Download folder file name.}
+\item{folder}{Upload folder file name.}
 }
 \value{
-A \code{list} or \code{tibble}.
+Nothing, invisibly.
 }
 \description{
-Functions to download model, model run results, or input parameters.
+Functions to upload model run results or input parameters (worksets).
 }

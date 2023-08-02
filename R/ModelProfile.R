@@ -1,4 +1,4 @@
-#' Model Profile
+#' OncoSimX Model Profile
 #'
 #' Functions for creating, modifying, and deleting profiles and profile options.
 #'
@@ -9,7 +9,7 @@
 #' @param key Option key.
 #' @param value Option value.
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list` from a JSON response object or nothing (invisibly).
 #'
 #' @export
 touch_model_profile <- function(model, data) {
@@ -40,8 +40,8 @@ set_model_profile_opt <- function(model, profile, key, value) {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
+  invisible()
 }
 
 #' @rdname touch_model_profile
@@ -51,6 +51,6 @@ del_model_profile_opt <- function(model, profile, key) {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
+  invisible()
 }

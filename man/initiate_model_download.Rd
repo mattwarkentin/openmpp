@@ -26,7 +26,7 @@ stamp or task run name.}
 \item{folder}{Download folder file name.}
 }
 \value{
-A \code{list} or \code{tibble}.
+Nothing, invisibly.
 }
 \description{
 Functions to download model, model run results, or input parameters.

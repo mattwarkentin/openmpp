@@ -3,6 +3,8 @@
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
+#' @return An `OncoSimXWorkset` instance.
+#'
 #' @export
 load_workset <- function(model, set) {
   OncoSimXWorkset$new(model, set)

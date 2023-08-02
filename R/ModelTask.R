@@ -1,13 +1,14 @@
-#' Model Task
+#' OncoSimX Model Task
 #'
-#' Functions for getting information about model tasks.
+#' Functions for getting creating, updating, retrieving, and deleting
+#'   model tasks.
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #' @inheritParams get_run_microdata
 #' @param task Modeling task.
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @export
 get_model_task <- function(model, task) {

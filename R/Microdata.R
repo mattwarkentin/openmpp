@@ -1,4 +1,4 @@
-#' Microdata
+#' OncoSimX Microdata
 #'
 #' Functions for retrieving microdata from model runs.
 #'
@@ -8,7 +8,7 @@
 #' @param data Data used for the body of the POST request.
 #' @param name Output table name.
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list` or `tibble`.
 #'
 #' @export
 get_run_microdata <- function(model, run, name, data) {

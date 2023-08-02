@@ -1,13 +1,14 @@
-#' Model Worksets
+#' OncoSimX Model Worksets
 #'
-#' Functions for getting information about worksets.
+#' Functions for creating, copying, merging, retrieving, and deleting
+#'   worksets.
 #'
 #' @param from Source workset name.
 #' @inheritParams get_workset_param
 #' @inheritParams get_model
 #' @inheritParams get_run_microdata
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @export
 get_workset <- function(model, set) {
@@ -87,6 +88,7 @@ delete_workset <- function(model, set) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname get_workset
@@ -97,6 +99,7 @@ delete_workset_param <- function(model, set, name) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname get_workset
@@ -108,6 +111,7 @@ update_workset_param <- function(model, set, name, data) {
     httr2::req_body_json(data) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname get_workset
@@ -118,6 +122,7 @@ copy_param_run_to_workset <- function(model, set, name, run) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname get_workset
@@ -128,6 +133,7 @@ merge_param_run_to_workset <- function(model, set, name, run) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname get_workset
@@ -138,6 +144,7 @@ copy_param_workset_to_workset <- function(model, set, name, from) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname get_workset
@@ -148,4 +155,5 @@ merge_param_workset_to_workset <- function(model, set, name, from) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform()
+  invisible()
 }

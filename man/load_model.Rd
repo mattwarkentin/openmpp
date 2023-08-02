@@ -10,6 +10,9 @@ load_model(model)
 \arguments{
 \item{model}{Model digest or model name.}
 }
+\value{
+An \code{OncoSimXModel} instance.
+}
 \description{
 OncoSimX Model Class
 }

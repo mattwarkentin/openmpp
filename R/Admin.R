@@ -1,10 +1,10 @@
-#' Administrative
+#' OpenM++ Administrative Tasks
 #'
 #' Functions for performing administrative tasks.
 #'
 #' @param pause Logical. Whether to pause or resume model runs queue processing.
 #'
-#' @return A `list` from a JSON response object.
+#' @return Nothing, invisibly.
 #'
 #' @export
 admin_refresh_models <- function() {
@@ -13,6 +13,7 @@ admin_refresh_models <- function() {
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname admin_refresh_models
@@ -23,6 +24,7 @@ admin_close_models <- function() {
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname admin_refresh_models
@@ -36,6 +38,7 @@ admin_pause_models <- function(pause) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname admin_refresh_models
@@ -46,4 +49,5 @@ admin_shutdown_service <- function() {
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>
     httr2::req_perform()
+  invisible()
 }

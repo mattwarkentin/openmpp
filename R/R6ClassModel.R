@@ -5,6 +5,8 @@
 #' @importFrom R6 R6Class
 #' @import cli purrr
 #'
+#' @return An `OncoSimXModel` instance.
+#'
 #' @export
 load_model <- function(model) {
   OncoSimXModel$new(model)

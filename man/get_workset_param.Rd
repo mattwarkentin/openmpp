@@ -26,8 +26,8 @@ get_run_param_csv(model, run, name)
 stamp or task run name.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list} or \code{tibble}.
 }
 \description{
-Functions for retrieving parameters from worksets or model runs.
+Functions for retrieving scenario parameters from worksets or model runs.
 }

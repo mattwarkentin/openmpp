@@ -1,11 +1,11 @@
-#' Service State
+#' OpenM++ Service State
 #'
-#' Functions for retrieveing or deleting service information.
+#' Functions for retrieving or deleting service information.
 #'
 #' @param job Model run submission time stamp.
 #' @param pos Position.
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list` from a JSON response object, or nothing (invisibly).
 #'
 #' @export
 get_service_config <- function() {
@@ -75,7 +75,7 @@ del_job_hist <- function(job) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()
-  invisible(job)
+  invisible()
 }
 
 #' @rdname get_service_config

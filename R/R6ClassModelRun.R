@@ -3,6 +3,8 @@
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
+#' @return An `OncoSimXModelRun` instance.
+#'
 #' @export
 load_model_run <- function(model, run) {
   OncoSimXModelRun$new(model, run)

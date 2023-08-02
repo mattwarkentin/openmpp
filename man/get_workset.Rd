@@ -15,7 +15,7 @@
 \alias{merge_param_run_to_workset}
 \alias{copy_param_workset_to_workset}
 \alias{merge_param_workset_to_workset}
-\title{Model Worksets}
+\title{OncoSimX Model Worksets}
 \usage{
 get_workset(model, set)
 
@@ -60,8 +60,9 @@ stamp or task run name.}
 \item{from}{Source workset name.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list}, \code{tibble}, or nothing (invisibly).
 }
 \description{
-Functions for getting information about worksets.
+Functions for creating, copying, merging, retrieving, and deleting
+worksets.
 }

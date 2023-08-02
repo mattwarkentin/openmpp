@@ -9,7 +9,7 @@
 \alias{set_queue_job_pos}
 \alias{del_job_hist}
 \alias{get_archive_state}
-\title{Service State}
+\title{OpenM++ Service State}
 \usage{
 get_service_config()
 
@@ -33,8 +33,8 @@ get_archive_state()
 \item{pos}{Position.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list} from a JSON response object, or nothing (invisibly).
 }
 \description{
-Functions for retrieveing or deleting service information.
+Functions for retrieving or deleting service information.
 }

@@ -1,6 +1,6 @@
-#' Model
+#' OncoSimX Models
 #'
-#' Functions to get the complete list of models and load
+#' Functions to get the complete list of models and load, run, or stop
 #'   a specific model.
 #'
 #' @param model Model digest or model name.

@@ -13,6 +13,9 @@ load_workset(model, set)
 
 \item{set}{Name of workset (input set of model parameters).}
 }
+\value{
+An \code{OncoSimXWorkset} instance.
+}
 \description{
 OncoSimX Workset Class
 }

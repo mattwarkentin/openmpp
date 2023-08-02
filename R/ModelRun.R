@@ -1,11 +1,11 @@
-#' Model Run
+#' OncoSimX Model Run
 #'
-#' Functions to interrogate model runs.
+#' Functions to retrieve and delete model runs.
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @export
 get_model_run <- function(model, run) {
@@ -90,6 +90,6 @@ delete_run <- function(model, run) {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
+  invisible()
 }

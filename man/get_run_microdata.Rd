@@ -3,7 +3,7 @@
 \name{get_run_microdata}
 \alias{get_run_microdata}
 \alias{get_run_microdata_csv}
-\title{Microdata}
+\title{OncoSimX Microdata}
 \usage{
 get_run_microdata(model, run, name, data)
 
@@ -20,7 +20,7 @@ stamp or task run name.}
 \item{data}{Data used for the body of the POST request.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list} or \code{tibble}.
 }
 \description{
 Functions for retrieving microdata from model runs.

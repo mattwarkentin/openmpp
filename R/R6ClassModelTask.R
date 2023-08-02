@@ -4,6 +4,8 @@
 #' @inheritParams get_workset_param
 #' @param task Modeling task name.
 #'
+#' @return An `OncoSimXModelTask` instance.
+#'
 #' @export
 load_model_task <- function(model, task) {
   OncoSimXModelTask$new(model, task)

@@ -6,7 +6,7 @@
 \alias{get_models_list}
 \alias{run_model}
 \alias{stop_model}
-\title{Model}
+\title{OncoSimX Models}
 \usage{
 get_model(model)
 
@@ -29,6 +29,6 @@ stop_model(model, stamp)
 A \code{list} or \code{tibble}.
 }
 \description{
-Functions to get the complete list of models and load
+Functions to get the complete list of models and load, run, or stop
 a specific model.
 }

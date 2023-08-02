@@ -1,6 +1,6 @@
 #' Workset Parameters
 #'
-#' Functions for retrieving parameters from worksets or model runs.
+#' Functions for retrieving scenario parameters from worksets or model runs.
 #'
 #' @inheritParams get_model
 #' @param run Model run digest, run stamp or run name, modeling task run
@@ -8,7 +8,7 @@
 #' @param set Name of workset (input set of model parameters).
 #' @param name Output table name.
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list` or `tibble`.
 #'
 #' @export
 get_workset_param <- function(model, set, name) {

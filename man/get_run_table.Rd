@@ -3,7 +3,7 @@
 \name{get_run_table}
 \alias{get_run_table}
 \alias{get_run_table_csv}
-\title{Output Tables}
+\title{Model Run Output Tables}
 \usage{
 get_run_table(model, run, name)
 
@@ -18,7 +18,7 @@ stamp or task run name.}
 \item{name}{Output table name.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list} or \code{tibble}.
 }
 \description{
 Functions for retrieving output tables from model runs.

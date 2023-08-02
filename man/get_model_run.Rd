@@ -10,7 +10,7 @@
 \alias{get_model_run_status_last}
 \alias{get_model_run_status_compl}
 \alias{delete_run}
-\title{Model Run}
+\title{OncoSimX Model Run}
 \usage{
 get_model_run(model, run)
 
@@ -37,8 +37,8 @@ delete_run(model, run)
 stamp or task run name.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list}, \code{tibble}, or nothing (invisibly).
 }
 \description{
-Functions to interrogate model runs.
+Functions to retrieve and delete model runs.
 }

@@ -1,4 +1,4 @@
-#' Output Tables
+#' Model Run Output Tables
 #'
 #' Functions for retrieving output tables from model runs.
 #'
@@ -7,7 +7,7 @@
 #'   stamp or task run name.
 #' @param name Output table name.
 #'
-#' @return A `list` from a JSON response object.
+#' @return A `list` or `tibble`.
 #'
 #' @export
 get_run_table <- function(model, run, name) {

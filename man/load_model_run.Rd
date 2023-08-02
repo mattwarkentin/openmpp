@@ -13,6 +13,9 @@ load_model_run(model, run)
 \item{run}{Model run digest, run stamp or run name, modeling task run
 stamp or task run name.}
 }
+\value{
+An \code{OncoSimXModelRun} instance.
+}
 \description{
 OncoSimX Model Run Class
 }

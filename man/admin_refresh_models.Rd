@@ -5,7 +5,7 @@
 \alias{admin_close_models}
 \alias{admin_pause_models}
 \alias{admin_shutdown_service}
-\title{Administrative}
+\title{OpenM++ Administrative Tasks}
 \usage{
 admin_refresh_models()
 
@@ -19,7 +19,7 @@ admin_shutdown_service()
 \item{pause}{Logical. Whether to pause or resume model runs queue processing.}
 }
 \value{
-A \code{list} from a JSON response object.
+Nothing, invisibly.
 }
 \description{
 Functions for performing administrative tasks.

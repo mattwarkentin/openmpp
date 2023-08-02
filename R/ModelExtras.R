@@ -1,4 +1,4 @@
-#' Model Extras
+#' OncoSimX Model Extras
 #'
 #' Functions for retrieving extra model information, including language lists,
 #'   word lists, profiles, and profile lists.

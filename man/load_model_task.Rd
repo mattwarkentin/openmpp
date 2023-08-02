@@ -11,6 +11,9 @@ load_model_task(model, task)
 
 \item{task}{Modeling task name.}
 }
+\value{
+An \code{OncoSimXModelTask} instance.
+}
 \description{
 OncoSimX Model Task Class
 }

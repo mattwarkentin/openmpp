@@ -4,7 +4,7 @@
 \alias{get_user_views}
 \alias{set_user_views}
 \alias{del_user_views}
-\title{Manage User Settings and Data}
+\title{Manage OpenM++ User Settings}
 \usage{
 get_user_views(model)
 
@@ -18,7 +18,7 @@ del_user_views(model)
 \item{data}{Data used for the body of the POST request.}
 }
 \value{
-A \code{list} from JSON response object.
+A \code{list} from JSON response object or nothing (invisibly).
 }
 \description{
 Functions for getting, setting, and deleting user configuration settings.

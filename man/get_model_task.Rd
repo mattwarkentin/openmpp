@@ -14,7 +14,7 @@
 \alias{create_task}
 \alias{update_task}
 \alias{delete_task}
-\title{Model Task}
+\title{OncoSimX Model Task}
 \usage{
 get_model_task(model, task)
 
@@ -53,8 +53,9 @@ stamp or task run name.}
 \item{data}{Data used for the body of the POST request.}
 }
 \value{
-A \code{list} from a JSON response object.
+A \code{list}, \code{tibble}, or nothing (invisibly).
 }
 \description{
-Functions for getting information about model tasks.
+Functions for getting creating, updating, retrieving, and deleting
+model tasks.
 }
