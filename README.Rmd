@@ -22,7 +22,7 @@ The goal of `oncosimx` is to provide a simplified interface to running OncoSimX 
 
 ## Installation
 
-You can install the development version of `oncosim` from [GitHub](https://github.com/) with:
+You can install the development version of `oncosimx` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")

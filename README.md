@@ -14,7 +14,7 @@ processing.
 
 ## Installation
 
-You can install the development version of `oncosim` from
+You can install the development version of `oncosimx` from
 [GitHub](https://github.com/) with:
 
 ``` r
