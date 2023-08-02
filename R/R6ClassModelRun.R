@@ -90,7 +90,7 @@ OncoSimXModelRun <-
       get_param = function(name) {
         if (rlang::is_null(self$Params[[name]])) {
           self$Params[[name]] <-
-            get_workset_param_csv(self$ModelDigest, self$RunDigest, name)
+            get_run_param_csv(self$ModelDigest, self$RunDigest, name)
         }
         self$Params[[name]]
       },
