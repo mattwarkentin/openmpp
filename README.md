@@ -1,5 +1,5 @@
 
-# oncosim
+# oncosimx
 
 <!-- badges: start -->
 
@@ -7,7 +7,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of oncosim is to provide a simplified interface to running
+The goal of `oncosimx` is to provide a simplified interface to running
 OncoSimX models directly from R and gathering results for further
 processing.
 
@@ -18,7 +18,7 @@ You can install the development version of `oncosim` from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("oncology-outcomes/oncosim")
+remotes::install_github("oncology-outcomes/oncosimx")
 ```
 
 ## Code of Conduct

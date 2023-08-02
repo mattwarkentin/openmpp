@@ -11,13 +11,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# oncosim
+# oncosimx
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of oncosim is to provide a simplified interface to running OncoSimX models directly from R and gathering results for further processing.
+The goal of `oncosimx` is to provide a simplified interface to running OncoSimX models directly from R and gathering results for further processing.
 
 ## Installation
 
@@ -25,7 +25,7 @@ You can install the development version of `oncosim` from [GitHub](https://githu
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("oncology-outcomes/oncosim")
+remotes::install_github("oncology-outcomes/oncosimx")
 ```
 
 ## Code of Conduct
