@@ -3,7 +3,7 @@
 #' @inheritParams get_model
 #'
 #' @importFrom R6 R6Class
-#' @import cli purrr
+#' @import cli purrr fs zip
 #'
 #' @return An `OncoSimXModel` instance.
 #'
@@ -20,7 +20,7 @@ OncoSimXModel <-
     cloneable = FALSE,
     portable = FALSE,
     public = list(
-      #' @field Type Object type (used for `print()`).
+      #' @field Type Object type (used for `print()` method).
       Type = 'Model',
 
       #' @field ModelDigest Model digest.
@@ -34,12 +34,6 @@ OncoSimXModel <-
 
       #' @field ModelMetadata Model metadata.
       ModelMetadata = NULL,
-
-      #' @field Params List of parameters.
-      Params = NULL,
-
-      #' @field Tables List of output tables.
-      Tables = NULL,
 
       #' @field ParamInfo Parameter information.
       ParamInfo = NULL,
@@ -57,10 +51,6 @@ OncoSimXModel <-
         self$ModelDigest <- private$.model$Model$Digest
         self$ModelName <- private$.model$Model$Name
         self$ModelVersion <- private$.model$Model$Version
-        self$Params <- vector('list', length(private$.model$ParamTxt))
-        self$Params <- rlang::set_names(self$Params, purrr::map_chr(private$.model$ParamTxt, \(x) x$Param$Name))
-        self$Tables <- vector('list', length(private$.model$TableTxt))
-        self$Tables <- rlang::set_names(self$Tables, purrr::map_chr(private$.model$TableTxt, \(x) x$Table$Name))
         self$ParamInfo <-
           purrr::map(private$.model$ParamTxt, \(x) {
             purrr::discard_at(x, 'ParamDimsTxt') |>
@@ -95,6 +85,9 @@ OncoSimXModel <-
     active = list(
       #' @field workset_list List of worksets.
       workset_list = function() get_worksets(self$ModelDigest),
+
+      #' @field scenario_list List of scenarios.
+      scenario_list = function() get_worksets(self$ModelDigest),
 
       #' @field run_list List of model runs.
       run_list = function() get_model_runs(self$ModelDigest),

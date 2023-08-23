@@ -3,10 +3,13 @@
 \name{OncoSimXModelTask}
 \alias{OncoSimXModelTask}
 \alias{load_workset}
+\alias{load_scenario}
 \alias{OncoSimXWorkset}
 \title{OncoSimX Workset Class}
 \usage{
 load_workset(model, set)
+
+load_scenario(model, set)
 }
 \arguments{
 \item{model}{Model digest or model name.}
@@ -18,6 +21,9 @@ An \code{OncoSimXWorkset} instance.
 }
 \description{
 OncoSimX Workset Class
+}
+\details{
+\code{load_scenario()} is an alias for \code{load_workset()}.
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -58,7 +64,11 @@ A new \code{OncoSimXModelTask} object.
 
 \item{\code{WorksetMetadata}}{Workset metadata.}
 
+\item{\code{WorksetDir}}{Workset directory.}
+
 \item{\code{Type}}{Object type (used for \code{print()}).}
+
+\item{\code{Params}}{List of parameters.}
 }
 \if{html}{\out{</div>}}
 }
@@ -66,6 +76,8 @@ A new \code{OncoSimXModelTask} object.
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{ReadOnly}}{Workset read-only status.}
+
+\item{\code{BaseRunDigest}}{Base run digest (scenario) for parameters.}
 }
 \if{html}{\out{</div>}}
 }
@@ -73,10 +85,16 @@ A new \code{OncoSimXModelTask} object.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXWorkset-new}{\code{OncoSimXWorkset$new()}}
-\item \href{#method-OncoSimXWorkset-load_params}{\code{OncoSimXWorkset$load_params()}}
 \item \href{#method-OncoSimXWorkset-get_param}{\code{OncoSimXWorkset$get_param()}}
 \item \href{#method-OncoSimXWorkset-print}{\code{OncoSimXWorkset$print()}}
+\item \href{#method-OncoSimXWorkset-copy_params}{\code{OncoSimXWorkset$copy_params()}}
+\item \href{#method-OncoSimXWorkset-copy_params_all}{\code{OncoSimXWorkset$copy_params_all()}}
 \item \href{#method-OncoSimXWorkset-extract_param}{\code{OncoSimXWorkset$extract_param()}}
+\item \href{#method-OncoSimXWorkset-extract_params}{\code{OncoSimXWorkset$extract_params()}}
+\item \href{#method-OncoSimXWorkset-zip_dir}{\code{OncoSimXWorkset$zip_dir()}}
+\item \href{#method-OncoSimXWorkset-upload_params}{\code{OncoSimXWorkset$upload_params()}}
+\item \href{#method-OncoSimXWorkset-create_dir}{\code{OncoSimXWorkset$create_dir()}}
+\item \href{#method-OncoSimXWorkset-run}{\code{OncoSimXWorkset$run()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -102,23 +120,10 @@ A new \code{OncoSimXModel} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-load_params"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-load_params}{}}}
-\subsection{Method \code{load_params()}}{
-Load all parameters.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$load_params()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXWorkset-get_param"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-get_param}{}}}
 \subsection{Method \code{get_param()}}{
-Retrieve a parameter.
+Retrieve a parameter table.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$get_param(name)}\if{html}{\out{</div>}}
 }
@@ -138,7 +143,7 @@ A \code{tibble}.
 \if{html}{\out{<a id="method-OncoSimXWorkset-print"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-print}{}}}
 \subsection{Method \code{print()}}{
-Print a OncoSimXWorkset object.
+Print a \code{OncoSimXWorkset} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$print(...)}\if{html}{\out{</div>}}
 }
@@ -155,12 +160,45 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-copy_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-copy_params}{}}}
+\subsection{Method \code{copy_params()}}{
+Copy a parameter from a base scenario.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$copy_params(names)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{names}}{Character vector of parameter names.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{self}, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-copy_params_all"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-copy_params_all}{}}}
+\subsection{Method \code{copy_params_all()}}{
+Copy all parameters from a base scenario.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$copy_params_all()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{self}, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXWorkset-extract_param"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-extract_param}{}}}
 \subsection{Method \code{extract_param()}}{
-Write a parameter to disk (CSV).
+Write a parameter to disk (CSV format).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$extract_param(name, file)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$extract_param(name)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -168,12 +206,102 @@ Write a parameter to disk (CSV).
 \describe{
 \item{\code{name}}{Parameter name.}
 
-\item{\code{file}}{Not currently used.}
+\item{\code{folder}}{Folder path.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{name}, invisibly.
+\code{self}, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-extract_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-extract_params}{}}}
+\subsection{Method \code{extract_params()}}{
+Write all parameters to disk (CSV format).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$extract_params()}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{folder}}{Folder path.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{self}, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-zip_dir"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-zip_dir}{}}}
+\subsection{Method \code{zip_dir()}}{
+Create zip archive for parameters.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$zip_dir()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Zip path, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-upload_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-upload_params}{}}}
+\subsection{Method \code{upload_params()}}{
+Upload parameters from a directory.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$upload_params()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{self}, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-create_dir"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-create_dir}{}}}
+\subsection{Method \code{create_dir()}}{
+Create directory for scenario.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$create_dir(dir = ".")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{dir}}{Root directory for scenario.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Directory path, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-run"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-run}{}}}
+\subsection{Method \code{run()}}{
+Run scenario
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$run(name, opts = opt_runs(), wait = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Run name.}
+
+\item{\code{opts}}{Run options.}
+
+\item{\code{wait}}{Logical. Should we wait until the model run is done?}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{self}, invisibly.
 }
 }
 }

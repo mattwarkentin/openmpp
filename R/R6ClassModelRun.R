@@ -3,12 +3,18 @@
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
+#' @details `load_run()` is an alias for `load_model_run()`.
+#'
 #' @return An `OncoSimXModelRun` instance.
 #'
 #' @export
 load_model_run <- function(model, run) {
   OncoSimXModelRun$new(model, run)
 }
+
+#' @rdname load_model_run
+#' @export
+load_run <- load_model_run
 
 #' @rdname load_model_run
 #' @export
@@ -35,6 +41,12 @@ OncoSimXModelRun <-
       #' @field Type Object type (used for `print()`).
       Type = 'ModelRun',
 
+      #' @field Params List of parameters.
+      Params = NULL,
+
+      #' @field Tables List of output tables.
+      Tables = NULL,
+
       #' @description
       #' Create a new OncoSimXModelRun object.
       #' @param model Model digest or name.
@@ -47,6 +59,19 @@ OncoSimXModelRun <-
         self$RunDigest = private$.run$RunDigest
         self$RunStatus = private$.run$Status
         self$RunMetadata = purrr::discard_at(private$.run, c('Param', 'Table'))
+        self$Params <- vector('list', length(private$.run$Param))
+        self$Params <- rlang::set_names(self$Params, purrr::map_chr(private$.run$Param, \(x) x$Name))
+        self$Tables <- vector('list', length(private$.run$Table))
+        self$Tables <- rlang::set_names(self$Tables, purrr::map_chr(private$.run$Table, \(x) x$Name))
+      },
+
+      #' @description
+      #' Load a tables.
+      #' @param name Table name.
+      #' @return Self, invisibly.
+      load_table = function(name) {
+        self$Tables[[name]] = get_run_table_csv(self$ModelDigest, self$RunDigest, name)
+        invisible(self)
       },
 
       #' @description
@@ -55,10 +80,7 @@ OncoSimXModelRun <-
       load_tables = function() {
         if (!private$.tables_loaded) {
           tbl_names <- names(self$Tables)
-          self$Tables = purrr::map(tbl_names, \(x) {
-            get_run_table_csv(self$ModelDigest, self$RunDigest, x)
-          }, .progress = TRUE)
-          self$Tables <- rlang::set_names(self$Tables, tbl_names)
+          purrr::walk(tbl_names, load_table, .progress = 'Loading Tables')
           private$.tables_loaded <- TRUE
         }
         invisible(self)
@@ -69,11 +91,17 @@ OncoSimXModelRun <-
       #' @param name Table name.
       #' @return A `tibble`.
       get_table = function(name) {
-        if (rlang::is_null(self$Tables[[name]])) {
-          self$Tables[[name]] <-
-            get_run_table_csv(self$ModelDigest, self$RunDigest, name)
-        }
+        if (rlang::is_null(self$Tables[[name]])) self$load_table(name)
         self$Tables[[name]]
+      },
+
+      #' @description
+      #' Load a parameter.
+      #' @param name Parameter name.
+      #' @return Self, invisibly.
+      load_param = function(name) {
+        self$Params[[name]] = get_run_param_csv(self$ModelDigest, self$RunDigest, name)
+        invisible(self)
       },
 
       #' @description
@@ -82,10 +110,7 @@ OncoSimXModelRun <-
       load_params = function() {
         if (!private$.params_loaded) {
           par_names <- names(self$Params)
-          self$Params = purrr::map(par_names, \(x) {
-            get_run_param_csv(self$ModelDigest, self$RunDigest, x)
-          }, .progress = TRUE)
-          self$Params <- rlang::set_names(self$Params, par_names)
+          purrr::walk(par_names, load_param, .progress = 'Loading Parameters')
           private$.params_loaded <- TRUE
         }
         invisible(self)
@@ -96,10 +121,6 @@ OncoSimXModelRun <-
       #' @param name Parameter name.
       #' @return A `tibble`.
       get_param = function(name) {
-        if (rlang::is_null(self$Params[[name]])) {
-          self$Params[[name]] <-
-            get_run_param_csv(self$ModelDigest, self$RunDigest, name)
-        }
         self$Params[[name]]
       },
 

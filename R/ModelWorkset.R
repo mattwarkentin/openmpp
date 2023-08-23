@@ -64,6 +64,7 @@ set_workset_readonly <- function(model, set, readonly) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/readonly/{readonly}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
+    httr2::req_method('POST') |>
     httr2::req_perform()
 }
 
@@ -73,8 +74,20 @@ create_workset <- function(data) {
   api_path <- glue::glue('/api/workset-create')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('PUT') |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_workset
+#' @export
+merge_workset <- function(data) {
+  api_path <- glue::glue('/api/workset-merge')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
+    httr2::req_method('PATCH') |>
     httr2::req_perform() |>
     httr2::resp_body_json()
 }
@@ -85,7 +98,7 @@ replace_workset <- function(data) {
   api_path <- glue::glue('/api/workset-replace')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('PUT') |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -119,7 +132,7 @@ update_workset_param <- function(model, set, name, data) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/parameter/{name}/new/value')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform()
   invisible()
@@ -165,6 +178,20 @@ merge_param_workset_to_workset <- function(model, set, name, from) {
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PATCH') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname get_workset
+#' @export
+upload_workset_params <- function(model, set, data) {
+  api_path <- glue::glue('/api/upload/model/{model}/workset')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_body_multipart(
+      filename = curl::form_file(data)
+    ) |>
+    httr2::req_method('POST') |>
     httr2::req_perform()
   invisible()
 }

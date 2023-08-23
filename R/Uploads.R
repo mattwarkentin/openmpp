@@ -13,7 +13,7 @@ initiate_run_upload <- function(model, run, data) {
   api_path <- glue::glue('/api/upload/model/{model}/run/{run}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
   invisible()
@@ -25,7 +25,7 @@ initiate_workset_upload <- function(model, set, data) {
   api_path <- glue::glue('/api/upload/model/{model}/workset/{set}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
   invisible()

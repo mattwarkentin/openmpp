@@ -36,9 +36,9 @@ get_model_task_run_last(model, task)
 
 get_model_task_run_compl(model, task)
 
-create_task(model, task, data)
+create_task(model, data)
 
-update_task(model, task, data)
+update_task(model, data)
 
 delete_task(model, task)
 }

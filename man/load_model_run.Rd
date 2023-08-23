@@ -2,10 +2,13 @@
 % Please edit documentation in R/R6ClassModelRun.R
 \name{load_model_run}
 \alias{load_model_run}
+\alias{load_run}
 \alias{OncoSimXModelRun}
 \title{OncoSimX Model Run Class}
 \usage{
 load_model_run(model, run)
+
+load_run(model, run)
 }
 \arguments{
 \item{model}{Model digest or model name.}
@@ -18,6 +21,9 @@ An \code{OncoSimXModelRun} instance.
 }
 \description{
 OncoSimX Model Run Class
+}
+\details{
+\code{load_run()} is an alias for \code{load_model_run()}.
 }
 \section{Super class}{
 \code{\link[oncosimx:OncoSimXModel]{oncosimx::OncoSimXModel}} -> \code{OncoSimXModelRun}
@@ -34,6 +40,10 @@ OncoSimX Model Run Class
 \item{\code{RunMetadata}}{Run metadata.}
 
 \item{\code{Type}}{Object type (used for \code{print()}).}
+
+\item{\code{Params}}{List of parameters.}
+
+\item{\code{Tables}}{List of output tables.}
 }
 \if{html}{\out{</div>}}
 }
@@ -41,8 +51,10 @@ OncoSimX Model Run Class
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXModelRun-new}{\code{OncoSimXModelRun$new()}}
+\item \href{#method-OncoSimXModelRun-load_table}{\code{OncoSimXModelRun$load_table()}}
 \item \href{#method-OncoSimXModelRun-load_tables}{\code{OncoSimXModelRun$load_tables()}}
 \item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
+\item \href{#method-OncoSimXModelRun-load_param}{\code{OncoSimXModelRun$load_param()}}
 \item \href{#method-OncoSimXModelRun-load_params}{\code{OncoSimXModelRun$load_params()}}
 \item \href{#method-OncoSimXModelRun-get_param}{\code{OncoSimXModelRun$get_param()}}
 \item \href{#method-OncoSimXModelRun-print}{\code{OncoSimXModelRun$print()}}
@@ -70,6 +82,26 @@ Create a new OncoSimXModelRun object.
 }
 \subsection{Returns}{
 A new \code{OncoSimXModel} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-load_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_table}{}}}
+\subsection{Method \code{load_table()}}{
+Load a tables.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_table(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
@@ -103,6 +135,26 @@ Retrieve a table.
 }
 \subsection{Returns}{
 A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-load_param"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_param}{}}}
+\subsection{Method \code{load_param()}}{
+Load a parameter.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_param(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Parameter name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}

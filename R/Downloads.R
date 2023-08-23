@@ -18,7 +18,8 @@ initiate_model_download <- function(model) {
         "NoAccumulatorsCsv" = TRUE,
         "NoMicrodata" = TRUE,
         "Utf8BomIntoCsv" = TRUE
-      )
+      ),
+      auto_unbox = TRUE
     ) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
@@ -36,7 +37,8 @@ initiate_run_download <- function(model, run) {
         "NoAccumulatorsCsv" = TRUE,
         "NoMicrodata" = TRUE,
         "Utf8BomIntoCsv" = TRUE
-      )
+      ),
+      auto_unbox = TRUE
     ) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
@@ -54,7 +56,8 @@ initiate_workset_download <- function(model, set) {
         "NoAccumulatorsCsv" = TRUE,
         "NoMicrodata" = TRUE,
         "Utf8BomIntoCsv" = TRUE
-      )
+      ),
+      auto_unbox = TRUE
     ) |>
     httr2::req_method('POST') |>
     httr2::req_perform()

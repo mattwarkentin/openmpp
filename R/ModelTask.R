@@ -109,11 +109,11 @@ get_model_task_run_compl <- function(model, task) {
 
 #' @rdname get_model_task
 #' @export
-create_task <- function(model, task, data) {
+create_task <- function(model, data) {
   api_path <- glue::glue('/api/task-new')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('PUT') |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -121,11 +121,11 @@ create_task <- function(model, task, data) {
 
 #' @rdname get_model_task
 #' @export
-update_task <- function(model, task, data) {
+update_task <- function(model, data) {
   api_path <- glue::glue('/api/task')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform() |>
     httr2::resp_body_json()

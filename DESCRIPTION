@@ -15,13 +15,17 @@ Depends:
   R (>= 4.1.0)
 Imports: 
     cli,
+    curl,
+    fs,
     glue,
     httr2,
+    jsonlite,
     purrr,
     R6,
     readr,
     rlang,
-    tibblify
+    tibblify,
+    zip
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

@@ -19,7 +19,7 @@ OncoSimX Model Class
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{Type}}{Object type (used for \code{print()}).}
+\item{\code{Type}}{Object type (used for \code{print()} method).}
 
 \item{\code{ModelDigest}}{Model digest.}
 
@@ -28,10 +28,6 @@ OncoSimX Model Class
 \item{\code{ModelVersion}}{Model version.}
 
 \item{\code{ModelMetadata}}{Model metadata.}
-
-\item{\code{Params}}{List of parameters.}
-
-\item{\code{Tables}}{List of output tables.}
 
 \item{\code{ParamInfo}}{Parameter information.}
 
@@ -43,6 +39,8 @@ OncoSimX Model Class
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{workset_list}}{List of worksets.}
+
+\item{\code{scenario_list}}{List of scenarios.}
 
 \item{\code{run_list}}{List of model runs.}
 

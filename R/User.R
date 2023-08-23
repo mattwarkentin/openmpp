@@ -23,7 +23,7 @@ set_user_views <- function(model, data) {
   api_path <- glue::glue('/api/user/view/model/{model}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data = data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_perform()
   invisible()
 }

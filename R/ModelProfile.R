@@ -16,7 +16,7 @@ touch_model_profile <- function(model, data) {
   api_path <- glue::glue('api/model/{model}/profile')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data = data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform() |>
     httr2::resp_body_json()

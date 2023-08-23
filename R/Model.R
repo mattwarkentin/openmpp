@@ -48,7 +48,7 @@ run_model <- function(data) {
   api_path <- '/api/run'
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data) |>
+    httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('POST') |>
     httr2::req_perform() |>
     httr2::resp_body_json()
