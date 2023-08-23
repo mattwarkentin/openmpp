@@ -66,19 +66,29 @@ OncoSimXWorkset <-
       },
 
       #' @description
+      #' Refresh parameters.
+      #' @return Self, invisibly.
+      refresh_params = function() {
+        to_refresh <- purrr::keep(self$Params, is.data.frame)
+        purrr::walk(names(to_refresh), private$.load_param, .progress = 'Refreshing Parameters')
+        invisible(self)
+      },
+
+      #' @description
       #' Print a `OncoSimXWorkset` object.
       #' @param ... Not currently used.
-      #' @return  Self, invisibly.
+      #' @return Self, invisibly.
       print = function(...) {
         super$print()
         cli::cli_alert(paste0('WorksetName: ', self$WorksetName))
         cli::cli_alert(paste0('BaseRunDigest: ', self$BaseRunDigest))
+        invisible(self)
       },
 
       #' @description
       #' Copy a parameter from a base scenario.
       #' @param names Character vector of parameter names.
-      #' @return  `self`, invisibly.
+      #' @return Self, invisibly.
       copy_params = function(names) {
         if (rlang::is_null(self$BaseRunDigest)) {
           rlang::abort('Cannot copy parameters without a base scenario.')
@@ -100,7 +110,7 @@ OncoSimXWorkset <-
 
       #' @description
       #' Copy all parameters from a base scenario.
-      #' @return  `self`, invisibly.
+      #' @return Self, invisibly.
       copy_params_all = function() {
         if (rlang::is_null(self$BaseRunDigest)) {
           rlang::abort('Cannot copy parameters without a base scenario.')
@@ -123,48 +133,35 @@ OncoSimXWorkset <-
       },
 
       #' @description
-      #' Write a parameter to disk (CSV format).
-      #' @param name Parameter name.
-      #' @param folder Folder path.
-      #' @return  `self`, invisibly.
-      extract_param = function(name) {
-        if (rlang::is_null(self$WorksetDir)) {
-          rlang::abort('Must run `create_dir()` before extracting parameters.')
+      #' Create directory for scenario.
+      #' @param dir Root directory for scenario.
+      #' @return Self, invisibly.
+      create_dir = function(dir = '.') {
+        dir <- fs::path_real(dir)
+        if (!fs::dir_exists(dir)) {
+          rlang::abort('Invalid directory path')
         }
 
-        data <- self$get_param(name)
-        if (is.data.frame(data)) {
-          readr::write_csv(data, glue::glue('{self$WorksetDir}/{name}.csv'))
-        }
-        invisible(self)
-      },
+        dir_path <- glue::glue('{dir}/{self$ModelName}.set.{self$WorksetName}')
 
-      #' @description
-      #' Write all parameters to disk (CSV format).
-      #' @param folder Folder path.
-      #' @return  `self`, invisibly.
-      extract_params = function() {
-        to_extract <- purrr::keep(self$Params, is.data.frame)
-        purrr::iwalk(to_extract, \(p, i) {
-          file <- glue::glue('{self$WorksetDir}/{i}.csv')
-          readr::write_csv(p, file, progress = FALSE)
-        }, .progress = 'Extracting Parameters')
+        dir_to_create <- glue::glue('{dir_path}/set.{self$WorksetName}')
+
+        fs::dir_create(dir_to_create)
+        self$WorksetDir <- dir_path
         invisible(self)
       },
 
       #' @description
       #' Create zip archive for parameters.
-      #' @return  Zip path, invisibly.
-      zip_dir = function() {
+      #' @return Zip path, invisibly.
+      archive_dir = function() {
         if (rlang::is_null(self$WorksetDir)) {
-          rlang::abort('No directory to zip.')
+          rlang::abort('No directory to archive.')
         }
 
-        dir_sp <- fs::path_split(self$WorksetDir)[[1]]
+        dir_file <- fs::path_file(self$WorksetDir)
 
-        dir_file <- dir_sp[[length(dir_sp) - 1]]
-
-        dir_path <- fs::path_real(glue::glue_collapse(dir_sp[1:(length(dir_sp) - 2)], '/'))
+        dir_path <- fs::path_dir(self$WorksetDir)
 
         zip_dir <- glue::glue('{dir_file}.zip')
 
@@ -177,34 +174,47 @@ OncoSimXWorkset <-
       },
 
       #' @description
-      #' Upload parameters from a directory.
-      #' @return  `self`, invisibly.
-      upload_params = function() {
-        zip_dir <- self$zip_dir()
-        upload_workset_params(
-          self$ModelName,
-          self$WorksetName,
-          zip_dir
-        )
-        # Reload self$Params
+      #' Write a parameter to disk (CSV format).
+      #' @param name Parameter name.
+      #' @param folder Folder path.
+      #' @return Self, invisibly.
+      extract_param = function(name) {
+        if (rlang::is_null(self$WorksetDir)) {
+          rlang::abort('Must run `create_dir()` before extracting parameters.')
+        }
+
+        data <- self$get_param(name)
+        if (is.data.frame(data)) {
+          readr::write_csv(data, glue::glue('{self$WorksetDir}/set.{self$WorksetName}/{name}.csv'))
+        }
         invisible(self)
       },
 
       #' @description
-      #' Create directory for scenario.
-      #' @param dir Root directory for scenario.
-      #' @return Directory path, invisibly.
-      create_dir = function(dir = '.') {
-        dir <- fs::path_real(dir)
-        dir_path <- glue::glue(
-          '{dir}/{self$ModelName}.set.{self$WorksetName}/set.{self$WorksetName}'
-        )
-        if (!fs::dir_exists(dir)) {
-          rlang::abort('Invalid directory path')
+      #' Write all parameters to disk (CSV format).
+      #' @param folder Folder path.
+      #' @return Self, invisibly.
+      extract_params = function() {
+        if (rlang::is_null(self$WorksetDir)) {
+          rlang::abort('Must run `create_dir()` before extracting parameters.')
         }
-        fs::dir_create(dir_path)
-        self$WorksetDir <- dir_path
-        invisible(dir_path)
+        to_extract <- purrr::keep(self$Params, is.data.frame)
+        purrr::iwalk(to_extract, \(p, i) {
+          file <- glue::glue('{self$WorksetDir}/set.{self$WorksetName}/{i}.csv')
+          readr::write_csv(p, file, progress = FALSE)
+        }, .progress = 'Extracting Parameters')
+        invisible(self)
+      },
+
+      #' @description
+      #' Upload parameters from a directory.
+      #' @return Self, invisibly.
+      upload_params = function() {
+        zip_dir <- self$archive_dir()
+        upload_workset_params(self$ModelName, self$WorksetName, zip_dir)
+        Sys.sleep(1) # wait for updates to register
+        self$refresh_params()
+        invisible(self)
       },
 
       #' @description
@@ -212,8 +222,9 @@ OncoSimXWorkset <-
       #' @param name Run name.
       #' @param opts Run options.
       #' @param wait Logical. Should we wait until the model run is done?
-      #' @return  `self`, invisibly.
-      run = function(name, opts = opt_runs(), wait = FALSE) {
+      #' @param wait_time Number of seconds to wait between status checks.
+      #' @return List of run information.
+      run = function(name, opts = opt_runs(), wait = FALSE, wait_time = 0.1) {
         if (rlang::is_false(self$ReadOnly)) {
           rlang::abort('Workset must be read-only to initiate a run.')
         }
@@ -224,14 +235,18 @@ OncoSimXWorkset <-
         opts$Opts$OpenM.SetName = self$WorksetName
         run_info <- run_model(opts)
 
+        sp <- cli::make_spinner(template = 'Running Model {spin}')
+
         is_running <- TRUE
         if (wait) {
           while (is_running) {
-            Sys.sleep(1)
+            sp$spin()
+            Sys.sleep(wait_time)
             status <- get_model_run_status(run_info$ModelDigest, name)$Status
             is_running <- status != 's'
           }
         }
+        sp$finish()
         run_info
       }
     ),

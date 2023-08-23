@@ -121,23 +121,25 @@ OncoSimXModelRun <-
       #' @param name Parameter name.
       #' @return A `tibble`.
       get_param = function(name) {
+        if (rlang::is_null(self$Params[[name]])) self$load_param(name)
         self$Params[[name]]
       },
 
       #' @description
-      #' Print a OncoSimXModelRun object.
+      #' Print a `OncoSimXModelRun` object.
       #' @param ... Not currently used.
       #' @return  Self, invisibly.
       print = function(...) {
         super$print()
         cli::cli_alert(paste0('RunName: ', self$RunName))
         cli::cli_alert(paste0('RunDigest: ', self$RunDigest))
+        invisible(self)
       },
 
       #' @description
       #' Write a parameter to disk (CSV).
       #' @param name Parameter name.
-      #' @param file Not currently used.
+      #' @param file File path.
       #' @return  `name`, invisibly.
       extract_param = function(name, file) {
         readr::write_csv(self$get_param(name), file)
@@ -146,10 +148,11 @@ OncoSimXModelRun <-
       #' @description
       #' Write an output table to disk (CSV).
       #' @param name Table name.
-      #' @param file Not currently used.
-      #' @return  `name`, invisibly.
+      #' @param file File path.
+      #' @return  Self, invisibly.
       extract_table = function(name, file) {
         readr::write_csv(self$get_table(name), file)
+        invisible(self)
       }
     ),
     private = list(

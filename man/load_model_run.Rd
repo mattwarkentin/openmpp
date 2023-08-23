@@ -194,7 +194,7 @@ A \code{tibble}.
 \if{html}{\out{<a id="method-OncoSimXModelRun-print"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXModelRun-print}{}}}
 \subsection{Method \code{print()}}{
-Print a OncoSimXModelRun object.
+Print a \code{OncoSimXModelRun} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$print(...)}\if{html}{\out{</div>}}
 }
@@ -224,7 +224,7 @@ Write a parameter to disk (CSV).
 \describe{
 \item{\code{name}}{Parameter name.}
 
-\item{\code{file}}{Not currently used.}
+\item{\code{file}}{File path.}
 }
 \if{html}{\out{</div>}}
 }
@@ -246,12 +246,12 @@ Write an output table to disk (CSV).
 \describe{
 \item{\code{name}}{Table name.}
 
-\item{\code{file}}{Not currently used.}
+\item{\code{file}}{File path.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{name}, invisibly.
+Self, invisibly.
 }
 }
 }
