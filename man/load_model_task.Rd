@@ -2,7 +2,7 @@
 % Please edit documentation in R/R6ClassModelTask.R
 \name{load_model_task}
 \alias{load_model_task}
-\title{OncoSimX Model Task Class}
+\title{OncoSimX ModelTask Class}
 \usage{
 load_model_task(model, task)
 }
@@ -15,5 +15,5 @@ load_model_task(model, task)
 An \code{OncoSimXModelTask} instance.
 }
 \description{
-OncoSimX Model Task Class
+OncoSimX ModelTask Class
 }

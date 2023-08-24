@@ -14,6 +14,4 @@ create_scenario <- function(model, name, base = NULL) {
 
 #' @rdname get_workset
 #' @export
-delete_scenario <- function(model, name) {
-  delete_workset(model, name)
-}
+delete_scenario <- delete_workset

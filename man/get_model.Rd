@@ -5,7 +5,7 @@
 \alias{get_models}
 \alias{get_models_list}
 \alias{run_model}
-\alias{stop_model}
+\alias{stop_model_run}
 \title{OncoSimX Models}
 \usage{
 get_model(model)
@@ -16,7 +16,7 @@ get_models_list()
 
 run_model(data)
 
-stop_model(model, stamp)
+stop_model_run(model, stamp)
 }
 \arguments{
 \item{model}{Model digest or model name.}

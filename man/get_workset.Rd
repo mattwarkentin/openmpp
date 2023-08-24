@@ -55,7 +55,7 @@ merge_param_workset_to_workset(model, set, name, from)
 
 upload_workset_params(model, set, data)
 
-delete_scenario(model, name)
+delete_scenario(model, set)
 }
 \arguments{
 \item{model}{Model digest or model name.}

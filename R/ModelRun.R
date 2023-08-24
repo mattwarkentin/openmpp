@@ -36,6 +36,10 @@ get_model_runs <- function(model) {
 
 #' @rdname get_model_run
 #' @export
+get_runs <- get_model_runs
+
+#' @rdname get_model_run
+#' @export
 get_model_run_status <- function(model, run) {
   api_path <- glue::glue('api/model/{model}/run/{run}/status')
   httr2::request(api_url()) |>

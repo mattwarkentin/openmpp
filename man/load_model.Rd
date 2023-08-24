@@ -29,9 +29,9 @@ OncoSimX Model Class
 
 \item{\code{ModelMetadata}}{Model metadata.}
 
-\item{\code{ParamInfo}}{Parameter information.}
+\item{\code{ParamInfo}}{Input parameter information.}
 
-\item{\code{TableInfo}}{Table information.}
+\item{\code{TableInfo}}{Output table information.}
 }
 \if{html}{\out{</div>}}
 }

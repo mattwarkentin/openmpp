@@ -37,14 +37,14 @@ OncoSimXWorkset <-
       #' @field Type Object type (used for `print()`).
       Type = 'Workset',
 
-      #' @field Params List of parameters.
+      #' @field Params List of input parameters.
       Params = NULL,
 
       #' @description
       #' Create a new OncoSimXWorkset object.
       #' @param model Model digest or name.
       #' @param set Workset name.
-      #' @return A new `OncoSimXModel` object.
+      #' @return A new `OncoSimXWorkset` object.
       initialize = function(model, set) {
         super$initialize(model)
         private$.workset = get_workset(model, set)

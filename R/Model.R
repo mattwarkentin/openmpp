@@ -56,7 +56,7 @@ run_model <- function(data) {
 
 #' @rdname get_model
 #' @export
-stop_model <- function(model, stamp) {
+stop_model_run <- function(model, stamp) {
   api_path <- '/api/run/stop/model/{model}/stamp/{stamp}'
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>

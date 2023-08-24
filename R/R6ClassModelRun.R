@@ -1,4 +1,4 @@
-#' OncoSimX Model Run Class
+#' OncoSimX ModelRun Class
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
@@ -32,16 +32,13 @@ OncoSimXModelRun <-
       #' @field RunDigest Run digest.
       RunDigest = NULL,
 
-      #' @field RunStatus Run status.
-      RunStatus = NULL,
-
       #' @field RunMetadata Run metadata.
       RunMetadata = NULL,
 
       #' @field Type Object type (used for `print()`).
       Type = 'ModelRun',
 
-      #' @field Params List of parameters.
+      #' @field Params List of input parameters.
       Params = NULL,
 
       #' @field Tables List of output tables.
@@ -51,14 +48,13 @@ OncoSimXModelRun <-
       #' Create a new OncoSimXModelRun object.
       #' @param model Model digest or name.
       #' @param run Run digest, run stamp, or run name.
-      #' @return A new `OncoSimXModel` object.
+      #' @return A new `OncoSimXModelRun` object.
       initialize = function(model, run) {
         super$initialize(model)
-        private$.run = get_model_run(model, run)
-        self$RunName = private$.run$Name
-        self$RunDigest = private$.run$RunDigest
-        self$RunStatus = private$.run$Status
-        self$RunMetadata = purrr::discard_at(private$.run, c('Param', 'Table'))
+        private$.run <- get_model_run(model, run)
+        self$RunName <- private$.run$Name
+        self$RunDigest <- private$.run$RunDigest
+        self$RunMetadata <- purrr::discard_at(private$.run, c('Param', 'Table'))
         self$Params <- vector('list', length(private$.run$Param))
         self$Params <- rlang::set_names(self$Params, purrr::map_chr(private$.run$Param, \(x) x$Name))
         self$Tables <- vector('list', length(private$.run$Table))
@@ -66,7 +62,7 @@ OncoSimXModelRun <-
       },
 
       #' @description
-      #' Load a tables.
+      #' Load a table.
       #' @param name Table name.
       #' @return Self, invisibly.
       load_table = function(name) {
@@ -80,7 +76,7 @@ OncoSimXModelRun <-
       load_tables = function() {
         if (!private$.tables_loaded) {
           tbl_names <- names(self$Tables)
-          purrr::walk(tbl_names, load_table, .progress = 'Loading Tables')
+          purrr::walk(tbl_names, self$load_table, .progress = 'Loading Tables')
           private$.tables_loaded <- TRUE
         }
         invisible(self)
@@ -160,5 +156,10 @@ OncoSimXModelRun <-
       .params_loaded = FALSE,
       .tables_loaded = FALSE
     ),
-    active = list()
+    active = list(
+      #' @field RunStatus Run status.
+      RunStatus = function() {
+        get_model_run_status(self$ModelDigest, self$RunDigest)
+      }
+    )
   )

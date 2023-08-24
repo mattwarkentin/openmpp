@@ -68,7 +68,7 @@ A new \code{OncoSimXModelTask} object.
 
 \item{\code{Type}}{Object type (used for \code{print()}).}
 
-\item{\code{Params}}{List of parameters.}
+\item{\code{Params}}{List of input parameters.}
 }
 \if{html}{\out{</div>}}
 }
@@ -117,7 +117,7 @@ Create a new OncoSimXWorkset object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new \code{OncoSimXModel} object.
+A new \code{OncoSimXWorkset} object.
 }
 }
 \if{html}{\out{<hr>}}

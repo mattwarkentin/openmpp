@@ -35,10 +35,10 @@ OncoSimXModel <-
       #' @field ModelMetadata Model metadata.
       ModelMetadata = NULL,
 
-      #' @field ParamInfo Parameter information.
+      #' @field ParamInfo Input parameter information.
       ParamInfo = NULL,
 
-      #' @field TableInfo Table information.
+      #' @field TableInfo Output table information.
       TableInfo = NULL,
 
       #' @description

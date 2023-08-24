@@ -4,7 +4,7 @@
 \alias{load_model_run}
 \alias{load_run}
 \alias{OncoSimXModelRun}
-\title{OncoSimX Model Run Class}
+\title{OncoSimX ModelRun Class}
 \usage{
 load_model_run(model, run)
 
@@ -20,7 +20,7 @@ stamp or task run name.}
 An \code{OncoSimXModelRun} instance.
 }
 \description{
-OncoSimX Model Run Class
+OncoSimX ModelRun Class
 }
 \details{
 \code{load_run()} is an alias for \code{load_model_run()}.
@@ -35,15 +35,20 @@ OncoSimX Model Run Class
 
 \item{\code{RunDigest}}{Run digest.}
 
-\item{\code{RunStatus}}{Run status.}
-
 \item{\code{RunMetadata}}{Run metadata.}
 
 \item{\code{Type}}{Object type (used for \code{print()}).}
 
-\item{\code{Params}}{List of parameters.}
+\item{\code{Params}}{List of input parameters.}
 
 \item{\code{Tables}}{List of output tables.}
+}
+\if{html}{\out{</div>}}
+}
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{RunStatus}}{Run status.}
 }
 \if{html}{\out{</div>}}
 }
@@ -81,14 +86,14 @@ Create a new OncoSimXModelRun object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new \code{OncoSimXModel} object.
+A new \code{OncoSimXModelRun} object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelRun-load_table"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_table}{}}}
 \subsection{Method \code{load_table()}}{
-Load a tables.
+Load a table.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_table(name)}\if{html}{\out{</div>}}
 }

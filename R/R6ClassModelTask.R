@@ -1,4 +1,4 @@
-#' OncoSimX Model Task Class
+#' OncoSimX ModelTask Class
 #'
 #' @param task Modeling task name.
 #' @inheritParams get_model

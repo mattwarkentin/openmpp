@@ -4,6 +4,7 @@
 \alias{get_model_run}
 \alias{get_model_runs_list}
 \alias{get_model_runs}
+\alias{get_runs}
 \alias{get_model_run_status}
 \alias{get_model_run_list_status}
 \alias{get_model_run_status_first}
@@ -17,6 +18,8 @@ get_model_run(model, run)
 get_model_runs_list(model)
 
 get_model_runs(model)
+
+get_runs(model)
 
 get_model_run_status(model, run)
 
