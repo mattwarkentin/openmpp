@@ -106,7 +106,7 @@ breast_default <- load_scenario('OncoSimX-breast', 'Default')
 breast_default
 ```
 
-Finally, we will load the base run for the Breast model
+Finally, we will load the base run for the Breast model.
 
 ```{r}
 baserun_digest <- breast$run_list$RunDigest[[1]]
@@ -120,7 +120,7 @@ We will create a new scenario based on the parameters from the `Default_first_ru
 create_scenario('OncoSimX-breast', 'MyNewScenario', baserun_digest)
 ```
 
-We will load the new scenario, copy over the `ProvincesOfInterest` parameter from the base run and extract it to a CSV file for editing
+We will load the new scenario, copy over the `ProvincesOfInterest` parameter from the base run and extract it to a CSV file for editing.
 
 ```{r echo=FALSE}
 new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
@@ -138,7 +138,7 @@ We didn't make any changes to the parameters, but we will run the model anyway. 
 new_scenario$run('ExampleRun', wait = TRUE)
 ```
 
-Now that our model run is complete, lets load it into memory
+Now that our model run is complete, lets load it into memory.
 
 ```{r}
 example_run <- load_run('OncoSimX-breast', 'ExampleRun')
@@ -151,7 +151,7 @@ We can now extract an output table from this model run using `$get_table()`.
 example_run$get_table('Breast_Cancer_Cases_Table')
 ```
 
-Great, we have create a new scenario, extracted some parameters to potentially modify, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
+Great, we have created a new scenario, extracted some parameters to potentially modify, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
 
 ```{r}
 breast_runs <- load_runs('OncoSimX-breast', breast$run_list$RunDigest)
