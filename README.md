@@ -79,11 +79,6 @@ parameters, but users can edit the extracted CSV files and use
 
 ``` r
 library(oncosimx)
-#> 
-#> Attaching package: 'oncosimx'
-#> The following object is masked from 'package:usethis':
-#> 
-#>     create_project
 library(ggplot2)
 ```
 

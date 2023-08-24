@@ -71,7 +71,7 @@ Instances of each of these 4 classes have methods and fields associated with the
 
 Here we will work through a very simple example of creating a new scenario, extracting parameters to change, running the model, and extracting results. In this example we do not actually change any parameters, but users can edit the extracted CSV files and use `workset$upload_params()` to upload changed parameters.
 
-```{r}
+```{r message=FALSE}
 library(oncosimx)
 library(ggplot2)
 ```
