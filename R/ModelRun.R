@@ -90,7 +90,7 @@ get_model_run_status_compl <- function(model) {
 
 #' @rdname get_model_run
 #' @export
-delete_run <- function(model, run) {
+delete_model_run <- function(model, run) {
   api_path <- glue::glue('/api/model/{model}/run/{run}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
@@ -98,3 +98,7 @@ delete_run <- function(model, run) {
     httr2::req_perform()
   invisible()
 }
+
+#' @rdname get_model_run
+#' @export
+delete_run <- delete_model_run

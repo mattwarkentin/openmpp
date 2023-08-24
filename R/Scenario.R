@@ -9,7 +9,6 @@ create_scenario <- function(model, name, base = NULL) {
   body <- list(ModelName = model, Name = name)
   if (!rlang::is_null(base)) body[['BaseRunDigest']] <- base
   create_workset(body)
-  load_workset(model, name)
 }
 
 #' @rdname get_workset

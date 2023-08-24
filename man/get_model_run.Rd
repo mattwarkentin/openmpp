@@ -10,6 +10,7 @@
 \alias{get_model_run_status_first}
 \alias{get_model_run_status_last}
 \alias{get_model_run_status_compl}
+\alias{delete_model_run}
 \alias{delete_run}
 \title{OncoSimX Model Run}
 \usage{
@@ -30,6 +31,8 @@ get_model_run_status_first(model)
 get_model_run_status_last(model)
 
 get_model_run_status_compl(model)
+
+delete_model_run(model, run)
 
 delete_run(model, run)
 }

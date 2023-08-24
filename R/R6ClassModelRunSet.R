@@ -56,10 +56,8 @@ OncoSimXModelRunSet <-
         self$ModelName <- first_run$ModelName
         self$ModelDigest <- first_run$ModelDigest
         self$ModelVersion <- first_run$ModelVersion
-        self$Params <- vector('list', length(first_run$Param))
-        self$Params <- rlang::set_names(self$Params, purrr::map_chr(first_run$Param, \(x) x$Name))
-        self$Tables <- vector('list', length(first_run$Table))
-        self$Tables <- rlang::set_names(self$Tables, purrr::map_chr(first_run$Table, \(x) x$Name))
+        self$Params <- first_run$Params
+        self$Tables <- first_run$Tables
       },
 
       #' @description
@@ -85,31 +83,40 @@ OncoSimXModelRunSet <-
       #' @description
       #' Load a table.
       #' @param name Table name.
+      #' @param stack Should tables be stacked by model runs? Default is `TRUE`.
       #' @return Self, invisibly.
-      load_table = function(name) {
-        self$Tables[[name]] =
+      load_table = function(name, stack = TRUE) {
+        tables <-
           purrr::map(private$.runs, \(r) {
             get_run_table_csv(r$ModelDigest, r$RunDigest, name)
-        }) |>
-          purrr::list_rbind(names_to = 'RunName')
+          })
+
+        if (stack) {
+          tables <- purrr::list_rbind(tables, names_to = 'RunName')
+        }
+
+        self$Tables[[name]] <- tables
+
         invisible(self)
       },
 
       #' @description
       #' Load all tables.
+      #' @param stack Should tables be stacked by model runs? Default is `TRUE`.
       #' @return Self, invisibly.
-      load_tables = function() {
+      load_tables = function(stack = TRUE) {
         tbl_names <- names(self$Tables)
-        purrr::walk(tbl_names, self$load_table, .progress = 'Loading Tables')
+        purrr::walk(tbl_names, \(t) self$load_table(t, stack), .progress = 'Loading Tables')
         invisible(self)
       },
 
       #' @description
       #' Retrieve a table.
       #' @param name Table name.
+      #' @param stack Should tables be stacked by model runs? Default is `TRUE`.
       #' @return A `tibble`.
-      get_table = function(name) {
-        if (rlang::is_null(self$Tables[[name]])) self$load_table(name)
+      get_table = function(name, stack = TRUE) {
+        if (rlang::is_null(self$Tables[[name]])) self$load_table(name, stack)
         self$Tables[[name]]
       },
 
@@ -158,6 +165,11 @@ OncoSimXModelRunSet <-
       #' @field RunDigests Run digests.
       RunDigests = function() {
         purrr::map_chr(private$.runs, \(x) x$RunDigest)
+      },
+
+      #' @field RunStamps Run stamps.
+      RunStamps = function() {
+        purrr::map_chr(private$.runs, \(x) x$RunStamp)
       },
 
       #' @field RunStatuses Run statuses.

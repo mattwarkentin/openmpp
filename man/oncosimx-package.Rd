@@ -6,7 +6,7 @@
 \alias{oncosimx-package}
 \title{oncosimx: Programmatic interface to the OncoSimX Web Platform}
 \description{
-This package provides a programmatic interfact to the OncoSimX web-based platform. OncoSim is a free, web-based simulation tool that can be used to evaluate cancer control strategies.
+This package provides a programmatic interface to the OncoSimX web-based platform. OncoSim is a free, web-based simulation tool that can be used to evaluate cancer control strategies.
 }
 \author{
 \strong{Maintainer}: Matthew T. Warkentin \email{matthew.warkentin@ucalgary.ca} (\href{https://orcid.org/0000-0001-8730-3511}{ORCID})

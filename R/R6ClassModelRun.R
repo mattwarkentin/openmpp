@@ -32,6 +32,9 @@ OncoSimXModelRun <-
       #' @field RunDigest Run digest.
       RunDigest = NULL,
 
+      #' @field RunStamp Run stamp.
+      RunStamp = NULL,
+
       #' @field RunMetadata Run metadata.
       RunMetadata = NULL,
 
@@ -54,6 +57,7 @@ OncoSimXModelRun <-
         private$.run <- get_model_run(model, run)
         self$RunName <- private$.run$Name
         self$RunDigest <- private$.run$RunDigest
+        self$RunStamp <- self$RunStatus$RunStamp
         self$RunMetadata <- purrr::discard_at(private$.run, c('Param', 'Table'))
         self$Params <- vector('list', length(private$.run$Param))
         self$Params <- rlang::set_names(self$Params, purrr::map_chr(private$.run$Param, \(x) x$Name))

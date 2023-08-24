@@ -48,6 +48,8 @@ OncoSimX ModelRunSet  Class
 
 \item{\code{RunDigests}}{Run digests.}
 
+\item{\code{RunStamps}}{Run stamps.}
+
 \item{\code{RunStatuses}}{Run statuses.}
 
 \item{\code{RunMetadatas}}{Run metadatas.}
@@ -115,13 +117,15 @@ Self, invisibly.
 \subsection{Method \code{load_table()}}{
 Load a table.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$load_table(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$load_table(name, stack = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{Table name.}
+
+\item{\code{stack}}{Should tables be stacked by model runs? Default is \code{TRUE}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -135,9 +139,16 @@ Self, invisibly.
 \subsection{Method \code{load_tables()}}{
 Load all tables.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$load_tables()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$load_tables(stack = TRUE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{stack}}{Should tables be stacked by model runs? Default is \code{TRUE}.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 Self, invisibly.
 }
@@ -148,13 +159,15 @@ Self, invisibly.
 \subsection{Method \code{get_table()}}{
 Retrieve a table.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$get_table(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$get_table(name, stack = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{Table name.}
+
+\item{\code{stack}}{Should tables be stacked by model runs? Default is \code{TRUE}.}
 }
 \if{html}{\out{</div>}}
 }

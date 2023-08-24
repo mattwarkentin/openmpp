@@ -35,6 +35,8 @@ OncoSimX ModelRun Class
 
 \item{\code{RunDigest}}{Run digest.}
 
+\item{\code{RunStamp}}{Run stamp.}
+
 \item{\code{RunMetadata}}{Run metadata.}
 
 \item{\code{Type}}{Object type (used for \code{print()}).}

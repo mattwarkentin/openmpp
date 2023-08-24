@@ -13,5 +13,4 @@ create_project <- function(model, name, worksets = NULL) {
       Set = worksets
     )
   )
-  load_model_task(model, name)
 }
