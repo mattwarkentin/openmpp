@@ -108,7 +108,7 @@ get_worksets('OncoSimX-breast')
 #>   ModelName     ModelDigest ModelVersion ModelCreateDateTime Name  BaseRunDigest
 #>   <chr>         <chr>       <chr>        <chr>               <chr> <chr>        
 #> 1 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… Defa… ""           
-#> 2 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… MyNe… "e588fec0286…
+#> 2 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… MyNe… ""           
 #> # ℹ 5 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
 #> #   IsCleanBaseRun <lgl>, Txt <list<tibble[,3]>>, Param <list>
 ```
@@ -179,19 +179,26 @@ parameter from the base run and extract it to a CSV file for editing.
 new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
 new_scenario$copy_param('ProvincesOfInterest')
 new_scenario$extract_param('ProvincesOfInterest')
+new_scenario$upload_params()
 ```
 
 We didn’t make any changes to the parameters, but we will run the model
 anyway. We will give it the name `'ExampleRun'`. We use the
 `wait = TRUE` flag to make sure we want for the model run to finish
 before returning to our R session. Note that model runs may take a long
-time.
+time when the number of simulation cases is large.
 
 ``` r
 new_scenario$run('ExampleRun', wait = TRUE)
 ```
 
-Now that our model run is complete, lets load it into memory.
+Note that we can use the `opts` argument and the `opts_run()` function
+to configure our run. By default, models are run with 5,000 simulation
+cases and 12 SubValues. This allows for quick model runs and faster
+iteration, but users will want to increase the number of simulation
+cases when performing a full model run.
+
+Now that our model run is complete, let’s load it into memory.
 
 ``` r
 example_run <- load_run('OncoSimX-breast', 'ExampleRun')
@@ -201,7 +208,7 @@ example_run
 #> → ModelDigest: 528f94c1525c994b010d84507ed7903f
 #> → ModelVersion: 3.6.1.5
 #> → RunName: ExampleRun
-#> → RunDigest: d9f62bf0bd4f1a80b95daa4338b5d001
+#> → RunDigest: f5387acf02f27944e323fac795f1bba6
 ```
 
 We can now extract an output table from this model run using
@@ -218,16 +225,17 @@ example_run$get_table('Breast_Cancer_Cases_Table')
 #>  4 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2018 0           
 #>  5 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2019 0           
 #>  6 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2020 0           
-#>  7 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2021 1722.898548…
+#>  7 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2021 861.5526521…
 #>  8 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2022 0           
-#>  9 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2023 0           
+#>  9 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2023 861.5526521…
 #> 10 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2024 0           
 #> # ℹ 8,167 more rows
 ```
 
 Great, we have created a new scenario, extracted some parameters to
-potentially modify, ran the model, and extracted output tables. In this
-last step, we will load multiple model runs into memory to compare them.
+potentially modify, uploaded the parameters, ran the model, and
+extracted output tables. In this last step, we will load multiple model
+runs into memory to compare them.
 
 ``` r
 breast_runs <- load_runs('OncoSimX-breast', breast$run_list$RunDigest)
@@ -237,7 +245,7 @@ breast_runs
 #> → ModelDigest: 528f94c1525c994b010d84507ed7903f
 #> → ModelVersion: 3.6.1.5
 #> → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]
-#> → RunDigests: [e588fec0286ad7cacb1cdb32f947898a, d9f62bf0bd4f1a80b95daa4338b5d001]
+#> → RunDigests: [e588fec0286ad7cacb1cdb32f947898a, f5387acf02f27944e323fac795f1bba6]
 ```
 
 We will extract a new table from both models. Note that an extra column,

@@ -130,15 +130,18 @@ new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
 new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
 new_scenario$copy_param('ProvincesOfInterest')
 new_scenario$extract_param('ProvincesOfInterest')
+new_scenario$upload_params()
 ```
 
-We didn't make any changes to the parameters, but we will run the model anyway. We will give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time.
+We didn't make any changes to the parameters, but we will run the model anyway. We will give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.
 
 ```{r eval=FALSE}
 new_scenario$run('ExampleRun', wait = TRUE)
 ```
 
-Now that our model run is complete, lets load it into memory.
+Note that we can use the `opts` argument and the `opts_run()` function to configure our run. By default, models are run with 5,000 simulation cases and 12 SubValues. This allows for quick model runs and faster iteration, but users will want to increase the number of simulation cases when performing a full model run.
+
+Now that our model run is complete, let's load it into memory.
 
 ```{r}
 example_run <- load_run('OncoSimX-breast', 'ExampleRun')
@@ -151,7 +154,7 @@ We can now extract an output table from this model run using `$get_table()`.
 example_run$get_table('Breast_Cancer_Cases_Table')
 ```
 
-Great, we have created a new scenario, extracted some parameters to potentially modify, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
+Great, we have created a new scenario, extracted some parameters to potentially modify, uploaded the parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
 
 ```{r}
 breast_runs <- load_runs('OncoSimX-breast', breast$run_list$RunDigest)
