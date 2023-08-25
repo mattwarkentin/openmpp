@@ -4,7 +4,7 @@
 \alias{create_scenario}
 \title{Manage Model Scenarios}
 \usage{
-create_scenario(model, name, base = NULL)
+create_scenario(model, name, base)
 }
 \arguments{
 \item{model}{Model name or digest.}
@@ -12,6 +12,9 @@ create_scenario(model, name, base = NULL)
 \item{name}{New scenario name.}
 
 \item{base}{Base run digest.}
+}
+\value{
+Nothing, invisibly.
 }
 \description{
 Manage Model Scenarios

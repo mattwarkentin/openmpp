@@ -66,6 +66,8 @@ A new \code{OncoSimXModelTask} object.
 
 \item{\code{WorksetDir}}{Workset directory.}
 
+\item{\code{BaseRunDigest}}{Base run digest for input parameters.}
+
 \item{\code{Type}}{Object type (used for \code{print()}).}
 
 \item{\code{Params}}{List of input parameters.}
@@ -76,8 +78,6 @@ A new \code{OncoSimXModelTask} object.
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{ReadOnly}}{Workset read-only status.}
-
-\item{\code{BaseRunDigest}}{Base run digest (scenario) for parameters.}
 }
 \if{html}{\out{</div>}}
 }
@@ -91,7 +91,6 @@ A new \code{OncoSimXModelTask} object.
 \item \href{#method-OncoSimXWorkset-copy_params}{\code{OncoSimXWorkset$copy_params()}}
 \item \href{#method-OncoSimXWorkset-copy_params_all}{\code{OncoSimXWorkset$copy_params_all()}}
 \item \href{#method-OncoSimXWorkset-create_dir}{\code{OncoSimXWorkset$create_dir()}}
-\item \href{#method-OncoSimXWorkset-archive_dir}{\code{OncoSimXWorkset$archive_dir()}}
 \item \href{#method-OncoSimXWorkset-extract_param}{\code{OncoSimXWorkset$extract_param()}}
 \item \href{#method-OncoSimXWorkset-extract_params}{\code{OncoSimXWorkset$extract_params()}}
 \item \href{#method-OncoSimXWorkset-upload_params}{\code{OncoSimXWorkset$upload_params()}}
@@ -227,19 +226,6 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-archive_dir"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-archive_dir}{}}}
-\subsection{Method \code{archive_dir()}}{
-Create zip archive for parameters.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$archive_dir()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Zip path, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXWorkset-extract_param"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-extract_param}{}}}
 \subsection{Method \code{extract_param()}}{
@@ -252,8 +238,6 @@ Write a parameter to disk (CSV format).
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{Parameter name.}
-
-\item{\code{folder}}{Folder path.}
 }
 \if{html}{\out{</div>}}
 }
@@ -270,13 +254,6 @@ Write all parameters to disk (CSV format).
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$extract_params()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{folder}}{Folder path.}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
 Self, invisibly.
 }
@@ -317,7 +294,7 @@ Run scenario
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-List of run information.
+Self, invisibly.
 }
 }
 }

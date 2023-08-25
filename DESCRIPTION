@@ -25,6 +25,8 @@ Imports:
     readr,
     rlang,
     tibblify,
+    tidyr,
+    tidyselect,
     zip
 Suggests: 
     testthat (>= 3.0.0)
