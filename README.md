@@ -108,7 +108,7 @@ get_worksets('OncoSimX-breast')
 #>   ModelName     ModelDigest ModelVersion ModelCreateDateTime Name  BaseRunDigest
 #>   <chr>         <chr>       <chr>        <chr>               <chr> <chr>        
 #> 1 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… Defa… ""           
-#> 2 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… MyNe… ""           
+#> 2 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… MyNe… "e588fec0286…
 #> # ℹ 5 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
 #> #   IsCleanBaseRun <lgl>, Txt <list<tibble[,3]>>, Param <list>
 ```
@@ -134,7 +134,6 @@ breast
 #> ── OncoSimX Model ──────────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
 #> → ModelDigest: 528f94c1525c994b010d84507ed7903f
-#> → ModelVersion: 3.6.1.5
 ```
 
 We will now load the `Default` set of input parameters for the Breast
@@ -146,7 +145,6 @@ breast_default
 #> ── OncoSimX Workset ────────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
 #> → ModelDigest: 528f94c1525c994b010d84507ed7903f
-#> → ModelVersion: 3.6.1.5
 #> → WorksetName: Default
 #> → BaseRunDigest:
 ```
@@ -160,7 +158,6 @@ breast_baserun
 #> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
 #> → ModelDigest: 528f94c1525c994b010d84507ed7903f
-#> → ModelVersion: 3.6.1.5
 #> → RunName: Default_first_run_32M_cases_12_subs
 #> → RunDigest: e588fec0286ad7cacb1cdb32f947898a
 ```
@@ -177,13 +174,10 @@ parameter from the base run and extract it to a CSV file for editing.
 
 ``` r
 new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
-new_scenario$copy_param('ProvincesOfInterest')
-new_scenario$extract_param('ProvincesOfInterest')
-new_scenario$upload_params()
 ```
 
-We didn’t make any changes to the parameters, but we will run the model
-anyway. We will give it the name `'ExampleRun'`. We use the
+We didn’t make any changes to the base parameters, but we will run the
+model anyway. We will give it the name `'ExampleRun'`. We use the
 `wait = TRUE` flag to make sure we want for the model run to finish
 before returning to our R session. Note that model runs may take a long
 time when the number of simulation cases is large.
@@ -206,30 +200,29 @@ example_run
 #> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
 #> → ModelDigest: 528f94c1525c994b010d84507ed7903f
-#> → ModelVersion: 3.6.1.5
 #> → RunName: ExampleRun
-#> → RunDigest: f5387acf02f27944e323fac795f1bba6
+#> → RunDigest: 5584cc00a7c296b2e4af66deb679cce8
 ```
 
 We can now extract an output table from this model run using
 `$get_table()`.
 
 ``` r
-example_run$get_table('Breast_Cancer_Cases_Table')
-#> # A tibble: 8,177 × 4
-#>    expr_name                        Province                   Year expr_value  
-#>    <chr>                            <chr>                     <dbl> <chr>       
-#>  1 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2015 0           
-#>  2 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2016 0           
-#>  3 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2017 0           
-#>  4 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2018 0           
-#>  5 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2019 0           
-#>  6 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2020 0           
-#>  7 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2021 861.5526521…
-#>  8 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2022 0           
-#>  9 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2023 861.5526521…
-#> 10 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2024 0           
-#> # ℹ 8,167 more rows
+example_run$get_table('Breast_Cancer_Rates_Table')
+#> # A tibble: 3,848 × 4
+#>    expr_name                        Province                   Year expr_value
+#>    <chr>                            <chr>                     <dbl>      <dbl>
+#>  1 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2015       0   
+#>  2 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2016       0   
+#>  3 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2017       0   
+#>  4 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2018       0   
+#>  5 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2019       0   
+#>  6 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2020       0   
+#>  7 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2021       3.25
+#>  8 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2022       0   
+#>  9 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2023       3.29
+#> 10 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2024       0   
+#> # ℹ 3,838 more rows
 ```
 
 Great, we have created a new scenario, extracted some parameters to
@@ -243,9 +236,8 @@ breast_runs
 #> ── OncoSimX ModelRunSet ────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
 #> → ModelDigest: 528f94c1525c994b010d84507ed7903f
-#> → ModelVersion: 3.6.1.5
 #> → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]
-#> → RunDigests: [e588fec0286ad7cacb1cdb32f947898a, f5387acf02f27944e323fac795f1bba6]
+#> → RunDigests: [e588fec0286ad7cacb1cdb32f947898a, 5584cc00a7c296b2e4af66deb679cce8]
 ```
 
 We will extract a new table from both models. Note that an extra column,
@@ -287,6 +279,16 @@ cost_bystage |>
 
 When we are sure we no longer need a scenario or model run, we can use
 `delete_scenario()` or `delete_run()` to clean things up!
+
+### Modifying Scenario Parameters
+
+You can modify scenario parameters one of two ways. (1) You can make
+changes to parameters directly in your R session (referred to as
+in-memory changes), or (2) you can extract the parameter table into a
+CSV file and make changes there. In both cases, the modified parameters
+will be saved as CSV files in a specially named directory in order to
+have a saved copy of changed parameters and then uploaded to batch
+update parameters.
 
 ## Code of Conduct
 

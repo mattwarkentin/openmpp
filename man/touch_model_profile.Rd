@@ -2,18 +2,18 @@
 % Please edit documentation in R/ModelProfile.R
 \name{touch_model_profile}
 \alias{touch_model_profile}
-\alias{del_model_profile}
+\alias{delete_model_profile}
 \alias{set_model_profile_opt}
-\alias{del_model_profile_opt}
+\alias{delete_model_profile_opt}
 \title{OncoSimX Model Profile}
 \usage{
 touch_model_profile(model, data)
 
-del_model_profile(model, profile)
+delete_model_profile(model, profile)
 
 set_model_profile_opt(model, profile, key, value)
 
-del_model_profile_opt(model, profile, key)
+delete_model_profile_opt(model, profile, key)
 }
 \arguments{
 \item{model}{Model digest or model name.}

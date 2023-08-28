@@ -1,7 +1,7 @@
 #' Run Configuration Options
 #'
-#' @param SimulationCases Number of cases to simulate.
-#' @param SubValues Number of sub values.
+#' @param SimulationCases Number of cases to simulate. Default is 5000.
+#' @param SubValues Number of sub values. Default is 12.
 #' @param RunStamp Run stamp.
 #' @param Tables List of tables to output.
 #' @param ... Not currently used.

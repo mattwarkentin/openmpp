@@ -69,7 +69,7 @@ set_queue_job_pos <- function(pos, job) {
 
 #' @rdname get_service_config
 #' @export
-del_job_hist <- function(job) {
+delete_job_hist <- function(job) {
   api_path <- glue::glue('api/service/job/delete/history/{job}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>

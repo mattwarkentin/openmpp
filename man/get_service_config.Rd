@@ -7,7 +7,7 @@
 \alias{get_queue_job_state}
 \alias{get_hist_job_state}
 \alias{set_queue_job_pos}
-\alias{del_job_hist}
+\alias{delete_job_hist}
 \alias{get_archive_state}
 \title{OpenM++ Service State}
 \usage{
@@ -23,7 +23,7 @@ get_hist_job_state(job)
 
 set_queue_job_pos(pos, job)
 
-del_job_hist(job)
+delete_job_hist(job)
 
 get_archive_state()
 }

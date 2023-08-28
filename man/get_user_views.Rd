@@ -3,14 +3,14 @@
 \name{get_user_views}
 \alias{get_user_views}
 \alias{set_user_views}
-\alias{del_user_views}
+\alias{delete_user_views}
 \title{Manage OpenM++ User Settings}
 \usage{
 get_user_views(model)
 
 set_user_views(model, data)
 
-del_user_views(model)
+delete_user_views(model)
 }
 \arguments{
 \item{model}{Model digest or model name.}

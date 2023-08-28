@@ -128,12 +128,9 @@ new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
 
 ```{r eval=FALSE}
 new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
-new_scenario$copy_param('ProvincesOfInterest')
-new_scenario$extract_param('ProvincesOfInterest')
-new_scenario$upload_params()
 ```
 
-We didn't make any changes to the parameters, but we will run the model anyway. We will give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.
+We didn't make any changes to the base parameters, but we will run the model anyway. We will give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.
 
 ```{r eval=FALSE}
 new_scenario$run('ExampleRun', wait = TRUE)
@@ -151,7 +148,7 @@ example_run
 We can now extract an output table from this model run using `$get_table()`.
 
 ```{r}
-example_run$get_table('Breast_Cancer_Cases_Table')
+example_run$get_table('Breast_Cancer_Rates_Table')
 ```
 
 Great, we have created a new scenario, extracted some parameters to potentially modify, uploaded the parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
@@ -181,6 +178,10 @@ cost_bystage |>
 ```
 
 When we are sure we no longer need a scenario or model run, we can use `delete_scenario()` or `delete_run()` to clean things up!
+
+### Modifying Scenario Parameters
+
+You can modify scenario parameters one of two ways. (1) You can make changes to parameters directly in your R session (referred to as in-memory changes), or (2) you can extract the parameter table into a CSV file and make changes there. In both cases, the modified parameters will be saved as CSV files in a specially named directory in order to have a saved copy of changed parameters and then uploaded to batch update parameters.
 
 ## Code of Conduct
 

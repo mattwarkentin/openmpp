@@ -24,7 +24,7 @@ touch_model_profile <- function(model, data) {
 
 #' @rdname touch_model_profile
 #' @export
-del_model_profile <- function(model, profile) {
+delete_model_profile <- function(model, profile) {
   api_path <- glue::glue('api/model/{model}/profile/{profile}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
@@ -46,7 +46,7 @@ set_model_profile_opt <- function(model, profile, key, value) {
 
 #' @rdname touch_model_profile
 #' @export
-del_model_profile_opt <- function(model, profile, key) {
+delete_model_profile_opt <- function(model, profile, key) {
   api_path <- glue::glue('api/model/{model}/profile/{profile}/key/{key}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>

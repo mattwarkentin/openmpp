@@ -8,7 +8,7 @@ api_url <- function() {
 #' @param y Old parameters
 is_compatible <- function(x, y) {
   if (!all(is.data.frame(x), is.data.frame(y))) {
-    rlang::abort('New and old parameters must be data frames')
+    rlang::abort('New and old parameters must both be data frames')
   }
   if (!nrow(x) == nrow(y)) {
     rlang::abort('New parameters must have the same number of rows as old parameters')
@@ -17,6 +17,6 @@ is_compatible <- function(x, y) {
     rlang::abort('New parameters must have the same number of columns as old parameters')
   }
   if (!all(colnames(x) == colnames(y))) {
-    rlang::abort('New parameters must have the same columns as old parameters, and in the same order')
+    rlang::abort('New parameters must have the same column names as old parameters, and in the same order')
   }
 }

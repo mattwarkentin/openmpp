@@ -30,7 +30,7 @@ set_user_views <- function(model, data) {
 
 #' @rdname get_user_views
 #' @export
-del_user_views <- function(model) {
+delete_user_views <- function(model) {
   api_path <- glue::glue('/api/user/view/model/{model}')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>

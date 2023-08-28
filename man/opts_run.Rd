@@ -16,9 +16,9 @@ opts_run(
 \method{print}{OpenMRunOpts}(x, ...)
 }
 \arguments{
-\item{SimulationCases}{Number of cases to simulate.}
+\item{SimulationCases}{Number of cases to simulate. Default is 5000.}
 
-\item{SubValues}{Number of sub values.}
+\item{SubValues}{Number of sub values. Default is 12.}
 
 \item{RunStamp}{Run stamp.}
 
