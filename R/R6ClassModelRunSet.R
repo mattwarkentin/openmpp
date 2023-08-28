@@ -23,6 +23,7 @@ OncoSimXModelRunSet <-
     classname = 'OncoSimXModelRunSet',
     cloneable = FALSE,
     portable = FALSE,
+    lock_objects = FALSE,
     public = list(
 
       #' @field ModelDigest Model digest.
@@ -37,12 +38,6 @@ OncoSimXModelRunSet <-
       #' @field Type Object type (used for `print()`).
       Type = 'ModelRunSet',
 
-      #' @field Params List of input parameters.
-      Params = NULL,
-
-      #' @field Tables List of output tables.
-      Tables = NULL,
-
       #' @description
       #' Create a new OncoSimXModelRunSet object.
       #' @param model Model digest or name.
@@ -56,8 +51,7 @@ OncoSimXModelRunSet <-
         self$ModelName <- first_run$ModelName
         self$ModelDigest <- first_run$ModelDigest
         self$ModelVersion <- first_run$ModelVersion
-        self$Params <- first_run$Params
-        self$Tables <- first_run$Tables
+        private$.load_table_bindings()
       },
 
       #' @description
@@ -74,39 +68,8 @@ OncoSimXModelRunSet <-
         cli::cat_rule(glue::glue('OncoSimX {self$Type}'))
         cli::cli_alert(paste0('ModelName: ', self$ModelName))
         cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))
-        cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
         cli::cli_alert(paste0('RunNames: ', RunNames))
         cli::cli_alert(paste0('RunDigests: ', RunDigests))
-        invisible(self)
-      },
-
-      #' @description
-      #' Load a table.
-      #' @param name Table name.
-      #' @param stack Should tables be stacked by model runs? Default is `TRUE`.
-      #' @return Self, invisibly.
-      load_table = function(name, stack = TRUE) {
-        tables <-
-          purrr::map(private$.runs, \(r) {
-            get_run_table_csv(r$ModelDigest, r$RunDigest, name)
-          })
-
-        if (stack) {
-          tables <- purrr::list_rbind(tables, names_to = 'RunName')
-        }
-
-        self$Tables[[name]] <- tables
-
-        invisible(self)
-      },
-
-      #' @description
-      #' Load all tables.
-      #' @param stack Should tables be stacked by model runs? Default is `TRUE`.
-      #' @return Self, invisibly.
-      load_tables = function(stack = TRUE) {
-        tbl_names <- names(self$Tables)
-        purrr::walk(tbl_names, \(t) self$load_table(t, stack), .progress = 'Loading Tables')
         invisible(self)
       },
 
@@ -116,8 +79,9 @@ OncoSimXModelRunSet <-
       #' @param stack Should tables be stacked by model runs? Default is `TRUE`.
       #' @return A `tibble`.
       get_table = function(name, stack = TRUE) {
-        if (rlang::is_null(self$Tables[[name]])) self$load_table(name, stack)
-        self$Tables[[name]]
+        tbls <- purrr::map(private$.runs, \(run) run$get_table(name))
+        if (stack) tbls <- purrr::list_rbind(tbls, names_to = 'RunName')
+        tbls
       },
 
       #' @description
@@ -128,33 +92,19 @@ OncoSimXModelRunSet <-
       extract_table = function(name, file) {
         readr::write_csv(self$get_table(name), file)
         invisible(self)
-      },
-
-      #' @description
-      #' Load a parameter.
-      #' @param name Parameter name.
-      #' @return Self, invisibly.
-      load_param = function(name) {
-        self$Tables[[name]] =
-          purrr::map(private$.runs, \(r) {
-            get_run_param_csv(r$ModelDigest, r$RunDigest, name)
-          }) |>
-          purrr::list_rbind(names_to = 'RunName')
-        invisible(self)
-      },
-
-      #' @description
-      #' Retrieve a parameter.
-      #' @param name Parameter name.
-      #' @return A `tibble`.
-      get_param = function(name) {
-        if (rlang::is_null(self$Params[[name]])) self$load_param(name)
-        self$Params[[name]]
       }
-
     ),
     private = list(
-      .runs = NULL
+      .runs = NULL,
+      .load_table_bindings = function() {
+        purrr::walk(private$.runs[[1]]$private$.run$Table, \(table) {
+          f <- function() {
+            table_name <- table$Name
+            self$get_table(table_name)
+          }
+          rlang::env_bind_active(self, '{table$Name}' := f)
+        })
+      }
     ),
     active = list(
       #' @field RunNames Run names.
@@ -174,7 +124,7 @@ OncoSimXModelRunSet <-
 
       #' @field RunStatuses Run statuses.
       RunStatuses = function() {
-        purrr::map(private$.runs, \(x) x$RunStatus)
+        purrr::map_chr(private$.runs, \(x) x$RunStatus)
       },
 
       #' @field RunMetadatas Run metadatas.

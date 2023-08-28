@@ -34,10 +34,6 @@ OncoSimX ModelRunSet  Class
 \item{\code{ModelVersion}}{Model version.}
 
 \item{\code{Type}}{Object type (used for \code{print()}).}
-
-\item{\code{Params}}{List of input parameters.}
-
-\item{\code{Tables}}{List of output tables.}
 }
 \if{html}{\out{</div>}}
 }
@@ -61,12 +57,8 @@ OncoSimX ModelRunSet  Class
 \itemize{
 \item \href{#method-OncoSimXModelRunSet-new}{\code{OncoSimXModelRunSet$new()}}
 \item \href{#method-OncoSimXModelRunSet-print}{\code{OncoSimXModelRunSet$print()}}
-\item \href{#method-OncoSimXModelRunSet-load_table}{\code{OncoSimXModelRunSet$load_table()}}
-\item \href{#method-OncoSimXModelRunSet-load_tables}{\code{OncoSimXModelRunSet$load_tables()}}
 \item \href{#method-OncoSimXModelRunSet-get_table}{\code{OncoSimXModelRunSet$get_table()}}
 \item \href{#method-OncoSimXModelRunSet-extract_table}{\code{OncoSimXModelRunSet$extract_table()}}
-\item \href{#method-OncoSimXModelRunSet-load_param}{\code{OncoSimXModelRunSet$load_param()}}
-\item \href{#method-OncoSimXModelRunSet-get_param}{\code{OncoSimXModelRunSet$get_param()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -104,48 +96,6 @@ Print a \code{OncoSimXModelRunSet} object.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{...}}{Not currently used.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-load_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-load_table}{}}}
-\subsection{Method \code{load_table()}}{
-Load a table.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$load_table(name, stack = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Table name.}
-
-\item{\code{stack}}{Should tables be stacked by model runs? Default is \code{TRUE}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-load_tables"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-load_tables}{}}}
-\subsection{Method \code{load_tables()}}{
-Load all tables.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$load_tables(stack = TRUE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{stack}}{Should tables be stacked by model runs? Default is \code{TRUE}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -195,46 +145,6 @@ Write an output table to disk (CSV).
 }
 \subsection{Returns}{
 Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-load_param"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-load_param}{}}}
-\subsection{Method \code{load_param()}}{
-Load a parameter.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$load_param(name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Parameter name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-get_param"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-get_param}{}}}
-\subsection{Method \code{get_param()}}{
-Retrieve a parameter.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$get_param(name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Parameter name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{tibble}.
 }
 }
 }

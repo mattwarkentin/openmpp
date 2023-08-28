@@ -40,16 +40,14 @@ OncoSimX ModelRun Class
 \item{\code{RunMetadata}}{Run metadata.}
 
 \item{\code{Type}}{Object type (used for \code{print()}).}
-
-\item{\code{Params}}{List of input parameters.}
-
-\item{\code{Tables}}{List of output tables.}
 }
 \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
+\item{\code{RunStatusInfo}}{Run status information.}
+
 \item{\code{RunStatus}}{Run status.}
 }
 \if{html}{\out{</div>}}
@@ -58,14 +56,8 @@ OncoSimX ModelRun Class
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXModelRun-new}{\code{OncoSimXModelRun$new()}}
-\item \href{#method-OncoSimXModelRun-load_table}{\code{OncoSimXModelRun$load_table()}}
-\item \href{#method-OncoSimXModelRun-load_tables}{\code{OncoSimXModelRun$load_tables()}}
 \item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
-\item \href{#method-OncoSimXModelRun-load_param}{\code{OncoSimXModelRun$load_param()}}
-\item \href{#method-OncoSimXModelRun-load_params}{\code{OncoSimXModelRun$load_params()}}
-\item \href{#method-OncoSimXModelRun-get_param}{\code{OncoSimXModelRun$get_param()}}
 \item \href{#method-OncoSimXModelRun-print}{\code{OncoSimXModelRun$print()}}
-\item \href{#method-OncoSimXModelRun-extract_param}{\code{OncoSimXModelRun$extract_param()}}
 \item \href{#method-OncoSimXModelRun-extract_table}{\code{OncoSimXModelRun$extract_table()}}
 }
 }
@@ -92,39 +84,6 @@ A new \code{OncoSimXModelRun} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-load_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_table}{}}}
-\subsection{Method \code{load_table()}}{
-Load a table.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_table(name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Table name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-load_tables"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_tables}{}}}
-\subsection{Method \code{load_tables()}}{
-Load all tables.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_tables()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelRun-get_table"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_table}{}}}
 \subsection{Method \code{get_table()}}{
@@ -137,59 +96,6 @@ Retrieve a table.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{Table name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{tibble}.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-load_param"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_param}{}}}
-\subsection{Method \code{load_param()}}{
-Load a parameter.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_param(name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Parameter name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-load_params"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-load_params}{}}}
-\subsection{Method \code{load_params()}}{
-Load all parameters.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$load_params()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-get_param"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_param}{}}}
-\subsection{Method \code{get_param()}}{
-Retrieve a parameter.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_param(name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Parameter name.}
 }
 \if{html}{\out{</div>}}
 }
@@ -215,28 +121,6 @@ Print a \code{OncoSimXModelRun} object.
 }
 \subsection{Returns}{
 Self, invisibly.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-extract_param"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-extract_param}{}}}
-\subsection{Method \code{extract_param()}}{
-Write a parameter to disk (CSV).
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$extract_param(name, file)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Parameter name.}
-
-\item{\code{file}}{File path.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{name}, invisibly.
 }
 }
 \if{html}{\out{<hr>}}

@@ -24,6 +24,7 @@ OncoSimXModelRun <-
     inherit = OncoSimXModel,
     cloneable = FALSE,
     portable = FALSE,
+    lock_objects = FALSE,
     public = list(
 
       #' @field RunName Run name.
@@ -41,12 +42,6 @@ OncoSimXModelRun <-
       #' @field Type Object type (used for `print()`).
       Type = 'ModelRun',
 
-      #' @field Params List of input parameters.
-      Params = NULL,
-
-      #' @field Tables List of output tables.
-      Tables = NULL,
-
       #' @description
       #' Create a new OncoSimXModelRun object.
       #' @param model Model digest or name.
@@ -57,33 +52,9 @@ OncoSimXModelRun <-
         private$.run <- get_model_run(model, run)
         self$RunName <- private$.run$Name
         self$RunDigest <- private$.run$RunDigest
-        self$RunStamp <- self$RunStatus$RunStamp
+        self$RunStamp <- self$RunStatusInfo$RunStamp
         self$RunMetadata <- purrr::discard_at(private$.run, c('Param', 'Table'))
-        self$Params <- vector('list', length(private$.run$Param))
-        self$Params <- rlang::set_names(self$Params, purrr::map_chr(private$.run$Param, \(x) x$Name))
-        self$Tables <- vector('list', length(private$.run$Table))
-        self$Tables <- rlang::set_names(self$Tables, purrr::map_chr(private$.run$Table, \(x) x$Name))
-      },
-
-      #' @description
-      #' Load a table.
-      #' @param name Table name.
-      #' @return Self, invisibly.
-      load_table = function(name) {
-        self$Tables[[name]] = get_run_table_csv(self$ModelDigest, self$RunDigest, name)
-        invisible(self)
-      },
-
-      #' @description
-      #' Load all tables.
-      #' @return Self, invisibly.
-      load_tables = function() {
-        if (!private$.tables_loaded) {
-          tbl_names <- names(self$Tables)
-          purrr::walk(tbl_names, self$load_table, .progress = 'Loading Tables')
-          private$.tables_loaded <- TRUE
-        }
-        invisible(self)
+        private$.load_table_bindings()
       },
 
       #' @description
@@ -91,38 +62,7 @@ OncoSimXModelRun <-
       #' @param name Table name.
       #' @return A `tibble`.
       get_table = function(name) {
-        if (rlang::is_null(self$Tables[[name]])) self$load_table(name)
-        self$Tables[[name]]
-      },
-
-      #' @description
-      #' Load a parameter.
-      #' @param name Parameter name.
-      #' @return Self, invisibly.
-      load_param = function(name) {
-        self$Params[[name]] = get_run_param_csv(self$ModelDigest, self$RunDigest, name)
-        invisible(self)
-      },
-
-      #' @description
-      #' Load all parameters.
-      #' @return Self, invisibly.
-      load_params = function() {
-        if (!private$.params_loaded) {
-          par_names <- names(self$Params)
-          purrr::walk(par_names, load_param, .progress = 'Loading Parameters')
-          private$.params_loaded <- TRUE
-        }
-        invisible(self)
-      },
-
-      #' @description
-      #' Retrieve a parameter.
-      #' @param name Parameter name.
-      #' @return A `tibble`.
-      get_param = function(name) {
-        if (rlang::is_null(self$Params[[name]])) self$load_param(name)
-        self$Params[[name]]
+        get_run_table_csv(self$ModelDigest, self$RunDigest, name)
       },
 
       #' @description
@@ -137,15 +77,6 @@ OncoSimXModelRun <-
       },
 
       #' @description
-      #' Write a parameter to disk (CSV).
-      #' @param name Parameter name.
-      #' @param file File path.
-      #' @return  `name`, invisibly.
-      extract_param = function(name, file) {
-        readr::write_csv(self$get_param(name), file)
-      },
-
-      #' @description
       #' Write an output table to disk (CSV).
       #' @param name Table name.
       #' @param file File path.
@@ -157,13 +88,24 @@ OncoSimXModelRun <-
     ),
     private = list(
       .run = NULL,
-      .params_loaded = FALSE,
-      .tables_loaded = FALSE
+      .load_table_bindings = function() {
+        purrr::walk(private$.run$Table, \(table) {
+          f <- function() {
+            table_name <- table$Name
+            self$get_table(table_name)
+          }
+          rlang::env_bind_active(self, '{table$Name}' := f)
+        })
+      }
     ),
     active = list(
+      #' @field RunStatusInfo Run status information.
+      RunStatusInfo = function() {
+        get_model_run_status(self$ModelDigest, self$RunDigest)
+      },
       #' @field RunStatus Run status.
       RunStatus = function() {
-        get_model_run_status(self$ModelDigest, self$RunDigest)
+        get_model_run_status(self$ModelDigest, self$RunDigest)$Status
       }
     )
   )
