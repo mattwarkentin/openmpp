@@ -75,7 +75,6 @@ OncoSimXModel <-
         cli::cat_rule(glue::glue('OncoSimX {self$Type}'))
         cli::cli_alert(paste0('ModelName: ', self$ModelName))
         cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))
-        cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
         invisible(self)
       }
     ),
