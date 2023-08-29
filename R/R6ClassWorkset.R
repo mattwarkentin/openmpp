@@ -50,10 +50,8 @@ OncoSimXWorkset <-
       #' @return A new `OncoSimXWorkset` object.
       initialize = function(model, set) {
         super$initialize(model)
-        private$.workset = get_workset(model, set)
-        self$WorksetName = private$.workset$Name
-        self$WorksetMetadata = purrr::discard_at(private$.workset, 'Param')
-        self$BaseRunDigest <- private$.workset$BaseRunDigest
+        private$.set_workset(model, set)
+        private$.set_metadata()
         private$.load_param_bindings()
       },
 
@@ -62,7 +60,9 @@ OncoSimXWorkset <-
       #' @param base Base run digest.
       #' @return Self, invisibly.
       set_base_digest = function(base) {
-        self$BaseRunDigest <- base
+        if (rlang::is_scalar_character(base)) {
+          self$BaseRunDigest <- base
+        }
         invisible(self)
       },
 
@@ -71,6 +71,9 @@ OncoSimXWorkset <-
       #' @param dir Root directory for scenario.
       #' @return Self, invisibly.
       set_workset_archive = function(dir) {
+        if (!rlang::is_scalar_character(dir)) {
+          return(self)
+        }
         dir <- fs::path_real(dir)
         if (!fs::dir_exists(dir)) {
           rlang::abort('Invalid directory path')
@@ -95,7 +98,11 @@ OncoSimXWorkset <-
       #' @param name Parameter name.
       #' @return A `tibble`.
       get_param = function(name) {
-        private$.pivot_wide(get_workset_param_csv(self$ModelDigest, self$WorksetName, name))
+        if (name %in% private$.params) {
+          return(private$.pivot_wide(get_workset_param_csv(self$ModelDigest, self$WorksetName, name)))
+        }
+        abort_msg <- glue::glue('Parameter `{name}` is not available in this workset.')
+        rlang::abort(abort_msg)
       },
 
       #' @description
@@ -114,7 +121,7 @@ OncoSimXWorkset <-
           x = data,
           file = glue::glue('{self$WorksetDir}/set.{self$WorksetName}/{name}.csv')
         )
-        private$.extracted <- append(private$.extracted, name)
+        private$.add_extracted(name)
         invisible(self)
       },
 
@@ -125,7 +132,7 @@ OncoSimXWorkset <-
       copy_params = function(names) {
         if (rlang::is_null(self$BaseRunDigest) |
             nchar(self$BaseRunDigest) == 0) {
-          rlang::abort('Cannot copy parameters without a base scenario.')
+          rlang::abort('Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.')
         }
 
         purrr::walk(
@@ -138,8 +145,7 @@ OncoSimXWorkset <-
           )
         )
 
-        private$.copied <- append(private$.copied, names)
-        private$.workset = get_workset(self$ModelName, self$WorksetName)
+        private$.set_workset(self$ModelName, self$WorksetName)
         private$.load_param_bindings()
         invisible(self)
       },
@@ -175,7 +181,7 @@ OncoSimXWorkset <-
           data <- self$get_param(name)
           readr::write_csv(data, glue::glue('{self$WorksetDir}/set.{self$WorksetName}/{name}.csv'))
         })
-        private$.extracted <- append(private$.extracted, names)
+        private$.add_extracted(names)
         invisible(self)
       },
 
@@ -183,7 +189,7 @@ OncoSimXWorkset <-
       #' Upload parameters from a directory.
       #' @return Self, invisibly.
       upload_params = function() {
-        not_ex <- setdiff(private$.copied, private$.extracted)
+        not_ex <- setdiff(private$.params, private$.extracted)
         self$extract_params(not_ex)
         zip_dir <- private$.prepare_upload()
         upload_workset_params(self$ModelName, self$WorksetName, zip_dir)
@@ -229,10 +235,31 @@ OncoSimXWorkset <-
     ),
     private = list(
       .workset = NULL,
-      .copied = NULL,
+      .params = NULL,
       .extracted = NULL,
+      .set_metadata = function() {
+        self$WorksetName = private$.workset$Name
+        self$WorksetMetadata = purrr::discard_at(private$.workset, 'Param')
+        self$BaseRunDigest <- private$.workset$BaseRunDigest
+      },
+      .set_workset = function(model, set) {
+        private$.workset = get_workset(model, set)
+      },
+      .add_params = function(names) {
+        current <- private$.params
+        total <- sort(unique(c(current, names)))
+        private$.params <- total
+        invisible(self)
+      },
+      .add_extracted = function(names) {
+        current <- private$.extracted
+        total <- sort(unique(c(current, names)))
+        private$.extracted <- total
+        invisible(self)
+      },
       .load_param_bindings = function() {
         purrr::walk(private$.workset$Param, \(param) {
+          private$.add_params(param$Name)
           f <- function(data) {
             param_name <- param$Name
             if (missing(data)) return(self$get_param(param_name))
@@ -304,9 +331,13 @@ OncoSimXWorkset <-
     active = list(
       #' @field ReadOnly Workset read-only status.
       ReadOnly = function(x) {
-        if (missing(x)) return(self$WorksetMetadata$IsReadonly)
+        if (missing(x)) return(private$.workset$IsReadonly)
+        if (!rlang::is_scalar_logical(x)) {
+          rlang::abort('Must be a scalar logical (TRUE or FALSE).')
+        }
         set_workset_readonly(self$ModelDigest, self$WorksetName, as.integer(x))
-        self$WorksetMetadata$IsReadonly <- x
+        private$.set_workset(self$ModelName, self$WorksetName)
+        private$.set_metadata()
         invisible(self)
       }
     )
