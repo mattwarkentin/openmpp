@@ -46,25 +46,10 @@ OncoSimXModel <-
       #' @param model Model digest or name.
       #' @return A new `OncoSimXModel` object.
       initialize = function(model) {
-        private$.model <- get_model(model)
-        self$ModelMetadata <- private$.model$Model
-        self$ModelDigest <- private$.model$Model$Digest
-        self$ModelName <- private$.model$Model$Name
-        self$ModelVersion <- private$.model$Model$Version
-        self$ParamInfo <-
-          purrr::map(private$.model$ParamTxt, \(x) {
-            purrr::discard_at(x, 'ParamDimsTxt') |>
-            purrr::list_flatten(name_spec = '{inner}')
-          }) |>
-          tibblify::tibblify() |>
-          suppressMessages()
-        self$TableInfo <-
-          purrr::map(private$.model$TableTxt, \(x) {
-            purrr::discard_at(x,  c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')) |>
-              purrr::list_flatten(name_spec = '{inner}')
-          }) |>
-          tibblify::tibblify() |>
-          suppressMessages()
+        private$.set_model(model)
+        private$.set_metadata()
+        private$.set_param_info()
+        private$.set_table_info()
       },
 
       #' @description
@@ -79,7 +64,34 @@ OncoSimXModel <-
       }
     ),
     private = list(
-      .model = NULL
+      .model = NULL,
+      .set_model = function(model) {
+        private$.model <- get_model(model)
+      },
+      .set_param_info = function() {
+        self$ParamInfo <-
+          purrr::map(private$.model$ParamTxt, \(x) {
+            purrr::discard_at(x, 'ParamDimsTxt') |>
+              purrr::list_flatten(name_spec = '{inner}')
+          }) |>
+          tibblify::tibblify() |>
+          suppressMessages()
+      },
+      .set_table_info = function() {
+        self$TableInfo <-
+          purrr::map(private$.model$TableTxt, \(x) {
+            purrr::discard_at(x,  c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')) |>
+              purrr::list_flatten(name_spec = '{inner}')
+          }) |>
+          tibblify::tibblify() |>
+          suppressMessages()
+      },
+      .set_metadata = function() {
+        self$ModelMetadata <- private$.model$Model
+        self$ModelDigest <- private$.model$Model$Digest
+        self$ModelName <- private$.model$Model$Name
+        self$ModelVersion <- private$.model$Model$Version
+      }
     ),
     active = list(
       #' @field workset_list List of worksets.
