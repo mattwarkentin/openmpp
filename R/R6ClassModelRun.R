@@ -49,11 +49,8 @@ OncoSimXModelRun <-
       #' @return A new `OncoSimXModelRun` object.
       initialize = function(model, run) {
         super$initialize(model)
-        private$.run <- get_model_run(model, run)
-        self$RunName <- private$.run$Name
-        self$RunDigest <- private$.run$RunDigest
-        self$RunStamp <- self$RunStatusInfo$RunStamp
-        self$RunMetadata <- purrr::discard_at(private$.run, c('Param', 'Table'))
+        private$.set_run(model, run)
+        private$.set_run_metadata()
         private$.load_table_bindings()
       },
 
@@ -62,7 +59,11 @@ OncoSimXModelRun <-
       #' @param name Table name.
       #' @return A `tibble`.
       get_table = function(name) {
-        get_run_table_csv(self$ModelDigest, self$RunDigest, name)
+        if (name %in% private$.tables) {
+          return(get_run_table_csv(self$ModelDigest, self$RunDigest, name))
+        }
+        abort_msg <- glue::glue('Table `{name}` is not available for model run.')
+        rlang::abort(abort_msg)
       },
 
       #' @description
@@ -88,8 +89,24 @@ OncoSimXModelRun <-
     ),
     private = list(
       .run = NULL,
+      .tables = NULL,
+      .set_run = function(model, run) {
+        private$.run <- get_model_run(model, run)
+      },
+      .set_run_metadata = function() {
+        self$RunName <- private$.run$Name
+        self$RunDigest <- private$.run$RunDigest
+        self$RunStamp <- self$RunStatusInfo$RunStamp
+        self$RunMetadata <- purrr::discard_at(private$.run, c('Param', 'Table'))
+      },
+      .add_table = function(name) {
+        curr <- private$.tables
+        total <- sort(unique(c(curr, name)))
+        private$.tables <- total
+      },
       .load_table_bindings = function() {
         purrr::walk(private$.run$Table, \(table) {
+          private$.add_table(table$Name)
           f <- function() {
             table_name <- table$Name
             self$get_table(table_name)

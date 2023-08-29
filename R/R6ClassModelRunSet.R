@@ -44,13 +44,8 @@ OncoSimXModelRunSet <-
       #' @param runs Run digests, run stamps, or run names.
       #' @return A new `OncoSimXModelSet` object.
       initialize = function(model, runs) {
-        private$.runs <- vector('list', length(runs))
-        private$.runs <- purrr::map(runs, \(r) OncoSimXModelRun$new(model, r))
-        private$.runs <- rlang::set_names(private$.runs, self$RunNames)
-        first_run <- private$.runs[[1]]
-        self$ModelName <- first_run$ModelName
-        self$ModelDigest <- first_run$ModelDigest
-        self$ModelVersion <- first_run$ModelVersion
+        private$.set_runs(model, runs)
+        private$.set_runs_metadata()
         private$.load_table_bindings()
       },
 
@@ -96,6 +91,17 @@ OncoSimXModelRunSet <-
     ),
     private = list(
       .runs = NULL,
+      .set_runs = function(model, runs) {
+        private$.runs <- vector('list', length(runs))
+        private$.runs <- purrr::map(runs, \(r) OncoSimXModelRun$new(model, r))
+        private$.runs <- rlang::set_names(private$.runs, self$RunNames)
+      },
+      .set_runs_metadata = function() {
+        first_run <- private$.runs[[1]]
+        self$ModelName <- first_run$ModelName
+        self$ModelDigest <- first_run$ModelDigest
+        self$ModelVersion <- first_run$ModelVersion
+      },
       .load_table_bindings = function() {
         purrr::walk(private$.runs[[1]]$private$.run$Table, \(table) {
           f <- function() {

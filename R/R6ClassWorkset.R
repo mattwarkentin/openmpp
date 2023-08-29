@@ -51,7 +51,7 @@ OncoSimXWorkset <-
       initialize = function(model, set) {
         super$initialize(model)
         private$.set_workset(model, set)
-        private$.set_metadata()
+        private$.set_workset_metadata()
         private$.load_param_bindings()
       },
 
@@ -237,7 +237,7 @@ OncoSimXWorkset <-
       .workset = NULL,
       .params = NULL,
       .extracted = NULL,
-      .set_metadata = function() {
+      .set_workset_metadata = function() {
         self$WorksetName = private$.workset$Name
         self$WorksetMetadata = purrr::discard_at(private$.workset, 'Param')
         self$BaseRunDigest <- private$.workset$BaseRunDigest

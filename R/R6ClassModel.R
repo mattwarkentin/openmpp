@@ -47,7 +47,7 @@ OncoSimXModel <-
       #' @return A new `OncoSimXModel` object.
       initialize = function(model) {
         private$.set_model(model)
-        private$.set_metadata()
+        private$.set_model_metadata()
         private$.set_param_info()
         private$.set_table_info()
       },
@@ -86,7 +86,7 @@ OncoSimXModel <-
           tibblify::tibblify() |>
           suppressMessages()
       },
-      .set_metadata = function() {
+      .set_model_metadata = function() {
         self$ModelMetadata <- private$.model$Model
         self$ModelDigest <- private$.model$Model$Digest
         self$ModelName <- private$.model$Model$Name
