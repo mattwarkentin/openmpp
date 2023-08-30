@@ -203,7 +203,7 @@ OncoSimXWorkset <-
       #' @param wait Logical. Should we wait until the model run is done?
       #' @param wait_time Number of seconds to wait between status checks.
       #' @return Self, invisibly.
-      run = function(name, opts = opt_runs(), wait = FALSE, wait_time = 0.1) {
+      run = function(name, opts = opts_runs(), wait = FALSE, wait_time = 0.1) {
         if (rlang::is_false(self$ReadOnly)) {
           rlang::abort('Workset must be read-only to initiate a run.')
         }
@@ -337,7 +337,7 @@ OncoSimXWorkset <-
         }
         set_workset_readonly(self$ModelDigest, self$WorksetName, as.integer(x))
         private$.set_workset(self$ModelName, self$WorksetName)
-        private$.set_metadata()
+        private$.set_workset_metadata()
         invisible(self)
       }
     )

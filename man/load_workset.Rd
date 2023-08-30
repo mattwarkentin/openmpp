@@ -298,7 +298,7 @@ Self, invisibly.
 \subsection{Method \code{run()}}{
 Run scenario
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$run(name, opts = opt_runs(), wait = FALSE, wait_time = 0.1)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$run(name, opts = opts_runs(), wait = FALSE, wait_time = 0.1)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

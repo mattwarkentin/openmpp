@@ -8,6 +8,10 @@
 #'
 #' @export
 create_scenario <- function(model, name, base) {
+  existing_scenarios <- get_worksets(model)$Name
+  if (name %in% existing_scenarios) {
+    rlang::abort('Scenario name already in use, choose a different name.')
+  }
   body <- list(ModelName = model, Name = name, BaseRunDigest = base)
   create_workset(body)
   invisible()
