@@ -1,6 +1,8 @@
 #' OpenM++ Web API URL
 api_url <- function() {
-  'http://localhost:4077'
+  host <- Sys.getenv('ONCOSIMX_HOST')
+  if (nchar(host) > 0) return(host)
+  rlang::abort('Local host address not found. Please set `ONCOSIMX_HOST` in your global or project .Renviron file.')
 }
 
 #' Are data frames compatible?
