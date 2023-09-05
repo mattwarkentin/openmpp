@@ -11,6 +11,9 @@
 #'
 #' @export
 load_workset <- function(model, set) {
+  if (!(set %in% get_worksets(model)$Name)) {
+    rlang::abort(glue::glue('Workset "{set}" does not exist for model "{model}".'))
+  }
   OncoSimXWorkset$new(model, set)
 }
 
@@ -133,6 +136,10 @@ OncoSimXWorkset <-
         if (rlang::is_null(self$BaseRunDigest) |
             nchar(self$BaseRunDigest) == 0) {
           rlang::abort('Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.')
+        }
+
+        if (names %in% private$.params) {
+          rlang::abort('Parameter(s) already exist in workset.')
         }
 
         purrr::walk(

@@ -9,6 +9,9 @@
 #'
 #' @export
 load_model_run <- function(model, run) {
+  if (!(run %in% get_runs(model)$Name)) {
+    rlang::abort(glue::glue('Model run "{run}" does not exist for model "{model}".'))
+  }
   OncoSimXModelRun$new(model, run)
 }
 

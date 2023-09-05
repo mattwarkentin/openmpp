@@ -9,6 +9,9 @@
 #'
 #' @export
 load_model <- function(model) {
+  if (!(model %in% get_models()$Name)) {
+    rlang::abort(glue::glue('Model "{model}" does not exist.'))
+  }
   OncoSimXModel$new(model)
 }
 

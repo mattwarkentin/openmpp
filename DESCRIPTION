@@ -28,4 +28,6 @@ Imports:
     tidyr,
     tidyselect,
     zip
-URL: https://oncology-outcomes.github.io/oncosimx/
+URL: https://github.com/oncology-outcomes/oncosimx,
+    https://oncology-outcomes.github.io/oncosimx/
+BugReports: https://github.com/oncology-outcomes/oncosimx/issues

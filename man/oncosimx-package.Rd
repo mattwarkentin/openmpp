@@ -8,6 +8,15 @@
 \description{
 This package provides a programmatic interface to the OncoSimX web-based platform. OncoSim is a free, web-based simulation tool that can be used to evaluate cancer control strategies.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/oncology-outcomes/oncosimx}
+  \item \url{https://oncology-outcomes.github.io/oncosimx/}
+  \item Report bugs at \url{https://github.com/oncology-outcomes/oncosimx/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Matthew T. Warkentin \email{matthew.warkentin@ucalgary.ca} (\href{https://orcid.org/0000-0001-8730-3511}{ORCID})
 
