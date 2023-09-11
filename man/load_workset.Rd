@@ -66,8 +66,6 @@ A new \code{OncoSimXModelTask} object.
 
 \item{\code{WorksetDir}}{Workset directory.}
 
-\item{\code{BaseRunDigest}}{Base run digest for input parameters.}
-
 \item{\code{Type}}{Object type (used for \code{print()}).}
 }
 \if{html}{\out{</div>}}
@@ -76,6 +74,8 @@ A new \code{OncoSimXModelTask} object.
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
 \item{\code{ReadOnly}}{Workset read-only status.}
+
+\item{\code{BaseRunDigest}}{Base run digest for input parameters.}
 }
 \if{html}{\out{</div>}}
 }
@@ -84,6 +84,7 @@ A new \code{OncoSimXModelTask} object.
 \itemize{
 \item \href{#method-OncoSimXWorkset-new}{\code{OncoSimXWorkset$new()}}
 \item \href{#method-OncoSimXWorkset-set_base_digest}{\code{OncoSimXWorkset$set_base_digest()}}
+\item \href{#method-OncoSimXWorkset-delete_base_digest}{\code{OncoSimXWorkset$delete_base_digest()}}
 \item \href{#method-OncoSimXWorkset-set_workset_archive}{\code{OncoSimXWorkset$set_workset_archive()}}
 \item \href{#method-OncoSimXWorkset-print}{\code{OncoSimXWorkset$print()}}
 \item \href{#method-OncoSimXWorkset-get_param}{\code{OncoSimXWorkset$get_param()}}
@@ -133,6 +134,19 @@ Set the base run digest.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-delete_base_digest"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-delete_base_digest}{}}}
+\subsection{Method \code{delete_base_digest()}}{
+Delete the base run digest.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$delete_base_digest()}\if{html}{\out{</div>}}
+}
+
 \subsection{Returns}{
 Self, invisibly.
 }

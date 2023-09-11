@@ -40,9 +40,6 @@ OncoSimXWorkset <-
       #' @field WorksetDir Workset directory.
       WorksetDir = NULL,
 
-      #' @field BaseRunDigest Base run digest for input parameters.
-      BaseRunDigest = NULL,
-
       #' @field Type Object type (used for `print()`).
       Type = 'Workset',
 
@@ -64,8 +61,42 @@ OncoSimXWorkset <-
       #' @return Self, invisibly.
       set_base_digest = function(base) {
         if (rlang::is_scalar_character(base)) {
-          self$BaseRunDigest <- base
+          json <- list(
+            ModelName = self$ModelName,
+            ModelDigest = self$ModelDigest,
+            Name = self$WorksetName,
+            BaseRunDigest = base
+          )
+          tmp_json <- tempfile(fileext = '.json')
+          writeLines(
+            text = jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE),
+            con = tmp_json,
+          )
+          merge_workset(tmp_json)
+          private$.set_workset(self$ModelName, self$WorksetName)
+          private$.set_workset_metadata()
         }
+        invisible(self)
+      },
+
+      #' @description
+      #' Delete the base run digest.
+      #' @return Self, invisibly.
+      delete_base_digest = function() {
+        json <- list(
+          ModelName = self$ModelName,
+          ModelDigest = self$ModelDigest,
+          Name = self$WorksetName,
+          IsCleanBaseRun = TRUE
+        )
+        tmp_json <- tempfile(fileext = '.json')
+        writeLines(
+          text = jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE),
+          con = tmp_json,
+        )
+        merge_workset(tmp_json)
+        private$.set_workset(self$ModelName, self$WorksetName)
+        private$.set_workset_metadata()
         invisible(self)
       },
 
@@ -219,6 +250,11 @@ OncoSimXWorkset <-
           rlang::abort('`opts` argument must be an `oncosimx::opts_run()` object')
         }
 
+        if (rlang::is_null(self$BaseRunDigest) |
+            nchar(self$BaseRunDigest) == 0) {
+          rlang::abort('Cannot find base run. Consider setting a base run with `$set_base_digest()`.')
+        }
+
         opts$Opts$OpenM.RunName = name
         opts$ModelDigest = self$ModelDigest
         opts$Opts$OpenM.BaseRunDigest = self$BaseRunDigest
@@ -247,7 +283,6 @@ OncoSimXWorkset <-
       .set_workset_metadata = function() {
         self$WorksetName = private$.workset$Name
         self$WorksetMetadata = purrr::discard_at(private$.workset, 'Param')
-        self$BaseRunDigest <- private$.workset$BaseRunDigest
       },
       .set_workset = function(model, set) {
         private$.workset = get_workset(model, set)
@@ -346,6 +381,16 @@ OncoSimXWorkset <-
         private$.set_workset(self$ModelName, self$WorksetName)
         private$.set_workset_metadata()
         invisible(self)
+      },
+
+      #' @field BaseRunDigest Base run digest for input parameters.
+      BaseRunDigest = function(base) {
+        if (missing(base)) return(private$.workset$BaseRunDigest)
+        if (nchar(base) == 0) {
+          delete_base_digest()
+          return(invisible(self))
+        }
+        set_base_digest(base)
       }
     )
   )

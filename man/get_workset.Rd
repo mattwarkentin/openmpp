@@ -4,6 +4,7 @@
 \alias{get_workset}
 \alias{get_worksets_list}
 \alias{get_worksets}
+\alias{get_scenarios}
 \alias{get_workset_status}
 \alias{get_workset_status_default}
 \alias{set_workset_readonly}
@@ -27,6 +28,8 @@ get_worksets_list(model)
 
 get_worksets(model)
 
+get_scenarios(model)
+
 get_workset_status(model, set)
 
 get_workset_status_default(model, set)
@@ -35,7 +38,7 @@ set_workset_readonly(model, set, readonly)
 
 create_workset(data)
 
-merge_workset(data)
+merge_workset(file)
 
 replace_workset(data)
 
@@ -65,6 +68,8 @@ delete_scenario(model, set)
 \item{readonly}{Boolean. Should workset be read-only?}
 
 \item{data}{Data used for the body of the POST request.}
+
+\item{file}{File path.}
 
 \item{name}{Output table name.}
 

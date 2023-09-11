@@ -4,14 +4,14 @@
 \alias{create_scenario}
 \title{Manage Model Scenarios}
 \usage{
-create_scenario(model, name, base)
+create_scenario(model, name, base = NULL)
 }
 \arguments{
 \item{model}{Model name or digest.}
 
 \item{name}{New scenario name.}
 
-\item{base}{Base run digest.}
+\item{base}{Base run digest (optional).}
 }
 \value{
 Nothing, invisibly.

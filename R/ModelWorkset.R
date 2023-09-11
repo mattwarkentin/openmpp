@@ -5,6 +5,7 @@
 #'
 #' @param from Source workset name.
 #' @param readonly Boolean. Should workset be read-only?
+#' @param file File path.
 #' @inheritParams get_workset_param
 #' @inheritParams get_model
 #' @inheritParams get_run_microdata
@@ -37,6 +38,10 @@ get_worksets <- function(model) {
     tibblify::tibblify() |>
     suppressMessages()
 }
+
+#' @rdname get_workset
+#' @export
+get_scenarios <- get_worksets
 
 #' @rdname get_workset
 #' @export
@@ -82,11 +87,13 @@ create_workset <- function(data) {
 
 #' @rdname get_workset
 #' @export
-merge_workset <- function(data) {
+merge_workset <- function(file) {
   api_path <- glue::glue('/api/workset-merge')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data, auto_unbox = TRUE) |>
+    httr2::req_body_multipart(
+      workset = curl::form_file(file)
+    ) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform() |>
     httr2::resp_body_json()
