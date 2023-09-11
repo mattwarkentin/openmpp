@@ -63,7 +63,9 @@ OncoSimXModelRun <-
       #' @return A `tibble`.
       get_table = function(name) {
         if (name %in% private$.tables) {
-          return(get_run_table_csv(self$ModelDigest, self$RunDigest, name))
+          tbl <- get_run_table_csv(self$ModelDigest, self$RunDigest, name)
+          suppressWarnings(tbl$expr_value <- as.numeric(tbl$expr_value))
+          return(tbl)
         }
         abort_msg <- glue::glue('Table `{name}` is not available for model run.')
         rlang::abort(abort_msg)

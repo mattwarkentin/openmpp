@@ -71,12 +71,10 @@ OncoSimXModelRunSet <-
       #' @description
       #' Retrieve a table.
       #' @param name Table name.
-      #' @param stack Should tables be stacked by model runs? Default is `TRUE`.
       #' @return A `tibble`.
-      get_table = function(name, stack = TRUE) {
-        tbls <- purrr::map(private$.runs, \(run) run$get_table(name))
-        if (stack) tbls <- purrr::list_rbind(tbls, names_to = 'RunName')
-        tbls
+      get_table = function(name) {
+        purrr::map(private$.runs, \(run) run$get_table(name)) |>
+          purrr::list_rbind(names_to = 'RunName')
       },
 
       #' @description

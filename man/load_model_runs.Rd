@@ -109,15 +109,13 @@ Self, invisibly.
 \subsection{Method \code{get_table()}}{
 Retrieve a table.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$get_table(name, stack = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$get_table(name)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{Table name.}
-
-\item{\code{stack}}{Should tables be stacked by model runs? Default is \code{TRUE}.}
 }
 \if{html}{\out{</div>}}
 }
