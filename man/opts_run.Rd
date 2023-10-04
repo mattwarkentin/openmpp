@@ -31,3 +31,8 @@ opts_run(
 \description{
 Run Configuration Options
 }
+\details{
+The default number of \code{SimulationCases} is low to enable rapid
+iteration but should be increased when running a model where the results
+are expected to be robust.
+}

@@ -6,6 +6,11 @@
 #' @param Tables List of tables to output.
 #' @param ... Not currently used.
 #'
+#' @details The default number of `SimulationCases` is low to enable rapid
+#'   iteration but should be increased when running a model where the results
+#'   are expected to be robust.
+#'
+#'
 #' @export
 opts_run <- function(
   SimulationCases = '5000',
@@ -18,17 +23,21 @@ opts_run <- function(
     RunStamp <- sub('.' , '_', fixed = TRUE, format(Sys.time(),"%Y_%m_%d_%H_%M_%OS3"))
   }
 
+  SimulationCases <- format(SimulationCases, scientific = FALSE)
+
   structure(
     list(
+      RunStamp = RunStamp,
       Mpi = list(
         Np = 4,
         IsNotOnRoot = TRUE
       ),
       Opts = list(
         Parameter.SimulationCases = SimulationCases,
-        OpenM.SubValues = SubValues,
+        OpenM.SubValues = as.character(SubValues),
         OpenM.RunStamp = RunStamp,
-        OpenM.Threads = '4'
+        OpenM.Threads = '4',
+        OpenM.LogToConsole = 'true'
       ),
       Tables = Tables
     ),
