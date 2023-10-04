@@ -240,8 +240,10 @@ OncoSimXWorkset <-
       #' @param opts Run options.
       #' @param wait Logical. Should we wait until the model run is done?
       #' @param wait_time Number of seconds to wait between status checks.
+      #' @param progress Logical. Should a progress bar be shown?
       #' @return Self, invisibly.
-      run = function(name, opts = opts_run(), wait = FALSE, wait_time = 0.1) {
+      run = function(name, opts = opts_run(), wait = FALSE, wait_time = 0.2,
+                     progress = TRUE) {
         if (rlang::is_false(self$ReadOnly)) {
           rlang::abort('Workset must be read-only to initiate a run.')
         }
@@ -261,18 +263,38 @@ OncoSimXWorkset <-
         opts$Opts$OpenM.SetName = self$WorksetName
         run_info <- run_model(opts)
 
-        sp <- cli::make_spinner(template = 'Running Model {spin}')
+        run_stamp <- opts$RunStamp
+        max_sim <- as.integer(opts$Opts$Parameter.SimulationCases)
 
-        is_running <- TRUE
         if (wait) {
-          while (is_running) {
-            sp$spin()
+
+          if (progress) {
+            cli::cli_progress_bar(
+              total = max_sim,
+              format = 'Running Simulation {cli::pb_bar}{cli::pb_percent} [{cli::pb_elapsed}]'
+            )
+          }
+
+          is_done <- private$.get_run_done(self$ModelDigest, run_stamp)
+          is_simulating <- TRUE
+          shown_finalizer <- FALSE
+
+          while (!is_done) {
+            if (is_simulating & progress) {
+              prog <- .get_run_progress(self$ModelDigest, run_stamp)
+              cli::cli_progress_update(set = prog)
+              is_simulating <- prog < max_sim
+            }
+
+            if (!is_simulating & progress & !shown_finalizer) {
+              cli::cli_progress_message('Finalizing model run...')
+              shown_finalizer <- TRUE
+            }
+
+            is_done <- private$.get_run_done(self$ModelDigest, run_stamp)
             Sys.sleep(wait_time)
-            status <- get_model_run_status(run_info$ModelDigest, name)$Status
-            is_running <- status != 's'
           }
         }
-        sp$finish()
         invisible(self)
       }
     ),
@@ -368,6 +390,17 @@ OncoSimXWorkset <-
           root = tmp
         )
         invisible(zip_path)
+      },
+      .get_run_progress = function(model, run) {
+        safe_status <- purrr::possibly(\(m, r) {
+          get_model_run_status(m, r)$Progress |>
+            purrr::map_int(\(x) x$Value) |>
+            sum()
+        }, otherwise = 0L)
+        safe_status(model, run)
+      },
+      .get_run_done = function(model, run) {
+        get_model_run_state(model, run)$IsFinal
       }
     ),
     active = list(

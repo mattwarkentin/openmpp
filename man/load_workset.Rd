@@ -312,7 +312,13 @@ Self, invisibly.
 \subsection{Method \code{run()}}{
 Run scenario
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$run(name, opts = opts_run(), wait = FALSE, wait_time = 0.1)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$run(
+  name,
+  opts = opts_run(),
+  wait = FALSE,
+  wait_time = 0.2,
+  progress = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -325,6 +331,8 @@ Run scenario
 \item{\code{wait}}{Logical. Should we wait until the model run is done?}
 
 \item{\code{wait_time}}{Number of seconds to wait between status checks.}
+
+\item{\code{progress}}{Logical. Should a progress bar be shown?}
 }
 \if{html}{\out{</div>}}
 }

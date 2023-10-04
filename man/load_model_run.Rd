@@ -59,6 +59,8 @@ OncoSimX ModelRun Class
 \item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
 \item \href{#method-OncoSimXModelRun-print}{\code{OncoSimXModelRun$print()}}
 \item \href{#method-OncoSimXModelRun-extract_table}{\code{OncoSimXModelRun$extract_table()}}
+\item \href{#method-OncoSimXModelRun-get_log}{\code{OncoSimXModelRun$get_log()}}
+\item \href{#method-OncoSimXModelRun-write_log}{\code{OncoSimXModelRun$write_log()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -138,6 +140,39 @@ Write an output table to disk (CSV).
 \item{\code{name}}{Table name.}
 
 \item{\code{file}}{File path.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-get_log"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_log}{}}}
+\subsection{Method \code{get_log()}}{
+Get console log for model run.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_log()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-write_log"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-write_log}{}}}
+\subsection{Method \code{write_log()}}{
+Write console log for model run to disk.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$write_log(dir)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{dir}}{Directory to save log file.}
 }
 \if{html}{\out{</div>}}
 }
