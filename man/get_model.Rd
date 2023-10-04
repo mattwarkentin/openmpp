@@ -5,6 +5,8 @@
 \alias{get_models}
 \alias{get_models_list}
 \alias{run_model}
+\alias{get_model_run_state}
+\alias{get_run_state}
 \alias{stop_model_run}
 \title{OncoSimX Models}
 \usage{
@@ -15,6 +17,10 @@ get_models()
 get_models_list()
 
 run_model(data)
+
+get_model_run_state(model, stamp)
+
+get_run_state(model, stamp)
 
 stop_model_run(model, stamp)
 }
