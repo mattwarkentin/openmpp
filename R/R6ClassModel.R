@@ -9,7 +9,9 @@
 #'
 #' @export
 load_model <- function(model) {
-  if (!(model %in% get_models()$Name)) {
+  models <- get_models()
+  valid_ids <- c(models$Name, models$Digest)
+  if (!(model %in% valid_ids)) {
     rlang::abort(glue::glue('Model "{model}" does not exist.'))
   }
   OncoSimXModel$new(model)
@@ -62,6 +64,7 @@ OncoSimXModel <-
       print = function(...) {
         cli::cat_rule(glue::glue('OncoSimX {self$Type}'))
         cli::cli_alert(paste0('ModelName: ', self$ModelName))
+        cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
         cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))
         invisible(self)
       }

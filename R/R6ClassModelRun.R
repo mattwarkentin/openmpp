@@ -9,7 +9,9 @@
 #'
 #' @export
 load_model_run <- function(model, run) {
-  if (!(run %in% get_runs(model)$Name)) {
+  runs <- get_runs(model)
+  valid_runs <- c(runs$Name, runs$RunDigest)
+  if (!(run %in% valid_runs)) {
     rlang::abort(glue::glue('Model run "{run}" does not exist for model "{model}".'))
   }
   OncoSimXModelRun$new(model, run)
@@ -89,6 +91,27 @@ OncoSimXModelRun <-
       #' @return  Self, invisibly.
       extract_table = function(name, file) {
         readr::write_csv(self$get_table(name), file)
+        invisible(self)
+      },
+
+      #' @description
+      #' Get console log for model run.
+      #' @return  Self, invisibly.
+      get_log = function() {
+        get_model_run_state(self$ModelDigest, self$RunStamp)$Lines |>
+          glue::glue_collapse(sep = '\n')
+      },
+
+      #' @description
+      #' Write console log for model run to disk.
+      #' @param dir Directory to save log file.
+      #' @return  Self, invisibly.
+      write_log = function(dir) {
+        if (fs::dir_exists(dir)) {
+          file_name <- get_model_run_state(self$ModelDigest, self$RunStamp)$LogFileName
+          file_path <- glue::glue('{dir}/{file_name}')
+          writeLines(self$get_log(), file_path)
+        }
         invisible(self)
       }
     ),
