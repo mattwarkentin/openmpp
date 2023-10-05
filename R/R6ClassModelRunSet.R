@@ -82,7 +82,7 @@ OncoSimXModelRunSet <-
       #' @param name Table name.
       #' @param file File path.
       #' @return  Self, invisibly.
-      extract_table = function(name, file) {
+      write_table = function(name, file) {
         readr::write_csv(self$get_table(name), file)
         invisible(self)
       }

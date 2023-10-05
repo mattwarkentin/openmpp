@@ -60,6 +60,17 @@ OncoSimXModelRun <-
       },
 
       #' @description
+      #' Print a `OncoSimXModelRun` object.
+      #' @param ... Not currently used.
+      #' @return  Self, invisibly.
+      print = function(...) {
+        super$print()
+        cli::cli_alert(paste0('RunName: ', self$RunName))
+        cli::cli_alert(paste0('RunDigest: ', self$RunDigest))
+        invisible(self)
+      },
+
+      #' @description
       #' Retrieve a table.
       #' @param name Table name.
       #' @return A `tibble`.
@@ -74,22 +85,11 @@ OncoSimXModelRun <-
       },
 
       #' @description
-      #' Print a `OncoSimXModelRun` object.
-      #' @param ... Not currently used.
-      #' @return  Self, invisibly.
-      print = function(...) {
-        super$print()
-        cli::cli_alert(paste0('RunName: ', self$RunName))
-        cli::cli_alert(paste0('RunDigest: ', self$RunDigest))
-        invisible(self)
-      },
-
-      #' @description
       #' Write an output table to disk (CSV).
       #' @param name Table name.
       #' @param file File path.
       #' @return  Self, invisibly.
-      extract_table = function(name, file) {
+      write_table = function(name, file) {
         readr::write_csv(self$get_table(name), file)
         invisible(self)
       },

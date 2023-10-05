@@ -53,6 +53,17 @@ OncoSimXWorkset <-
       },
 
       #' @description
+      #' Print a `OncoSimXWorkset` object.
+      #' @param ... Not currently used.
+      #' @return Self, invisibly.
+      print = function(...) {
+        super$print()
+        cli::cli_alert(paste0('WorksetName: ', self$WorksetName))
+        cli::cli_alert(paste0('BaseRunDigest: ', self$BaseRunDigest))
+        invisible(self)
+      },
+
+      #' @description
       #' Set the base run digest.
       #' @param base Base run digest.
       #' @return Self, invisibly.
@@ -98,13 +109,31 @@ OncoSimXWorkset <-
       },
 
       #' @description
-      #' Print a `OncoSimXWorkset` object.
-      #' @param ... Not currently used.
+      #' Copy a parameter from a base scenario.
+      #' @param names Character vector of parameter names.
       #' @return Self, invisibly.
-      print = function(...) {
-        super$print()
-        cli::cli_alert(paste0('WorksetName: ', self$WorksetName))
-        cli::cli_alert(paste0('BaseRunDigest: ', self$BaseRunDigest))
+      copy_params = function(names) {
+        if (rlang::is_null(self$BaseRunDigest) |
+            nchar(self$BaseRunDigest) == 0) {
+          rlang::abort('Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.')
+        }
+
+        if (any(names %in% private$.params)) {
+          rlang::abort('Parameter(s) already exist in workset.')
+        }
+
+        purrr::walk(
+          .x = names,
+          .f = \(name) copy_param_run_to_workset(
+            model = self$ModelDigest,
+            set = self$WorksetName,
+            name = name,
+            run = self$BaseRunDigest
+          )
+        )
+
+        private$.set_workset(self$ModelName, self$WorksetName)
+        private$.load_param_bindings()
         invisible(self)
       },
 
@@ -150,35 +179,6 @@ OncoSimXWorkset <-
 
         merge_workset(ws, tmp_csv)
 
-        invisible(self)
-      },
-
-      #' @description
-      #' Copy a parameter from a base scenario.
-      #' @param names Character vector of parameter names.
-      #' @return Self, invisibly.
-      copy_params = function(names) {
-        if (rlang::is_null(self$BaseRunDigest) |
-            nchar(self$BaseRunDigest) == 0) {
-          rlang::abort('Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.')
-        }
-
-        if (any(names %in% private$.params)) {
-          rlang::abort('Parameter(s) already exist in workset.')
-        }
-
-        purrr::walk(
-          .x = names,
-          .f = \(name) copy_param_run_to_workset(
-            model = self$ModelDigest,
-            set = self$WorksetName,
-            name = name,
-            run = self$BaseRunDigest
-          )
-        )
-
-        private$.set_workset(self$ModelName, self$WorksetName)
-        private$.load_param_bindings()
         invisible(self)
       },
 

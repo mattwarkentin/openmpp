@@ -81,12 +81,12 @@ A new \code{OncoSimXModelTask} object.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXWorkset-new}{\code{OncoSimXWorkset$new()}}
+\item \href{#method-OncoSimXWorkset-print}{\code{OncoSimXWorkset$print()}}
 \item \href{#method-OncoSimXWorkset-set_base_digest}{\code{OncoSimXWorkset$set_base_digest()}}
 \item \href{#method-OncoSimXWorkset-delete_base_digest}{\code{OncoSimXWorkset$delete_base_digest()}}
-\item \href{#method-OncoSimXWorkset-print}{\code{OncoSimXWorkset$print()}}
+\item \href{#method-OncoSimXWorkset-copy_params}{\code{OncoSimXWorkset$copy_params()}}
 \item \href{#method-OncoSimXWorkset-get_param}{\code{OncoSimXWorkset$get_param()}}
 \item \href{#method-OncoSimXWorkset-set_param}{\code{OncoSimXWorkset$set_param()}}
-\item \href{#method-OncoSimXWorkset-copy_params}{\code{OncoSimXWorkset$copy_params()}}
 \item \href{#method-OncoSimXWorkset-run}{\code{OncoSimXWorkset$run()}}
 }
 }
@@ -110,6 +110,26 @@ Create a new OncoSimXWorkset object.
 }
 \subsection{Returns}{
 A new \code{OncoSimXWorkset} object.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-print"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-print}{}}}
+\subsection{Method \code{print()}}{
+Print a \code{OncoSimXWorkset} object.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$print(...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Not currently used.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
@@ -146,18 +166,18 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-print"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-print}{}}}
-\subsection{Method \code{print()}}{
-Print a \code{OncoSimXWorkset} object.
+\if{html}{\out{<a id="method-OncoSimXWorkset-copy_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-copy_params}{}}}
+\subsection{Method \code{copy_params()}}{
+Copy a parameter from a base scenario.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$print(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$copy_params(names)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{Not currently used.}
+\item{\code{names}}{Character vector of parameter names.}
 }
 \if{html}{\out{</div>}}
 }
@@ -205,26 +225,6 @@ Retrieve a parameter table.
 }
 \subsection{Returns}{
 A \code{tibble}.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-copy_params"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-copy_params}{}}}
-\subsection{Method \code{copy_params()}}{
-Copy a parameter from a base scenario.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$copy_params(names)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{names}}{Character vector of parameter names.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}

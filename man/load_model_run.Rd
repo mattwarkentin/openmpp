@@ -56,9 +56,9 @@ OncoSimX ModelRun Class
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-OncoSimXModelRun-new}{\code{OncoSimXModelRun$new()}}
-\item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
 \item \href{#method-OncoSimXModelRun-print}{\code{OncoSimXModelRun$print()}}
-\item \href{#method-OncoSimXModelRun-extract_table}{\code{OncoSimXModelRun$extract_table()}}
+\item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
+\item \href{#method-OncoSimXModelRun-write_table}{\code{OncoSimXModelRun$write_table()}}
 \item \href{#method-OncoSimXModelRun-get_log}{\code{OncoSimXModelRun$get_log()}}
 \item \href{#method-OncoSimXModelRun-write_log}{\code{OncoSimXModelRun$write_log()}}
 }
@@ -86,26 +86,6 @@ A new \code{OncoSimXModelRun} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-get_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_table}{}}}
-\subsection{Method \code{get_table()}}{
-Retrieve a table.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_table(name)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{Table name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{tibble}.
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OncoSimXModelRun-print"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXModelRun-print}{}}}
 \subsection{Method \code{print()}}{
@@ -126,12 +106,32 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-extract_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-extract_table}{}}}
-\subsection{Method \code{extract_table()}}{
+\if{html}{\out{<a id="method-OncoSimXModelRun-get_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_table}{}}}
+\subsection{Method \code{get_table()}}{
+Retrieve a table.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_table(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRun-write_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-write_table}{}}}
+\subsection{Method \code{write_table()}}{
 Write an output table to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$extract_table(name, file)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$write_table(name, file)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

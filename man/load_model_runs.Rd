@@ -58,7 +58,7 @@ OncoSimX ModelRunSet  Class
 \item \href{#method-OncoSimXModelRunSet-new}{\code{OncoSimXModelRunSet$new()}}
 \item \href{#method-OncoSimXModelRunSet-print}{\code{OncoSimXModelRunSet$print()}}
 \item \href{#method-OncoSimXModelRunSet-get_table}{\code{OncoSimXModelRunSet$get_table()}}
-\item \href{#method-OncoSimXModelRunSet-extract_table}{\code{OncoSimXModelRunSet$extract_table()}}
+\item \href{#method-OncoSimXModelRunSet-write_table}{\code{OncoSimXModelRunSet$write_table()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -124,12 +124,12 @@ A \code{tibble}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-extract_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-extract_table}{}}}
-\subsection{Method \code{extract_table()}}{
+\if{html}{\out{<a id="method-OncoSimXModelRunSet-write_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-write_table}{}}}
+\subsection{Method \code{write_table()}}{
 Write an output table to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$extract_table(name, file)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$write_table(name, file)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
