@@ -169,7 +169,7 @@ OncoSimXWorkset <-
           rlang::abort('Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.')
         }
 
-        if (names %in% private$.params) {
+        if (any(names %in% private$.params)) {
           rlang::abort('Parameter(s) already exist in workset.')
         }
 
