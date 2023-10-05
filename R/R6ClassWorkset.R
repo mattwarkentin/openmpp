@@ -37,9 +37,6 @@ OncoSimXWorkset <-
       #' @field WorksetMetadata Workset metadata.
       WorksetMetadata = NULL,
 
-      #' @field WorksetDir Workset directory.
-      WorksetDir = NULL,
-
       #' @field Type Object type (used for `print()`).
       Type = 'Workset',
 
@@ -101,22 +98,6 @@ OncoSimXWorkset <-
       },
 
       #' @description
-      #' Set the workset archive.
-      #' @param dir Root directory for scenario.
-      #' @return Self, invisibly.
-      set_workset_archive = function(dir) {
-        if (!rlang::is_scalar_character(dir)) {
-          return(self)
-        }
-        dir <- fs::path_real(dir)
-        if (!fs::dir_exists(dir)) {
-          rlang::abort('Invalid directory path')
-        }
-        self$WorksetDir <- dir
-        invisible(self)
-      },
-
-      #' @description
       #' Print a `OncoSimXWorkset` object.
       #' @param ... Not currently used.
       #' @return Self, invisibly.
@@ -145,17 +126,30 @@ OncoSimXWorkset <-
       #' @param data New parameter data.
       #' @return A `tibble`.
       set_param = function(name, data) {
-        if (rlang::is_null(self$WorksetDir)) {
-          rlang::abort('Cannot find workset directory.')
-        }
+        old <- self$get_param(name)
 
-        is_compatible(data, self$get_param(name))
+        is_compatible(data, old)
 
-        readr::write_csv(
-          x = data,
-          file = glue::glue('{self$WorksetDir}/set.{self$WorksetName}/{name}.csv')
+        attributes(data) <- attributes(self$get_param(name))
+        data <- private$.pivot_long(data)
+
+        tmp_csv <- glue::glue('{tempdir()}/{name}.csv')
+
+        readr::write_csv(data, tmp_csv)
+
+        ws <- list(
+          ModelName = self$ModelName,
+          ModelDigest = self$ModelDigest,
+          Name = self$WorksetName,
+          Param = list(list(
+            Name = name,
+            SubCount = 1,
+            DeafultSubId = 0
+          ))
         )
-        private$.add_extracted(name)
+
+        merge_workset(ws, tmp_csv)
+
         invisible(self)
       },
 
@@ -185,52 +179,6 @@ OncoSimXWorkset <-
 
         private$.set_workset(self$ModelName, self$WorksetName)
         private$.load_param_bindings()
-        invisible(self)
-      },
-
-      #' @description
-      #' Create archive for scenario parameters.
-      #' @param dir Root directory for scenario.
-      #' @return Self, invisibly.
-      create_archive = function(dir = '.') {
-        dir <- fs::path_real(dir)
-        if (!fs::dir_exists(dir)) {
-          rlang::abort('Invalid directory path')
-        }
-
-        dir_path <- glue::glue('{dir}/{self$ModelName}.set.{self$WorksetName}')
-
-        dir_to_create <- glue::glue('{dir_path}/set.{self$WorksetName}')
-
-        fs::dir_create(dir_to_create)
-        self$set_workset_archive(dir_path)
-        invisible(self)
-      },
-
-      #' @description
-      #' Write a parameter to disk (CSV format).
-      #' @param names Parameter names.
-      #' @return Self, invisibly.
-      extract_params = function(names) {
-        if (rlang::is_null(self$WorksetDir)) {
-          rlang::abort('Cannot find workset directory.')
-        }
-        purrr::walk(names, \(name) {
-          data <- self$get_param(name)
-          readr::write_csv(data, glue::glue('{self$WorksetDir}/set.{self$WorksetName}/{name}.csv'))
-        })
-        private$.add_extracted(names)
-        invisible(self)
-      },
-
-      #' @description
-      #' Upload parameters from a directory.
-      #' @return Self, invisibly.
-      upload_params = function() {
-        not_ex <- setdiff(private$.params, private$.extracted)
-        self$extract_params(not_ex)
-        zip_dir <- private$.prepare_upload()
-        upload_workset_params(self$ModelName, self$WorksetName, zip_dir)
         invisible(self)
       },
 
@@ -301,7 +249,6 @@ OncoSimXWorkset <-
     private = list(
       .workset = NULL,
       .params = NULL,
-      .extracted = NULL,
       .set_workset_metadata = function() {
         self$WorksetName = private$.workset$Name
         self$WorksetMetadata = purrr::discard_at(private$.workset, 'Param')
@@ -313,12 +260,6 @@ OncoSimXWorkset <-
         current <- private$.params
         total <- sort(unique(c(current, names)))
         private$.params <- total
-        invisible(self)
-      },
-      .add_extracted = function(names) {
-        current <- private$.extracted
-        total <- sort(unique(c(current, names)))
-        private$.extracted <- total
         invisible(self)
       },
       .load_param_bindings = function() {
@@ -355,41 +296,6 @@ OncoSimXWorkset <-
           names_to = names(attr(param, 'pivot_col')),
           values_to = 'param_value'
         )
-      },
-      .prepare_upload = function() {
-        if (rlang::is_null(self$WorksetDir)) {
-          rlang::abort('Cannot find a workset directory to archive.')
-        }
-        tmp <- tempdir()
-        tmp_scene <- glue::glue('{tmp}/{self$ModelName}.set.{self$WorksetName}/set.{self$WorksetName}')
-        fs::dir_create(tmp_scene)
-
-        csvs <- fs::dir_ls(self$WorksetDir, recurse = TRUE, glob = '*.csv')
-        csvs_files <- fs::path_file(csvs)
-        pars <- fs::path_ext_remove(csvs_files)
-
-        data_wide <- purrr::map(csvs, \(d) readr::read_csv(d, progress = FALSE, show_col_types = FALSE))
-
-        data_long <- purrr::map2(pars, data_wide, \(n, d) {
-          attributes(d) <- attributes(self$get_param(n))
-          private$.pivot_long(d)
-        })
-
-        purrr::walk2(csvs_files, data_long, \(n, d) {
-          to_create <- glue::glue('{tmp_scene}/{n}')
-          readr::write_csv(d, to_create)
-        })
-
-        dir_file <- fs::path_file(self$WorksetDir)
-        zip_file <- glue::glue('{dir_file}.zip')
-        zip_path <- glue::glue('{tmp}/{zip_file}')
-
-        zip::zip(
-          zipfile = zip_file,
-          files = dir_file,
-          root = tmp
-        )
-        invisible(zip_path)
       },
       .get_run_progress = function(model, run) {
         safe_status <- purrr::possibly(\(m, r) {

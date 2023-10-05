@@ -32,13 +32,13 @@ get_scenarios(model)
 
 get_workset_status(model, set)
 
-get_workset_status_default(model, set)
+get_workset_status_default(model)
 
 set_workset_readonly(model, set, readonly)
 
 create_workset(data)
 
-merge_workset(file)
+merge_workset(workset, file)
 
 replace_workset(data)
 
@@ -68,6 +68,8 @@ delete_scenario(model, set)
 \item{readonly}{Boolean. Should workset be read-only?}
 
 \item{data}{Data used for the body of the POST request.}
+
+\item{workset}{Workset metadata.}
 
 \item{file}{File path.}
 

@@ -6,6 +6,7 @@
 #' @param from Source workset name.
 #' @param readonly Boolean. Should workset be read-only?
 #' @param file File path.
+#' @param workset Workset metadata.
 #' @inheritParams get_workset_param
 #' @inheritParams get_model
 #' @inheritParams get_run_microdata
@@ -55,7 +56,7 @@ get_workset_status <- function(model, set) {
 
 #' @rdname get_workset
 #' @export
-get_workset_status_default <- function(model, set) {
+get_workset_status_default <- function(model) {
   api_path <- glue::glue('api/model/{model}/workset/status/default')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
@@ -87,12 +88,13 @@ create_workset <- function(data) {
 
 #' @rdname get_workset
 #' @export
-merge_workset <- function(file) {
+merge_workset <- function(workset, file) {
   api_path <- glue::glue('/api/workset-merge')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_body_multipart(
-      workset = curl::form_file(file)
+      workset = jsonlite::toJSON(workset, auto_unbox = TRUE),
+      `parameter-csv` = curl::form_file(file)
     ) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform() |>
