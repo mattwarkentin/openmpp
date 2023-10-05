@@ -121,9 +121,9 @@ stamp or task run name.</p></dd>
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-OncoSimXModelRun-new"><code>OncoSimXModelRun$new()</code></a></p></li>
-<li><p><a href="#method-OncoSimXModelRun-get_table"><code>OncoSimXModelRun$get_table()</code></a></p></li>
 <li><p><a href="#method-OncoSimXModelRun-print"><code>OncoSimXModelRun$print()</code></a></p></li>
-<li><p><a href="#method-OncoSimXModelRun-extract_table"><code>OncoSimXModelRun$extract_table()</code></a></p></li>
+<li><p><a href="#method-OncoSimXModelRun-get_table"><code>OncoSimXModelRun$get_table()</code></a></p></li>
+<li><p><a href="#method-OncoSimXModelRun-write_table"><code>OncoSimXModelRun$write_table()</code></a></p></li>
 <li><p><a href="#method-OncoSimXModelRun-get_log"><code>OncoSimXModelRun$get_log()</code></a></p></li>
 <li><p><a href="#method-OncoSimXModelRun-write_log"><code>OncoSimXModelRun$write_log()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-OncoSimXModelRun-new"></a><div class="section">
@@ -150,35 +150,15 @@ stamp or task run name.</p></dd>
 <p>A new <code>OncoSimXModelRun</code> object.</p>
 </div>
 
-</div><p></p><hr><a id="method-OncoSimXModelRun-get_table"></a><div class="section">
-<h3 id="method-get-table-">Method <code>get_table()</code><a class="anchor" aria-label="anchor" href="#method-get-table-"></a></h3>
-<p>Retrieve a table.</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">OncoSimXModelRun</span><span class="op">$</span><span class="fu">get_table</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>name</code></dt>
-<dd><p>Table name.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A <code>tibble</code>.</p>
-</div>
-
 </div><p></p><hr><a id="method-OncoSimXModelRun-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Print a <code>OncoSimXModelRun</code> object.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">OncoSimXModelRun</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>Not currently used.</p></dd>
 
@@ -186,15 +166,35 @@ stamp or task run name.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>Self, invisibly.</p>
 </div>
 
-</div><p></p><hr><a id="method-OncoSimXModelRun-extract_table"></a><div class="section">
-<h3 id="method-extract-table-">Method <code>extract_table()</code><a class="anchor" aria-label="anchor" href="#method-extract-table-"></a></h3>
+</div><p></p><hr><a id="method-OncoSimXModelRun-get_table"></a><div class="section">
+<h3 id="method-get-table-">Method <code>get_table()</code><a class="anchor" aria-label="anchor" href="#method-get-table-"></a></h3>
+<p>Retrieve a table.</p><div class="section">
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">OncoSimXModelRun</span><span class="op">$</span><span class="fu">get_table</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>name</code></dt>
+<dd><p>Table name.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<p>A <code>tibble</code>.</p>
+</div>
+
+</div><p></p><hr><a id="method-OncoSimXModelRun-write_table"></a><div class="section">
+<h3 id="method-write-table-">Method <code>write_table()</code><a class="anchor" aria-label="anchor" href="#method-write-table-"></a></h3>
 <p>Write an output table to disk (CSV).</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">OncoSimXModelRun</span><span class="op">$</span><span class="fu">extract_table</span><span class="op">(</span><span class="va">name</span>, <span class="va">file</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">OncoSimXModelRun</span><span class="op">$</span><span class="fu">write_table</span><span class="op">(</span><span class="va">name</span>, <span class="va">file</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
