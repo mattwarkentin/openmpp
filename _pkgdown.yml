@@ -1,15 +1,3 @@
 url: https://oncology-outcomes.github.io/oncosimx/
 template:
   bootstrap: 5
-reference:
-- title: "Main Functions"
-- contents:
-  - get_models
-  - get_worksets
-  - get_scenarios
-  - get_model_runs
-  - get_runs
-  - create_workset
-  - create_scenario
-  - starts_with('load_')
-  - opts_run
