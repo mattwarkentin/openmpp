@@ -54,6 +54,8 @@ The `oncosimx` package contains many functions that provide access to nearly eve
     + `load_workset()` / `load_scenario()`
     
     + `load_model_run()` / `load_run()`
+    
+    + `load_model_runs()` / `load_runs()`
 
 - Functions for deleting worksets or model runs
 
@@ -65,7 +67,7 @@ The `oncosimx` package contains many functions that provide access to nearly eve
 
 There are 4 main classes you will work with when using the `oncosimx` package: `OncoSimXModel`, `OncoSimXWorkset`, `OncoSimXModelRun`, and `OncoSimXModelRunSet`. Each of these are `R6` classes. `R6` is an encapsulated object-oriented programming system for R. Use the `load_*()` set of functions to load a model, workset/scenario, model run, or set of model runs into memory.
 
-Instances of each of these 4 classes have methods and fields associated with them. You can access methods and fields using the `$` subset operator (e.g., `obj$action()` or `obj$field`)
+Instances of each of these 4 classes have methods and fields associated with them. You can access public methods and fields using the standard `$` subset operator (e.g., `obj$action()` or `obj$field`)
 
 ### Example
 
@@ -73,6 +75,7 @@ Here we will work through a very simple example of creating a new scenario, extr
 
 ```{r message=FALSE}
 library(oncosimx)
+library(tidyverse)
 library(ggplot2)
 ```
 
@@ -122,18 +125,33 @@ create_scenario('OncoSimX-breast', 'MyNewScenario', baserun_digest)
 
 We will load the new scenario, copy over the `ProvincesOfInterest` parameter from the base run and extract it to a CSV file for editing.
 
-```{r echo=FALSE}
-new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
+```{r}
+my_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
+```
+
+Let's only run the simulation for Alberta...
+
+```{r eval=FALSE}
+my_scenario$copy_params('ProvincesOfInterest')
 ```
 
 ```{r eval=FALSE}
-new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
+alberta_only <- my_scenario$ProvincesOfInterest
+alberta_only <- 
+  alberta_only |> 
+  mutate(
+    across(Newfoundland_and_Labrador:NT, \(x) FALSE),
+    Alberta = TRUE
+  )
+
+my_scenario$ProvincesOfInterest <- alberta_only
 ```
 
-We didn't make any changes to the base parameters, but we will run the model anyway. We will give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.
+We will now run the model anyway. We will give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.
 
 ```{r eval=FALSE}
-new_scenario$run('ExampleRun', wait = TRUE)
+my_scenario$ReadOnly <- TRUE
+my_scenario$run('ExampleRun', wait = TRUE, progress = FALSE)
 ```
 
 Note that we can use the `opts` argument and the `opts_run()` function to configure our run. By default, models are run with 5,000 simulation cases and 12 SubValues. This allows for quick model runs and faster iteration, but users will want to increase the number of simulation cases when performing a full model run.
@@ -148,10 +166,10 @@ example_run
 We can now extract an output table from this model run using `$get_table()`.
 
 ```{r}
-example_run$get_table('Breast_Cancer_Rates_Table')
+example_run$Breast_Cancer_Cases_Table
 ```
 
-Great, we have created a new scenario, extracted some parameters to potentially modify, uploaded the parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
+Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
 
 ```{r}
 breast_runs <- load_runs('OncoSimX-breast', breast$run_list$RunDigest)
@@ -161,13 +179,13 @@ breast_runs
 We will extract a new table from both models. Note that an extra column, `RunName` is added to indicate which model run the output table data corresponds to.
 
 ```{r}
-cost_bystage <- breast_runs$get_table('Breast_Cancer_Cost_ByStage_Table')
+cost_bystage <- breast_runs$Breast_Cancer_Cost_ByStage_Table
 cost_bystage
 ```
 
-We can even plot this using `ggplot2`!
+We can even plot this using `ggplot2`! Note that the number of simulation cases for `ExampleRun` is very low so the results are not to be trusted!
 
-```{r}
+```{r warning=FALSE}
 cost_bystage |> 
   ggplot(aes(Stage, expr_value, fill = RunName)) +
   geom_col(position = position_dodge()) +
@@ -178,10 +196,6 @@ cost_bystage |>
 ```
 
 When we are sure we no longer need a scenario or model run, we can use `delete_scenario()` or `delete_run()` to clean things up!
-
-### Modifying Scenario Parameters
-
-You can modify scenario parameters one of two ways. (1) You can make changes to parameters directly in your R session (referred to as in-memory changes), or (2) you can extract the parameter table into a CSV file and make changes there. In both cases, the modified parameters will be saved as CSV files in a specially named directory in order to have a saved copy of changed parameters and then uploaded to batch update parameters.
 
 ## Code of Conduct
 

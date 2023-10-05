@@ -50,6 +50,8 @@ use a smaller set of functions for most tasks.
 
   - `load_model_run()` / `load_run()`
 
+  - `load_model_runs()` / `load_runs()`
+
 - Functions for deleting worksets or model runs
 
   - `delete_workset()` / `delete_scenario()`
@@ -66,8 +68,8 @@ encapsulated object-oriented programming system for R. Use the
 run, or set of model runs into memory.
 
 Instances of each of these 4 classes have methods and fields associated
-with them. You can access methods and fields using the `$` subset
-operator (e.g., `obj$action()` or `obj$field`)
+with them. You can access public methods and fields using the standard
+`$` subset operator (e.g., `obj$action()` or `obj$field`)
 
 ### Example
 
@@ -79,6 +81,7 @@ parameters, but users can edit the extracted CSV files and use
 
 ``` r
 library(oncosimx)
+library(tidyverse)
 library(ggplot2)
 ```
 
@@ -86,18 +89,25 @@ Let’s see what models are available:
 
 ``` r
 get_models()
-#> # A tibble: 9 × 7
-#>   ModelId Name               Digest  Type Version CreateDateTime DefaultLangCode
-#>     <int> <chr>              <chr>  <int> <chr>   <chr>          <chr>          
-#> 1     101 OncoSimX-allcance… ce674…     0 3.6.1.5 2023-06-13 16… EN             
-#> 2     101 OncoSimX-breast    528f9…     0 3.6.1.5 2023-06-13 15… EN             
-#> 3     101 OncoSimX-cervical  30246…     0 3.6.1.5 2023-06-13 16… EN             
-#> 4     101 OncoSimX-colorect… b275d…     0 3.6.1.5 2023-06-13 16… EN             
-#> 5     101 OncoSimX-gmm       e83b4…     0 3.6.1.5 2023-06-13 16… EN             
-#> 6     101 OncoSimX-lung      eeb24…     0 3.6.1.5 2023-06-13 16… EN             
-#> 7     101 GMM                02614…     1 1.1.2.0 2022-03-23 10… EN             
-#> 8     101 HPVMM              0636a…     1 1.9.2.0 2023-03-20 11… EN             
-#> 9     101 RiskPaths          d90e1…     0 3.0.0.0 2022-03-07 23… EN
+#> # A tibble: 16 × 7
+#>    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode
+#>      <int> <chr>             <chr>  <int> <chr>   <chr>          <chr>          
+#>  1     101 OncoSimX-allcanc… 41146…     0 3.6.2.4 2023-09-20 18… EN             
+#>  2     101 OncoSimX-breast   55c8b…     0 3.6.2.4 2023-09-20 17… EN             
+#>  3     101 OncoSimX-cervical bb3b5…     0 3.6.2.4 2023-09-20 18… EN             
+#>  4     101 OncoSimX-colorec… 36999…     0 3.6.2.4 2023-09-20 18… EN             
+#>  5     101 OncoSimX-gmm      baa35…     0 3.6.2.4 2023-09-20 18… EN             
+#>  6     101 OncoSimX-lung     bb4e0…     0 3.6.2.4 2023-09-20 18… EN             
+#>  7     101 OncoSimX-allcanc… 8dc92…     0 3.6.1.6 2023-09-01 14… EN             
+#>  8     101 OncoSimX-allcanc… ce674…     0 3.6.1.5 2023-06-13 16… EN             
+#>  9     101 OncoSimX-breast   528f9…     0 3.6.1.5 2023-06-13 15… EN             
+#> 10     101 OncoSimX-cervical 30246…     0 3.6.1.5 2023-06-13 16… EN             
+#> 11     101 OncoSimX-colorec… b275d…     0 3.6.1.5 2023-06-13 16… EN             
+#> 12     101 OncoSimX-gmm      e83b4…     0 3.6.1.5 2023-06-13 16… EN             
+#> 13     101 OncoSimX-lung     eeb24…     0 3.6.1.5 2023-06-13 16… EN             
+#> 14     101 GMM               02614…     1 1.1.2.0 2022-03-23 10… EN             
+#> 15     101 HPVMM             0636a…     1 1.9.2.0 2023-03-20 11… EN             
+#> 16     101 RiskPaths         d90e1…     0 3.0.0.0 2022-03-07 23… EN
 ```
 
 We can now see what worksets and model runs exist for a given model.
@@ -107,8 +117,8 @@ get_worksets('OncoSimX-breast')
 #> # A tibble: 2 × 11
 #>   ModelName     ModelDigest ModelVersion ModelCreateDateTime Name  BaseRunDigest
 #>   <chr>         <chr>       <chr>        <chr>               <chr> <chr>        
-#> 1 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… Defa… ""           
-#> 2 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… MyNe… "e588fec0286…
+#> 1 OncoSimX-bre… 55c8b4118b… 3.6.2.4      2023-09-20 17:58:4… Defa… ""           
+#> 2 OncoSimX-bre… 55c8b4118b… 3.6.2.4      2023-09-20 17:58:4… MyNe… "b02ca21b49c…
 #> # ℹ 5 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
 #> #   IsCleanBaseRun <lgl>, Txt <list<tibble[,3]>>, Param <list>
 ```
@@ -118,8 +128,8 @@ get_runs('OncoSimX-breast')
 #> # A tibble: 2 × 20
 #>   ModelName       ModelDigest    ModelVersion ModelCreateDateTime Name  SubCount
 #>   <chr>           <chr>          <chr>        <chr>               <chr>    <int>
-#> 1 OncoSimX-breast 528f94c1525c9… 3.6.1.5      2023-06-13 15:54:0… Defa…       12
-#> 2 OncoSimX-breast 528f94c1525c9… 3.6.1.5      2023-06-13 15:54:0… Exam…       12
+#> 1 OncoSimX-breast 55c8b4118b002… 3.6.2.4      2023-09-20 17:58:4… Defa…       12
+#> 2 OncoSimX-breast 55c8b4118b002… 3.6.2.4      2023-09-20 17:58:4… Exam…       12
 #> # ℹ 14 more variables: SubStarted <int>, SubCompleted <int>,
 #> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunDigest <chr>,
 #> #   ValueDigest <chr>, RunStamp <chr>, Txt <list>, Opts <list>, Param <list>,
@@ -133,7 +143,8 @@ breast <- load_model('OncoSimX-breast')
 breast
 #> ── OncoSimX Model ──────────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelDigest: 528f94c1525c994b010d84507ed7903f
+#> → ModelVersion: 3.6.2.4
+#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
 ```
 
 We will now load the `Default` set of input parameters for the Breast
@@ -144,7 +155,8 @@ breast_default <- load_scenario('OncoSimX-breast', 'Default')
 breast_default
 #> ── OncoSimX Workset ────────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelDigest: 528f94c1525c994b010d84507ed7903f
+#> → ModelVersion: 3.6.2.4
+#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
 #> → WorksetName: Default
 #> → BaseRunDigest:
 ```
@@ -157,9 +169,10 @@ breast_baserun <- load_run('OncoSimX-breast', baserun_digest)
 breast_baserun
 #> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelDigest: 528f94c1525c994b010d84507ed7903f
+#> → ModelVersion: 3.6.2.4
+#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
 #> → RunName: Default_first_run_32M_cases_12_subs
-#> → RunDigest: e588fec0286ad7cacb1cdb32f947898a
+#> → RunDigest: b02ca21b49c13d067d253c477dce6fb2
 ```
 
 We will create a new scenario based on the parameters from the
@@ -173,17 +186,36 @@ We will load the new scenario, copy over the `ProvincesOfInterest`
 parameter from the base run and extract it to a CSV file for editing.
 
 ``` r
-new_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
+my_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
 ```
 
-We didn’t make any changes to the base parameters, but we will run the
-model anyway. We will give it the name `'ExampleRun'`. We use the
-`wait = TRUE` flag to make sure we want for the model run to finish
-before returning to our R session. Note that model runs may take a long
-time when the number of simulation cases is large.
+Let’s only run the simulation for Alberta…
 
 ``` r
-new_scenario$run('ExampleRun', wait = TRUE)
+my_scenario$copy_params('ProvincesOfInterest')
+```
+
+``` r
+alberta_only <- my_scenario$ProvincesOfInterest
+alberta_only <- 
+  alberta_only |> 
+  mutate(
+    across(Newfoundland_and_Labrador:NT, \(x) FALSE),
+    Alberta = TRUE
+  )
+
+my_scenario$ProvincesOfInterest <- alberta_only
+```
+
+We will now run the model anyway. We will give it the name
+`'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for
+the model run to finish before returning to our R session. Note that
+model runs may take a long time when the number of simulation cases is
+large.
+
+``` r
+my_scenario$ReadOnly <- TRUE
+my_scenario$run('ExampleRun', wait = TRUE, progress = FALSE)
 ```
 
 Note that we can use the `opts` argument and the `opts_run()` function
@@ -199,45 +231,45 @@ example_run <- load_run('OncoSimX-breast', 'ExampleRun')
 example_run
 #> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelDigest: 528f94c1525c994b010d84507ed7903f
+#> → ModelVersion: 3.6.2.4
+#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
 #> → RunName: ExampleRun
-#> → RunDigest: 5584cc00a7c296b2e4af66deb679cce8
+#> → RunDigest: a999db2c6cc30d6c703b8f1189686e81
 ```
 
 We can now extract an output table from this model run using
 `$get_table()`.
 
 ``` r
-example_run$get_table('Breast_Cancer_Rates_Table')
-#> # A tibble: 3,848 × 4
+example_run$Breast_Cancer_Cases_Table
+#> # A tibble: 8,177 × 4
 #>    expr_name                        Province                   Year expr_value
 #>    <chr>                            <chr>                     <dbl>      <dbl>
-#>  1 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2015       0   
-#>  2 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2016       0   
-#>  3 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2017       0   
-#>  4 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2018       0   
-#>  5 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2019       0   
-#>  6 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2020       0   
-#>  7 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2021       3.25
-#>  8 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2022       0   
-#>  9 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2023       3.29
-#> 10 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2024       0   
-#> # ℹ 3,838 more rows
+#>  1 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2015          0
+#>  2 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2016          0
+#>  3 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2017          0
+#>  4 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2018          0
+#>  5 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2019          0
+#>  6 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2020          0
+#>  7 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2021          0
+#>  8 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2022          0
+#>  9 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2023          0
+#> 10 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2024          0
+#> # ℹ 8,167 more rows
 ```
 
-Great, we have created a new scenario, extracted some parameters to
-potentially modify, uploaded the parameters, ran the model, and
-extracted output tables. In this last step, we will load multiple model
-runs into memory to compare them.
+Great, we have created a new scenario, modified some parameters, ran the
+model, and extracted output tables. In this last step, we will load
+multiple model runs into memory to compare them.
 
 ``` r
 breast_runs <- load_runs('OncoSimX-breast', breast$run_list$RunDigest)
 breast_runs
 #> ── OncoSimX ModelRunSet ────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelDigest: 528f94c1525c994b010d84507ed7903f
+#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
 #> → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]
-#> → RunDigests: [e588fec0286ad7cacb1cdb32f947898a, 5584cc00a7c296b2e4af66deb679cce8]
+#> → RunDigests: [b02ca21b49c13d067d253c477dce6fb2, a999db2c6cc30d6c703b8f1189686e81]
 ```
 
 We will extract a new table from both models. Note that an extra column,
@@ -245,25 +277,27 @@ We will extract a new table from both models. Note that an extra column,
 corresponds to.
 
 ``` r
-cost_bystage <- breast_runs$get_table('Breast_Cancer_Cost_ByStage_Table')
+cost_bystage <- breast_runs$Breast_Cancer_Cost_ByStage_Table
 cost_bystage
 #> # A tibble: 80 × 4
 #>    RunName                             expr_name            Stage     expr_value
 #>    <chr>                               <chr>                <chr>          <dbl>
-#>  1 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    4.74e 8
-#>  2 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.98e 9
-#>  3 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.98e 8
-#>  4 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.40e 9
-#>  5 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.90e 9
-#>  6 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.23e 9
-#>  7 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.18e 8
-#>  8 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    6.07e 8
-#>  9 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.16e 9
-#> 10 Default_first_run_32M_cases_12_subs Total_treatment_cost all          1.13e10
+#>  1 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    4.95e 8
+#>  2 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 9
+#>  3 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 8
+#>  4 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.59e 9
+#>  5 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.06e 9
+#>  6 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.54e 9
+#>  7 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.77e 8
+#>  8 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    7.54e 8
+#>  9 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.27e 9
+#> 10 Default_first_run_32M_cases_12_subs Total_treatment_cost all          1.25e10
 #> # ℹ 70 more rows
 ```
 
-We can even plot this using `ggplot2`!
+We can even plot this using `ggplot2`! Note that the number of
+simulation cases for `ExampleRun` is very low so the results are not to
+be trusted!
 
 ``` r
 cost_bystage |> 
@@ -275,20 +309,10 @@ cost_bystage |>
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
 
 When we are sure we no longer need a scenario or model run, we can use
 `delete_scenario()` or `delete_run()` to clean things up!
-
-### Modifying Scenario Parameters
-
-You can modify scenario parameters one of two ways. (1) You can make
-changes to parameters directly in your R session (referred to as
-in-memory changes), or (2) you can extract the parameter table into a
-CSV file and make changes there. In both cases, the modified parameters
-will be saved as CSV files in a specially named directory in order to
-have a saved copy of changed parameters and then uploaded to batch
-update parameters.
 
 ## Code of Conduct
 
