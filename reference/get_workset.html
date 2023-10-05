@@ -61,13 +61,13 @@ worksets.</p>
 <span></span>
 <span><span class="fu">get_workset_status</span><span class="op">(</span><span class="va">model</span>, <span class="va">set</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">get_workset_status_default</span><span class="op">(</span><span class="va">model</span>, <span class="va">set</span><span class="op">)</span></span>
+<span><span class="fu">get_workset_status_default</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">set_workset_readonly</span><span class="op">(</span><span class="va">model</span>, <span class="va">set</span>, <span class="va">readonly</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">create_workset</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">merge_workset</span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span>
+<span><span class="fu">merge_workset</span><span class="op">(</span><span class="va">workset</span>, <span class="va">file</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">replace_workset</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
@@ -106,6 +106,10 @@ worksets.</p>
 
 <dt>data</dt>
 <dd><p>Data used for the body of the POST request.</p></dd>
+
+
+<dt>workset</dt>
+<dd><p>Workset metadata.</p></dd>
 
 
 <dt>file</dt>

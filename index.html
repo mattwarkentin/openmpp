@@ -105,6 +105,7 @@
 <li><p><code><a href="reference/load_model.html">load_model()</a></code></p></li>
 <li><p><code><a href="reference/load_workset.html">load_workset()</a></code> / <code><a href="reference/load_workset.html">load_scenario()</a></code></p></li>
 <li><p><code><a href="reference/load_model_run.html">load_model_run()</a></code> / <code><a href="reference/load_model_run.html">load_run()</a></code></p></li>
+<li><p><code><a href="reference/load_model_runs.html">load_model_runs()</a></code> / <code><a href="reference/load_model_runs.html">load_runs()</a></code></p></li>
 </ul>
 </li>
 <li>
@@ -120,7 +121,7 @@
 <h3 id="models-scenarios-runs-and-runsets">Models, Scenarios, Runs, and RunSets<a class="anchor" aria-label="anchor" href="#models-scenarios-runs-and-runsets"></a>
 </h3>
 <p>There are 4 main classes you will work with when using the <code>oncosimx</code> package: <code>OncoSimXModel</code>, <code>OncoSimXWorkset</code>, <code>OncoSimXModelRun</code>, and <code>OncoSimXModelRunSet</code>. Each of these are <code>R6</code> classes. <code>R6</code> is an encapsulated object-oriented programming system for R. Use the <code>load_*()</code> set of functions to load a model, workset/scenario, model run, or set of model runs into memory.</p>
-<p>Instances of each of these 4 classes have methods and fields associated with them. You can access methods and fields using the <code>$</code> subset operator (e.g., <code>obj$action()</code> or <code>obj$field</code>)</p>
+<p>Instances of each of these 4 classes have methods and fields associated with them. You can access public methods and fields using the standard <code>$</code> subset operator (e.g., <code>obj$action()</code> or <code>obj$field</code>)</p>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -128,30 +129,38 @@
 <p>Here we will work through a very simple example of creating a new scenario, extracting parameters to change, running the model, and extracting results. In this example we do not actually change any parameters, but users can edit the extracted CSV files and use <code>workset$upload_params()</code> to upload changed parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oncology-outcomes/oncosimx" class="external-link">oncosimx</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <p>Let’s see what models are available:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_model.html">get_models</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 9 × 7</span></span>
-<span><span class="co">#&gt;   ModelId Name               Digest  Type Version CreateDateTime DefaultLangCode</span></span>
-<span><span class="co">#&gt;     &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;          </span></span>
-<span><span class="co">#&gt; 1     101 OncoSimX-allcance… ce674…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
-<span><span class="co">#&gt; 2     101 OncoSimX-breast    528f9…     0 3.6.1.5 2023-06-13 15… EN             </span></span>
-<span><span class="co">#&gt; 3     101 OncoSimX-cervical  30246…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
-<span><span class="co">#&gt; 4     101 OncoSimX-colorect… b275d…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
-<span><span class="co">#&gt; 5     101 OncoSimX-gmm       e83b4…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
-<span><span class="co">#&gt; 6     101 OncoSimX-lung      eeb24…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
-<span><span class="co">#&gt; 7     101 GMM                02614…     1 1.1.2.0 2022-03-23 10… EN             </span></span>
-<span><span class="co">#&gt; 8     101 HPVMM              0636a…     1 1.9.2.0 2023-03-20 11… EN             </span></span>
-<span><span class="co">#&gt; 9     101 RiskPaths          d90e1…     0 3.0.0.0 2022-03-07 23… EN</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 16 × 7</span></span>
+<span><span class="co">#&gt;    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode</span></span>
+<span><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;          </span></span>
+<span><span class="co">#&gt;  1     101 OncoSimX-allcanc… 41146…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
+<span><span class="co">#&gt;  2     101 OncoSimX-breast   55c8b…     0 3.6.2.4 2023-09-20 17… EN             </span></span>
+<span><span class="co">#&gt;  3     101 OncoSimX-cervical bb3b5…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
+<span><span class="co">#&gt;  4     101 OncoSimX-colorec… 36999…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
+<span><span class="co">#&gt;  5     101 OncoSimX-gmm      baa35…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
+<span><span class="co">#&gt;  6     101 OncoSimX-lung     bb4e0…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
+<span><span class="co">#&gt;  7     101 OncoSimX-allcanc… 8dc92…     0 3.6.1.6 2023-09-01 14… EN             </span></span>
+<span><span class="co">#&gt;  8     101 OncoSimX-allcanc… ce674…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
+<span><span class="co">#&gt;  9     101 OncoSimX-breast   528f9…     0 3.6.1.5 2023-06-13 15… EN             </span></span>
+<span><span class="co">#&gt; 10     101 OncoSimX-cervical 30246…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
+<span><span class="co">#&gt; 11     101 OncoSimX-colorec… b275d…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
+<span><span class="co">#&gt; 12     101 OncoSimX-gmm      e83b4…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
+<span><span class="co">#&gt; 13     101 OncoSimX-lung     eeb24…     0 3.6.1.5 2023-06-13 16… EN             </span></span>
+<span><span class="co">#&gt; 14     101 GMM               02614…     1 1.1.2.0 2022-03-23 10… EN             </span></span>
+<span><span class="co">#&gt; 15     101 HPVMM             0636a…     1 1.9.2.0 2023-03-20 11… EN             </span></span>
+<span><span class="co">#&gt; 16     101 RiskPaths         d90e1…     0 3.0.0.0 2022-03-07 23… EN</span></span></code></pre></div>
 <p>We can now see what worksets and model runs exist for a given model.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_workset.html">get_worksets</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 11</span></span>
 <span><span class="co">#&gt;   ModelName     ModelDigest ModelVersion ModelCreateDateTime Name  BaseRunDigest</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;        </span></span>
-<span><span class="co">#&gt; 1 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… Defa… ""           </span></span>
-<span><span class="co">#&gt; 2 OncoSimX-bre… 528f94c152… 3.6.1.5      2023-06-13 15:54:0… MyNe… "e588fec0286…</span></span>
+<span><span class="co">#&gt; 1 OncoSimX-bre… 55c8b4118b… 3.6.2.4      2023-09-20 17:58:4… Defa… ""           </span></span>
+<span><span class="co">#&gt; 2 OncoSimX-bre… 55c8b4118b… 3.6.2.4      2023-09-20 17:58:4… MyNe… "b02ca21b49c…</span></span>
 <span><span class="co">#&gt; # ℹ 5 more variables: IsReadonly &lt;lgl&gt;, UpdateDateTime &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   IsCleanBaseRun &lt;lgl&gt;, Txt &lt;list&lt;tibble[,3]&gt;&gt;, Param &lt;list&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -159,8 +168,8 @@
 <span><span class="co">#&gt; # A tibble: 2 × 20</span></span>
 <span><span class="co">#&gt;   ModelName       ModelDigest    ModelVersion ModelCreateDateTime Name  SubCount</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;    &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 OncoSimX-breast 528f94c1525c9… 3.6.1.5      2023-06-13 15:54:0… Defa…       12</span></span>
-<span><span class="co">#&gt; 2 OncoSimX-breast 528f94c1525c9… 3.6.1.5      2023-06-13 15:54:0… Exam…       12</span></span>
+<span><span class="co">#&gt; 1 OncoSimX-breast 55c8b4118b002… 3.6.2.4      2023-09-20 17:58:4… Defa…       12</span></span>
+<span><span class="co">#&gt; 2 OncoSimX-breast 55c8b4118b002… 3.6.2.4      2023-09-20 17:58:4… Exam…       12</span></span>
 <span><span class="co">#&gt; # ℹ 14 more variables: SubStarted &lt;int&gt;, SubCompleted &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   CreateDateTime &lt;chr&gt;, Status &lt;chr&gt;, UpdateDateTime &lt;chr&gt;, RunDigest &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   ValueDigest &lt;chr&gt;, RunStamp &lt;chr&gt;, Txt &lt;list&gt;, Opts &lt;list&gt;, Param &lt;list&gt;,</span></span>
@@ -171,14 +180,16 @@
 <span><span class="va">breast</span></span>
 <span><span class="co">#&gt; ── OncoSimX Model ──────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelDigest: 528f94c1525c994b010d84507ed7903f</span></span></code></pre></div>
+<span><span class="co">#&gt; → ModelVersion: 3.6.2.4</span></span>
+<span><span class="co">#&gt; → ModelDigest: 55c8b4118b0024c4170bb6af274cfade</span></span></code></pre></div>
 <p>We will now load the <code>Default</code> set of input parameters for the Breast model.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">breast_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'Default'</span><span class="op">)</span></span>
 <span><span class="va">breast_default</span></span>
 <span><span class="co">#&gt; ── OncoSimX Workset ────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelDigest: 528f94c1525c994b010d84507ed7903f</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.6.2.4</span></span>
+<span><span class="co">#&gt; → ModelDigest: 55c8b4118b0024c4170bb6af274cfade</span></span>
 <span><span class="co">#&gt; → WorksetName: Default</span></span>
 <span><span class="co">#&gt; → BaseRunDigest:</span></span></code></pre></div>
 <p>Finally, we will load the base run for the Breast model.</p>
@@ -188,74 +199,90 @@
 <span><span class="va">breast_baserun</span></span>
 <span><span class="co">#&gt; ── OncoSimX ModelRun ───────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelDigest: 528f94c1525c994b010d84507ed7903f</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.6.2.4</span></span>
+<span><span class="co">#&gt; → ModelDigest: 55c8b4118b0024c4170bb6af274cfade</span></span>
 <span><span class="co">#&gt; → RunName: Default_first_run_32M_cases_12_subs</span></span>
-<span><span class="co">#&gt; → RunDigest: e588fec0286ad7cacb1cdb32f947898a</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: b02ca21b49c13d067d253c477dce6fb2</span></span></code></pre></div>
 <p>We will create a new scenario based on the parameters from the <code>Default_first_run_32M_cases_12_subs</code> model run.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/create_scenario.html">create_scenario</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'MyNewScenario'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span></code></pre></div>
 <p>We will load the new scenario, copy over the <code>ProvincesOfInterest</code> parameter from the base run and extract it to a CSV file for editing.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new_scenario</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'MyNewScenario'</span><span class="op">)</span></span></code></pre></div>
-<p>We didn’t make any changes to the base parameters, but we will run the model anyway. We will give it the name <code>'ExampleRun'</code>. We use the <code>wait = TRUE</code> flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.</p>
+<code class="sourceCode R"><span><span class="va">my_scenario</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'MyNewScenario'</span><span class="op">)</span></span></code></pre></div>
+<p>Let’s only run the simulation for Alberta…</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new_scenario</span><span class="op">$</span><span class="fu">run</span><span class="op">(</span><span class="st">'ExampleRun'</span>, wait <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">my_scenario</span><span class="op">$</span><span class="fu">copy_params</span><span class="op">(</span><span class="st">'ProvincesOfInterest'</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">alberta_only</span> <span class="op">&lt;-</span> <span class="va">my_scenario</span><span class="op">$</span><span class="va">ProvincesOfInterest</span></span>
+<span><span class="va">alberta_only</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="va">alberta_only</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span><span class="va">Newfoundland_and_Labrador</span><span class="op">:</span><span class="va">NT</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>    Alberta <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">my_scenario</span><span class="op">$</span><span class="va">ProvincesOfInterest</span> <span class="op">&lt;-</span> <span class="va">alberta_only</span></span></code></pre></div>
+<p>We will now run the model anyway. We will give it the name <code>'ExampleRun'</code>. We use the <code>wait = TRUE</code> flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_scenario</span><span class="op">$</span><span class="va">ReadOnly</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">my_scenario</span><span class="op">$</span><span class="fu">run</span><span class="op">(</span><span class="st">'ExampleRun'</span>, wait <span class="op">=</span> <span class="cn">TRUE</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Note that we can use the <code>opts</code> argument and the <code><a href="reference/opts_run.html">opts_run()</a></code> function to configure our run. By default, models are run with 5,000 simulation cases and 12 SubValues. This allows for quick model runs and faster iteration, but users will want to increase the number of simulation cases when performing a full model run.</p>
 <p>Now that our model run is complete, let’s load it into memory.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_run</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_run.html">load_run</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'ExampleRun'</span><span class="op">)</span></span>
 <span><span class="va">example_run</span></span>
 <span><span class="co">#&gt; ── OncoSimX ModelRun ───────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelDigest: 528f94c1525c994b010d84507ed7903f</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.6.2.4</span></span>
+<span><span class="co">#&gt; → ModelDigest: 55c8b4118b0024c4170bb6af274cfade</span></span>
 <span><span class="co">#&gt; → RunName: ExampleRun</span></span>
-<span><span class="co">#&gt; → RunDigest: 5584cc00a7c296b2e4af66deb679cce8</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: a999db2c6cc30d6c703b8f1189686e81</span></span></code></pre></div>
 <p>We can now extract an output table from this model run using <code>$get_table()</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="fu">get_table</span><span class="op">(</span><span class="st">'Breast_Cancer_Rates_Table'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 3,848 × 4</span></span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Breast_Cancer_Cases_Table</span></span>
+<span><span class="co">#&gt; # A tibble: 8,177 × 4</span></span>
 <span><span class="co">#&gt;    expr_name                        Province                   Year expr_value</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                            &lt;chr&gt;                     &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2015       0   </span></span>
-<span><span class="co">#&gt;  2 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2016       0   </span></span>
-<span><span class="co">#&gt;  3 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2017       0   </span></span>
-<span><span class="co">#&gt;  4 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2018       0   </span></span>
-<span><span class="co">#&gt;  5 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2019       0   </span></span>
-<span><span class="co">#&gt;  6 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2020       0   </span></span>
-<span><span class="co">#&gt;  7 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2021       3.25</span></span>
-<span><span class="co">#&gt;  8 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2022       0   </span></span>
-<span><span class="co">#&gt;  9 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2023       3.29</span></span>
-<span><span class="co">#&gt; 10 Incidence_rate_x_mbined_per_1000 Newfoundland_and_Labrador  2024       0   </span></span>
-<span><span class="co">#&gt; # ℹ 3,838 more rows</span></span></code></pre></div>
-<p>Great, we have created a new scenario, extracted some parameters to potentially modify, uploaded the parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt;  1 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2015          0</span></span>
+<span><span class="co">#&gt;  2 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2016          0</span></span>
+<span><span class="co">#&gt;  3 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2017          0</span></span>
+<span><span class="co">#&gt;  4 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2018          0</span></span>
+<span><span class="co">#&gt;  5 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2019          0</span></span>
+<span><span class="co">#&gt;  6 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2020          0</span></span>
+<span><span class="co">#&gt;  7 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2021          0</span></span>
+<span><span class="co">#&gt;  8 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2022          0</span></span>
+<span><span class="co">#&gt;  9 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2023          0</span></span>
+<span><span class="co">#&gt; 10 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2024          0</span></span>
+<span><span class="co">#&gt; # ℹ 8,167 more rows</span></span></code></pre></div>
+<p>Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">breast_runs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_runs.html">load_runs</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="va">breast</span><span class="op">$</span><span class="va">run_list</span><span class="op">$</span><span class="va">RunDigest</span><span class="op">)</span></span>
 <span><span class="va">breast_runs</span></span>
 <span><span class="co">#&gt; ── OncoSimX ModelRunSet ────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelDigest: 528f94c1525c994b010d84507ed7903f</span></span>
+<span><span class="co">#&gt; → ModelDigest: 55c8b4118b0024c4170bb6af274cfade</span></span>
 <span><span class="co">#&gt; → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]</span></span>
-<span><span class="co">#&gt; → RunDigests: [e588fec0286ad7cacb1cdb32f947898a, 5584cc00a7c296b2e4af66deb679cce8]</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigests: [b02ca21b49c13d067d253c477dce6fb2, a999db2c6cc30d6c703b8f1189686e81]</span></span></code></pre></div>
 <p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cost_bystage</span> <span class="op">&lt;-</span> <span class="va">breast_runs</span><span class="op">$</span><span class="fu">get_table</span><span class="op">(</span><span class="st">'Breast_Cancer_Cost_ByStage_Table'</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cost_bystage</span> <span class="op">&lt;-</span> <span class="va">breast_runs</span><span class="op">$</span><span class="va">Breast_Cancer_Cost_ByStage_Table</span></span>
 <span><span class="va">cost_bystage</span></span>
 <span><span class="co">#&gt; # A tibble: 80 × 4</span></span>
 <span><span class="co">#&gt;    RunName                             expr_name            Stage     expr_value</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                               &lt;chr&gt;                &lt;chr&gt;          &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    4.74e 8</span></span>
-<span><span class="co">#&gt;  2 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.98e 9</span></span>
-<span><span class="co">#&gt;  3 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.98e 8</span></span>
-<span><span class="co">#&gt;  4 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.40e 9</span></span>
-<span><span class="co">#&gt;  5 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.90e 9</span></span>
-<span><span class="co">#&gt;  6 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.23e 9</span></span>
-<span><span class="co">#&gt;  7 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.18e 8</span></span>
-<span><span class="co">#&gt;  8 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    6.07e 8</span></span>
-<span><span class="co">#&gt;  9 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.16e 9</span></span>
-<span><span class="co">#&gt; 10 Default_first_run_32M_cases_12_subs Total_treatment_cost all          1.13e10</span></span>
+<span><span class="co">#&gt;  1 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    4.95e 8</span></span>
+<span><span class="co">#&gt;  2 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 9</span></span>
+<span><span class="co">#&gt;  3 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 8</span></span>
+<span><span class="co">#&gt;  4 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.59e 9</span></span>
+<span><span class="co">#&gt;  5 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.06e 9</span></span>
+<span><span class="co">#&gt;  6 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.54e 9</span></span>
+<span><span class="co">#&gt;  7 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.77e 8</span></span>
+<span><span class="co">#&gt;  8 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    7.54e 8</span></span>
+<span><span class="co">#&gt;  9 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.27e 9</span></span>
+<span><span class="co">#&gt; 10 Default_first_run_32M_cases_12_subs Total_treatment_cost all          1.25e10</span></span>
 <span><span class="co">#&gt; # ℹ 70 more rows</span></span></code></pre></div>
-<p>We can even plot this using <code>ggplot2</code>!</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p>We can even plot this using <code>ggplot2</code>! Note that the number of simulation cases for <code>ExampleRun</code> is very low so the results are not to be trusted!</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cost_bystage</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Stage</span>, <span class="va">expr_value</span>, fill <span class="op">=</span> <span class="va">RunName</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_col</span><span class="op">(</span>position <span class="op">=</span> <span class="fu">position_dodge</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -263,13 +290,8 @@
 <span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-17-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-18-1.png" width="100%"></p>
 <p>When we are sure we no longer need a scenario or model run, we can use <code><a href="reference/get_workset.html">delete_scenario()</a></code> or <code><a href="reference/get_model_run.html">delete_run()</a></code> to clean things up!</p>
-</div>
-<div class="section level3">
-<h3 id="modifying-scenario-parameters">Modifying Scenario Parameters<a class="anchor" aria-label="anchor" href="#modifying-scenario-parameters"></a>
-</h3>
-<p>You can modify scenario parameters one of two ways. (1) You can make changes to parameters directly in your R session (referred to as in-memory changes), or (2) you can extract the parameter table into a CSV file and make changes there. In both cases, the modified parameters will be saved as CSV files in a specially named directory in order to have a saved copy of changed parameters and then uploaded to batch update parameters.</p>
 </div>
 </div>
 <div class="section level2">
