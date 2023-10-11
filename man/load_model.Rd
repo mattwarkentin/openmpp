@@ -38,13 +38,13 @@ OncoSimX Model Class
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{workset_list}}{List of worksets.}
+\item{\code{Worksets}}{Data frame of worksets.}
 
-\item{\code{scenario_list}}{List of scenarios.}
+\item{\code{Scenarios}}{Data frame of scenarios.}
 
-\item{\code{run_list}}{List of model runs.}
+\item{\code{Runs}}{Data frame of model runs.}
 
-\item{\code{task_list}}{List of model tasks.}
+\item{\code{Tasks}}{Data frame of model tasks.}
 }
 \if{html}{\out{</div>}}
 }

@@ -26,7 +26,7 @@ remotes::install_github("oncology-outcomes/oncosimx")
 
 The `oncosimx` package contains many functions that provide access to
 nearly every OpenM++ API endpoint. However, users will typically only
-use a smaller set of functions for most tasks.
+use a smaller set of functions for most common tasks.
 
 ### User Authentication
 
@@ -178,7 +178,7 @@ breast_default
 Finally, we will load the base run for the Breast model.
 
 ``` r
-baserun_digest <- breast$run_list$RunDigest[[1]]
+baserun_digest <- breast$Runs$RunDigest[[1]]
 breast_baserun <- load_run('OncoSimX-breast', baserun_digest)
 breast_baserun
 #> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
@@ -277,10 +277,11 @@ model, and extracted output tables. In this last step, we will load
 multiple model runs into memory to compare them.
 
 ``` r
-breast_runs <- load_runs('OncoSimX-breast', breast$run_list$RunDigest)
+breast_runs <- load_runs('OncoSimX-breast', breast$Runs$RunDigest)
 breast_runs
 #> ── OncoSimX ModelRunSet ────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
+#> → ModelVersion: 3.6.2.4
 #> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
 #> → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]
 #> → RunDigests: [b02ca21b49c13d067d253c477dce6fb2, a999db2c6cc30d6c703b8f1189686e81]

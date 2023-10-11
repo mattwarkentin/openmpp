@@ -100,16 +100,16 @@ OncoSimXModel <-
       }
     ),
     active = list(
-      #' @field workset_list List of worksets.
-      workset_list = function() get_worksets(self$ModelDigest),
+      #' @field Worksets Data frame of worksets.
+      Worksets = function() get_worksets(self$ModelDigest),
 
-      #' @field scenario_list List of scenarios.
-      scenario_list = function() get_worksets(self$ModelDigest),
+      #' @field Scenarios Data frame of scenarios.
+      Scenarios = function() get_worksets(self$ModelDigest),
 
-      #' @field run_list List of model runs.
-      run_list = function() get_model_runs(self$ModelDigest),
+      #' @field Runs Data frame of model runs.
+      Runs = function() get_model_runs(self$ModelDigest),
 
-      #' @field task_list List of model tasks.
-      task_list = function() get_model_tasks(self$ModelDigest)
+      #' @field Tasks Data frame of model tasks.
+      Tasks = function() get_model_tasks(self$ModelDigest)
     )
   )

@@ -122,7 +122,7 @@ breast_default
 Finally, we will load the base run for the Breast model.
 
 ```{r}
-baserun_digest <- breast$run_list$RunDigest[[1]]
+baserun_digest <- breast$Runs$RunDigest[[1]]
 breast_baserun <- load_run('OncoSimX-breast', baserun_digest)
 breast_baserun
 ```
@@ -182,7 +182,7 @@ example_run$Breast_Cancer_Cases_Table
 Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
 
 ```{r}
-breast_runs <- load_runs('OncoSimX-breast', breast$run_list$RunDigest)
+breast_runs <- load_runs('OncoSimX-breast', breast$Runs$RunDigest)
 breast_runs
 ```
 
