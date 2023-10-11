@@ -5,7 +5,7 @@
 #'
 #' @param from Source workset name.
 #' @param readonly Boolean. Should workset be read-only?
-#' @param file File path.
+#' @param csv CSV file path.
 #' @param workset Workset metadata.
 #' @inheritParams get_workset_param
 #' @inheritParams get_model
@@ -88,13 +88,12 @@ create_workset <- function(data) {
 
 #' @rdname get_workset
 #' @export
-merge_workset <- function(workset, file) {
+merge_workset <- function(workset) {
   api_path <- glue::glue('/api/workset-merge')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
     httr2::req_body_multipart(
-      workset = jsonlite::toJSON(workset, auto_unbox = TRUE),
-      `parameter-csv` = curl::form_file(file)
+      workset = jsonlite::toJSON(workset, auto_unbox = TRUE)
     ) |>
     httr2::req_method('PATCH') |>
     httr2::req_perform() |>
@@ -103,11 +102,28 @@ merge_workset <- function(workset, file) {
 
 #' @rdname get_workset
 #' @export
-replace_workset <- function(data) {
+update_workset_param_csv <- function(workset, csv) {
+  api_path <- glue::glue('/api/workset-merge')
+  httr2::request(api_url()) |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_body_multipart(
+      workset = jsonlite::toJSON(workset, auto_unbox = TRUE),
+      `parameter-csv` = curl::form_file(csv)
+    ) |>
+    httr2::req_method('PATCH') |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_workset
+#' @export
+replace_workset <- function(workset) {
   api_path <- glue::glue('/api/workset-replace')
   httr2::request(api_url()) |>
     httr2::req_url_path(api_path) |>
-    httr2::req_body_json(data, auto_unbox = TRUE) |>
+    httr2::req_body_multipart(
+      workset = jsonlite::toJSON(workset, auto_unbox = TRUE)
+    ) |>
     httr2::req_method('PUT') |>
     httr2::req_perform() |>
     httr2::resp_body_json()

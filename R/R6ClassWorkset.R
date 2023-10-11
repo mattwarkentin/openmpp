@@ -68,6 +68,7 @@ OncoSimXWorkset <-
       #' @param base Base run digest.
       #' @return Self, invisibly.
       set_base_digest = function(base) {
+        private$.check_modifiable()
         if (rlang::is_scalar_character(base)) {
           json <- list(
             ModelName = self$ModelName,
@@ -75,13 +76,8 @@ OncoSimXWorkset <-
             Name = self$WorksetName,
             BaseRunDigest = base
           )
-          tmp_json <- tempfile(fileext = '.json')
-          writeLines(
-            text = jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE),
-            con = tmp_json,
-          )
-          merge_workset(tmp_json)
-          private$.set_workset(self$ModelName, self$WorksetName)
+          merge_workset(json)
+          private$.set_workset(self$ModelDigest, self$WorksetName)
           private$.set_workset_metadata()
         }
         invisible(self)
@@ -91,28 +87,26 @@ OncoSimXWorkset <-
       #' Delete the base run digest.
       #' @return Self, invisibly.
       delete_base_digest = function() {
+        private$.check_modifiable()
         json <- list(
           ModelName = self$ModelName,
           ModelDigest = self$ModelDigest,
           Name = self$WorksetName,
+          BaseRunDigest =  "",
           IsCleanBaseRun = TRUE
         )
-        tmp_json <- tempfile(fileext = '.json')
-        writeLines(
-          text = jsonlite::toJSON(json, pretty = TRUE, auto_unbox = TRUE),
-          con = tmp_json,
-        )
-        merge_workset(tmp_json)
-        private$.set_workset(self$ModelName, self$WorksetName)
+        merge_workset(json)
+        private$.set_workset(self$ModelDigest, self$WorksetName)
         private$.set_workset_metadata()
         invisible(self)
       },
 
       #' @description
-      #' Copy a parameter from a base scenario.
+      #' Copy parameters from a base scenario.
       #' @param names Character vector of parameter names.
       #' @return Self, invisibly.
       copy_params = function(names) {
+        private$.check_modifiable()
         if (rlang::is_null(self$BaseRunDigest) |
             nchar(self$BaseRunDigest) == 0) {
           rlang::abort('Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.')
@@ -132,13 +126,33 @@ OncoSimXWorkset <-
           )
         )
 
-        private$.set_workset(self$ModelName, self$WorksetName)
+        private$.set_workset(self$ModelDigest, self$WorksetName)
         private$.load_param_bindings()
         invisible(self)
       },
 
       #' @description
-      #' Retrieve a parameter table.
+      #' Delete parameters from scenario.
+      #' @param names Character vector of parameter names.
+      #' @return Self, invisibly.
+      delete_params = function(names) {
+        private$.check_modifiable()
+        purrr::walk(
+          .x = names,
+          .f = \(name) {
+            if (name %in% private$.params) {
+              delete_workset_param(self$ModelDigest, self$WorksetName, name)
+              rm(list = name, envir = self$.__enclos_env__)
+            }
+          }
+        )
+        private$.set_workset(self$ModelDigest, self$WorksetName)
+        private$.load_param_bindings()
+        invisible(self)
+      },
+
+      #' @description
+      #' Retrieve a parameter.
       #' @param name Parameter name.
       #' @return A `tibble`.
       get_param = function(name) {
@@ -150,11 +164,12 @@ OncoSimXWorkset <-
       },
 
       #' @description
-      #' Retrieve a parameter table.
+      #' Set a parameter.
       #' @param name Parameter name.
       #' @param data New parameter data.
-      #' @return A `tibble`.
+      #' @return Self, invisibly.
       set_param = function(name, data) {
+        private$.check_modifiable()
         old <- self$get_param(name)
 
         is_compatible(data, old)
@@ -177,7 +192,7 @@ OncoSimXWorkset <-
           ))
         )
 
-        merge_workset(ws, tmp_csv)
+        update_workset_param_csv(ws, tmp_csv)
 
         invisible(self)
       },
@@ -263,6 +278,7 @@ OncoSimXWorkset <-
         invisible(self)
       },
       .load_param_bindings = function() {
+        private$.params <- NULL
         purrr::walk(private$.workset$Param, \(param) {
           private$.add_params(param$Name)
           f <- function(data) {
@@ -307,18 +323,26 @@ OncoSimXWorkset <-
       },
       .get_run_done = function(model, run) {
         get_model_run_state(model, run)$IsFinal
+      },
+      .check_modifiable = function(call = rlang::caller_env()) {
+        if (rlang::is_true(self$ReadOnly)) {
+          rlang::abort(
+            message = 'Cannot modify a read-only workset.',
+            call = call
+          )
+        }
       }
     ),
     active = list(
       #' @field ReadOnly Workset read-only status.
       ReadOnly = function(x) {
-        if (missing(x)) return(private$.workset$IsReadonly)
+        if (missing(x)) {
+          return(get_workset(self$ModelDigest, self$WorksetName)$IsReadonly)
+        }
         if (!rlang::is_scalar_logical(x)) {
           rlang::abort('Must be a scalar logical (TRUE or FALSE).')
         }
         set_workset_readonly(self$ModelDigest, self$WorksetName, as.integer(x))
-        private$.set_workset(self$ModelName, self$WorksetName)
-        private$.set_workset_metadata()
         invisible(self)
       },
 

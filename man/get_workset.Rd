@@ -10,6 +10,7 @@
 \alias{set_workset_readonly}
 \alias{create_workset}
 \alias{merge_workset}
+\alias{update_workset_param_csv}
 \alias{replace_workset}
 \alias{delete_workset}
 \alias{delete_workset_param}
@@ -38,9 +39,11 @@ set_workset_readonly(model, set, readonly)
 
 create_workset(data)
 
-merge_workset(workset, file)
+merge_workset(workset)
 
-replace_workset(data)
+update_workset_param_csv(workset, csv)
+
+replace_workset(workset)
 
 delete_workset(model, set)
 
@@ -71,7 +74,7 @@ delete_scenario(model, set)
 
 \item{workset}{Workset metadata.}
 
-\item{file}{File path.}
+\item{csv}{CSV file path.}
 
 \item{name}{Output table name.}
 

@@ -55,6 +55,7 @@ OncoSimX Workset Class
 \item \href{#method-OncoSimXWorkset-set_base_digest}{\code{OncoSimXWorkset$set_base_digest()}}
 \item \href{#method-OncoSimXWorkset-delete_base_digest}{\code{OncoSimXWorkset$delete_base_digest()}}
 \item \href{#method-OncoSimXWorkset-copy_params}{\code{OncoSimXWorkset$copy_params()}}
+\item \href{#method-OncoSimXWorkset-delete_params}{\code{OncoSimXWorkset$delete_params()}}
 \item \href{#method-OncoSimXWorkset-get_param}{\code{OncoSimXWorkset$get_param()}}
 \item \href{#method-OncoSimXWorkset-set_param}{\code{OncoSimXWorkset$set_param()}}
 \item \href{#method-OncoSimXWorkset-run}{\code{OncoSimXWorkset$run()}}
@@ -139,9 +140,29 @@ Self, invisibly.
 \if{html}{\out{<a id="method-OncoSimXWorkset-copy_params"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-copy_params}{}}}
 \subsection{Method \code{copy_params()}}{
-Copy a parameter from a base scenario.
+Copy parameters from a base scenario.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$copy_params(names)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{names}}{Character vector of parameter names.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXWorkset-delete_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-delete_params}{}}}
+\subsection{Method \code{delete_params()}}{
+Delete parameters from scenario.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$delete_params(names)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -159,7 +180,7 @@ Self, invisibly.
 \if{html}{\out{<a id="method-OncoSimXWorkset-get_param"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-get_param}{}}}
 \subsection{Method \code{get_param()}}{
-Retrieve a parameter table.
+Retrieve a parameter.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$get_param(name)}\if{html}{\out{</div>}}
 }
@@ -179,7 +200,7 @@ A \code{tibble}.
 \if{html}{\out{<a id="method-OncoSimXWorkset-set_param"></a>}}
 \if{latex}{\out{\hypertarget{method-OncoSimXWorkset-set_param}{}}}
 \subsection{Method \code{set_param()}}{
-Retrieve a parameter table.
+Set a parameter.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$set_param(name, data)}\if{html}{\out{</div>}}
 }
@@ -194,7 +215,7 @@ Retrieve a parameter table.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A \code{tibble}.
+Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
