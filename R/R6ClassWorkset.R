@@ -142,7 +142,7 @@ OncoSimXWorkset <-
           .f = \(name) {
             if (name %in% private$.params) {
               delete_workset_param(self$ModelDigest, self$WorksetName, name)
-              rm(list = name, envir = self$.__enclos_env__)
+              rm(list = name, envir = self)
             }
           }
         )
