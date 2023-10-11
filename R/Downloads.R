@@ -74,4 +74,3 @@ delete_download_files <- function(folder) {
     httr2::req_perform()
   invisible()
 }
-
