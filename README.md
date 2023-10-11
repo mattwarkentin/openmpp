@@ -28,6 +28,20 @@ The `oncosimx` package contains many functions that provide access to
 nearly every OpenM++ API endpoint. However, users will typically only
 use a smaller set of functions for most tasks.
 
+### User Authentication
+
+Each user is required to set their local host address for the OpenM++
+API in their global or project-specific `.Renviron` file in order for
+the `oncosimx` package to communicate with the API on behalf of the
+user. To do this, set the `ONCOSIMX_HOST` environment variable in your
+`.Renviron` file as follows:
+
+    ONCOSIMX_HOST=http://localhost:XXXX
+
+Where `XXXX` is the four digits corresponding to your specific local
+host address. If you aren’t sure of your host address, you may contact
+the OpenM++ administrator to retrieve this information.
+
 ### Main Functions
 
 - Functions for accessing tables of models, worksets, or model runs
