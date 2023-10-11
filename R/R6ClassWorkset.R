@@ -179,7 +179,7 @@ OncoSimXWorkset <-
 
         tmp_csv <- glue::glue('{tempdir()}/{name}.csv')
 
-        readr::write_csv(data, tmp_csv)
+        readr::write_csv(data, tmp_csv, progress = FALSE)
 
         ws <- list(
           ModelName = self$ModelName,
