@@ -95,6 +95,23 @@ OncoSimXModelRun <-
       },
 
       #' @description
+      #' Write all output tables to disk (CSV).
+      #' @param dir Directory path.
+      #' @return  Self, invisibly.
+      write_tables = function(dir) {
+        if (fs::dir_exists(dir)) {
+          purrr::walk(
+            .x = private$.tables,
+            .f = \(t) {
+              file <- glue::glue('{dir}/{t}.csv')
+              self$write_table(t, file)
+            }
+          )
+        }
+        invisible(self)
+      },
+
+      #' @description
       #' Get console log for model run.
       #' @return  Self, invisibly.
       get_log = function() {

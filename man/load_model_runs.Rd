@@ -59,6 +59,7 @@ OncoSimX ModelRunSet  Class
 \item \href{#method-OncoSimXModelRunSet-print}{\code{OncoSimXModelRunSet$print()}}
 \item \href{#method-OncoSimXModelRunSet-get_table}{\code{OncoSimXModelRunSet$get_table()}}
 \item \href{#method-OncoSimXModelRunSet-write_table}{\code{OncoSimXModelRunSet$write_table()}}
+\item \href{#method-OncoSimXModelRunSet-write_tables}{\code{OncoSimXModelRunSet$write_tables()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -138,6 +139,26 @@ Write an output table to disk (CSV).
 \item{\code{name}}{Table name.}
 
 \item{\code{file}}{File path.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+Self, invisibly.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OncoSimXModelRunSet-write_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-write_tables}{}}}
+\subsection{Method \code{write_tables()}}{
+Write all output tables to disk (CSV).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$write_tables(dir)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{dir}}{Directory path.}
 }
 \if{html}{\out{</div>}}
 }

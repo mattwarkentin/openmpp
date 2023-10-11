@@ -86,10 +86,28 @@ OncoSimXModelRunSet <-
       write_table = function(name, file) {
         readr::write_csv(self$get_table(name), file)
         invisible(self)
+      },
+
+      #' @description
+      #' Write all output tables to disk (CSV).
+      #' @param dir Directory path.
+      #' @return  Self, invisibly.
+      write_tables = function(dir) {
+        if (fs::dir_exists(dir)) {
+          purrr::walk(
+            .x = private$.tables,
+            .f = \(t) {
+              file <- glue::glue('{dir}/{t}.csv')
+              self$write_table(t, file)
+            }
+          )
+        }
+        invisible(self)
       }
     ),
     private = list(
       .runs = NULL,
+      .tables = NULL,
       .set_runs = function(model, runs) {
         private$.runs <- vector('list', length(runs))
         private$.runs <- purrr::map(runs, \(r) OncoSimXModelRun$new(model, r))
@@ -101,8 +119,14 @@ OncoSimXModelRunSet <-
         self$ModelDigest <- first_run$ModelDigest
         self$ModelVersion <- first_run$ModelVersion
       },
+      .add_table = function(name) {
+        curr <- private$.tables
+        total <- sort(unique(c(curr, name)))
+        private$.tables <- total
+      },
       .load_table_bindings = function() {
         purrr::walk(private$.runs[[1]]$private$.run$Table, \(table) {
+          private$.add_table(table$Name)
           f <- function() {
             table_name <- table$Name
             self$get_table(table_name)
