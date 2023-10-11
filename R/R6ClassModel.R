@@ -40,11 +40,11 @@ OncoSimXModel <-
       #' @field ModelMetadata Model metadata.
       ModelMetadata = NULL,
 
-      #' @field ParamInfo Input parameter information.
-      ParamInfo = NULL,
+      #' @field Parameters Input parameter information.
+      Parameters = NULL,
 
-      #' @field TableInfo Output table information.
-      TableInfo = NULL,
+      #' @field Tables Output table information.
+      Tables = NULL,
 
       #' @description
       #' Create a new OncoSimXModel object.
@@ -75,7 +75,7 @@ OncoSimXModel <-
         private$.model <- get_model(model)
       },
       .set_param_info = function() {
-        self$ParamInfo <-
+        self$Parameters <-
           purrr::map(private$.model$ParamTxt, \(x) {
             purrr::discard_at(x, 'ParamDimsTxt') |>
               purrr::list_flatten(name_spec = '{inner}')
@@ -84,7 +84,7 @@ OncoSimXModel <-
           suppressMessages()
       },
       .set_table_info = function() {
-        self$TableInfo <-
+        self$Tables <-
           purrr::map(private$.model$TableTxt, \(x) {
             purrr::discard_at(x,  c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')) |>
               purrr::list_flatten(name_spec = '{inner}')
@@ -100,16 +100,16 @@ OncoSimXModel <-
       }
     ),
     active = list(
-      #' @field Worksets Data frame of worksets.
-      Worksets = function() get_worksets(self$ModelDigest),
+      #' @field ModelWorksets Data frame of worksets.
+      ModelWorksets = function() get_worksets(self$ModelDigest),
 
-      #' @field Scenarios Data frame of scenarios.
-      Scenarios = function() get_worksets(self$ModelDigest),
+      #' @field ModelScenarios Data frame of scenarios.
+      ModelScenarios = function() get_worksets(self$ModelDigest),
 
-      #' @field Runs Data frame of model runs.
-      Runs = function() get_model_runs(self$ModelDigest),
+      #' @field ModelRuns Data frame of model runs.
+      ModelRuns = function() get_model_runs(self$ModelDigest),
 
-      #' @field Tasks Data frame of model tasks.
-      Tasks = function() get_model_tasks(self$ModelDigest)
+      #' @field ModelTasks Data frame of model tasks.
+      ModelTasks = function() get_model_tasks(self$ModelDigest)
     )
   )

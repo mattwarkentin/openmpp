@@ -29,22 +29,22 @@ OncoSimX Model Class
 
 \item{\code{ModelMetadata}}{Model metadata.}
 
-\item{\code{ParamInfo}}{Input parameter information.}
+\item{\code{Parameters}}{Input parameter information.}
 
-\item{\code{TableInfo}}{Output table information.}
+\item{\code{Tables}}{Output table information.}
 }
 \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{Worksets}}{Data frame of worksets.}
+\item{\code{ModelWorksets}}{Data frame of worksets.}
 
-\item{\code{Scenarios}}{Data frame of scenarios.}
+\item{\code{ModelScenarios}}{Data frame of scenarios.}
 
-\item{\code{Runs}}{Data frame of model runs.}
+\item{\code{ModelRuns}}{Data frame of model runs.}
 
-\item{\code{Tasks}}{Data frame of model tasks.}
+\item{\code{ModelTasks}}{Data frame of model tasks.}
 }
 \if{html}{\out{</div>}}
 }
