@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# oncosimx
+# oncosimx <a href="https://oncology-outcomes.github.io/oncosimx/"><img src="man/figures/logo.png" align="right" height="104" alt="oncosimx website" /></a>
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -121,8 +121,8 @@ breast_default
 
 Finally, we will load the base run for the Breast model.
 
-```{r}
-baserun_digest <- breast$Runs$RunDigest[[1]]
+```{r warning=FALSE}
+baserun_digest <- breast$ModelRuns$RunDigest[[1]]
 breast_baserun <- load_run('OncoSimX-breast', baserun_digest)
 breast_baserun
 ```
@@ -135,7 +135,7 @@ create_scenario('OncoSimX-breast', 'MyNewScenario', baserun_digest)
 
 We will load the new scenario, copy over the `ProvincesOfInterest` parameter from the base run and extract it to a CSV file for editing.
 
-```{r}
+```{r warning=FALSE}
 my_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
 ```
 
@@ -146,7 +146,7 @@ my_scenario$copy_params('ProvincesOfInterest')
 ```
 
 ```{r eval=FALSE}
-alberta_only <- my_scenario$ProvincesOfInterest
+alberta_only <- my_scenario$Parameters$ProvincesOfInterest
 alberta_only <- 
   alberta_only |> 
   mutate(
@@ -154,7 +154,7 @@ alberta_only <-
     Alberta = TRUE
   )
 
-my_scenario$ProvincesOfInterest <- alberta_only
+my_scenario$Parameters$ProvincesOfInterest <- alberta_only
 ```
 
 We will now run the model anyway. We will give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. Note that model runs may take a long time when the number of simulation cases is large.
@@ -168,7 +168,7 @@ Note that we can use the `opts` argument and the `opts_run()` function to config
 
 Now that our model run is complete, let's load it into memory.
 
-```{r}
+```{r warning=FALSE}
 example_run <- load_run('OncoSimX-breast', 'ExampleRun')
 example_run
 ```
@@ -176,20 +176,20 @@ example_run
 We can now extract an output table from this model run using `$get_table()`.
 
 ```{r}
-example_run$Breast_Cancer_Cases_Table
+example_run$Tables$Breast_Cancer_Cases_Table
 ```
 
 Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
 
-```{r}
-breast_runs <- load_runs('OncoSimX-breast', breast$Runs$RunDigest)
+```{r warning=FALSE}
+breast_runs <- load_runs('OncoSimX-breast', breast$ModelRuns$RunDigest)
 breast_runs
 ```
 
 We will extract a new table from both models. Note that an extra column, `RunName` is added to indicate which model run the output table data corresponds to.
 
 ```{r}
-cost_bystage <- breast_runs$Breast_Cancer_Cost_ByStage_Table
+cost_bystage <- breast_runs$Tables$Breast_Cancer_Cost_ByStage_Table
 cost_bystage
 ```
 

@@ -1,5 +1,5 @@
 
-# oncosimx
+# oncosimx <a href="https://oncology-outcomes.github.io/oncosimx/"><img src="man/figures/logo.png" align="right" height="104" alt="oncosimx website" /></a>
 
 <!-- badges: start -->
 
@@ -103,25 +103,20 @@ Let’s see what models are available:
 
 ``` r
 get_models()
-#> # A tibble: 16 × 7
+#> # A tibble: 22 × 7
 #>    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode
 #>      <int> <chr>             <chr>  <int> <chr>   <chr>          <chr>          
-#>  1     101 OncoSimX-allcanc… 41146…     0 3.6.2.4 2023-09-20 18… EN             
-#>  2     101 OncoSimX-breast   55c8b…     0 3.6.2.4 2023-09-20 17… EN             
-#>  3     101 OncoSimX-cervical bb3b5…     0 3.6.2.4 2023-09-20 18… EN             
-#>  4     101 OncoSimX-colorec… 36999…     0 3.6.2.4 2023-09-20 18… EN             
-#>  5     101 OncoSimX-gmm      baa35…     0 3.6.2.4 2023-09-20 18… EN             
-#>  6     101 OncoSimX-lung     bb4e0…     0 3.6.2.4 2023-09-20 18… EN             
-#>  7     101 OncoSimX-allcanc… 8dc92…     0 3.6.1.6 2023-09-01 14… EN             
-#>  8     101 OncoSimX-allcanc… ce674…     0 3.6.1.5 2023-06-13 16… EN             
-#>  9     101 OncoSimX-breast   528f9…     0 3.6.1.5 2023-06-13 15… EN             
-#> 10     101 OncoSimX-cervical 30246…     0 3.6.1.5 2023-06-13 16… EN             
-#> 11     101 OncoSimX-colorec… b275d…     0 3.6.1.5 2023-06-13 16… EN             
-#> 12     101 OncoSimX-gmm      e83b4…     0 3.6.1.5 2023-06-13 16… EN             
-#> 13     101 OncoSimX-lung     eeb24…     0 3.6.1.5 2023-06-13 16… EN             
-#> 14     101 GMM               02614…     1 1.1.2.0 2022-03-23 10… EN             
-#> 15     101 HPVMM             0636a…     1 1.9.2.0 2023-03-20 11… EN             
-#> 16     101 RiskPaths         d90e1…     0 3.0.0.0 2022-03-07 23… EN
+#>  1     101 OncoSimX-allcanc… c1d97…     0 3.6.2.5 2023-11-03 18… EN             
+#>  2     101 OncoSimX-breast   742b9…     0 3.6.2.5 2023-11-03 18… EN             
+#>  3     101 OncoSimX-cervical 72c69…     0 3.6.2.5 2023-11-03 19… EN             
+#>  4     101 OncoSimX-colorec… 6802a…     0 3.6.2.5 2023-11-03 19… EN             
+#>  5     101 OncoSimX-gmm      46607…     0 3.6.2.5 2023-11-03 19… EN             
+#>  6     101 OncoSimX-lung     f3611…     0 3.6.2.5 2023-11-03 19… EN             
+#>  7     101 OncoSimX-allcanc… 41146…     0 3.6.2.4 2023-09-20 18… EN             
+#>  8     101 OncoSimX-breast   55c8b…     0 3.6.2.4 2023-09-20 17… EN             
+#>  9     101 OncoSimX-cervical bb3b5…     0 3.6.2.4 2023-09-20 18… EN             
+#> 10     101 OncoSimX-colorec… 36999…     0 3.6.2.4 2023-09-20 18… EN             
+#> # ℹ 12 more rows
 ```
 
 We can now see what worksets and model runs exist for a given model.
@@ -131,23 +126,23 @@ get_worksets('OncoSimX-breast')
 #> # A tibble: 2 × 11
 #>   ModelName     ModelDigest ModelVersion ModelCreateDateTime Name  BaseRunDigest
 #>   <chr>         <chr>       <chr>        <chr>               <chr> <chr>        
-#> 1 OncoSimX-bre… 55c8b4118b… 3.6.2.4      2023-09-20 17:58:4… Defa… ""           
-#> 2 OncoSimX-bre… 55c8b4118b… 3.6.2.4      2023-09-20 17:58:4… MyNe… "b02ca21b49c…
+#> 1 OncoSimX-bre… 742b985b8c… 3.6.2.5      2023-11-03 18:55:1… Defa… ""           
+#> 2 OncoSimX-bre… 742b985b8c… 3.6.2.5      2023-11-03 18:55:1… MyNe… "9f9890c641e…
 #> # ℹ 5 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
 #> #   IsCleanBaseRun <lgl>, Txt <list<tibble[,3]>>, Param <list>
 ```
 
 ``` r
 get_runs('OncoSimX-breast')
-#> # A tibble: 2 × 20
+#> # A tibble: 2 × 21
 #>   ModelName       ModelDigest    ModelVersion ModelCreateDateTime Name  SubCount
 #>   <chr>           <chr>          <chr>        <chr>               <chr>    <int>
-#> 1 OncoSimX-breast 55c8b4118b002… 3.6.2.4      2023-09-20 17:58:4… Defa…       12
-#> 2 OncoSimX-breast 55c8b4118b002… 3.6.2.4      2023-09-20 17:58:4… Exam…       12
-#> # ℹ 14 more variables: SubStarted <int>, SubCompleted <int>,
-#> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunDigest <chr>,
-#> #   ValueDigest <chr>, RunStamp <chr>, Txt <list>, Opts <list>, Param <list>,
-#> #   Table <list>, Entity <list>, Progress <list>
+#> 1 OncoSimX-breast 742b985b8c3b6… 3.6.2.5      2023-11-03 18:55:1… Defa…       12
+#> 2 OncoSimX-breast 742b985b8c3b6… 3.6.2.5      2023-11-03 18:55:1… Exam…       12
+#> # ℹ 15 more variables: SubStarted <int>, SubCompleted <int>,
+#> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunId <int>,
+#> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>, Txt <list>,
+#> #   Opts <list>, Param <list>, Table <list>, Entity <list>, Progress <list>
 ```
 
 Now we can load the `OncoSimX-breast` model to inspect.
@@ -157,8 +152,8 @@ breast <- load_model('OncoSimX-breast')
 breast
 #> ── OncoSimX Model ──────────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.4
-#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
+#> → ModelVersion: 3.6.2.5
+#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
 ```
 
 We will now load the `Default` set of input parameters for the Breast
@@ -169,8 +164,8 @@ breast_default <- load_scenario('OncoSimX-breast', 'Default')
 breast_default
 #> ── OncoSimX Workset ────────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.4
-#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
+#> → ModelVersion: 3.6.2.5
+#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
 #> → WorksetName: Default
 #> → BaseRunDigest:
 ```
@@ -178,15 +173,15 @@ breast_default
 Finally, we will load the base run for the Breast model.
 
 ``` r
-baserun_digest <- breast$Runs$RunDigest[[1]]
+baserun_digest <- breast$ModelRuns$RunDigest[[1]]
 breast_baserun <- load_run('OncoSimX-breast', baserun_digest)
 breast_baserun
 #> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.4
-#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
+#> → ModelVersion: 3.6.2.5
+#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
 #> → RunName: Default_first_run_32M_cases_12_subs
-#> → RunDigest: b02ca21b49c13d067d253c477dce6fb2
+#> → RunDigest: 9f9890c641e0c43d5fd439591106f8fa
 ```
 
 We will create a new scenario based on the parameters from the
@@ -210,7 +205,7 @@ my_scenario$copy_params('ProvincesOfInterest')
 ```
 
 ``` r
-alberta_only <- my_scenario$ProvincesOfInterest
+alberta_only <- my_scenario$Parameters$ProvincesOfInterest
 alberta_only <- 
   alberta_only |> 
   mutate(
@@ -218,7 +213,7 @@ alberta_only <-
     Alberta = TRUE
   )
 
-my_scenario$ProvincesOfInterest <- alberta_only
+my_scenario$Parameters$ProvincesOfInterest <- alberta_only
 ```
 
 We will now run the model anyway. We will give it the name
@@ -245,17 +240,17 @@ example_run <- load_run('OncoSimX-breast', 'ExampleRun')
 example_run
 #> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.4
-#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
+#> → ModelVersion: 3.6.2.5
+#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
 #> → RunName: ExampleRun
-#> → RunDigest: a999db2c6cc30d6c703b8f1189686e81
+#> → RunDigest: fe83202b767917d818cca7cce7502b93
 ```
 
 We can now extract an output table from this model run using
 `$get_table()`.
 
 ``` r
-example_run$Breast_Cancer_Cases_Table
+example_run$Tables$Breast_Cancer_Cases_Table
 #> # A tibble: 8,177 × 4
 #>    expr_name                        Province                   Year expr_value
 #>    <chr>                            <chr>                     <dbl>      <dbl>
@@ -277,14 +272,14 @@ model, and extracted output tables. In this last step, we will load
 multiple model runs into memory to compare them.
 
 ``` r
-breast_runs <- load_runs('OncoSimX-breast', breast$Runs$RunDigest)
+breast_runs <- load_runs('OncoSimX-breast', breast$ModelRuns$RunDigest)
 breast_runs
 #> ── OncoSimX ModelRunSet ────────────────────────────────────────────────────────
 #> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.4
-#> → ModelDigest: 55c8b4118b0024c4170bb6af274cfade
+#> → ModelVersion: 3.6.2.5
+#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
 #> → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]
-#> → RunDigests: [b02ca21b49c13d067d253c477dce6fb2, a999db2c6cc30d6c703b8f1189686e81]
+#> → RunDigests: [9f9890c641e0c43d5fd439591106f8fa, fe83202b767917d818cca7cce7502b93]
 ```
 
 We will extract a new table from both models. Note that an extra column,
@@ -292,7 +287,7 @@ We will extract a new table from both models. Note that an extra column,
 corresponds to.
 
 ``` r
-cost_bystage <- breast_runs$Breast_Cancer_Cost_ByStage_Table
+cost_bystage <- breast_runs$Tables$Breast_Cancer_Cost_ByStage_Table
 cost_bystage
 #> # A tibble: 80 × 4
 #>    RunName                             expr_name            Stage     expr_value
