@@ -34,6 +34,8 @@ OncoSimX ModelRunSet  Class
 \item{\code{ModelVersion}}{Model version.}
 
 \item{\code{Type}}{Object type (used for \code{print()}).}
+
+\item{\code{Tables}}{Run tables}
 }
 \if{html}{\out{</div>}}
 }

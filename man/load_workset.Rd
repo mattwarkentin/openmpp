@@ -35,6 +35,8 @@ OncoSimX Workset Class
 \item{\code{WorksetMetadata}}{Workset metadata.}
 
 \item{\code{Type}}{Object type (used for \code{print()}).}
+
+\item{\code{Parameters}}{Workset parameters.}
 }
 \if{html}{\out{</div>}}
 }

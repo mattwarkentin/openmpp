@@ -7,6 +7,8 @@
 #'
 #' @return An `OncoSimXModelRunSet` instance.
 #'
+#' @include Utils.R
+#'
 #' @export
 load_model_runs <- function(model, runs) {
   OncoSimXModelRunSet$new(model, runs)
@@ -37,6 +39,9 @@ OncoSimXModelRunSet <-
 
       #' @field Type Object type (used for `print()`).
       Type = 'ModelRunSet',
+
+      #' @field Tables Run tables
+      Tables = rlang::env(),
 
       #' @description
       #' Create a new OncoSimXModelRunSet object.
@@ -131,7 +136,7 @@ OncoSimXModelRunSet <-
             table_name <- table$Name
             self$get_table(table_name)
           }
-          rlang::env_bind_active(self, '{table$Name}' := f)
+          rlang::env_bind_active(self$Tables, '{table$Name}' := f)
         })
       }
     ),

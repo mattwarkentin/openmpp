@@ -39,6 +39,10 @@ OncoSimX ModelRun Class
 
 \item{\code{RunMetadata}}{Run metadata.}
 
+\item{\code{Parameters}}{Run parameters.}
+
+\item{\code{Tables}}{Run tables}
+
 \item{\code{Type}}{Object type (used for \code{print()}).}
 }
 \if{html}{\out{</div>}}

@@ -7,6 +7,8 @@
 #'
 #' @return An `OncoSimXModel` instance.
 #'
+#' @include Utils.R
+#'
 #' @export
 load_model <- function(model) {
   models <- get_models()
@@ -40,11 +42,11 @@ OncoSimXModel <-
       #' @field ModelMetadata Model metadata.
       ModelMetadata = NULL,
 
-      #' @field Parameters Input parameter information.
-      Parameters = NULL,
+      #' @field ParamsInfo Input parameter information.
+      ParamsInfo = NULL,
 
-      #' @field Tables Output table information.
-      Tables = NULL,
+      #' @field TablesInfo Output table information.
+      TablesInfo = NULL,
 
       #' @description
       #' Create a new OncoSimXModel object.
@@ -75,7 +77,7 @@ OncoSimXModel <-
         private$.model <- get_model(model)
       },
       .set_param_info = function() {
-        self$Parameters <-
+        self$ParamsInfo <-
           purrr::map(private$.model$ParamTxt, \(x) {
             purrr::discard_at(x, 'ParamDimsTxt') |>
               purrr::list_flatten(name_spec = '{inner}')
@@ -84,7 +86,7 @@ OncoSimXModel <-
           suppressMessages()
       },
       .set_table_info = function() {
-        self$Tables <-
+        self$TablesInfo <-
           purrr::map(private$.model$TableTxt, \(x) {
             purrr::discard_at(x,  c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')) |>
               purrr::list_flatten(name_spec = '{inner}')

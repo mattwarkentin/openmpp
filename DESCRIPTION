@@ -31,3 +31,26 @@ Imports:
 URL: https://github.com/oncology-outcomes/oncosimx,
     https://oncology-outcomes.github.io/oncosimx/
 BugReports: https://github.com/oncology-outcomes/oncosimx/issues
+Collate: 
+    'Admin.R'
+    'Downloads.R'
+    'Microdata.R'
+    'Model.R'
+    'ModelExtras.R'
+    'ModelProfile.R'
+    'ModelRun.R'
+    'ModelTask.R'
+    'ModelWorkset.R'
+    'OutputTables.R'
+    'Parameters.R'
+    'Utils.R'
+    'R6ClassModel.R'
+    'R6ClassModelRun.R'
+    'R6ClassModelRunSet.R'
+    'R6ClassWorkset.R'
+    'RunOptions.R'
+    'Scenario.R'
+    'Service.R'
+    'Uploads.R'
+    'User.R'
+    'oncosimx-package.R'

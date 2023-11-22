@@ -9,6 +9,8 @@
 #'
 #' @details `load_scenario()` is an alias for `load_workset()`.
 #'
+#' @include Utils.R
+#'
 #' @export
 load_workset <- function(model, set) {
   if (!(set %in% get_worksets(model)$Name)) {
@@ -39,6 +41,9 @@ OncoSimXWorkset <-
 
       #' @field Type Object type (used for `print()`).
       Type = 'Workset',
+
+      #' @field Parameters Workset parameters.
+      Parameters = rlang::env(),
 
       #' @description
       #' Create a new OncoSimXWorkset object.
@@ -287,32 +292,11 @@ OncoSimXWorkset <-
             self$set_param(param_name, data)
             invisible(self)
           }
-          rlang::env_bind_active(self, '{param$Name}' := f)
+          rlang::env_bind_active(self$Parameters, '{param$Name}' := f)
         })
       },
-      .pivot_wide = function(param) {
-        pivot_col <- tidyselect::eval_select(tidyselect::last_col(1), param)
-        non_pivot_cols <- tidyselect::eval_select(tidyselect::everything(), param, exclude = c('param_value', names(pivot_col)))
-        pwide <-
-          param |>
-          tidyr::pivot_wider(
-            values_from = param_value,
-            names_from = tidyselect::any_of(names(pivot_col))
-          )
-        ats <- attributes(pwide)
-        ats[['pivot_col']] <- pivot_col
-        ats[['non_pivot_cols']] <- non_pivot_cols
-        attributes(pwide) <- ats
-        pwide
-      },
-      .pivot_long = function(param) {
-        param |>
-        tidyr::pivot_longer(
-          cols = -tidyselect::all_of(names(attr(param, 'non_pivot_cols'))),
-          names_to = names(attr(param, 'pivot_col')),
-          values_to = 'param_value'
-        )
-      },
+      .pivot_wide = pivot_wide_impl,
+      .pivot_long = pivot_long_impl,
       .get_run_progress = function(model, run) {
         safe_status <- purrr::possibly(\(m, r) {
           get_model_run_status(m, r)$Progress |>

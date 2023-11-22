@@ -7,6 +7,8 @@
 #'
 #' @return An `OncoSimXModelRun` instance.
 #'
+#' @include Utils.R
+#'
 #' @export
 load_model_run <- function(model, run) {
   runs <- get_runs(model)
@@ -44,6 +46,12 @@ OncoSimXModelRun <-
       #' @field RunMetadata Run metadata.
       RunMetadata = NULL,
 
+      #' @field Parameters Run parameters.
+      Parameters = rlang::env(),
+
+      #' @field Tables Run tables
+      Tables = rlang::env(),
+
       #' @field Type Object type (used for `print()`).
       Type = 'ModelRun',
 
@@ -57,6 +65,7 @@ OncoSimXModelRun <-
         private$.set_run(model, run)
         private$.set_run_metadata()
         private$.load_table_bindings()
+        private$.load_run_param_bindings()
       },
 
       #' @description
@@ -156,15 +165,28 @@ OncoSimXModelRun <-
             table_name <- table$Name
             self$get_table(table_name)
           }
-          rlang::env_bind_active(self, '{table$Name}' := f)
+          rlang::env_bind_active(self$Tables, '{table$Name}' := f)
         })
-      }
+      },
+      .load_run_param_bindings = function() {
+        purrr::walk(private$.run$Param, \(param) {
+          f <- function() {
+            param_name <- param$Name
+            get_run_param_csv(self$ModelDigest, self$RunDigest, param_name) |>
+              private$.pivot_wide()
+          }
+          rlang::env_bind_active(self$Parameters, '{param$Name}' := f)
+        })
+      },
+      .pivot_wide = pivot_wide_impl,
+      .pivot_long = pivot_long_impl
     ),
     active = list(
       #' @field RunStatusInfo Run status information.
       RunStatusInfo = function() {
         get_model_run_status(self$ModelDigest, self$RunDigest)
       },
+
       #' @field RunStatus Run status.
       RunStatus = function() {
         get_model_run_status(self$ModelDigest, self$RunDigest)$Status
