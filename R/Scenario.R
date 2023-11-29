@@ -12,13 +12,27 @@ create_scenario <- function(model, name, base = NULL) {
   if (name %in% existing_scenarios) {
     rlang::abort('Scenario name already in use, choose a different name.')
   }
+
+  is_model_name <- model %in% get_models()$Name
+
   body <- list(
-    ModelName = model,
+    ModelName = if (is_model_name) model else get_digest_model(model),
+    ModelDigest = if (!is_model_name) model else get_model_digests(model)[[1]],
     Name = name
   )
   if (!rlang::is_null(base)) body$BaseRunDigest <- base
   create_workset(body)
   invisible()
+}
+
+get_model_digests <- function(name) {
+  models <- get_models()
+  models[models$Name == name, , drop = FALSE]$Digest
+}
+
+get_digest_model <- function(digest) {
+  models <- get_models()
+  models[models$Digest == digest, , drop = FALSE]$Name
 }
 
 #' @rdname get_workset
