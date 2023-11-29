@@ -88,10 +88,8 @@ with them. You can access public methods and fields using the standard
 ### Example
 
 Here we will work through a very simple example of creating a new
-scenario, extracting parameters to change, running the model, and
-extracting results. In this example we do not actually change any
-parameters, but users can edit the extracted CSV files and use
-`workset$upload_params()` to upload changed parameters.
+scenario, extracting parameters to change, changing parameters, running
+the model, and extracting results.
 
 ``` r
 library(oncosimx)
@@ -192,7 +190,7 @@ create_scenario('OncoSimX-breast', 'MyNewScenario', baserun_digest)
 ```
 
 We will load the new scenario, copy over the `ProvincesOfInterest`
-parameter from the base run and extract it to a CSV file for editing.
+parameter from the base run.
 
 ``` r
 my_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
@@ -216,11 +214,11 @@ alberta_only <-
 my_scenario$Parameters$ProvincesOfInterest <- alberta_only
 ```
 
-We will now run the model anyway. We will give it the name
-`'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for
-the model run to finish before returning to our R session. Note that
-model runs may take a long time when the number of simulation cases is
-large.
+We will now run the model and give it the name `'ExampleRun'`. We use
+the `wait = TRUE` flag to make sure we want for the model run to finish
+before returning to our R session. We use `progress = FALSE` to avoid
+printing progress bars in this document. Note that model runs may take a
+long time when the number of simulation cases is large.
 
 ``` r
 my_scenario$ReadOnly <- TRUE
@@ -246,8 +244,8 @@ example_run
 #> → RunDigest: fe83202b767917d818cca7cce7502b93
 ```
 
-We can now extract an output table from this model run using
-`$get_table()`.
+We can now extract an output table from the `Tables` field in the model
+run object (`example_run$Tables`).
 
 ``` r
 example_run$Tables$Breast_Cancer_Cases_Table
@@ -306,11 +304,12 @@ cost_bystage
 ```
 
 We can even plot this using `ggplot2`! Note that the number of
-simulation cases for `ExampleRun` is very low so the results are not to
-be trusted!
+simulation cases for `ExampleRun` is **very low** so the results are not
+to be trusted! This is only for demonstration purposes.
 
 ``` r
 cost_bystage |> 
+  filter(expr_name == 'Total_treatment_cost') |> 
   ggplot(aes(Stage, expr_value, fill = RunName)) +
   geom_col(position = position_dodge()) +
   labs(x = NULL, y = 'Breast Cancer Costs ($)') +
