@@ -115,7 +115,7 @@ OpenMppModelRunSet <-
       .tables = NULL,
       .set_runs = function(model, runs) {
         private$.runs <- vector('list', length(runs))
-        private$.runs <- purrr::map(runs, \(r) OncoSimXModelRun$new(model, r))
+        private$.runs <- purrr::map(runs, \(r) OpenMppModelRun$new(model, r))
         private$.runs <- rlang::set_names(private$.runs, self$RunNames)
       },
       .set_runs_metadata = function() {
