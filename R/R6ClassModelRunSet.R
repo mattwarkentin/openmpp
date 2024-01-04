@@ -1,17 +1,17 @@
-#' OncoSimX ModelRunSet  Class
+#' OpenM++ ModelRunSet Class
 #'
 #' @param model Model name or digest.
 #' @param runs Character vector of model run names, digests, or stamps.
 #'
 #' @details `load_runs()` is an alias for `load_model_runs()`.
 #'
-#' @return An `OncoSimXModelRunSet` instance.
+#' @return An `OpenMppModelRunSet` instance.
 #'
 #' @include Utils.R
 #'
 #' @export
 load_model_runs <- function(model, runs) {
-  OncoSimXModelRunSet$new(model, runs)
+  OpenMppModelRunSet$new(model, runs)
 }
 
 #' @rdname load_model_runs
@@ -20,9 +20,9 @@ load_runs <- load_model_runs
 
 #' @rdname load_model_runs
 #' @export
-OncoSimXModelRunSet <-
+OpenMppModelRunSet <-
   R6::R6Class(
-    classname = 'OncoSimXModelRunSet',
+    classname = 'OpenMppModelRunSet',
     cloneable = FALSE,
     portable = FALSE,
     lock_objects = FALSE,
@@ -65,7 +65,7 @@ OncoSimXModelRunSet <-
         digests <- glue::glue_collapse(self$RunDigests, sep = ', ')
         RunDigests = glue::glue('[{digests}]')
 
-        cli::cat_rule(glue::glue('OncoSimX {self$Type}'))
+        cli::cat_rule(glue::glue('OpenM++ {self$Type}'))
         cli::cli_alert(paste0('ModelName: ', self$ModelName))
         cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
         cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))

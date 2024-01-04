@@ -2,7 +2,7 @@
 % Please edit documentation in R/RunOptions.R
 \name{opts_run}
 \alias{opts_run}
-\alias{print.OpenMRunOpts}
+\alias{print.OpenMppRunOpts}
 \title{Run Configuration Options}
 \usage{
 opts_run(
@@ -13,7 +13,7 @@ opts_run(
   ...
 )
 
-\method{print}{OpenMRunOpts}(x, ...)
+\method{print}{OpenMppRunOpts}(x, ...)
 }
 \arguments{
 \item{SimulationCases}{Number of cases to simulate. Default is 5000.}

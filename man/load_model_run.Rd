@@ -3,8 +3,8 @@
 \name{load_model_run}
 \alias{load_model_run}
 \alias{load_run}
-\alias{OncoSimXModelRun}
-\title{OncoSimX ModelRun Class}
+\alias{OpenMppModelRun}
+\title{OpenM++ ModelRun Class}
 \usage{
 load_model_run(model, run)
 
@@ -17,16 +17,16 @@ load_run(model, run)
 stamp or task run name.}
 }
 \value{
-An \code{OncoSimXModelRun} instance.
+An \code{OpenMppModelRun} instance.
 }
 \description{
-OncoSimX ModelRun Class
+OpenM++ ModelRun Class
 }
 \details{
 \code{load_run()} is an alias for \code{load_model_run()}.
 }
 \section{Super class}{
-\code{\link[oncosimx:OncoSimXModel]{oncosimx::OncoSimXModel}} -> \code{OncoSimXModelRun}
+\code{\link[oncosimx:OpenMppModel]{oncosimx::OpenMppModel}} -> \code{OpenMppModelRun}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -59,22 +59,22 @@ OncoSimX ModelRun Class
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-OncoSimXModelRun-new}{\code{OncoSimXModelRun$new()}}
-\item \href{#method-OncoSimXModelRun-print}{\code{OncoSimXModelRun$print()}}
-\item \href{#method-OncoSimXModelRun-get_table}{\code{OncoSimXModelRun$get_table()}}
-\item \href{#method-OncoSimXModelRun-write_table}{\code{OncoSimXModelRun$write_table()}}
-\item \href{#method-OncoSimXModelRun-write_tables}{\code{OncoSimXModelRun$write_tables()}}
-\item \href{#method-OncoSimXModelRun-get_log}{\code{OncoSimXModelRun$get_log()}}
-\item \href{#method-OncoSimXModelRun-write_log}{\code{OncoSimXModelRun$write_log()}}
+\item \href{#method-OpenMppModelRun-new}{\code{OpenMppModelRun$new()}}
+\item \href{#method-OpenMppModelRun-print}{\code{OpenMppModelRun$print()}}
+\item \href{#method-OpenMppModelRun-get_table}{\code{OpenMppModelRun$get_table()}}
+\item \href{#method-OpenMppModelRun-write_table}{\code{OpenMppModelRun$write_table()}}
+\item \href{#method-OpenMppModelRun-write_tables}{\code{OpenMppModelRun$write_tables()}}
+\item \href{#method-OpenMppModelRun-get_log}{\code{OpenMppModelRun$get_log()}}
+\item \href{#method-OpenMppModelRun-write_log}{\code{OpenMppModelRun$write_log()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-new"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-new}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRun-new"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new OncoSimXModelRun object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$new(model, run)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$new(model, run)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -91,12 +91,12 @@ A new \code{OncoSimXModelRun} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-print"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-print}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRun-print"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-print}{}}}
 \subsection{Method \code{print()}}{
 Print a \code{OncoSimXModelRun} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$print(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$print(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -111,12 +111,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-get_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_table}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRun-get_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-get_table}{}}}
 \subsection{Method \code{get_table()}}{
 Retrieve a table.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_table(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$get_table(name)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -131,12 +131,12 @@ A \code{tibble}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-write_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-write_table}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRun-write_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-write_table}{}}}
 \subsection{Method \code{write_table()}}{
 Write an output table to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$write_table(name, file)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$write_table(name, file)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -153,12 +153,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-write_tables"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-write_tables}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRun-write_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-write_tables}{}}}
 \subsection{Method \code{write_tables()}}{
 Write all output tables to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$write_tables(dir)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$write_tables(dir)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -173,12 +173,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-get_log"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-get_log}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRun-get_log"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-get_log}{}}}
 \subsection{Method \code{get_log()}}{
 Get console log for model run.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$get_log()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$get_log()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
@@ -186,12 +186,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRun-write_log"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRun-write_log}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRun-write_log"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-write_log}{}}}
 \subsection{Method \code{write_log()}}{
 Write console log for model run to disk.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRun$write_log(dir)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$write_log(dir)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

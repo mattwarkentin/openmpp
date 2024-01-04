@@ -1,11 +1,11 @@
-#' OncoSimX ModelRun Class
+#' OpenM++ ModelRun Class
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
 #' @details `load_run()` is an alias for `load_model_run()`.
 #'
-#' @return An `OncoSimXModelRun` instance.
+#' @return An `OpenMppModelRun` instance.
 #'
 #' @include Utils.R
 #'
@@ -16,7 +16,7 @@ load_model_run <- function(model, run) {
   if (!(run %in% valid_runs)) {
     rlang::abort(glue::glue('Model run "{run}" does not exist for model "{model}".'))
   }
-  OncoSimXModelRun$new(model, run)
+  OpenMppModelRun$new(model, run)
 }
 
 #' @rdname load_model_run
@@ -25,10 +25,10 @@ load_run <- load_model_run
 
 #' @rdname load_model_run
 #' @export
-OncoSimXModelRun <-
+OpenMppModelRun <-
   R6::R6Class(
-    classname = 'OncoSimXModelRun',
-    inherit = OncoSimXModel,
+    classname = 'OpenMppModelRun',
+    inherit = OpenMppModel,
     cloneable = FALSE,
     portable = FALSE,
     lock_objects = FALSE,

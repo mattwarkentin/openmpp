@@ -3,8 +3,8 @@
 \name{load_workset}
 \alias{load_workset}
 \alias{load_scenario}
-\alias{OncoSimXWorkset}
-\title{OncoSimX Workset Class}
+\alias{OpenMppWorkset}
+\title{OpenM++ Workset Class}
 \usage{
 load_workset(model, set)
 
@@ -16,16 +16,16 @@ load_scenario(model, set)
 \item{set}{Name of workset (input set of model parameters).}
 }
 \value{
-An \code{OncoSimXWorkset} instance.
+An \code{OpenMppWorkset} instance.
 }
 \description{
-OncoSimX Workset Class
+OpenM++ Workset Class
 }
 \details{
 \code{load_scenario()} is an alias for \code{load_workset()}.
 }
 \section{Super class}{
-\code{\link[oncosimx:OncoSimXModel]{oncosimx::OncoSimXModel}} -> \code{OncoSimXWorkset}
+\code{\link[oncosimx:OpenMppModel]{oncosimx::OpenMppModel}} -> \code{OpenMppWorkset}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -52,24 +52,24 @@ OncoSimX Workset Class
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-OncoSimXWorkset-new}{\code{OncoSimXWorkset$new()}}
-\item \href{#method-OncoSimXWorkset-print}{\code{OncoSimXWorkset$print()}}
-\item \href{#method-OncoSimXWorkset-set_base_digest}{\code{OncoSimXWorkset$set_base_digest()}}
-\item \href{#method-OncoSimXWorkset-delete_base_digest}{\code{OncoSimXWorkset$delete_base_digest()}}
-\item \href{#method-OncoSimXWorkset-copy_params}{\code{OncoSimXWorkset$copy_params()}}
-\item \href{#method-OncoSimXWorkset-delete_params}{\code{OncoSimXWorkset$delete_params()}}
-\item \href{#method-OncoSimXWorkset-get_param}{\code{OncoSimXWorkset$get_param()}}
-\item \href{#method-OncoSimXWorkset-set_param}{\code{OncoSimXWorkset$set_param()}}
-\item \href{#method-OncoSimXWorkset-run}{\code{OncoSimXWorkset$run()}}
+\item \href{#method-OpenMppWorkset-new}{\code{OpenMppWorkset$new()}}
+\item \href{#method-OpenMppWorkset-print}{\code{OpenMppWorkset$print()}}
+\item \href{#method-OpenMppWorkset-set_base_digest}{\code{OpenMppWorkset$set_base_digest()}}
+\item \href{#method-OpenMppWorkset-delete_base_digest}{\code{OpenMppWorkset$delete_base_digest()}}
+\item \href{#method-OpenMppWorkset-copy_params}{\code{OpenMppWorkset$copy_params()}}
+\item \href{#method-OpenMppWorkset-delete_params}{\code{OpenMppWorkset$delete_params()}}
+\item \href{#method-OpenMppWorkset-get_param}{\code{OpenMppWorkset$get_param()}}
+\item \href{#method-OpenMppWorkset-set_param}{\code{OpenMppWorkset$set_param()}}
+\item \href{#method-OpenMppWorkset-run}{\code{OpenMppWorkset$run()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-new"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-new}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-new"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new OncoSimXWorkset object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$new(model, set)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$new(model, set)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -86,12 +86,12 @@ A new \code{OncoSimXWorkset} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-print"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-print}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-print"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-print}{}}}
 \subsection{Method \code{print()}}{
 Print a \code{OncoSimXWorkset} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$print(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$print(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -106,12 +106,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-set_base_digest"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-set_base_digest}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-set_base_digest"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-set_base_digest}{}}}
 \subsection{Method \code{set_base_digest()}}{
 Set the base run digest.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$set_base_digest(base)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$set_base_digest(base)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -126,12 +126,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-delete_base_digest"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-delete_base_digest}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-delete_base_digest"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-delete_base_digest}{}}}
 \subsection{Method \code{delete_base_digest()}}{
 Delete the base run digest.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$delete_base_digest()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$delete_base_digest()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
@@ -139,12 +139,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-copy_params"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-copy_params}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-copy_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-copy_params}{}}}
 \subsection{Method \code{copy_params()}}{
 Copy parameters from a base scenario.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$copy_params(names)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$copy_params(names)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -159,12 +159,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-delete_params"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-delete_params}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-delete_params"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-delete_params}{}}}
 \subsection{Method \code{delete_params()}}{
 Delete parameters from scenario.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$delete_params(names)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$delete_params(names)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -179,12 +179,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-get_param"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-get_param}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-get_param"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-get_param}{}}}
 \subsection{Method \code{get_param()}}{
 Retrieve a parameter.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$get_param(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$get_param(name)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -199,12 +199,12 @@ A \code{tibble}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-set_param"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-set_param}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-set_param"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-set_param}{}}}
 \subsection{Method \code{set_param()}}{
 Set a parameter.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$set_param(name, data)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$set_param(name, data)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -221,12 +221,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXWorkset-run"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXWorkset-run}{}}}
+\if{html}{\out{<a id="method-OpenMppWorkset-run"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppWorkset-run}{}}}
 \subsection{Method \code{run()}}{
 Run scenario
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXWorkset$run(
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$run(
   name,
   opts = opts_run(),
   wait = FALSE,

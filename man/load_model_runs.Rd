@@ -3,8 +3,8 @@
 \name{load_model_runs}
 \alias{load_model_runs}
 \alias{load_runs}
-\alias{OncoSimXModelRunSet}
-\title{OncoSimX ModelRunSet  Class}
+\alias{OpenMppModelRunSet}
+\title{OpenM++ ModelRunSet Class}
 \usage{
 load_model_runs(model, runs)
 
@@ -16,10 +16,10 @@ load_runs(model, runs)
 \item{runs}{Character vector of model run names, digests, or stamps.}
 }
 \value{
-An \code{OncoSimXModelRunSet} instance.
+An \code{OpenMppModelRunSet} instance.
 }
 \description{
-OncoSimX ModelRunSet  Class
+OpenM++ ModelRunSet Class
 }
 \details{
 \code{load_runs()} is an alias for \code{load_model_runs()}.
@@ -57,20 +57,20 @@ OncoSimX ModelRunSet  Class
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-OncoSimXModelRunSet-new}{\code{OncoSimXModelRunSet$new()}}
-\item \href{#method-OncoSimXModelRunSet-print}{\code{OncoSimXModelRunSet$print()}}
-\item \href{#method-OncoSimXModelRunSet-get_table}{\code{OncoSimXModelRunSet$get_table()}}
-\item \href{#method-OncoSimXModelRunSet-write_table}{\code{OncoSimXModelRunSet$write_table()}}
-\item \href{#method-OncoSimXModelRunSet-write_tables}{\code{OncoSimXModelRunSet$write_tables()}}
+\item \href{#method-OpenMppModelRunSet-new}{\code{OpenMppModelRunSet$new()}}
+\item \href{#method-OpenMppModelRunSet-print}{\code{OpenMppModelRunSet$print()}}
+\item \href{#method-OpenMppModelRunSet-get_table}{\code{OpenMppModelRunSet$get_table()}}
+\item \href{#method-OpenMppModelRunSet-write_table}{\code{OpenMppModelRunSet$write_table()}}
+\item \href{#method-OpenMppModelRunSet-write_tables}{\code{OpenMppModelRunSet$write_tables()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-new"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-new}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRunSet-new"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRunSet-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new OncoSimXModelRunSet object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$new(model, runs)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRunSet$new(model, runs)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -87,12 +87,12 @@ A new \code{OncoSimXModelSet} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-print"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-print}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRunSet-print"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRunSet-print}{}}}
 \subsection{Method \code{print()}}{
 Print a \code{OncoSimXModelRunSet} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$print(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRunSet$print(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -107,12 +107,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-get_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-get_table}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRunSet-get_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRunSet-get_table}{}}}
 \subsection{Method \code{get_table()}}{
 Retrieve a table.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$get_table(name)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRunSet$get_table(name)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -127,12 +127,12 @@ A \code{tibble}.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-write_table"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-write_table}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRunSet-write_table"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRunSet-write_table}{}}}
 \subsection{Method \code{write_table()}}{
 Write an output table to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$write_table(name, file)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRunSet$write_table(name, file)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -149,12 +149,12 @@ Self, invisibly.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModelRunSet-write_tables"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModelRunSet-write_tables}{}}}
+\if{html}{\out{<a id="method-OpenMppModelRunSet-write_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRunSet-write_tables}{}}}
 \subsection{Method \code{write_tables()}}{
 Write all output tables to disk (CSV).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModelRunSet$write_tables(dir)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRunSet$write_tables(dir)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

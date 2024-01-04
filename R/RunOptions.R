@@ -41,13 +41,14 @@ opts_run <- function(
       ),
       Tables = Tables
     ),
-    class = c('OpenMRunOpts', 'list')
+    class = c('OpenMppRunOpts', 'list')
   )
 }
 
 #' @rdname opts_run
 #' @param x Object to print.
 #' @export
-print.OpenMRunOpts = function(x, ...) {
+print.OpenMppRunOpts = function(x, ...) {
+  cli::cat_line('OpenM++ Run Options')
   print(jsonlite::toJSON(x, pretty = TRUE, auto_unbox = TRUE))
 }

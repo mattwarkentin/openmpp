@@ -2,8 +2,8 @@
 % Please edit documentation in R/R6ClassModel.R
 \name{load_model}
 \alias{load_model}
-\alias{OncoSimXModel}
-\title{OncoSimX Model Class}
+\alias{OpenMppModel}
+\title{OpenM++ Model Class}
 \usage{
 load_model(model)
 }
@@ -11,10 +11,10 @@ load_model(model)
 \item{model}{Model digest or model name.}
 }
 \value{
-An \code{OncoSimXModel} instance.
+An \code{OpenMppModel} instance.
 }
 \description{
-OncoSimX Model Class
+OpenM++ Model Class
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -51,17 +51,17 @@ OncoSimX Model Class
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-OncoSimXModel-new}{\code{OncoSimXModel$new()}}
-\item \href{#method-OncoSimXModel-print}{\code{OncoSimXModel$print()}}
+\item \href{#method-OpenMppModel-new}{\code{OpenMppModel$new()}}
+\item \href{#method-OpenMppModel-print}{\code{OpenMppModel$print()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModel-new"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModel-new}{}}}
+\if{html}{\out{<a id="method-OpenMppModel-new"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModel-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new OncoSimXModel object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModel$new(model)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModel$new(model)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -76,12 +76,12 @@ A new \code{OncoSimXModel} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-OncoSimXModel-print"></a>}}
-\if{latex}{\out{\hypertarget{method-OncoSimXModel-print}{}}}
+\if{html}{\out{<a id="method-OpenMppModel-print"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModel-print}{}}}
 \subsection{Method \code{print()}}{
 Print a OncoSimXModel object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{OncoSimXModel$print(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModel$print(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

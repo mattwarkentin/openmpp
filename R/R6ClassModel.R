@@ -1,11 +1,11 @@
-#' OncoSimX Model Class
+#' OpenM++ Model Class
 #'
 #' @inheritParams get_model
 #'
 #' @importFrom R6 R6Class
 #' @import cli purrr fs zip
 #'
-#' @return An `OncoSimXModel` instance.
+#' @return An `OpenMppModel` instance.
 #'
 #' @include Utils.R
 #'
@@ -16,14 +16,14 @@ load_model <- function(model) {
   if (!(model %in% valid_ids)) {
     rlang::abort(glue::glue('Model "{model}" does not exist.'))
   }
-  OncoSimXModel$new(model)
+  OpenMppModel$new(model)
 }
 
 #' @rdname load_model
 #' @export
-OncoSimXModel <-
+OpenMppModel <-
   R6::R6Class(
-    classname = 'OncoSimXModel',
+    classname = 'OpenMppModel',
     cloneable = FALSE,
     portable = FALSE,
     public = list(
@@ -64,7 +64,7 @@ OncoSimXModel <-
       #' @param ... Not currently used.
       #' @return  Self, invisibly.
       print = function(...) {
-        cli::cat_rule(glue::glue('OncoSimX {self$Type}'))
+        cli::cat_rule(glue::glue('OpenM++ {self$Type}'))
         cli::cli_alert(paste0('ModelName: ', self$ModelName))
         cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
         cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))

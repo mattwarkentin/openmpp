@@ -1,11 +1,11 @@
-#' OncoSimX Workset Class
+#' OpenM++ Workset Class
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
 #' @import tidyr tidyselect
 #'
-#' @return An `OncoSimXWorkset` instance.
+#' @return An `OpenMppWorkset` instance.
 #'
 #' @details `load_scenario()` is an alias for `load_workset()`.
 #'
@@ -16,7 +16,7 @@ load_workset <- function(model, set) {
   if (!(set %in% get_worksets(model)$Name)) {
     rlang::abort(glue::glue('Workset "{set}" does not exist for model "{model}".'))
   }
-  OncoSimXWorkset$new(model, set)
+  OpenMppWorkset$new(model, set)
 }
 
 #' @rdname load_workset
@@ -25,10 +25,10 @@ load_scenario <- load_workset
 
 #' @rdname load_workset
 #' @export
-OncoSimXWorkset <-
+OpenMppWorkset <-
   R6::R6Class(
-    classname = 'OncoSimXWorkset',
-    inherit = OncoSimXModel,
+    classname = 'OpenMppWorkset',
+    inherit = OpenMppModel,
     cloneable = FALSE,
     portable = FALSE,
     lock_objects = FALSE,
@@ -216,7 +216,7 @@ OncoSimXWorkset <-
           rlang::abort('Workset must be read-only to initiate a run.')
         }
 
-        if (!inherits(opts, 'OpenMRunOpts')) {
+        if (!inherits(opts, 'OpenMppRunOpts')) {
           rlang::abort('`opts` argument must be an `oncosimx::opts_run()` object')
         }
 
