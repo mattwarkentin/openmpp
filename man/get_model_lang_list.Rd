@@ -5,7 +5,7 @@
 \alias{get_model_word_list}
 \alias{get_model_profile}
 \alias{get_model_profile_list}
-\title{OncoSimX Model Extras}
+\title{OpenM++ Model Extras}
 \usage{
 get_model_lang_list(model)
 

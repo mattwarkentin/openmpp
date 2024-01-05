@@ -4,9 +4,9 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Matthew T.", "Warkentin", , "matthew.warkentin@ucalgary.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8730-3511"))
-Description: This package provides a programmatic interface to the OncoSimX
-  web-based platform. OncoSim is a free, web-based simulation tool that
-  can be used to evaluate cancer control strategies.
+Description: This package provides a programmatic interface to the OpenM++
+  microsimulation platform and OncoSimX. OncoSimX is a free, web-based 
+  simulation tool that can be used to evaluate cancer control strategies.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

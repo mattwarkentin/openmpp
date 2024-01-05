@@ -67,7 +67,7 @@ OpenM++ Workset Class
 \if{html}{\out{<a id="method-OpenMppWorkset-new"></a>}}
 \if{latex}{\out{\hypertarget{method-OpenMppWorkset-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new OncoSimXWorkset object.
+Create a new OpenMppWorkset object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$new(model, set)}\if{html}{\out{</div>}}
 }
@@ -82,14 +82,14 @@ Create a new OncoSimXWorkset object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new \code{OncoSimXWorkset} object.
+A new \code{OpenMppWorkset} object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OpenMppWorkset-print"></a>}}
 \if{latex}{\out{\hypertarget{method-OpenMppWorkset-print}{}}}
 \subsection{Method \code{print()}}{
-Print a \code{OncoSimXWorkset} object.
+Print a \code{OpenMppWorkset} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$print(...)}\if{html}{\out{</div>}}
 }

@@ -21,7 +21,7 @@
 \alias{merge_param_workset_to_workset}
 \alias{upload_workset_params}
 \alias{delete_scenario}
-\title{OncoSimX Model Worksets}
+\title{OpenM++ Model Worksets}
 \usage{
 get_workset(model, set)
 

@@ -13,7 +13,7 @@
 \alias{get_model_run_status_compl}
 \alias{delete_model_run}
 \alias{delete_run}
-\title{OncoSimX Model Run}
+\title{OpenM++ Model Run}
 \usage{
 get_model_run(model, run)
 

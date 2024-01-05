@@ -3,7 +3,7 @@
 \name{get_run_microdata}
 \alias{get_run_microdata}
 \alias{get_run_microdata_csv}
-\title{OncoSimX Microdata}
+\title{OpenM++ Microdata}
 \usage{
 get_run_microdata(model, run, name, data)
 

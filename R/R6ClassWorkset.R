@@ -46,10 +46,10 @@ OpenMppWorkset <-
       Parameters = rlang::env(),
 
       #' @description
-      #' Create a new OncoSimXWorkset object.
+      #' Create a new OpenMppWorkset object.
       #' @param model Model digest or name.
       #' @param set Workset name.
-      #' @return A new `OncoSimXWorkset` object.
+      #' @return A new `OpenMppWorkset` object.
       initialize = function(model, set) {
         super$initialize(model)
         private$.set_workset(model, set)
@@ -58,7 +58,7 @@ OpenMppWorkset <-
       },
 
       #' @description
-      #' Print a `OncoSimXWorkset` object.
+      #' Print a `OpenMppWorkset` object.
       #' @param ... Not currently used.
       #' @return Self, invisibly.
       print = function(...) {

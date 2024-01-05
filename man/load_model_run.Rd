@@ -72,7 +72,7 @@ OpenM++ ModelRun Class
 \if{html}{\out{<a id="method-OpenMppModelRun-new"></a>}}
 \if{latex}{\out{\hypertarget{method-OpenMppModelRun-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new OncoSimXModelRun object.
+Create a new OpenMppModelRun object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$new(model, run)}\if{html}{\out{</div>}}
 }
@@ -87,14 +87,14 @@ Create a new OncoSimXModelRun object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new \code{OncoSimXModelRun} object.
+A new \code{OpenMppModelRun} object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OpenMppModelRun-print"></a>}}
 \if{latex}{\out{\hypertarget{method-OpenMppModelRun-print}{}}}
 \subsection{Method \code{print()}}{
-Print a \code{OncoSimXModelRun} object.
+Print a \code{OpenMppModelRun} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$print(...)}\if{html}{\out{</div>}}
 }

@@ -1,4 +1,4 @@
-#' OncoSimX Model Profile
+#' OpenM++ Model Profile
 #'
 #' Functions for creating, modifying, and deleting profiles and profile options.
 #'

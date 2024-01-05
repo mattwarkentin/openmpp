@@ -59,7 +59,7 @@ OpenM++ Model Class
 \if{html}{\out{<a id="method-OpenMppModel-new"></a>}}
 \if{latex}{\out{\hypertarget{method-OpenMppModel-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new OncoSimXModel object.
+Create a new OpenMppModel object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppModel$new(model)}\if{html}{\out{</div>}}
 }
@@ -72,14 +72,14 @@ Create a new OncoSimXModel object.
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new \code{OncoSimXModel} object.
+A new \code{OpenMppModel} object.
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-OpenMppModel-print"></a>}}
 \if{latex}{\out{\hypertarget{method-OpenMppModel-print}{}}}
 \subsection{Method \code{print()}}{
-Print a OncoSimXModel object.
+Print a OpenMppModel object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppModel$print(...)}\if{html}{\out{</div>}}
 }

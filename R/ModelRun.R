@@ -1,4 +1,4 @@
-#' OncoSimX Model Run
+#' OpenM++ Model Run
 #'
 #' Functions to retrieve and delete model runs.
 #'

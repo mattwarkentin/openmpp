@@ -1,4 +1,4 @@
-#' OncoSimX Model Worksets
+#' OpenM++ Model Worksets
 #'
 #' Functions for creating, copying, merging, retrieving, and deleting
 #'   worksets.

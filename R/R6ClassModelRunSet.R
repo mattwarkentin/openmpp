@@ -44,10 +44,10 @@ OpenMppModelRunSet <-
       Tables = rlang::env(),
 
       #' @description
-      #' Create a new OncoSimXModelRunSet object.
+      #' Create a new OpenMppModelRunSet object.
       #' @param model Model digest or name.
       #' @param runs Run digests, run stamps, or run names.
-      #' @return A new `OncoSimXModelSet` object.
+      #' @return A new `OpenMppModelRunSet` object.
       initialize = function(model, runs) {
         private$.set_runs(model, runs)
         private$.set_runs_metadata()
@@ -55,7 +55,7 @@ OpenMppModelRunSet <-
       },
 
       #' @description
-      #' Print a `OncoSimXModelRunSet` object.
+      #' Print a `OpenMppModelRunSet` object.
       #' @param ... Not currently used.
       #' @return  Self, invisibly.
       print = function(...) {

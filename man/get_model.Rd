@@ -8,7 +8,7 @@
 \alias{get_model_run_state}
 \alias{get_run_state}
 \alias{stop_model_run}
-\title{OncoSimX Models}
+\title{OpenM++ Models}
 \usage{
 get_model(model)
 

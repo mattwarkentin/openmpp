@@ -14,7 +14,7 @@
 \alias{create_task}
 \alias{update_task}
 \alias{delete_task}
-\title{OncoSimX Model Task}
+\title{OpenM++ Model Task}
 \usage{
 get_model_task(model, task)
 

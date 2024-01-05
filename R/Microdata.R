@@ -1,4 +1,4 @@
-#' OncoSimX Microdata
+#' OpenM++ Microdata
 #'
 #' Functions for retrieving microdata from model runs.
 #'

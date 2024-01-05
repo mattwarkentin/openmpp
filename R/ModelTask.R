@@ -1,4 +1,4 @@
-#' OncoSimX Model Task
+#' OpenM++ Model Task
 #'
 #' Functions for getting creating, updating, retrieving, and deleting
 #'   model tasks.

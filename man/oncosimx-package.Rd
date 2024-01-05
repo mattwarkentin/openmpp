@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-This package provides a programmatic interface to the OncoSimX web-based platform. OncoSim is a free, web-based simulation tool that can be used to evaluate cancer control strategies.
+This package provides a programmatic interface to the OpenM++ microsimulation platform and OncoSimX. OncoSimX is a free, web-based simulation tool that can be used to evaluate cancer control strategies.
 }
 \seealso{
 Useful links:

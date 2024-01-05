@@ -5,7 +5,7 @@
 \alias{delete_model_profile}
 \alias{set_model_profile_opt}
 \alias{delete_model_profile_opt}
-\title{OncoSimX Model Profile}
+\title{OpenM++ Model Profile}
 \usage{
 touch_model_profile(model, data)
 

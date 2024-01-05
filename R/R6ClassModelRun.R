@@ -56,10 +56,10 @@ OpenMppModelRun <-
       Type = 'ModelRun',
 
       #' @description
-      #' Create a new OncoSimXModelRun object.
+      #' Create a new OpenMppModelRun object.
       #' @param model Model digest or name.
       #' @param run Run digest, run stamp, or run name.
-      #' @return A new `OncoSimXModelRun` object.
+      #' @return A new `OpenMppModelRun` object.
       initialize = function(model, run) {
         super$initialize(model)
         private$.set_run(model, run)
@@ -69,7 +69,7 @@ OpenMppModelRun <-
       },
 
       #' @description
-      #' Print a `OncoSimXModelRun` object.
+      #' Print a `OpenMppModelRun` object.
       #' @param ... Not currently used.
       #' @return  Self, invisibly.
       print = function(...) {

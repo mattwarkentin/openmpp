@@ -49,9 +49,9 @@ OpenMppModel <-
       TablesInfo = NULL,
 
       #' @description
-      #' Create a new OncoSimXModel object.
+      #' Create a new OpenMppModel object.
       #' @param model Model digest or name.
-      #' @return A new `OncoSimXModel` object.
+      #' @return A new `OpenMppModel` object.
       initialize = function(model) {
         private$.set_model(model)
         private$.set_model_metadata()
@@ -60,7 +60,7 @@ OpenMppModel <-
       },
 
       #' @description
-      #' Print a OncoSimXModel object.
+      #' Print a OpenMppModel object.
       #' @param ... Not currently used.
       #' @return  Self, invisibly.
       print = function(...) {
