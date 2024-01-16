@@ -1,12 +1,11 @@
-Package: oncosimx
-Title: Programmatic interface to the OncoSimX Web Platform
+Package: openmpp
+Title: Programmatic interface to OpenM++
 Version: 0.0.0.9000
 Authors@R: 
     person("Matthew T.", "Warkentin", , "matthew.warkentin@ucalgary.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8730-3511"))
 Description: This package provides a programmatic interface to the OpenM++
-  microsimulation platform and OncoSimX. OncoSimX is a free, web-based 
-  simulation tool that can be used to evaluate cancer control strategies.
+  microsimulation platform.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -16,7 +15,6 @@ Depends:
 Imports: 
     cli,
     curl,
-    fs,
     glue,
     httr2,
     jsonlite,
@@ -24,22 +22,21 @@ Imports:
     R6,
     readr,
     rlang,
-    tibblify,
+    tibble,
     tidyr,
-    tidyselect,
-    zip
-URL: https://github.com/oncology-outcomes/oncosimx,
-    https://oncology-outcomes.github.io/oncosimx/
-BugReports: https://github.com/oncology-outcomes/oncosimx/issues
+    tidyselect
+URL: https://github.com/oncology-outcomes/openmpp,
+    https://oncology-outcomes.github.io/openmpp/
+BugReports: https://github.com/oncology-outcomes/openmpp/issues
 Collate: 
+    'APIConnections.R'
     'Admin.R'
     'Downloads.R'
-    'Microdata.R'
-    'Model.R'
     'ModelExtras.R'
+    'ModelMetadata.R'
     'ModelProfile.R'
-    'ModelRun.R'
-    'ModelTask.R'
+    'ModelRuns.R'
+    'ModelTasks.R'
     'ModelWorkset.R'
     'OutputTables.R'
     'Parameters.R'
@@ -48,9 +45,12 @@ Collate:
     'R6ClassModelRun.R'
     'R6ClassModelRunSet.R'
     'R6ClassWorkset.R'
+    'RunMicrodata.R'
+    'RunModels.R'
     'RunOptions.R'
     'Scenario.R'
     'Service.R'
     'Uploads.R'
     'User.R'
-    'oncosimx-package.R'
+    'openmpp-package.R'
+    'zzz.R'
