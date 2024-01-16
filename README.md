@@ -1,46 +1,75 @@
 
-# oncosimx <a href="https://oncology-outcomes.github.io/oncosimx/"><img src="man/figures/logo.png" align="right" height="104" alt="oncosimx website" /></a>
+# openmpp
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/oncology-outcomes/oncosimx/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/oncology-outcomes/oncosimx/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of `oncosimx` is to provide a programmatic interface to the
-OncoSimX web-based platform directly from R to simplify creating
-scenarios, running models, and gathering results for further processing.
+The goal of `openmpp` is to provide a programmatic interface to the
+OpenM++ API directly from R to simplify creating scenarios, running
+models, and gathering results for further processing.
 
 ## Installation
 
-You can install the development version of `oncosimx` from
+You can install the development version of `openmpp` from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("oncology-outcomes/oncosimx")
+remotes::install_github("oncology-outcomes/openmpp")
 ```
 
 ## Usage
 
-The `oncosimx` package contains many functions that provide access to
+The `openmpp` package contains many functions that provide access to
 nearly every OpenM++ API endpoint. However, users will typically only
 use a smaller set of functions for most common tasks.
 
 ### User Authentication
 
-Each user is required to set their local host address for the OpenM++
-API in their global or project-specific `.Renviron` file in order for
-the `oncosimx` package to communicate with the API on behalf of the
-user. To do this, set the `ONCOSIMX_HOST` environment variable in your
-`.Renviron` file as follows:
+Each user is required to set their local or remote host address (i.e.,
+URL) for the OpenM++ API in their global or project-specific `.Renviron`
+file in order for the `openmpp` package to authenticate and communicate
+with the API on behalf of the user.
 
-    ONCOSIMX_HOST=http://localhost:XXXX
+For an API running locally, set the following environment variable in
+your `.Renviron` file:
+
+    OPENMPP_LOCAL_URL=http://localhost:XXXX
 
 Where `XXXX` is the four digits corresponding to your specific local
 host address. If you aren’t sure of your host address, you may contact
 the OpenM++ administrator to retrieve this information.
+
+For an API running remotely, set the following environment variables in
+your `.Renviron` file:
+
+    OPENMPP_REMOTE_URL=...
+    OPENMPP_REMOTE_USER=...
+    OPENMPP_REMOTE_PWD=...
+
+Note that the URL, user name, and password should be kept confidential
+and not committed into version control (e.g., git).
+
+Once the environment variables are set, users may register a local or
+remote API connection in their R scripts.
+
+``` r
+library(openmpp)
+use_OpenMpp_local()
+```
+
+Or,
+
+``` r
+library(openmpp)
+use_OpenMpp_remote()
+```
+
+see `?use_OpenMpp_local` or `?use_OpenMpp_remote` for more information.
 
 ### Main Functions
 
@@ -74,9 +103,9 @@ the OpenM++ administrator to retrieve this information.
 
 ### Models, Scenarios, Runs, and RunSets
 
-There are 4 main classes you will work with when using the `oncosimx`
-package: `OncoSimXModel`, `OncoSimXWorkset`, `OncoSimXModelRun`, and
-`OncoSimXModelRunSet`. Each of these are `R6` classes. `R6` is an
+There are 4 main classes you will work with when using the `openmpp`
+package: `OpenMppModel`, `OpenMppWorkset`, `OpenMppModelRun`, and
+`OpenMppModelRunSet`. Each of these are `R6` classes. `R6` is an
 encapsulated object-oriented programming system for R. Use the
 `load_*()` set of functions to load a model, workset/scenario, model
 run, or set of model runs into memory.
@@ -92,9 +121,11 @@ scenario, extracting parameters to change, changing parameters, running
 the model, and extracting results.
 
 ``` r
-library(oncosimx)
-library(tidyverse)
+library(openmpp)
+library(dplyr)
 library(ggplot2)
+
+use_OpenMpp_remote()
 ```
 
 Let’s see what models are available:
@@ -120,98 +151,94 @@ get_models()
 We can now see what worksets and model runs exist for a given model.
 
 ``` r
-get_worksets('OncoSimX-breast')
-#> # A tibble: 2 × 11
-#>   ModelName     ModelDigest ModelVersion ModelCreateDateTime Name  BaseRunDigest
-#>   <chr>         <chr>       <chr>        <chr>               <chr> <chr>        
-#> 1 OncoSimX-bre… 742b985b8c… 3.6.2.5      2023-11-03 18:55:1… Defa… ""           
-#> 2 OncoSimX-bre… 742b985b8c… 3.6.2.5      2023-11-03 18:55:1… MyNe… "9f9890c641e…
-#> # ℹ 5 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
-#> #   IsCleanBaseRun <lgl>, Txt <list<tibble[,3]>>, Param <list>
+get_worksets('RiskPaths')
+#> # A tibble: 1 × 10
+#>   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest
+#>   <chr>     <chr>           <chr>        <chr>               <chr> <chr>        
+#> 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2022-03-07 23:23:3… Defa… ""           
+#> # ℹ 4 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
+#> #   IsCleanBaseRun <lgl>, Txt <list>
 ```
 
 ``` r
-get_runs('OncoSimX-breast')
-#> # A tibble: 2 × 21
-#>   ModelName       ModelDigest    ModelVersion ModelCreateDateTime Name  SubCount
-#>   <chr>           <chr>          <chr>        <chr>               <chr>    <int>
-#> 1 OncoSimX-breast 742b985b8c3b6… 3.6.2.5      2023-11-03 18:55:1… Defa…       12
-#> 2 OncoSimX-breast 742b985b8c3b6… 3.6.2.5      2023-11-03 18:55:1… Exam…       12
-#> # ℹ 15 more variables: SubStarted <int>, SubCompleted <int>,
+get_runs('RiskPaths')
+#> # A tibble: 2 × 15
+#>   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount
+#>   <chr>     <chr>                <chr>        <chr>               <chr>    <int>
+#> 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Risk…        1
+#> 2 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Exam…       12
+#> # ℹ 9 more variables: SubStarted <int>, SubCompleted <int>,
 #> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunId <int>,
-#> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>, Txt <list>,
-#> #   Opts <list>, Param <list>, Table <list>, Entity <list>, Progress <list>
+#> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>
 ```
 
-Now we can load the `OncoSimX-breast` model to inspect.
+Now we can load the `RiskPaths` model to inspect.
 
 ``` r
-breast <- load_model('OncoSimX-breast')
-breast
-#> ── OncoSimX Model ──────────────────────────────────────────────────────────────
-#> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.5
-#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
+rp <- load_model('RiskPaths')
+rp
+#> ── OpenM++ Model ───────────────────────────────────────────────────────────────
+#> → ModelName: RiskPaths
+#> → ModelVersion: 3.0.0.0
+#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
 ```
 
-We will now load the `Default` set of input parameters for the Breast
+We will now load the `Default` set of input parameters for the RiskPaths
 model.
 
 ``` r
-breast_default <- load_scenario('OncoSimX-breast', 'Default')
-breast_default
-#> ── OncoSimX Workset ────────────────────────────────────────────────────────────
-#> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.5
-#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
+rp_default <- load_scenario('RiskPaths', 'Default')
+rp_default
+#> ── OpenM++ Workset ─────────────────────────────────────────────────────────────
+#> → ModelName: RiskPaths
+#> → ModelVersion: 3.0.0.0
+#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
 #> → WorksetName: Default
 #> → BaseRunDigest:
 ```
 
-Finally, we will load the base run for the Breast model.
+Finally, we will load the base run for the RiskPaths model.
 
 ``` r
-baserun_digest <- breast$ModelRuns$RunDigest[[1]]
-breast_baserun <- load_run('OncoSimX-breast', baserun_digest)
-breast_baserun
-#> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
-#> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.5
-#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
-#> → RunName: Default_first_run_32M_cases_12_subs
-#> → RunDigest: 9f9890c641e0c43d5fd439591106f8fa
+baserun_digest <- rp$ModelRuns$RunDigest[[1]]
+rp_baserun <- load_run('RiskPaths', baserun_digest)
+rp_baserun
+#> ── OpenM++ ModelRun ────────────────────────────────────────────────────────────
+#> → ModelName: RiskPaths
+#> → ModelVersion: 3.0.0.0
+#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
+#> → RunName: RiskPaths_Default
+#> → RunDigest: 9a6bf761db1a7f27b91fc1d56c0e6d0e
 ```
 
 We will create a new scenario based on the parameters from the
-`Default_first_run_32M_cases_12_subs` model run.
+`RiskPaths_Default` model run.
 
 ``` r
-create_scenario('OncoSimX-breast', 'MyNewScenario', baserun_digest)
+create_scenario('RiskPaths', 'MyNewScenario', baserun_digest)
 ```
 
-We will load the new scenario, copy over the `ProvincesOfInterest`
+We will load the new scenario, copy over the `AgeBaselinePreg1`
 parameter from the base run.
 
 ``` r
-my_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
+my_scenario <- load_scenario('RiskPaths', 'MyNewScenario')
 ```
 
-Let’s only run the simulation for Alberta…
+Let’s reduce the fertility rate by 10% across all age groups…
 
 ``` r
-my_scenario$copy_params('ProvincesOfInterest')
+my_scenario$copy_params('AgeBaselinePreg1')
 ```
 
 ``` r
-alberta_only <- my_scenario$Parameters$ProvincesOfInterest
-alberta_only <- 
-  alberta_only |> 
-  mutate(
-    across(Newfoundland_and_Labrador:NT, \(x) FALSE),
-    Alberta = TRUE
-  )
+half_rate <- my_scenario$Parameters$AgeBaselinePreg1
 
-my_scenario$Parameters$ProvincesOfInterest <- alberta_only
+half_rate <-
+  half_rate |> 
+  mutate(across(-sub_id, \(x) x * 0.9))
+
+my_scenario$Parameters$AgeBaselinePreg1 <- half_rate
 ```
 
 We will now run the model and give it the name `'ExampleRun'`. We use
@@ -234,35 +261,31 @@ cases when performing a full model run.
 Now that our model run is complete, let’s load it into memory.
 
 ``` r
-example_run <- load_run('OncoSimX-breast', 'ExampleRun')
+example_run <- load_run('RiskPaths', 'ExampleRun')
 example_run
-#> ── OncoSimX ModelRun ───────────────────────────────────────────────────────────
-#> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.5
-#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
+#> ── OpenM++ ModelRun ────────────────────────────────────────────────────────────
+#> → ModelName: RiskPaths
+#> → ModelVersion: 3.0.0.0
+#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
 #> → RunName: ExampleRun
-#> → RunDigest: fe83202b767917d818cca7cce7502b93
+#> → RunDigest: db233133948da72e7ce831726ff73459
 ```
 
 We can now extract an output table from the `Tables` field in the model
 run object (`example_run$Tables`).
 
 ``` r
-example_run$Tables$Breast_Cancer_Cases_Table
-#> # A tibble: 8,177 × 4
-#>    expr_name                        Province                   Year expr_value
-#>    <chr>                            <chr>                     <dbl>      <dbl>
-#>  1 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2015          0
-#>  2 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2016          0
-#>  3 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2017          0
-#>  4 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2018          0
-#>  5 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2019          0
-#>  6 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2020          0
-#>  7 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2021          0
-#>  8 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2022          0
-#>  9 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2023          0
-#> 10 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2024          0
-#> # ℹ 8,167 more rows
+example_run$Tables$T06_BirthsByUnion
+#> # A tibble: 7 × 3
+#>   expr_name Dim0                   expr_value
+#>   <chr>     <chr>                       <dbl>
+#> 1 Expr0     US_NEVER_IN_UNION         1205.  
+#> 2 Expr0     US_FIRST_UNION_PERIOD1    2944.  
+#> 3 Expr0     US_FIRST_UNION_PERIOD2     333.  
+#> 4 Expr0     US_AFTER_FIRST_UNION        10.0 
+#> 5 Expr0     US_SECOND_UNION             72.0 
+#> 6 Expr0     US_AFTER_SECOND_UNION        1.00
+#> 7 Expr0     all                       4565.
 ```
 
 Great, we have created a new scenario, modified some parameters, ran the
@@ -270,14 +293,14 @@ model, and extracted output tables. In this last step, we will load
 multiple model runs into memory to compare them.
 
 ``` r
-breast_runs <- load_runs('OncoSimX-breast', breast$ModelRuns$RunDigest)
-breast_runs
-#> ── OncoSimX ModelRunSet ────────────────────────────────────────────────────────
-#> → ModelName: OncoSimX-breast
-#> → ModelVersion: 3.6.2.5
-#> → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f
-#> → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]
-#> → RunDigests: [9f9890c641e0c43d5fd439591106f8fa, fe83202b767917d818cca7cce7502b93]
+rp_runs <- load_runs('RiskPaths', rp$ModelRuns$RunDigest)
+rp_runs
+#> ── OpenM++ ModelRunSet ─────────────────────────────────────────────────────────
+#> → ModelName: RiskPaths
+#> → ModelVersion: 3.0.0.0
+#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
+#> → RunNames: [RiskPaths_Default, ExampleRun, ExampleRun]
+#> → RunDigests: [9a6bf761db1a7f27b91fc1d56c0e6d0e, db233133948da72e7ce831726ff73459, 890006eaf5fc25cd2d8c928a204c104d]
 ```
 
 We will extract a new table from both models. Note that an extra column,
@@ -285,34 +308,33 @@ We will extract a new table from both models. Note that an extra column,
 corresponds to.
 
 ``` r
-cost_bystage <- breast_runs$Tables$Breast_Cancer_Cost_ByStage_Table
-cost_bystage
-#> # A tibble: 80 × 4
-#>    RunName                             expr_name            Stage     expr_value
-#>    <chr>                               <chr>                <chr>          <dbl>
-#>  1 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    4.95e 8
-#>  2 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 9
-#>  3 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 8
-#>  4 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.59e 9
-#>  5 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.06e 9
-#>  6 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.54e 9
-#>  7 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.77e 8
-#>  8 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    7.54e 8
-#>  9 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.27e 9
-#> 10 Default_first_run_32M_cases_12_subs Total_treatment_cost all          1.25e10
-#> # ℹ 70 more rows
+births <- rp_runs$Tables$T06_BirthsByUnion
+births
+#> # A tibble: 21 × 4
+#>    RunName           expr_name Dim0                   expr_value
+#>    <chr>             <chr>     <chr>                       <dbl>
+#>  1 RiskPaths_Default Expr0     US_NEVER_IN_UNION           1285 
+#>  2 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD1      2986 
+#>  3 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD2       293 
+#>  4 RiskPaths_Default Expr0     US_AFTER_FIRST_UNION          11 
+#>  5 RiskPaths_Default Expr0     US_SECOND_UNION               57 
+#>  6 RiskPaths_Default Expr0     US_AFTER_SECOND_UNION          1 
+#>  7 RiskPaths_Default Expr0     all                         4633 
+#>  8 ExampleRun        Expr0     US_NEVER_IN_UNION           1205.
+#>  9 ExampleRun        Expr0     US_FIRST_UNION_PERIOD1      2944.
+#> 10 ExampleRun        Expr0     US_FIRST_UNION_PERIOD2       333.
+#> # ℹ 11 more rows
 ```
 
 We can even plot this using `ggplot2`! Note that the number of
-simulation cases for `ExampleRun` is **very low** so the results are not
-to be trusted! This is only for demonstration purposes.
+simulation cases for `ExampleRun` is **low** so the results are not to
+be trusted! This is only for demonstration purposes.
 
 ``` r
-cost_bystage |> 
-  filter(expr_name == 'Total_treatment_cost') |> 
-  ggplot(aes(Stage, expr_value, fill = RunName)) +
+births |> 
+  ggplot(aes(Dim0, expr_value, fill = RunName)) +
   geom_col(position = position_dodge()) +
-  labs(x = NULL, y = 'Breast Cancer Costs ($)') +
+  labs(x = NULL, y = 'Number of births by union') +
   coord_flip() +
   theme_minimal() +
   theme(legend.position = 'bottom')
@@ -325,7 +347,7 @@ When we are sure we no longer need a scenario or model run, we can use
 
 ## Code of Conduct
 
-Please note that the `oncosimx` project is released with a [Contributor
+Please note that the `openmpp` project is released with a [Contributor
 Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

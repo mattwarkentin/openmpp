@@ -11,37 +11,65 @@ knitr::opts_chunk$set(
 )
 ```
 
-# oncosimx <a href="https://oncology-outcomes.github.io/oncosimx/"><img src="man/figures/logo.png" align="right" height="104" alt="oncosimx website" /></a>
+# openmpp
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/oncology-outcomes/oncosimx/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/oncology-outcomes/oncosimx/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of `oncosimx` is to provide a programmatic interface to the OncoSimX web-based platform directly from R to simplify creating scenarios, running models, and gathering results for further processing.
+The goal of `openmpp` is to provide a programmatic interface to the OpenM++ API directly from R to simplify creating scenarios, running models, and gathering results for further processing.
 
 ## Installation
 
-You can install the development version of `oncosimx` from [GitHub](https://github.com/) with:
+You can install the development version of `openmpp` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("oncology-outcomes/oncosimx")
+remotes::install_github("oncology-outcomes/openmpp")
 ```
 
 ## Usage
 
-The `oncosimx` package contains many functions that provide access to nearly every OpenM++ API endpoint. However, users will typically only use a smaller set of functions for most common tasks.
+The `openmpp` package contains many functions that provide access to nearly every OpenM++ API endpoint. However, users will typically only use a smaller set of functions for most common tasks.
 
 ### User Authentication
 
-Each user is required to set their local host address for the OpenM++ API in their global or project-specific `.Renviron` file in order for the `oncosimx` package to communicate with the API on behalf of the user. To do this, set the `ONCOSIMX_HOST` environment variable in your `.Renviron` file as follows:
+Each user is required to set their local or remote host address (i.e., URL) for the OpenM++ API in their global or project-specific `.Renviron` file in order for the `openmpp` package to authenticate and communicate with the API on behalf of the user. 
+
+For an API running locally, set the following environment variable in your `.Renviron` file:
 
 ```
-ONCOSIMX_HOST=http://localhost:XXXX
+OPENMPP_LOCAL_URL=http://localhost:XXXX
 ```
 
 Where `XXXX` is the four digits corresponding to your specific local host address. If you aren't sure of your host address, you may contact the OpenM++ administrator to retrieve this information.
+
+For an API running remotely, set the following environment variables in your `.Renviron` file:
+
+```
+OPENMPP_REMOTE_URL=...
+OPENMPP_REMOTE_USER=...
+OPENMPP_REMOTE_PWD=...
+```
+
+Note that the URL, user name, and password should be kept confidential and not committed into version control (e.g., git).
+
+Once the environment variables are set, users may register a local or remote API connection in their R scripts.
+
+```r
+library(openmpp)
+use_OpenMpp_local()
+```
+
+Or,
+
+```r
+library(openmpp)
+use_OpenMpp_remote()
+```
+
+see `?use_OpenMpp_local` or `?use_OpenMpp_remote` for more information.
 
 ### Main Functions
 
@@ -75,7 +103,7 @@ Where `XXXX` is the four digits corresponding to your specific local host addres
 
 ### Models, Scenarios, Runs, and RunSets
 
-There are 4 main classes you will work with when using the `oncosimx` package: `OncoSimXModel`, `OncoSimXWorkset`, `OncoSimXModelRun`, and `OncoSimXModelRunSet`. Each of these are `R6` classes. `R6` is an encapsulated object-oriented programming system for R. Use the `load_*()` set of functions to load a model, workset/scenario, model run, or set of model runs into memory.
+There are 4 main classes you will work with when using the `openmpp` package: `OpenMppModel`, `OpenMppWorkset`, `OpenMppModelRun`, and `OpenMppModelRunSet`. Each of these are `R6` classes. `R6` is an encapsulated object-oriented programming system for R. Use the `load_*()` set of functions to load a model, workset/scenario, model run, or set of model runs into memory.
 
 Instances of each of these 4 classes have methods and fields associated with them. You can access public methods and fields using the standard `$` subset operator (e.g., `obj$action()` or `obj$field`)
 
@@ -84,9 +112,11 @@ Instances of each of these 4 classes have methods and fields associated with the
 Here we will work through a very simple example of creating a new scenario, extracting parameters to change, changing parameters, running the model, and extracting results.
 
 ```{r message=FALSE}
-library(oncosimx)
-library(tidyverse)
+library(openmpp)
+library(dplyr)
 library(ggplot2)
+
+use_OpenMpp_remote()
 ```
 
 Let's see what models are available:
@@ -98,68 +128,66 @@ get_models()
 We can now see what worksets and model runs exist for a given model.
 
 ```{r}
-get_worksets('OncoSimX-breast')
+get_worksets('RiskPaths')
 ```
 
 ```{r}
-get_runs('OncoSimX-breast')
+get_runs('RiskPaths')
 ```
 
-Now we can load the `OncoSimX-breast` model to inspect.
+Now we can load the `RiskPaths` model to inspect.
 
 ```{r}
-breast <- load_model('OncoSimX-breast')
-breast
+rp <- load_model('RiskPaths')
+rp
 ```
 
-We will now load the `Default` set of input parameters for the Breast model.
+We will now load the `Default` set of input parameters for the RiskPaths model.
 
 ```{r}
-breast_default <- load_scenario('OncoSimX-breast', 'Default')
-breast_default
+rp_default <- load_scenario('RiskPaths', 'Default')
+rp_default
 ```
 
-Finally, we will load the base run for the Breast model.
+Finally, we will load the base run for the RiskPaths model.
 
 ```{r warning=FALSE}
-baserun_digest <- breast$ModelRuns$RunDigest[[1]]
-breast_baserun <- load_run('OncoSimX-breast', baserun_digest)
-breast_baserun
+baserun_digest <- rp$ModelRuns$RunDigest[[1]]
+rp_baserun <- load_run('RiskPaths', baserun_digest)
+rp_baserun
 ```
 
-We will create a new scenario based on the parameters from the `Default_first_run_32M_cases_12_subs` model run.
+We will create a new scenario based on the parameters from the `RiskPaths_Default` model run.
 
-```{r eval=FALSE}
-create_scenario('OncoSimX-breast', 'MyNewScenario', baserun_digest)
+```{r}
+create_scenario('RiskPaths', 'MyNewScenario', baserun_digest)
 ```
 
-We will load the new scenario, copy over the `ProvincesOfInterest` parameter from the base run.
+We will load the new scenario, copy over the `AgeBaselinePreg1` parameter from the base run.
 
 ```{r warning=FALSE}
-my_scenario <- load_scenario('OncoSimX-breast', 'MyNewScenario')
+my_scenario <- load_scenario('RiskPaths', 'MyNewScenario')
 ```
 
-Let's only run the simulation for Alberta...
+Let's reduce the fertility rate by 10% across all age groups...
 
-```{r eval=FALSE}
-my_scenario$copy_params('ProvincesOfInterest')
+```{r}
+my_scenario$copy_params('AgeBaselinePreg1')
 ```
 
-```{r eval=FALSE}
-alberta_only <- my_scenario$Parameters$ProvincesOfInterest
-alberta_only <- 
-  alberta_only |> 
-  mutate(
-    across(Newfoundland_and_Labrador:NT, \(x) FALSE),
-    Alberta = TRUE
-  )
+```{r}
+half_rate <- my_scenario$Parameters$AgeBaselinePreg1
 
-my_scenario$Parameters$ProvincesOfInterest <- alberta_only
+half_rate <-
+  half_rate |> 
+  mutate(across(-sub_id, \(x) x * 0.9))
+
+my_scenario$Parameters$AgeBaselinePreg1 <- half_rate
 ```
 
 We will now run the model and give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. We use `progress = FALSE` to avoid printing progress bars in this document. Note that model runs may take a long time when the number of simulation cases is large.
 
-```{r eval=FALSE}
+```{r}
 my_scenario$ReadOnly <- TRUE
 my_scenario$run('ExampleRun', wait = TRUE, progress = FALSE)
 ```
@@ -169,38 +197,37 @@ Note that we can use the `opts` argument and the `opts_run()` function to config
 Now that our model run is complete, let's load it into memory.
 
 ```{r warning=FALSE}
-example_run <- load_run('OncoSimX-breast', 'ExampleRun')
+example_run <- load_run('RiskPaths', 'ExampleRun')
 example_run
 ```
 
 We can now extract an output table from the `Tables` field in the model run object (`example_run$Tables`).
 
 ```{r}
-example_run$Tables$Breast_Cancer_Cases_Table
+example_run$Tables$T06_BirthsByUnion
 ```
 
 Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.
 
 ```{r warning=FALSE}
-breast_runs <- load_runs('OncoSimX-breast', breast$ModelRuns$RunDigest)
-breast_runs
+rp_runs <- load_runs('RiskPaths', rp$ModelRuns$RunDigest)
+rp_runs
 ```
 
 We will extract a new table from both models. Note that an extra column, `RunName` is added to indicate which model run the output table data corresponds to.
 
 ```{r}
-cost_bystage <- breast_runs$Tables$Breast_Cancer_Cost_ByStage_Table
-cost_bystage
+births <- rp_runs$Tables$T06_BirthsByUnion
+births
 ```
 
-We can even plot this using `ggplot2`! Note that the number of simulation cases for `ExampleRun` is **very low** so the results are not to be trusted! This is only for demonstration purposes.
+We can even plot this using `ggplot2`! Note that the number of simulation cases for `ExampleRun` is **low** so the results are not to be trusted! This is only for demonstration purposes.
 
 ```{r warning=FALSE}
-cost_bystage |> 
-  filter(expr_name == 'Total_treatment_cost') |> 
-  ggplot(aes(Stage, expr_value, fill = RunName)) +
+births |> 
+  ggplot(aes(Dim0, expr_value, fill = RunName)) +
   geom_col(position = position_dodge()) +
-  labs(x = NULL, y = 'Breast Cancer Costs ($)') +
+  labs(x = NULL, y = 'Number of births by union') +
   coord_flip() +
   theme_minimal() +
   theme(legend.position = 'bottom')
@@ -208,6 +235,12 @@ cost_bystage |>
 
 When we are sure we no longer need a scenario or model run, we can use `delete_scenario()` or `delete_run()` to clean things up!
 
+```{r echo=FALSE}
+my_scenario$ReadOnly <- FALSE
+delete_scenario('RiskPaths', 'MyNewScenario')
+delete_model_run('RiskPaths', 'ExampleRun')
+```
+
 ## Code of Conduct
 
-Please note that the `oncosimx` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the `openmpp` project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
