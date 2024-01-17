@@ -3,6 +3,7 @@
 #' Functions to upload model run results or input parameters (worksets).
 #'
 #' @param folder Upload folder file name.
+#' @param data Data used for the body of the request.
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #'
@@ -11,7 +12,7 @@
 #' @export
 initiate_run_upload <- function(model, run, data) {
   api_path <- glue::glue('/api/upload/model/{model}/run/{run}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('POST') |>
@@ -23,7 +24,7 @@ initiate_run_upload <- function(model, run, data) {
 #' @export
 initiate_workset_upload <- function(model, set, data) {
   api_path <- glue::glue('/api/upload/model/{model}/workset/{set}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('POST') |>
@@ -35,9 +36,60 @@ initiate_workset_upload <- function(model, set, data) {
 #' @export
 delete_upload_files <- function(folder) {
   api_path <- glue::glue('/api/upload/delete/{folder}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()
   invisible()
+}
+
+#' @rdname initiate_run_upload
+#' @export
+delete_upload_files_async <- function(folder) {
+  api_path <- glue::glue('/api/upload/start/delete/{folder}')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('DELETE') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname initiate_run_upload
+#' @export
+get_upload_log <- function(name) {
+  api_path <- glue::glue('/api/upload/log/file/{name}')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname initiate_run_upload
+#' @export
+get_upload_logs_model <- function(model) {
+  api_path <- glue::glue('/api/upload/log/model/{model}')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname initiate_run_upload
+#' @export
+get_upload_logs_all <- function() {
+  api_path <- glue::glue('/api/upload/log/all')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname initiate_run_upload
+#' @export
+get_upload_filetree <- function(folder) {
+  api_path <- glue::glue('/api/upload/file-tree/{folder}')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
 }

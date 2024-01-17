@@ -15,7 +15,7 @@ delete_user_views(model)
 \arguments{
 \item{model}{Model digest or model name.}
 
-\item{data}{Data used for the body of the POST request.}
+\item{data}{Data used for the body of the request.}
 }
 \value{
 A \code{list} from JSON response object or nothing (invisibly).

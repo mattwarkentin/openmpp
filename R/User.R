@@ -2,6 +2,7 @@
 #'
 #' Functions for getting, setting, and deleting user configuration settings.
 #'
+#' @param data Data used for the body of the request.
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #' @inheritParams get_run_microdata
@@ -11,7 +12,7 @@
 #' @export
 get_user_views <- function(model) {
   api_path <- glue::glue('/api/user/view/model/{model}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -21,9 +22,10 @@ get_user_views <- function(model) {
 #' @export
 set_user_views <- function(model, data) {
   api_path <- glue::glue('/api/user/view/model/{model}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_body_json(data, auto_unbox = TRUE) |>
+    httr2::req_method('PUT') |>
     httr2::req_perform()
   invisible()
 }
@@ -32,7 +34,7 @@ set_user_views <- function(model, data) {
 #' @export
 delete_user_views <- function(model) {
   api_path <- glue::glue('/api/user/view/model/{model}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()

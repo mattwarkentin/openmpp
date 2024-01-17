@@ -9,7 +9,7 @@
 #' @export
 admin_refresh_models <- function() {
   api_path <- 'api/admin/all-models/refresh'
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
@@ -20,7 +20,7 @@ admin_refresh_models <- function() {
 #' @export
 admin_close_models <- function() {
   api_path <- 'api/admin/all-models/close'
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
@@ -34,7 +34,21 @@ admin_pause_models <- function(pause) {
     rlang::abort('`pause` must be a logical (TRUE or FALSE).')
   }
   api_path <- glue::glue('api/admin/jobs-pause/{pause}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('POST') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname admin_refresh_models
+#' @export
+admin_pause_all_models <- function(pause) {
+  if (!rlang::is_scalar_logical(pause)) {
+    rlang::abort('`pause` must be a logical (TRUE or FALSE).')
+  }
+  api_path <- glue::glue('/api/admin-all/jobs-pause/{pause}')
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
@@ -45,7 +59,7 @@ admin_pause_models <- function(pause) {
 #' @export
 admin_shutdown_service <- function() {
   api_path <- 'api/admin/shutdown'
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>
     httr2::req_perform()

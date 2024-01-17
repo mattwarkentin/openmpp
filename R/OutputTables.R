@@ -1,4 +1,4 @@
-#' Model Run Output Tables
+#' OpenM++ Output Tables
 #'
 #' Functions for retrieving output tables from model runs.
 #'
@@ -12,7 +12,7 @@
 #' @export
 get_run_table <- function(model, run, name) {
   api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/exprstart/0/count/0')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -22,7 +22,7 @@ get_run_table <- function(model, run, name) {
 #' @export
 get_run_table_csv <- function(model, run, name) {
   api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/expr/csv')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_string() |>

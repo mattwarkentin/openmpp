@@ -19,7 +19,7 @@ OpenM++ Model Class
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
-\item{\code{Type}}{Object type (used for \code{print()} method).}
+\item{\code{OpenMppType}}{OpenM++ object type (used for \code{print()} method).}
 
 \item{\code{ModelDigest}}{Model digest.}
 

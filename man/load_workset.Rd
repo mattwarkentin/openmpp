@@ -25,7 +25,7 @@ OpenM++ Workset Class
 \code{load_scenario()} is an alias for \code{load_workset()}.
 }
 \section{Super class}{
-\code{\link[oncosimx:OpenMppModel]{oncosimx::OpenMppModel}} -> \code{OpenMppWorkset}
+\code{\link[openmpp:OpenMppModel]{openmpp::OpenMppModel}} -> \code{OpenMppWorkset}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -34,7 +34,7 @@ OpenM++ Workset Class
 
 \item{\code{WorksetMetadata}}{Workset metadata.}
 
-\item{\code{Type}}{Object type (used for \code{print()}).}
+\item{\code{OpenMppType}}{OpenM++ object type (used for \code{print()}).}
 
 \item{\code{Parameters}}{Workset parameters.}
 }

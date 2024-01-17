@@ -4,6 +4,11 @@
 \alias{initiate_run_upload}
 \alias{initiate_workset_upload}
 \alias{delete_upload_files}
+\alias{delete_upload_files_async}
+\alias{get_upload_log}
+\alias{get_upload_logs_model}
+\alias{get_upload_logs_all}
+\alias{get_upload_filetree}
 \title{Upload model runs or worksets}
 \usage{
 initiate_run_upload(model, run, data)
@@ -11,6 +16,16 @@ initiate_run_upload(model, run, data)
 initiate_workset_upload(model, set, data)
 
 delete_upload_files(folder)
+
+delete_upload_files_async(folder)
+
+get_upload_log(name)
+
+get_upload_logs_model(model)
+
+get_upload_logs_all()
+
+get_upload_filetree(folder)
 }
 \arguments{
 \item{model}{Model digest or model name.}
@@ -18,11 +33,13 @@ delete_upload_files(folder)
 \item{run}{Model run digest, run stamp or run name, modeling task run
 stamp or task run name.}
 
-\item{data}{Data used for the body of the POST request.}
+\item{data}{Data used for the body of the request.}
 
 \item{set}{Name of workset (input set of model parameters).}
 
 \item{folder}{Upload folder file name.}
+
+\item{name}{Output table name.}
 }
 \value{
 Nothing, invisibly.

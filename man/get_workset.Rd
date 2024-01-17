@@ -70,7 +70,7 @@ delete_scenario(model, set)
 
 \item{readonly}{Boolean. Should workset be read-only?}
 
-\item{data}{Data used for the body of the POST request.}
+\item{data}{Data used for the body of the request.}
 
 \item{workset}{Workset metadata.}
 

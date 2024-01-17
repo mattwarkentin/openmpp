@@ -37,8 +37,8 @@ OpenMppModelRunSet <-
       #' @field ModelVersion Model version.
       ModelVersion = NULL,
 
-      #' @field Type Object type (used for `print()`).
-      Type = 'ModelRunSet',
+      #' @field OpenMppType OpenM++ object type (used for `print()`).
+      OpenMppType = 'ModelRunSet',
 
       #' @field Tables Run tables
       Tables = rlang::env(),
@@ -65,7 +65,7 @@ OpenMppModelRunSet <-
         digests <- glue::glue_collapse(self$RunDigests, sep = ', ')
         RunDigests = glue::glue('[{digests}]')
 
-        cli::cat_rule(glue::glue('OpenM++ {self$Type}'))
+        cli::cat_rule(glue::glue('OpenM++ {self$OpenMppType}'))
         cli::cli_alert(paste0('ModelName: ', self$ModelName))
         cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
         cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))
@@ -98,7 +98,7 @@ OpenMppModelRunSet <-
       #' @param dir Directory path.
       #' @return  Self, invisibly.
       write_tables = function(dir) {
-        if (fs::dir_exists(dir)) {
+        if (dir.exists(dir)) {
           purrr::walk(
             .x = private$.tables,
             .f = \(t) {

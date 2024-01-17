@@ -5,6 +5,11 @@
 \alias{initiate_run_download}
 \alias{initiate_workset_download}
 \alias{delete_download_files}
+\alias{delete_download_files_async}
+\alias{get_download_log}
+\alias{get_download_logs_model}
+\alias{get_download_logs_all}
+\alias{get_download_filetree}
 \title{Download model, model run results, or input parameters}
 \usage{
 initiate_model_download(model)
@@ -14,6 +19,16 @@ initiate_run_download(model, run)
 initiate_workset_download(model, set)
 
 delete_download_files(folder)
+
+delete_download_files_async(folder)
+
+get_download_log(name)
+
+get_download_logs_model(model)
+
+get_download_logs_all()
+
+get_download_filetree(folder)
 }
 \arguments{
 \item{model}{Model digest or model name.}
@@ -24,6 +39,8 @@ stamp or task run name.}
 \item{set}{Name of workset (input set of model parameters).}
 
 \item{folder}{Download folder file name.}
+
+\item{name}{Output table name.}
 }
 \value{
 Nothing, invisibly.

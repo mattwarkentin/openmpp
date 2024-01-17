@@ -3,7 +3,7 @@
 #' @inheritParams get_model
 #'
 #' @importFrom R6 R6Class
-#' @import cli purrr fs zip
+#' @import cli purrr
 #'
 #' @return An `OpenMppModel` instance.
 #'
@@ -27,8 +27,8 @@ OpenMppModel <-
     cloneable = FALSE,
     portable = FALSE,
     public = list(
-      #' @field Type Object type (used for `print()` method).
-      Type = 'Model',
+      #' @field OpenMppType OpenM++ object type (used for `print()` method).
+      OpenMppType = 'Model',
 
       #' @field ModelDigest Model digest.
       ModelDigest = NULL,
@@ -64,7 +64,7 @@ OpenMppModel <-
       #' @param ... Not currently used.
       #' @return  Self, invisibly.
       print = function(...) {
-        cli::cat_rule(glue::glue('OpenM++ {self$Type}'))
+        cli::cat_rule(glue::glue('OpenM++ {self$OpenMppType}'))
         cli::cli_alert(paste0('ModelName: ', self$ModelName))
         cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
         cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))
@@ -82,8 +82,8 @@ OpenMppModel <-
             purrr::discard_at(x, 'ParamDimsTxt') |>
               purrr::list_flatten(name_spec = '{inner}')
           }) |>
-          tibblify::tibblify() |>
-          suppressMessages()
+          purrr::map(tibble::as_tibble) |>
+          purrr::list_rbind()
       },
       .set_table_info = function() {
         self$TablesInfo <-
@@ -91,8 +91,8 @@ OpenMppModel <-
             purrr::discard_at(x,  c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')) |>
               purrr::list_flatten(name_spec = '{inner}')
           }) |>
-          tibblify::tibblify() |>
-          suppressMessages()
+          purrr::map(tibble::as_tibble) |>
+          purrr::list_rbind()
       },
       .set_model_metadata = function() {
         self$ModelMetadata <- private$.model$Model

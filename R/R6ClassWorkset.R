@@ -39,8 +39,8 @@ OpenMppWorkset <-
       #' @field WorksetMetadata Workset metadata.
       WorksetMetadata = NULL,
 
-      #' @field Type Object type (used for `print()`).
-      Type = 'Workset',
+      #' @field OpenMppType OpenM++ object type (used for `print()`).
+      OpenMppType = 'Workset',
 
       #' @field Parameters Workset parameters.
       Parameters = rlang::env(),
@@ -217,7 +217,7 @@ OpenMppWorkset <-
         }
 
         if (!inherits(opts, 'OpenMppRunOpts')) {
-          rlang::abort('`opts` argument must be an `oncosimx::opts_run()` object')
+          rlang::abort('`opts` argument must be an `openmpp::opts_run()` object')
         }
 
         if (rlang::is_null(self$BaseRunDigest) |

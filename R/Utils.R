@@ -1,10 +1,3 @@
-#' OpenM++ Web API URL
-api_url <- function() {
-  host <- Sys.getenv('ONCOSIMX_HOST')
-  if (nchar(host) > 0) return(host)
-  rlang::abort('Local host address not found. Please set `ONCOSIMX_HOST` in your global or project .Renviron file.')
-}
-
 #' Are data frames compatible?
 #' @param x New parameters.
 #' @param y Old parameters

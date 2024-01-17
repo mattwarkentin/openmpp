@@ -4,6 +4,7 @@
 \alias{admin_refresh_models}
 \alias{admin_close_models}
 \alias{admin_pause_models}
+\alias{admin_pause_all_models}
 \alias{admin_shutdown_service}
 \title{OpenM++ Administrative Tasks}
 \usage{
@@ -12,6 +13,8 @@ admin_refresh_models()
 admin_close_models()
 
 admin_pause_models(pause)
+
+admin_pause_all_models(pause)
 
 admin_shutdown_service()
 }

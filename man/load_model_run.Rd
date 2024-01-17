@@ -26,7 +26,7 @@ OpenM++ ModelRun Class
 \code{load_run()} is an alias for \code{load_model_run()}.
 }
 \section{Super class}{
-\code{\link[oncosimx:OpenMppModel]{oncosimx::OpenMppModel}} -> \code{OpenMppModelRun}
+\code{\link[openmpp:OpenMppModel]{openmpp::OpenMppModel}} -> \code{OpenMppModelRun}
 }
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
@@ -43,7 +43,7 @@ OpenM++ ModelRun Class
 
 \item{\code{Tables}}{Run tables}
 
-\item{\code{Type}}{Object type (used for \code{print()}).}
+\item{\code{OpenMppType}}{OpenM++ object type (used for \code{print()}).}
 }
 \if{html}{\out{</div>}}
 }

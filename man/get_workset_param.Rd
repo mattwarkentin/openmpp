@@ -5,7 +5,7 @@
 \alias{get_workset_param_csv}
 \alias{get_run_param}
 \alias{get_run_param_csv}
-\title{Workset Parameters}
+\title{OpenM++ Workset and Run Parameters}
 \usage{
 get_workset_param(model, set, name)
 
@@ -29,5 +29,5 @@ stamp or task run name.}
 A \code{list} or \code{tibble}.
 }
 \description{
-Functions for retrieving scenario parameters from worksets or model runs.
+Functions for retrieving parameters from worksets or model runs.
 }

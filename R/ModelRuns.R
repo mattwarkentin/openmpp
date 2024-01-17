@@ -1,6 +1,6 @@
-#' OpenM++ Model Run
+#' OpenM++ Model Runs
 #'
-#' Functions to retrieve and delete model runs.
+#' Functions to retrieve model run metadata and delete model runs.
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
@@ -10,7 +10,7 @@
 #' @export
 get_model_run <- function(model, run) {
   api_path <- glue::glue('api/model/{model}/run/{run}/text')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -18,9 +18,13 @@ get_model_run <- function(model, run) {
 
 #' @rdname get_model_run
 #' @export
+get_run <- get_model_run
+
+#' @rdname get_model_run
+#' @export
 get_model_runs_list <- function(model) {
   api_path <- glue::glue('api/model/{model}/run-list')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -30,8 +34,9 @@ get_model_runs_list <- function(model) {
 #' @export
 get_model_runs <- function(model) {
   get_model_runs_list(model) |>
-    tibblify::tibblify() |>
-    suppressMessages()
+    purrr::map(purrr::compact) |>
+    purrr::map(tibble::as_tibble) |>
+    purrr::list_rbind()
 }
 
 #' @rdname get_model_run
@@ -42,7 +47,7 @@ get_runs <- get_model_runs
 #' @export
 get_model_run_status <- function(model, run) {
   api_path <- glue::glue('api/model/{model}/run/{run}/status')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -56,7 +61,7 @@ get_run_status <- get_model_run_status
 #' @export
 get_model_run_list_status <- function(model, run) {
   api_path <- glue::glue('api/model/{model}/run/{run}/status/list')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -66,7 +71,7 @@ get_model_run_list_status <- function(model, run) {
 #' @export
 get_model_run_status_first <- function(model) {
   api_path <- glue::glue('api/model/{model}/run/status/first')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -76,7 +81,7 @@ get_model_run_status_first <- function(model) {
 #' @export
 get_model_run_status_last <- function(model) {
   api_path <- glue::glue('api/model/{model}/run/status/last')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -86,7 +91,7 @@ get_model_run_status_last <- function(model) {
 #' @export
 get_model_run_status_compl <- function(model) {
   api_path <- glue::glue('api/model/{model}/run/status/last-completed')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -96,7 +101,7 @@ get_model_run_status_compl <- function(model) {
 #' @export
 delete_model_run <- function(model, run) {
   api_path <- glue::glue('/api/model/{model}/run/{run}')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
     httr2::req_perform()

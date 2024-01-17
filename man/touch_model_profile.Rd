@@ -18,7 +18,7 @@ delete_model_profile_opt(model, profile, key)
 \arguments{
 \item{model}{Model digest or model name.}
 
-\item{data}{Data used for the body of the POST request.}
+\item{data}{Data used for the body of the request.}
 
 \item{profile}{Profile name.}
 

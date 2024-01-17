@@ -52,8 +52,8 @@ OpenMppModelRun <-
       #' @field Tables Run tables
       Tables = rlang::env(),
 
-      #' @field Type Object type (used for `print()`).
-      Type = 'ModelRun',
+      #' @field OpenMppType OpenM++ object type (used for `print()`).
+      OpenMppType = 'ModelRun',
 
       #' @description
       #' Create a new OpenMppModelRun object.
@@ -108,7 +108,7 @@ OpenMppModelRun <-
       #' @param dir Directory path.
       #' @return  Self, invisibly.
       write_tables = function(dir) {
-        if (fs::dir_exists(dir)) {
+        if (dir.exists(dir)) {
           purrr::walk(
             .x = private$.tables,
             .f = \(t) {
@@ -133,7 +133,7 @@ OpenMppModelRun <-
       #' @param dir Directory to save log file.
       #' @return  Self, invisibly.
       write_log = function(dir) {
-        if (fs::dir_exists(dir)) {
+        if (dir.exists(dir)) {
           file_name <- get_model_run_state(self$ModelDigest, self$RunStamp)$LogFileName
           file_path <- glue::glue('{dir}/{file_name}')
           writeLines(self$get_log(), file_path)

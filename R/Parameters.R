@@ -1,6 +1,6 @@
-#' Workset Parameters
+#' OpenM++ Workset and Run Parameters
 #'
-#' Functions for retrieving scenario parameters from worksets or model runs.
+#' Functions for retrieving parameters from worksets or model runs.
 #'
 #' @inheritParams get_model
 #' @param run Model run digest, run stamp or run name, modeling task run
@@ -13,7 +13,7 @@
 #' @export
 get_workset_param <- function(model, set, name) {
   api_path <- glue::glue('api/model/{model}/workset/{set}/parameter/{name}/value/start/0/count/0')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -23,7 +23,7 @@ get_workset_param <- function(model, set, name) {
 #' @export
 get_workset_param_csv <- function(model, set, name) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/parameter/{name}/csv')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_string() |>
@@ -34,7 +34,7 @@ get_workset_param_csv <- function(model, set, name) {
 #' @export
 get_run_param <- function(model, run, name) {
   api_path <- glue::glue('api/model/{model}/run/{run}/parameter/{name}/value/start/0/count/0')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_json()
@@ -44,7 +44,7 @@ get_run_param <- function(model, run, name) {
 #' @export
 get_run_param_csv <- function(model, run, name) {
   api_path <- glue::glue('/api/model/{model}/run/{run}/parameter/{name}/csv')
-  httr2::request(api_url()) |>
+  OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
     httr2::resp_body_string() |>

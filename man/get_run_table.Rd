@@ -3,7 +3,7 @@
 \name{get_run_table}
 \alias{get_run_table}
 \alias{get_run_table_csv}
-\title{Model Run Output Tables}
+\title{OpenM++ Output Tables}
 \usage{
 get_run_table(model, run, name)
 
