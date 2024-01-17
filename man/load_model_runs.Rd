@@ -35,7 +35,7 @@ OpenM++ ModelRunSet Class
 
 \item{\code{OpenMppType}}{OpenM++ object type (used for \code{print()}).}
 
-\item{\code{Tables}}{Run tables}
+\item{\code{Tables}}{Model run output tables}
 }
 \if{html}{\out{</div>}}
 }

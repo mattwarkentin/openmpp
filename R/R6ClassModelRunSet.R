@@ -40,8 +40,8 @@ OpenMppModelRunSet <-
       #' @field OpenMppType OpenM++ object type (used for `print()`).
       OpenMppType = 'ModelRunSet',
 
-      #' @field Tables Run tables
-      Tables = rlang::env(),
+      #' @field Tables Model run output tables
+      Tables = NULL,
 
       #' @description
       #' Create a new OpenMppModelRunSet object.
@@ -130,6 +130,7 @@ OpenMppModelRunSet <-
         private$.tables <- total
       },
       .load_table_bindings = function() {
+        self$Tables <- rlang::env()
         purrr::walk(private$.runs[[1]]$private$.run$Table, \(table) {
           private$.add_table(table$Name)
           f <- function() {

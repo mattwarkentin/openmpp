@@ -39,9 +39,9 @@ OpenM++ ModelRun Class
 
 \item{\code{RunMetadata}}{Run metadata.}
 
-\item{\code{Parameters}}{Run parameters.}
+\item{\code{Parameters}}{Model run parameters.}
 
-\item{\code{Tables}}{Run tables}
+\item{\code{Tables}}{Model run output tables}
 
 \item{\code{OpenMppType}}{OpenM++ object type (used for \code{print()}).}
 }

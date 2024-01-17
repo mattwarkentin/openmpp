@@ -43,7 +43,7 @@ OpenMppWorkset <-
       OpenMppType = 'Workset',
 
       #' @field Parameters Workset parameters.
-      Parameters = rlang::env(),
+      Parameters = NULL,
 
       #' @description
       #' Create a new OpenMppWorkset object.
@@ -284,6 +284,7 @@ OpenMppWorkset <-
       },
       .load_param_bindings = function() {
         private$.params <- NULL
+        self$Parameters <- rlang::env()
         purrr::walk(private$.workset$Param, \(param) {
           private$.add_params(param$Name)
           f <- function(data) {

@@ -46,11 +46,11 @@ OpenMppModelRun <-
       #' @field RunMetadata Run metadata.
       RunMetadata = NULL,
 
-      #' @field Parameters Run parameters.
-      Parameters = rlang::env(),
+      #' @field Parameters Model run parameters.
+      Parameters = NULL,
 
-      #' @field Tables Run tables
-      Tables = rlang::env(),
+      #' @field Tables Model run output tables
+      Tables = NULL,
 
       #' @field OpenMppType OpenM++ object type (used for `print()`).
       OpenMppType = 'ModelRun',
@@ -159,6 +159,7 @@ OpenMppModelRun <-
         private$.tables <- total
       },
       .load_table_bindings = function() {
+        self$Tables <- rlang::env()
         purrr::walk(private$.run$Table, \(table) {
           private$.add_table(table$Name)
           f <- function() {
@@ -169,6 +170,7 @@ OpenMppModelRun <-
         })
       },
       .load_run_param_bindings = function() {
+        self$Parameters <- rlang::env()
         purrr::walk(private$.run$Param, \(param) {
           f <- function() {
             param_name <- param$Name
