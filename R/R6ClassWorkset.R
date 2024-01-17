@@ -142,6 +142,7 @@ OpenMppWorkset <-
       #' @return Self, invisibly.
       delete_params = function(names) {
         private$.check_modifiable()
+        purrr::map(names, \(x) private$.check_param_exists(x, rlang::caller_env(3)))
         purrr::walk(
           .x = names,
           .f = \(name) {
@@ -175,6 +176,8 @@ OpenMppWorkset <-
       #' @return Self, invisibly.
       set_param = function(name, data) {
         private$.check_modifiable()
+        private$.check_param_exists(name)
+
         old <- self$get_param(name)
 
         is_compatible(data, old)
@@ -313,6 +316,14 @@ OpenMppWorkset <-
         if (rlang::is_true(self$ReadOnly)) {
           rlang::abort(
             message = 'Cannot modify a read-only workset.',
+            call = call
+          )
+        }
+      },
+      .check_param_exists = function(param, call = rlang::caller_env()) {
+        if (!param %in% private$.params) {
+          rlang::abort(
+            message = 'Cannot modify a parameters that does not exit.',
             call = call
           )
         }
