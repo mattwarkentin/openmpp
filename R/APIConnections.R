@@ -22,7 +22,7 @@
 #'   project-specific `.Renviron` file. The same approach may be used to declare
 #'   your URLs for making API requests. While these URLs are typically not
 #'   sensitive information, keeping all of this information in one place makes
-#'   sense for consistenct. For local and remote API connections, set the
+#'   sense for consistency. For local and remote API connections, set the
 #'   following environment variables in your `.Renviron` files:
 #'
 #'   - `OPENMPP_LOCAL_URL`: URL for a local API connection.
