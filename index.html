@@ -6,9 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="This package provides a programmatic interface to the OpenM++
-  microsimulation platform and OncoSimX. OncoSimX is a free, web-based 
-  simulation tool that can be used to evaluate cancer control strategies.">
-<title>Programmatic interface to the OncoSimX Web Platform • oncosimx</title>
+  microsimulation platform.">
+<title>Programmatic interface to OpenM++ • openmpp</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -19,11 +18,10 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Programmatic interface to the OncoSimX Web Platform">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Programmatic interface to OpenM++">
 <meta property="og:description" content="This package provides a programmatic interface to the OpenM++
-  microsimulation platform and OncoSimX. OncoSimX is a free, web-based 
-  simulation tool that can be used to evaluate cancer control strategies.">
-<meta property="og:image" content="https://oncology-outcomes.github.io/oncosimx/logo.png">
+  microsimulation platform.">
+<meta property="og:image" content="https://oncology-outcomes.github.io/openmpp/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -35,7 +33,7 @@
 
     <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
     
-    <a class="navbar-brand me-2" href="index.html">oncosimx</a>
+    <a class="navbar-brand me-2" href="index.html">openmpp</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
 
@@ -56,7 +54,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/oncology-outcomes/oncosimx/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/oncology-outcomes/openmpp/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -70,31 +68,45 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="oncosimx-">oncosimx 
-<a class="anchor" aria-label="anchor" href="#oncosimx-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="openmpp">openmpp<a class="anchor" aria-label="anchor" href="#openmpp"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
-<p>The goal of <code>oncosimx</code> is to provide a programmatic interface to the OncoSimX web-based platform directly from R to simplify creating scenarios, running models, and gathering results for further processing.</p>
+<p>The goal of <code>openmpp</code> is to provide a programmatic interface to the OpenM++ API directly from R to simplify creating scenarios, running models, and gathering results for further processing.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <code>oncosimx</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of <code>openmpp</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"oncology-outcomes/oncosimx"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"oncology-outcomes/openmpp"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The <code>oncosimx</code> package contains many functions that provide access to nearly every OpenM++ API endpoint. However, users will typically only use a smaller set of functions for most common tasks.</p>
+<p>The <code>openmpp</code> package contains many functions that provide access to nearly every OpenM++ API endpoint. However, users will typically only use a smaller set of functions for most common tasks.</p>
 <div class="section level3">
 <h3 id="user-authentication">User Authentication<a class="anchor" aria-label="anchor" href="#user-authentication"></a>
 </h3>
-<p>Each user is required to set their local host address for the OpenM++ API in their global or project-specific <code>.Renviron</code> file in order for the <code>oncosimx</code> package to communicate with the API on behalf of the user. To do this, set the <code>ONCOSIMX_HOST</code> environment variable in your <code>.Renviron</code> file as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ONCOSIMX_HOST<span class="ot">=</span>http<span class="sc">:</span><span class="er">//</span>localhost<span class="sc">:</span>XXXX</span></code></pre></div>
+<p>Each user is required to set their local or remote host address (i.e., URL) for the OpenM++ API in their global or project-specific <code>.Renviron</code> file in order for the <code>openmpp</code> package to authenticate and communicate with the API on behalf of the user.</p>
+<p>For an API running locally, set the following environment variable in your <code>.Renviron</code> file:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>OPENMPP_LOCAL_URL<span class="ot">=</span>http<span class="sc">:</span><span class="er">//</span>localhost<span class="sc">:</span>XXXX</span></code></pre></div>
 <p>Where <code>XXXX</code> is the four digits corresponding to your specific local host address. If you aren’t sure of your host address, you may contact the OpenM++ administrator to retrieve this information.</p>
+<p>For an API running remotely, set the following environment variables in your <code>.Renviron</code> file:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>OPENMPP_REMOTE_URL<span class="ot">=</span>...</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>OPENMPP_REMOTE_USER<span class="ot">=</span>...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>OPENMPP_REMOTE_PWD<span class="ot">=</span>...</span></code></pre></div>
+<p>Note that the URL, user name, and password should be kept confidential and not committed into version control (e.g., git).</p>
+<p>Once the environment variables are set, users may register a local or remote API connection in their R scripts.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oncology-outcomes/openmpp" class="external-link">openmpp</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/use_OpenMpp_local.html">use_OpenMpp_local</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Or,</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oncology-outcomes/openmpp" class="external-link">openmpp</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/use_OpenMpp_local.html">use_OpenMpp_remote</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>see <code><a href="reference/use_OpenMpp_local.html">?use_OpenMpp_local</a></code> or <code><a href="reference/use_OpenMpp_local.html">?use_OpenMpp_remote</a></code> for more information.</p>
 </div>
 <div class="section level3">
 <h3 id="main-functions">Main Functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
@@ -137,19 +149,21 @@
 <div class="section level3">
 <h3 id="models-scenarios-runs-and-runsets">Models, Scenarios, Runs, and RunSets<a class="anchor" aria-label="anchor" href="#models-scenarios-runs-and-runsets"></a>
 </h3>
-<p>There are 4 main classes you will work with when using the <code>oncosimx</code> package: <code>OncoSimXModel</code>, <code>OncoSimXWorkset</code>, <code>OncoSimXModelRun</code>, and <code>OncoSimXModelRunSet</code>. Each of these are <code>R6</code> classes. <code>R6</code> is an encapsulated object-oriented programming system for R. Use the <code>load_*()</code> set of functions to load a model, workset/scenario, model run, or set of model runs into memory.</p>
+<p>There are 4 main classes you will work with when using the <code>openmpp</code> package: <code>OpenMppModel</code>, <code>OpenMppWorkset</code>, <code>OpenMppModelRun</code>, and <code>OpenMppModelRunSet</code>. Each of these are <code>R6</code> classes. <code>R6</code> is an encapsulated object-oriented programming system for R. Use the <code>load_*()</code> set of functions to load a model, workset/scenario, model run, or set of model runs into memory.</p>
 <p>Instances of each of these 4 classes have methods and fields associated with them. You can access public methods and fields using the standard <code>$</code> subset operator (e.g., <code>obj$action()</code> or <code>obj$field</code>)</p>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
 <p>Here we will work through a very simple example of creating a new scenario, extracting parameters to change, changing parameters, running the model, and extracting results.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oncology-outcomes/oncosimx" class="external-link">oncosimx</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oncology-outcomes/openmpp" class="external-link">openmpp</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/use_OpenMpp_local.html">use_OpenMpp_remote</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s see what models are available:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_model.html">get_models</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 22 × 7</span></span>
 <span><span class="co">#&gt;    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode</span></span>
@@ -166,141 +180,132 @@
 <span><span class="co">#&gt; 10     101 OncoSimX-colorec… 36999…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
 <span><span class="co">#&gt; # ℹ 12 more rows</span></span></code></pre></div>
 <p>We can now see what worksets and model runs exist for a given model.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/get_workset.html">get_worksets</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 11</span></span>
-<span><span class="co">#&gt;   ModelName     ModelDigest ModelVersion ModelCreateDateTime Name  BaseRunDigest</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;        </span></span>
-<span><span class="co">#&gt; 1 OncoSimX-bre… 742b985b8c… 3.6.2.5      2023-11-03 18:55:1… Defa… ""           </span></span>
-<span><span class="co">#&gt; 2 OncoSimX-bre… 742b985b8c… 3.6.2.5      2023-11-03 18:55:1… MyNe… "9f9890c641e…</span></span>
-<span><span class="co">#&gt; # ℹ 5 more variables: IsReadonly &lt;lgl&gt;, UpdateDateTime &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   IsCleanBaseRun &lt;lgl&gt;, Txt &lt;list&lt;tibble[,3]&gt;&gt;, Param &lt;list&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/get_model_run.html">get_runs</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 21</span></span>
-<span><span class="co">#&gt;   ModelName       ModelDigest    ModelVersion ModelCreateDateTime Name  SubCount</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;    &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 OncoSimX-breast 742b985b8c3b6… 3.6.2.5      2023-11-03 18:55:1… Defa…       12</span></span>
-<span><span class="co">#&gt; 2 OncoSimX-breast 742b985b8c3b6… 3.6.2.5      2023-11-03 18:55:1… Exam…       12</span></span>
-<span><span class="co">#&gt; # ℹ 15 more variables: SubStarted &lt;int&gt;, SubCompleted &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   CreateDateTime &lt;chr&gt;, Status &lt;chr&gt;, UpdateDateTime &lt;chr&gt;, RunId &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   RunDigest &lt;chr&gt;, ValueDigest &lt;chr&gt;, RunStamp &lt;chr&gt;, Txt &lt;list&gt;,</span></span>
-<span><span class="co">#&gt; #   Opts &lt;list&gt;, Param &lt;list&gt;, Table &lt;list&gt;, Entity &lt;list&gt;, Progress &lt;list&gt;</span></span></code></pre></div>
-<p>Now we can load the <code>OncoSimX-breast</code> model to inspect.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">breast</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span><span class="op">)</span></span>
-<span><span class="va">breast</span></span>
-<span><span class="co">#&gt; ── OncoSimX Model ──────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelVersion: 3.6.2.5</span></span>
-<span><span class="co">#&gt; → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f</span></span></code></pre></div>
-<p>We will now load the <code>Default</code> set of input parameters for the Breast model.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">breast_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'Default'</span><span class="op">)</span></span>
-<span><span class="va">breast_default</span></span>
-<span><span class="co">#&gt; ── OncoSimX Workset ────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelVersion: 3.6.2.5</span></span>
-<span><span class="co">#&gt; → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_workset.html">get_worksets</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 10</span></span>
+<span><span class="co">#&gt;   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;        </span></span>
+<span><span class="co">#&gt; 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2022-03-07 23:23:3… Defa… ""           </span></span>
+<span><span class="co">#&gt; # ℹ 4 more variables: IsReadonly &lt;lgl&gt;, UpdateDateTime &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   IsCleanBaseRun &lt;lgl&gt;, Txt &lt;list&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_model_run.html">get_runs</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 15</span></span>
+<span><span class="co">#&gt;   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;    &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Risk…        1</span></span>
+<span><span class="co">#&gt; 2 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Exam…       12</span></span>
+<span><span class="co">#&gt; # ℹ 9 more variables: SubStarted &lt;int&gt;, SubCompleted &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   CreateDateTime &lt;chr&gt;, Status &lt;chr&gt;, UpdateDateTime &lt;chr&gt;, RunId &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   RunDigest &lt;chr&gt;, ValueDigest &lt;chr&gt;, RunStamp &lt;chr&gt;</span></span></code></pre></div>
+<p>Now we can load the <code>RiskPaths</code> model to inspect.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
+<span><span class="va">rp</span></span>
+<span><span class="co">#&gt; ── OpenM++ Model ───────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; → ModelName: RiskPaths</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
+<span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span></code></pre></div>
+<p>We will now load the <code>Default</code> set of input parameters for the RiskPaths model.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rp_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'Default'</span><span class="op">)</span></span>
+<span><span class="va">rp_default</span></span>
+<span><span class="co">#&gt; ── OpenM++ Workset ─────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; → ModelName: RiskPaths</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
+<span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span>
 <span><span class="co">#&gt; → WorksetName: Default</span></span>
 <span><span class="co">#&gt; → BaseRunDigest:</span></span></code></pre></div>
-<p>Finally, we will load the base run for the Breast model.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">baserun_digest</span> <span class="op">&lt;-</span> <span class="va">breast</span><span class="op">$</span><span class="va">ModelRuns</span><span class="op">$</span><span class="va">RunDigest</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="va">breast_baserun</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_run.html">load_run</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span>
-<span><span class="va">breast_baserun</span></span>
-<span><span class="co">#&gt; ── OncoSimX ModelRun ───────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelVersion: 3.6.2.5</span></span>
-<span><span class="co">#&gt; → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f</span></span>
-<span><span class="co">#&gt; → RunName: Default_first_run_32M_cases_12_subs</span></span>
-<span><span class="co">#&gt; → RunDigest: 9f9890c641e0c43d5fd439591106f8fa</span></span></code></pre></div>
-<p>We will create a new scenario based on the parameters from the <code>Default_first_run_32M_cases_12_subs</code> model run.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/create_scenario.html">create_scenario</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'MyNewScenario'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span></code></pre></div>
-<p>We will load the new scenario, copy over the <code>ProvincesOfInterest</code> parameter from the base run.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_scenario</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'MyNewScenario'</span><span class="op">)</span></span></code></pre></div>
-<p>Let’s only run the simulation for Alberta…</p>
+<p>Finally, we will load the base run for the RiskPaths model.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_scenario</span><span class="op">$</span><span class="fu">copy_params</span><span class="op">(</span><span class="st">'ProvincesOfInterest'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">baserun_digest</span> <span class="op">&lt;-</span> <span class="va">rp</span><span class="op">$</span><span class="va">ModelRuns</span><span class="op">$</span><span class="va">RunDigest</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">rp_baserun</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_run.html">load_run</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span>
+<span><span class="va">rp_baserun</span></span>
+<span><span class="co">#&gt; ── OpenM++ ModelRun ────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; → ModelName: RiskPaths</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
+<span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span>
+<span><span class="co">#&gt; → RunName: RiskPaths_Default</span></span>
+<span><span class="co">#&gt; → RunDigest: 9a6bf761db1a7f27b91fc1d56c0e6d0e</span></span></code></pre></div>
+<p>We will create a new scenario based on the parameters from the <code>RiskPaths_Default</code> model run.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">alberta_only</span> <span class="op">&lt;-</span> <span class="va">my_scenario</span><span class="op">$</span><span class="va">Parameters</span><span class="op">$</span><span class="va">ProvincesOfInterest</span></span>
-<span><span class="va">alberta_only</span> <span class="op">&lt;-</span> </span>
-<span>  <span class="va">alberta_only</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span></span>
-<span>    <span class="fu">across</span><span class="op">(</span><span class="va">Newfoundland_and_Labrador</span><span class="op">:</span><span class="va">NT</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
-<span>    Alberta <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">my_scenario</span><span class="op">$</span><span class="va">Parameters</span><span class="op">$</span><span class="va">ProvincesOfInterest</span> <span class="op">&lt;-</span> <span class="va">alberta_only</span></span></code></pre></div>
-<p>We will now run the model and give it the name <code>'ExampleRun'</code>. We use the <code>wait = TRUE</code> flag to make sure we want for the model run to finish before returning to our R session. We use <code>progress = FALSE</code> to avoid printing progress bars in this document. Note that model runs may take a long time when the number of simulation cases is large.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/create_scenario.html">create_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'MyNewScenario'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span></code></pre></div>
+<p>We will load the new scenario, copy over the <code>AgeBaselinePreg1</code> parameter from the base run.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_scenario</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'MyNewScenario'</span><span class="op">)</span></span></code></pre></div>
+<p>Let’s reduce the fertility rate by 10% across all age groups…</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_scenario</span><span class="op">$</span><span class="fu">copy_params</span><span class="op">(</span><span class="st">'AgeBaselinePreg1'</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">half_rate</span> <span class="op">&lt;-</span> <span class="va">my_scenario</span><span class="op">$</span><span class="va">Parameters</span><span class="op">$</span><span class="va">AgeBaselinePreg1</span></span>
+<span></span>
+<span><span class="va">half_rate</span> <span class="op">&lt;-</span></span>
+<span>  <span class="va">half_rate</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="op">-</span><span class="va">sub_id</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my_scenario</span><span class="op">$</span><span class="va">Parameters</span><span class="op">$</span><span class="va">AgeBaselinePreg1</span> <span class="op">&lt;-</span> <span class="va">half_rate</span></span></code></pre></div>
+<p>We will now run the model and give it the name <code>'ExampleRun'</code>. We use the <code>wait = TRUE</code> flag to make sure we want for the model run to finish before returning to our R session. We use <code>progress = FALSE</code> to avoid printing progress bars in this document. Note that model runs may take a long time when the number of simulation cases is large.</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_scenario</span><span class="op">$</span><span class="va">ReadOnly</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
 <span><span class="va">my_scenario</span><span class="op">$</span><span class="fu">run</span><span class="op">(</span><span class="st">'ExampleRun'</span>, wait <span class="op">=</span> <span class="cn">TRUE</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Note that we can use the <code>opts</code> argument and the <code><a href="reference/opts_run.html">opts_run()</a></code> function to configure our run. By default, models are run with 5,000 simulation cases and 12 SubValues. This allows for quick model runs and faster iteration, but users will want to increase the number of simulation cases when performing a full model run.</p>
 <p>Now that our model run is complete, let’s load it into memory.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example_run</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_run.html">load_run</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="st">'ExampleRun'</span><span class="op">)</span></span>
-<span><span class="va">example_run</span></span>
-<span><span class="co">#&gt; ── OncoSimX ModelRun ───────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelVersion: 3.6.2.5</span></span>
-<span><span class="co">#&gt; → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f</span></span>
-<span><span class="co">#&gt; → RunName: ExampleRun</span></span>
-<span><span class="co">#&gt; → RunDigest: fe83202b767917d818cca7cce7502b93</span></span></code></pre></div>
-<p>We can now extract an output table from the <code>Tables</code> field in the model run object (<code>example_run$Tables</code>).</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">Breast_Cancer_Cases_Table</span></span>
-<span><span class="co">#&gt; # A tibble: 8,177 × 4</span></span>
-<span><span class="co">#&gt;    expr_name                        Province                   Year expr_value</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                            &lt;chr&gt;                     &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2015          0</span></span>
-<span><span class="co">#&gt;  2 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2016          0</span></span>
-<span><span class="co">#&gt;  3 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2017          0</span></span>
-<span><span class="co">#&gt;  4 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2018          0</span></span>
-<span><span class="co">#&gt;  5 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2019          0</span></span>
-<span><span class="co">#&gt;  6 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2020          0</span></span>
-<span><span class="co">#&gt;  7 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2021          0</span></span>
-<span><span class="co">#&gt;  8 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2022          0</span></span>
-<span><span class="co">#&gt;  9 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2023          0</span></span>
-<span><span class="co">#&gt; 10 Incidence_of_i_x_d_DCIS_combined Newfoundland_and_Labrador  2024          0</span></span>
-<span><span class="co">#&gt; # ℹ 8,167 more rows</span></span></code></pre></div>
-<p>Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">breast_runs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_runs.html">load_runs</a></span><span class="op">(</span><span class="st">'OncoSimX-breast'</span>, <span class="va">breast</span><span class="op">$</span><span class="va">ModelRuns</span><span class="op">$</span><span class="va">RunDigest</span><span class="op">)</span></span>
-<span><span class="va">breast_runs</span></span>
-<span><span class="co">#&gt; ── OncoSimX ModelRunSet ────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; → ModelName: OncoSimX-breast</span></span>
-<span><span class="co">#&gt; → ModelVersion: 3.6.2.5</span></span>
-<span><span class="co">#&gt; → ModelDigest: 742b985b8c3b685b2cd97f17255f5d5f</span></span>
-<span><span class="co">#&gt; → RunNames: [Default_first_run_32M_cases_12_subs, ExampleRun]</span></span>
-<span><span class="co">#&gt; → RunDigests: [9f9890c641e0c43d5fd439591106f8fa, fe83202b767917d818cca7cce7502b93]</span></span></code></pre></div>
-<p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cost_bystage</span> <span class="op">&lt;-</span> <span class="va">breast_runs</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">Breast_Cancer_Cost_ByStage_Table</span></span>
-<span><span class="va">cost_bystage</span></span>
-<span><span class="co">#&gt; # A tibble: 80 × 4</span></span>
-<span><span class="co">#&gt;    RunName                             expr_name            Stage     expr_value</span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                               &lt;chr&gt;                &lt;chr&gt;          &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt;  1 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    4.95e 8</span></span>
-<span><span class="co">#&gt;  2 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 9</span></span>
-<span><span class="co">#&gt;  3 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    3.17e 8</span></span>
-<span><span class="co">#&gt;  4 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.59e 9</span></span>
-<span><span class="co">#&gt;  5 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.06e 9</span></span>
-<span><span class="co">#&gt;  6 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.54e 9</span></span>
-<span><span class="co">#&gt;  7 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    2.77e 8</span></span>
-<span><span class="co">#&gt;  8 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    7.54e 8</span></span>
-<span><span class="co">#&gt;  9 Default_first_run_32M_cases_12_subs Total_treatment_cost Breast_c…    1.27e 9</span></span>
-<span><span class="co">#&gt; 10 Default_first_run_32M_cases_12_subs Total_treatment_cost all          1.25e10</span></span>
-<span><span class="co">#&gt; # ℹ 70 more rows</span></span></code></pre></div>
-<p>We can even plot this using <code>ggplot2</code>! Note that the number of simulation cases for <code>ExampleRun</code> is <strong>very low</strong> so the results are not to be trusted! This is only for demonstration purposes.</p>
+<code class="sourceCode R"><span><span class="va">example_run</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_run.html">load_run</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'ExampleRun'</span><span class="op">)</span></span>
+<span><span class="va">example_run</span></span>
+<span><span class="co">#&gt; ── OpenM++ ModelRun ────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; → ModelName: RiskPaths</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
+<span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span>
+<span><span class="co">#&gt; → RunName: ExampleRun</span></span>
+<span><span class="co">#&gt; → RunDigest: db233133948da72e7ce831726ff73459</span></span></code></pre></div>
+<p>We can now extract an output table from the <code>Tables</code> field in the model run object (<code>example_run$Tables</code>).</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cost_bystage</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">expr_name</span> <span class="op">==</span> <span class="st">'Total_treatment_cost'</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Stage</span>, <span class="va">expr_value</span>, fill <span class="op">=</span> <span class="va">RunName</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
+<span><span class="co">#&gt; # A tibble: 7 × 3</span></span>
+<span><span class="co">#&gt;   expr_name Dim0                   expr_value</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Expr0     US_NEVER_IN_UNION         1205.  </span></span>
+<span><span class="co">#&gt; 2 Expr0     US_FIRST_UNION_PERIOD1    2944.  </span></span>
+<span><span class="co">#&gt; 3 Expr0     US_FIRST_UNION_PERIOD2     333.  </span></span>
+<span><span class="co">#&gt; 4 Expr0     US_AFTER_FIRST_UNION        10.0 </span></span>
+<span><span class="co">#&gt; 5 Expr0     US_SECOND_UNION             72.0 </span></span>
+<span><span class="co">#&gt; 6 Expr0     US_AFTER_SECOND_UNION        1.00</span></span>
+<span><span class="co">#&gt; 7 Expr0     all                       4565.</span></span></code></pre></div>
+<p>Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rp_runs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_runs.html">load_runs</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="va">rp</span><span class="op">$</span><span class="va">ModelRuns</span><span class="op">$</span><span class="va">RunDigest</span><span class="op">)</span></span>
+<span><span class="va">rp_runs</span></span>
+<span><span class="co">#&gt; ── OpenM++ ModelRunSet ─────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; → ModelName: RiskPaths</span></span>
+<span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
+<span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span>
+<span><span class="co">#&gt; → RunNames: [RiskPaths_Default, ExampleRun, ExampleRun]</span></span>
+<span><span class="co">#&gt; → RunDigests: [9a6bf761db1a7f27b91fc1d56c0e6d0e, db233133948da72e7ce831726ff73459, 890006eaf5fc25cd2d8c928a204c104d]</span></span></code></pre></div>
+<p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">births</span> <span class="op">&lt;-</span> <span class="va">rp_runs</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
+<span><span class="va">births</span></span>
+<span><span class="co">#&gt; # A tibble: 21 × 4</span></span>
+<span><span class="co">#&gt;    RunName           expr_name Dim0                   expr_value</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt;                       &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 RiskPaths_Default Expr0     US_NEVER_IN_UNION           1285 </span></span>
+<span><span class="co">#&gt;  2 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD1      2986 </span></span>
+<span><span class="co">#&gt;  3 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD2       293 </span></span>
+<span><span class="co">#&gt;  4 RiskPaths_Default Expr0     US_AFTER_FIRST_UNION          11 </span></span>
+<span><span class="co">#&gt;  5 RiskPaths_Default Expr0     US_SECOND_UNION               57 </span></span>
+<span><span class="co">#&gt;  6 RiskPaths_Default Expr0     US_AFTER_SECOND_UNION          1 </span></span>
+<span><span class="co">#&gt;  7 RiskPaths_Default Expr0     all                         4633 </span></span>
+<span><span class="co">#&gt;  8 ExampleRun        Expr0     US_NEVER_IN_UNION           1205.</span></span>
+<span><span class="co">#&gt;  9 ExampleRun        Expr0     US_FIRST_UNION_PERIOD1      2944.</span></span>
+<span><span class="co">#&gt; 10 ExampleRun        Expr0     US_FIRST_UNION_PERIOD2       333.</span></span>
+<span><span class="co">#&gt; # ℹ 11 more rows</span></span></code></pre></div>
+<p>We can even plot this using <code>ggplot2</code>! Note that the number of simulation cases for <code>ExampleRun</code> is <strong>low</strong> so the results are not to be trusted! This is only for demonstration purposes.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">births</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Dim0</span>, <span class="va">expr_value</span>, fill <span class="op">=</span> <span class="va">RunName</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_col</span><span class="op">(</span>position <span class="op">=</span> <span class="fu">position_dodge</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">'Breast Cancer Costs ($)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">'Number of births by union'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">coord_flip</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">'bottom'</span><span class="op">)</span></span></code></pre></div>
@@ -311,14 +316,14 @@
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
-<p>Please note that the <code>oncosimx</code> project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the <code>openmpp</code> project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/oncology-outcomes/oncosimx/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/oncology-outcomes/oncosimx/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/oncology-outcomes/openmpp/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/oncology-outcomes/openmpp/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -340,7 +345,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing oncosimx</a></li>
+<li><a href="authors.html#citation">Citing openmpp</a></li>
 </ul>
 </div>
 
@@ -355,7 +360,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://github.com/oncology-outcomes/oncosimx/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/oncology-outcomes/oncosimx/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
