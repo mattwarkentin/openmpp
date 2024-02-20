@@ -6,10 +6,10 @@
 \title{Run Configuration Options}
 \usage{
 opts_run(
-  SimulationCases = "5000",
-  SubValues = "12",
-  RunStamp = NULL,
-  Tables = list(),
+  SimulationCases = 5000,
+  SubValues = 12,
+  RunStamp = TimeStamp(),
+  Opts = list(),
   ...
 )
 
@@ -20,11 +20,11 @@ opts_run(
 
 \item{SubValues}{Number of sub values. Default is 12.}
 
-\item{RunStamp}{Run stamp.}
+\item{RunStamp}{Run stamp. Default is generated based on the current time.}
 
-\item{Tables}{List of tables to output.}
+\item{Opts}{Additional options to pass to the \code{Opts} list component.}
 
-\item{...}{Not currently used.}
+\item{...}{Any other run options.}
 
 \item{x}{Object to print.}
 }

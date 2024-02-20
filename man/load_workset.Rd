@@ -224,7 +224,7 @@ Self, invisibly.
 \if{html}{\out{<a id="method-OpenMppWorkset-run"></a>}}
 \if{latex}{\out{\hypertarget{method-OpenMppWorkset-run}{}}}
 \subsection{Method \code{run()}}{
-Run scenario
+Initiate a model run for the model workset/scenario.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppWorkset$run(
   name,
@@ -240,7 +240,7 @@ Run scenario
 \describe{
 \item{\code{name}}{Run name.}
 
-\item{\code{opts}}{Run options.}
+\item{\code{opts}}{Run options. See \code{\link[=opts_run]{opts_run()}} for more details.}
 
 \item{\code{wait}}{Logical. Should we wait until the model run is done?}
 

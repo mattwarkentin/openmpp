@@ -206,9 +206,9 @@ OpenMppWorkset <-
       },
 
       #' @description
-      #' Run scenario
+      #' Initiate a model run for the model workset/scenario.
       #' @param name Run name.
-      #' @param opts Run options.
+      #' @param opts Run options. See [opts_run()] for more details.
       #' @param wait Logical. Should we wait until the model run is done?
       #' @param wait_time Number of seconds to wait between status checks.
       #' @param progress Logical. Should a progress bar be shown?
@@ -218,6 +218,8 @@ OpenMppWorkset <-
         if (rlang::is_false(self$ReadOnly)) {
           rlang::abort('Workset must be read-only to initiate a run.')
         }
+
+        rlang::check_required(name)
 
         if (name %in% self$ModelRuns$Name) {
           rlang::abort('ModelRun name already in use, choose a different name.')
