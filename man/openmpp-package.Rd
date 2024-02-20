@@ -6,8 +6,6 @@
 \alias{openmpp-package}
 \title{openmpp: Programmatic interface to OpenM++}
 \description{
-\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
-
 This package provides a programmatic interface to the OpenM++ microsimulation platform.
 }
 \seealso{

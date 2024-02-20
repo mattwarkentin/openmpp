@@ -4,7 +4,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -162,11 +162,10 @@ get_worksets('RiskPaths')
 
 ``` r
 get_runs('RiskPaths')
-#> # A tibble: 2 × 15
+#> # A tibble: 1 × 15
 #>   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount
 #>   <chr>     <chr>                <chr>        <chr>               <chr>    <int>
 #> 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Risk…        1
-#> 2 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Exam…       12
 #> # ℹ 9 more variables: SubStarted <int>, SubCompleted <int>,
 #> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunId <int>,
 #> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>
@@ -268,7 +267,7 @@ example_run
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
 #> → RunName: ExampleRun
-#> → RunDigest: db233133948da72e7ce831726ff73459
+#> → RunDigest: 3cd6aa785ea8f2373107295d5b6e6d44
 ```
 
 We can now extract an output table from the `Tables` field in the model
@@ -299,8 +298,8 @@ rp_runs
 #> → ModelName: RiskPaths
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
-#> → RunNames: [RiskPaths_Default, ExampleRun, ExampleRun]
-#> → RunDigests: [9a6bf761db1a7f27b91fc1d56c0e6d0e, db233133948da72e7ce831726ff73459, 890006eaf5fc25cd2d8c928a204c104d]
+#> → RunNames: [RiskPaths_Default, ExampleRun]
+#> → RunDigests: [9a6bf761db1a7f27b91fc1d56c0e6d0e, 3cd6aa785ea8f2373107295d5b6e6d44]
 ```
 
 We will extract a new table from both models. Note that an extra column,
@@ -310,20 +309,23 @@ corresponds to.
 ``` r
 births <- rp_runs$Tables$T06_BirthsByUnion
 births
-#> # A tibble: 21 × 4
+#> # A tibble: 14 × 4
 #>    RunName           expr_name Dim0                   expr_value
 #>    <chr>             <chr>     <chr>                       <dbl>
-#>  1 RiskPaths_Default Expr0     US_NEVER_IN_UNION           1285 
-#>  2 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD1      2986 
-#>  3 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD2       293 
-#>  4 RiskPaths_Default Expr0     US_AFTER_FIRST_UNION          11 
-#>  5 RiskPaths_Default Expr0     US_SECOND_UNION               57 
-#>  6 RiskPaths_Default Expr0     US_AFTER_SECOND_UNION          1 
-#>  7 RiskPaths_Default Expr0     all                         4633 
-#>  8 ExampleRun        Expr0     US_NEVER_IN_UNION           1205.
-#>  9 ExampleRun        Expr0     US_FIRST_UNION_PERIOD1      2944.
-#> 10 ExampleRun        Expr0     US_FIRST_UNION_PERIOD2       333.
-#> # ℹ 11 more rows
+#>  1 RiskPaths_Default Expr0     US_NEVER_IN_UNION         1285   
+#>  2 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD1    2986   
+#>  3 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD2     293   
+#>  4 RiskPaths_Default Expr0     US_AFTER_FIRST_UNION        11   
+#>  5 RiskPaths_Default Expr0     US_SECOND_UNION             57   
+#>  6 RiskPaths_Default Expr0     US_AFTER_SECOND_UNION        1   
+#>  7 RiskPaths_Default Expr0     all                       4633   
+#>  8 ExampleRun        Expr0     US_NEVER_IN_UNION         1205.  
+#>  9 ExampleRun        Expr0     US_FIRST_UNION_PERIOD1    2944.  
+#> 10 ExampleRun        Expr0     US_FIRST_UNION_PERIOD2     333.  
+#> 11 ExampleRun        Expr0     US_AFTER_FIRST_UNION        10.0 
+#> 12 ExampleRun        Expr0     US_SECOND_UNION             72.0 
+#> 13 ExampleRun        Expr0     US_AFTER_SECOND_UNION        1.00
+#> 14 ExampleRun        Expr0     all                       4565.
 ```
 
 We can even plot this using `ggplot2`! Note that the number of
