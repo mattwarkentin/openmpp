@@ -219,12 +219,15 @@ OpenMppWorkset <-
           rlang::abort('Workset must be read-only to initiate a run.')
         }
 
+        if (name %in% self$ModelRuns$Name) {
+          rlang::abort('ModelRun name already in use, choose a different name.')
+        }
+
         if (!inherits(opts, 'OpenMppRunOpts')) {
           rlang::abort('`opts` argument must be an `openmpp::opts_run()` object')
         }
 
-        if (rlang::is_null(self$BaseRunDigest) |
-            nchar(self$BaseRunDigest) == 0) {
+        if (rlang::is_null(self$BaseRunDigest) | nchar(self$BaseRunDigest) == 0) {
           rlang::abort('Cannot find base run. Consider setting a base run with `$set_base_digest()`.')
         }
 
@@ -232,7 +235,8 @@ OpenMppWorkset <-
         opts$ModelDigest = self$ModelDigest
         opts$Opts$OpenM.BaseRunDigest = self$BaseRunDigest
         opts$Opts$OpenM.SetName = self$WorksetName
-        run_info <- run_model(opts)
+
+        run_model(opts)
 
         run_stamp <- opts$RunStamp
         max_sim <- as.integer(opts$Opts$Parameter.SimulationCases)
