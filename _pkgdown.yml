@@ -1,3 +1,35 @@
 url: https://oncology-outcomes.github.io/openmpp/
 template:
   bootstrap: 5
+reference:
+- title: API Connections
+  contents:
+    - 'use_OpenMpp_local'
+    - 'use_OpenMpp_remote'
+- title: Class Accessors
+  contents:
+    - 'load_model'
+    - 'load_workset'
+    - 'load_scenario'
+    - 'load_model_run'
+    - 'load_run'
+    - 'load_model_runs'
+    - 'load_runs'
+- title: Miscellaneous
+  contents:
+    - 'create_workset'
+    - 'create_scenario'
+    - 'get_workset'
+    - 'get_worksets'
+    - 'get_scenarios'
+    - 'get_model'
+    - 'get_models'
+    - 'get_model_run'
+    - 'get_run'
+    - 'get_model_runs'
+    - 'get_runs'
+    - 'delete_workset'
+    - 'delete_scenario'
+    - 'delete_model_run'
+    - 'delete_run'
+    - 'opts_run'
