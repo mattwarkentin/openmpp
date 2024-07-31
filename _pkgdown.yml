@@ -9,7 +9,7 @@ reference:
 - title: Class Accessors
   contents:
     - load_model
-    - load_workset'
+    - load_workset
     - load_scenario
     - load_model_run
     - load_run
