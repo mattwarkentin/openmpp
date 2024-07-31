@@ -94,6 +94,39 @@ OpenMppModelRun <-
       },
 
       #' @description
+      #' Retrieve a table calculation.
+      #' @param name Table name.
+      #' @param calc Name of calculation. One of `"avg"`, `"sum"`, `"count"`,
+      #'   `"max"`, `"min"`, `"var"`, `"sd"`, `"se"`, or `"cv"`.
+      #' @return A `tibble`.
+      get_table_calc = function(name, calc) {
+        if (name %in% private$.tables) {
+          tbl <- get_run_table_calc_csv(self$ModelDigest, self$RunDigest, name, calc)
+          suppressWarnings(tbl$calc_value <- as.numeric(tbl$calc_value))
+          return(tbl)
+        }
+        abort_msg <- glue::glue('Table `{name}` is not available for model run.')
+        rlang::abort(abort_msg)
+      },
+
+      #' @description
+      #' Retrieve a table comparison.
+      #' @param name Table name.
+      #' @param compare Comparison to calculate. One of `"diff"`, `"ratio"`, or
+      #'   `"percent"`.
+      #' @param variant Run digest, name, or stamp for the variant model run.
+      #' @return A `tibble`.
+      get_table_comparison = function(name, compare, variant) {
+        if (name %in% private$.tables) {
+          tbl <- get_run_table_comparison_csv(self$ModelDigest, self$RunDigest, name, compare, variant)
+          suppressWarnings(tbl$calc_value <- as.numeric(tbl$calc_value))
+          return(tbl)
+        }
+        abort_msg <- glue::glue('Table `{name}` is not available for model run.')
+        rlang::abort(abort_msg)
+      },
+
+      #' @description
       #' Write an output table to disk (CSV).
       #' @param name Table name.
       #' @param file File path.

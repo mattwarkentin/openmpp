@@ -62,6 +62,8 @@ OpenM++ ModelRun Class
 \item \href{#method-OpenMppModelRun-new}{\code{OpenMppModelRun$new()}}
 \item \href{#method-OpenMppModelRun-print}{\code{OpenMppModelRun$print()}}
 \item \href{#method-OpenMppModelRun-get_table}{\code{OpenMppModelRun$get_table()}}
+\item \href{#method-OpenMppModelRun-get_table_calc}{\code{OpenMppModelRun$get_table_calc()}}
+\item \href{#method-OpenMppModelRun-get_table_comparison}{\code{OpenMppModelRun$get_table_comparison()}}
 \item \href{#method-OpenMppModelRun-write_table}{\code{OpenMppModelRun$write_table()}}
 \item \href{#method-OpenMppModelRun-write_tables}{\code{OpenMppModelRun$write_tables()}}
 \item \href{#method-OpenMppModelRun-get_log}{\code{OpenMppModelRun$get_log()}}
@@ -123,6 +125,54 @@ Retrieve a table.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{Table name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OpenMppModelRun-get_table_calc"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-get_table_calc}{}}}
+\subsection{Method \code{get_table_calc()}}{
+Retrieve a table calculation.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$get_table_calc(name, calc)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+
+\item{\code{calc}}{Name of calculation. One of \code{"avg"}, \code{"sum"}, \code{"count"},
+\code{"max"}, \code{"min"}, \code{"var"}, \code{"sd"}, \code{"se"}, or \code{"cv"}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OpenMppModelRun-get_table_comparison"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-get_table_comparison}{}}}
+\subsection{Method \code{get_table_comparison()}}{
+Retrieve a table comparison.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$get_table_comparison(name, compare, variant)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+
+\item{\code{compare}}{Comparison to calculate. One of \code{"diff"}, \code{"ratio"}, or
+\code{"percent"}.}
+
+\item{\code{variant}}{Run digest, name, or stamp for the variant model run.}
 }
 \if{html}{\out{</div>}}
 }

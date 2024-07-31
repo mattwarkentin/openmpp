@@ -60,6 +60,7 @@ OpenM++ ModelRunSet Class
 \item \href{#method-OpenMppModelRunSet-new}{\code{OpenMppModelRunSet$new()}}
 \item \href{#method-OpenMppModelRunSet-print}{\code{OpenMppModelRunSet$print()}}
 \item \href{#method-OpenMppModelRunSet-get_table}{\code{OpenMppModelRunSet$get_table()}}
+\item \href{#method-OpenMppModelRunSet-get_table_calc}{\code{OpenMppModelRunSet$get_table_calc()}}
 \item \href{#method-OpenMppModelRunSet-write_table}{\code{OpenMppModelRunSet$write_table()}}
 \item \href{#method-OpenMppModelRunSet-write_tables}{\code{OpenMppModelRunSet$write_tables()}}
 }
@@ -119,6 +120,29 @@ Retrieve a table.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{name}}{Table name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OpenMppModelRunSet-get_table_calc"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRunSet-get_table_calc}{}}}
+\subsection{Method \code{get_table_calc()}}{
+Retrieve a table calculation.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRunSet$get_table_calc(name, calc)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+
+\item{\code{calc}}{Name of calculation. One of \code{"avg"}, \code{"sum"}, \code{"count"},
+\code{"max"}, \code{"min"}, \code{"var"}, \code{"sd"}, \code{"se"}, or \code{"cv"}.}
 }
 \if{html}{\out{</div>}}
 }

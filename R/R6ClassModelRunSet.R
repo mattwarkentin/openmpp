@@ -84,6 +84,17 @@ OpenMppModelRunSet <-
       },
 
       #' @description
+      #' Retrieve a table calculation.
+      #' @param name Table name.
+      #' @param calc Name of calculation. One of `"avg"`, `"sum"`, `"count"`,
+      #'   `"max"`, `"min"`, `"var"`, `"sd"`, `"se"`, or `"cv"`.
+      #' @return A `tibble`.
+      get_table_calc = function(name, calc) {
+        purrr::map(private$.runs, \(run) run$get_table_calc(name, calc)) |>
+          purrr::list_rbind(names_to = 'RunName')
+      },
+
+      #' @description
       #' Write an output table to disk (CSV).
       #' @param name Table name.
       #' @param file File path.
