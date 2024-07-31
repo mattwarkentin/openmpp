@@ -4,9 +4,9 @@
 \name{openmpp-package}
 \alias{openmpp}
 \alias{openmpp-package}
-\title{openmpp: Programmatic interface to OpenM++}
+\title{openmpp: Programmatic Interface to OpenM++}
 \description{
-This package provides a programmatic interface to the OpenM++ microsimulation platform.
+A programmatic interface to the OpenM++ microsimulation platform.
 }
 \seealso{
 Useful links:
