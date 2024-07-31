@@ -15,7 +15,7 @@ reference:
     - 'load_run'
     - 'load_model_runs'
     - 'load_runs'
-- title: Miscellaneous
+- title: Helpers
   contents:
     - 'create_workset'
     - 'create_scenario'
@@ -33,3 +33,6 @@ reference:
     - 'delete_model_run'
     - 'delete_run'
     - 'opts_run'
+- title: All Functions
+  contents:
+      - 'matches(.*)'
