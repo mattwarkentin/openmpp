@@ -1,6 +1,5 @@
 test_that("Tests OpenMppModel class", {
   skip_on_cran()
-  skip_on_ci()
 
   # Setup
   use_OpenMpp_remote()
