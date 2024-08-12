@@ -1,6 +1,6 @@
 Package: openmpp
 Title: Programmatic Interface to OpenM++
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Matthew T.", "Warkentin", , "matthew.warkentin@ucalgary.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8730-3511"))
@@ -8,7 +8,7 @@ Description: A programmatic interface to the OpenM++ microsimulation platform.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2.9000
 Depends:
   R (>= 4.1.0)
 Imports: 
@@ -30,6 +30,11 @@ BugReports: https://github.com/oncology-outcomes/openmpp/issues
 Collate: 
     'APIConnections.R'
     'Admin.R'
+    'Utils.R'
+    'ClassModel.R'
+    'ClassModelRun.R'
+    'ClassModelRunSet.R'
+    'ClassWorkset.R'
     'Downloads.R'
     'ModelExtras.R'
     'ModelMetadata.R'
@@ -39,11 +44,6 @@ Collate:
     'ModelWorkset.R'
     'OutputTables.R'
     'Parameters.R'
-    'Utils.R'
-    'R6ClassModel.R'
-    'R6ClassModelRun.R'
-    'R6ClassModelRunSet.R'
-    'R6ClassWorkset.R'
     'RunMicrodata.R'
     'RunModels.R'
     'RunOptions.R'
@@ -53,3 +53,6 @@ Collate:
     'User.R'
     'openmpp-package.R'
     'zzz.R'
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

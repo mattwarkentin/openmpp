@@ -4,18 +4,27 @@
 \alias{get_user_views}
 \alias{set_user_views}
 \alias{delete_user_views}
-\title{Manage OpenM++ User Settings}
+\alias{get_user_files}
+\title{Manage OpenM++ User Files or Settings}
 \usage{
 get_user_views(model)
 
 set_user_views(model, data)
 
 delete_user_views(model)
+
+get_user_files(ext = "*", path = "")
 }
 \arguments{
 \item{model}{Model digest or model name.}
 
 \item{data}{Data used for the body of the request.}
+
+\item{ext}{Comma-separated string of file extensions. Default is \code{"*"} which
+returns all files.}
+
+\item{path}{Optional file path. Default is \code{""} (empty) and returns the
+entire tree of user files.}
 }
 \value{
 A \code{list} from JSON response object or nothing (invisibly).
