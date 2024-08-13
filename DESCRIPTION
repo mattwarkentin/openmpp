@@ -24,9 +24,9 @@ Imports:
     tibble,
     tidyr,
     tidyselect
-URL: https://github.com/oncology-outcomes/openmpp,
-    https://oncology-outcomes.github.io/openmpp/
-BugReports: https://github.com/oncology-outcomes/openmpp/issues
+URL: https://github.com/mattwarkentin/openmpp,
+    https://mattwarkentin.github.io/openmpp/
+BugReports: https://github.com/mattwarkentin/openmpp/issues
 Collate: 
     'APIConnections.R'
     'Admin.R'
