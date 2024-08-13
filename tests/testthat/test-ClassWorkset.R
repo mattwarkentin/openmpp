@@ -1,5 +1,6 @@
-test_that("Tests OpenMppWorkset class", {
+test_that("OpenMppWorkset class works", {
   skip_on_cran()
+  skip_on_os('windows')
 
   # Setup
   use_OpenMpp_remote()

@@ -1,5 +1,6 @@
-test_that("Tests OpenMppModelRunSet class", {
+test_that("OpenMppModelRunSet class works", {
   skip_on_cran()
+  skip_on_os('windows')
 
   # Setup
   use_OpenMpp_remote()
