@@ -58,7 +58,7 @@
 <p>You can install the development version of <code>openmpp</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"oncology-outcomes/openmpp"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mattwarkentin/openmpp"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -143,27 +143,27 @@
 <p>Let’s see what models are available:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_model.html">get_models</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 22 × 7</span></span>
+<span><span class="co">#&gt; # A tibble: 34 × 7</span></span>
 <span><span class="co">#&gt;    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode</span></span>
 <span><span class="co">#&gt;      &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;          </span></span>
-<span><span class="co">#&gt;  1     101 OncoSimX-allcanc… c1d97…     0 3.6.2.5 2023-11-03 18… EN             </span></span>
-<span><span class="co">#&gt;  2     101 OncoSimX-breast   742b9…     0 3.6.2.5 2023-11-03 18… EN             </span></span>
-<span><span class="co">#&gt;  3     101 OncoSimX-cervical 72c69…     0 3.6.2.5 2023-11-03 19… EN             </span></span>
-<span><span class="co">#&gt;  4     101 OncoSimX-colorec… 6802a…     0 3.6.2.5 2023-11-03 19… EN             </span></span>
-<span><span class="co">#&gt;  5     101 OncoSimX-gmm      46607…     0 3.6.2.5 2023-11-03 19… EN             </span></span>
-<span><span class="co">#&gt;  6     101 OncoSimX-lung     f3611…     0 3.6.2.5 2023-11-03 19… EN             </span></span>
-<span><span class="co">#&gt;  7     101 OncoSimX-allcanc… 41146…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
-<span><span class="co">#&gt;  8     101 OncoSimX-breast   55c8b…     0 3.6.2.4 2023-09-20 17… EN             </span></span>
-<span><span class="co">#&gt;  9     101 OncoSimX-cervical bb3b5…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
-<span><span class="co">#&gt; 10     101 OncoSimX-colorec… 36999…     0 3.6.2.4 2023-09-20 18… EN             </span></span>
-<span><span class="co">#&gt; # ℹ 12 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt;  1     101 OncoSim-allcance… 24892…     0 3.6.4.4 2024-08-09 16… EN             </span></span>
+<span><span class="co">#&gt;  2     101 OncoSim-breast    e1f97…     0 3.6.4.4 2024-08-09 15… EN             </span></span>
+<span><span class="co">#&gt;  3     101 OncoSim-cervical  a9583…     0 3.6.4.4 2024-08-09 15… EN             </span></span>
+<span><span class="co">#&gt;  4     101 OncoSim-colorect… 0636a…     0 3.6.4.4 2024-08-09 15… EN             </span></span>
+<span><span class="co">#&gt;  5     101 OncoSim-gmm       5dc68…     0 3.6.4.4 2024-08-09 15… EN             </span></span>
+<span><span class="co">#&gt;  6     101 OncoSim-lung      de02f…     0 3.6.4.4 2024-08-09 16… EN             </span></span>
+<span><span class="co">#&gt;  7     101 OncoSim-allcance… a746a…     0 3.6.3.9 2024-03-19 13… EN             </span></span>
+<span><span class="co">#&gt;  8     101 OncoSim-breast    4f35e…     0 3.6.3.9 2024-03-19 12… EN             </span></span>
+<span><span class="co">#&gt;  9     101 OncoSim-cervical  c851a…     0 3.6.3.9 2024-03-19 13… EN             </span></span>
+<span><span class="co">#&gt; 10     101 OncoSim-colorect… 52248…     0 3.6.3.9 2024-03-19 13… EN             </span></span>
+<span><span class="co">#&gt; # ℹ 24 more rows</span></span></code></pre></div>
 <p>We can now see what worksets and model runs exist for a given model.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_workset.html">get_worksets</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 10</span></span>
 <span><span class="co">#&gt;   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;        </span></span>
-<span><span class="co">#&gt; 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2022-03-07 23:23:3… Defa… ""           </span></span>
+<span><span class="co">#&gt; 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2024-02-16 20:32:4… Defa… ""           </span></span>
 <span><span class="co">#&gt; # ℹ 4 more variables: IsReadonly &lt;lgl&gt;, UpdateDateTime &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   IsCleanBaseRun &lt;lgl&gt;, Txt &lt;list&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -171,7 +171,7 @@
 <span><span class="co">#&gt; # A tibble: 1 × 15</span></span>
 <span><span class="co">#&gt;   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;    &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Risk…        1</span></span>
+<span><span class="co">#&gt; 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2024-02-16 20:32:4… Risk…        1</span></span>
 <span><span class="co">#&gt; # ℹ 9 more variables: SubStarted &lt;int&gt;, SubCompleted &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   CreateDateTime &lt;chr&gt;, Status &lt;chr&gt;, UpdateDateTime &lt;chr&gt;, RunId &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   RunDigest &lt;chr&gt;, ValueDigest &lt;chr&gt;, RunStamp &lt;chr&gt;</span></span></code></pre></div>
@@ -203,7 +203,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span>
 <span><span class="co">#&gt; → RunName: RiskPaths_Default</span></span>
-<span><span class="co">#&gt; → RunDigest: 9a6bf761db1a7f27b91fc1d56c0e6d0e</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: 134517d057d2008d01c9dbc418247ae3</span></span></code></pre></div>
 <p>We will create a new scenario based on the parameters from the <code>RiskPaths_Default</code> model run.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/create_scenario.html">create_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'MyNewScenario'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span></code></pre></div>
@@ -235,7 +235,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span>
 <span><span class="co">#&gt; → RunName: ExampleRun</span></span>
-<span><span class="co">#&gt; → RunDigest: 3cd6aa785ea8f2373107295d5b6e6d44</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: 204a176d2c10350a58d7b3ba9cca235b</span></span></code></pre></div>
 <p>We can now extract an output table from the <code>Tables</code> field in the model run object (<code>example_run$Tables</code>).</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
@@ -258,7 +258,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span>
 <span><span class="co">#&gt; → RunNames: [RiskPaths_Default, ExampleRun]</span></span>
-<span><span class="co">#&gt; → RunDigests: [9a6bf761db1a7f27b91fc1d56c0e6d0e, 3cd6aa785ea8f2373107295d5b6e6d44]</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigests: [134517d057d2008d01c9dbc418247ae3, 204a176d2c10350a58d7b3ba9cca235b]</span></span></code></pre></div>
 <p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">births</span> <span class="op">&lt;-</span> <span class="va">rp_runs</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
@@ -340,7 +340,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
-<li><a href="https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
