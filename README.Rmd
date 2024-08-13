@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![R-CMD-check](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `openmpp` is to provide a programmatic interface to the OpenM++ API directly from R to simplify creating scenarios, running models, and gathering results for further processing.
@@ -26,7 +26,7 @@ You can install the development version of `openmpp` from [GitHub](https://githu
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("oncology-outcomes/openmpp")
+remotes::install_github("mattwarkentin/openmpp")
 ```
 
 ## Usage

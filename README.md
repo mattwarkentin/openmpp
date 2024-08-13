@@ -5,7 +5,7 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![R-CMD-check](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/oncology-outcomes/openmpp/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `openmpp` is to provide a programmatic interface to the
@@ -19,7 +19,7 @@ You can install the development version of `openmpp` from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("oncology-outcomes/openmpp")
+remotes::install_github("mattwarkentin/openmpp")
 ```
 
 ## Usage
@@ -132,20 +132,20 @@ Let’s see what models are available:
 
 ``` r
 get_models()
-#> # A tibble: 22 × 7
+#> # A tibble: 34 × 7
 #>    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode
 #>      <int> <chr>             <chr>  <int> <chr>   <chr>          <chr>          
-#>  1     101 OncoSimX-allcanc… c1d97…     0 3.6.2.5 2023-11-03 18… EN             
-#>  2     101 OncoSimX-breast   742b9…     0 3.6.2.5 2023-11-03 18… EN             
-#>  3     101 OncoSimX-cervical 72c69…     0 3.6.2.5 2023-11-03 19… EN             
-#>  4     101 OncoSimX-colorec… 6802a…     0 3.6.2.5 2023-11-03 19… EN             
-#>  5     101 OncoSimX-gmm      46607…     0 3.6.2.5 2023-11-03 19… EN             
-#>  6     101 OncoSimX-lung     f3611…     0 3.6.2.5 2023-11-03 19… EN             
-#>  7     101 OncoSimX-allcanc… 41146…     0 3.6.2.4 2023-09-20 18… EN             
-#>  8     101 OncoSimX-breast   55c8b…     0 3.6.2.4 2023-09-20 17… EN             
-#>  9     101 OncoSimX-cervical bb3b5…     0 3.6.2.4 2023-09-20 18… EN             
-#> 10     101 OncoSimX-colorec… 36999…     0 3.6.2.4 2023-09-20 18… EN             
-#> # ℹ 12 more rows
+#>  1     101 OncoSim-allcance… 24892…     0 3.6.4.4 2024-08-09 16… EN             
+#>  2     101 OncoSim-breast    e1f97…     0 3.6.4.4 2024-08-09 15… EN             
+#>  3     101 OncoSim-cervical  a9583…     0 3.6.4.4 2024-08-09 15… EN             
+#>  4     101 OncoSim-colorect… 0636a…     0 3.6.4.4 2024-08-09 15… EN             
+#>  5     101 OncoSim-gmm       5dc68…     0 3.6.4.4 2024-08-09 15… EN             
+#>  6     101 OncoSim-lung      de02f…     0 3.6.4.4 2024-08-09 16… EN             
+#>  7     101 OncoSim-allcance… a746a…     0 3.6.3.9 2024-03-19 13… EN             
+#>  8     101 OncoSim-breast    4f35e…     0 3.6.3.9 2024-03-19 12… EN             
+#>  9     101 OncoSim-cervical  c851a…     0 3.6.3.9 2024-03-19 13… EN             
+#> 10     101 OncoSim-colorect… 52248…     0 3.6.3.9 2024-03-19 13… EN             
+#> # ℹ 24 more rows
 ```
 
 We can now see what worksets and model runs exist for a given model.
@@ -155,7 +155,7 @@ get_worksets('RiskPaths')
 #> # A tibble: 1 × 10
 #>   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest
 #>   <chr>     <chr>           <chr>        <chr>               <chr> <chr>        
-#> 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2022-03-07 23:23:3… Defa… ""           
+#> 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2024-02-16 20:32:4… Defa… ""           
 #> # ℹ 4 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
 #> #   IsCleanBaseRun <lgl>, Txt <list>
 ```
@@ -165,7 +165,7 @@ get_runs('RiskPaths')
 #> # A tibble: 1 × 15
 #>   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount
 #>   <chr>     <chr>                <chr>        <chr>               <chr>    <int>
-#> 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2022-03-07 23:23:3… Risk…        1
+#> 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2024-02-16 20:32:4… Risk…        1
 #> # ℹ 9 more variables: SubStarted <int>, SubCompleted <int>,
 #> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunId <int>,
 #> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>
@@ -207,7 +207,7 @@ rp_baserun
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
 #> → RunName: RiskPaths_Default
-#> → RunDigest: 9a6bf761db1a7f27b91fc1d56c0e6d0e
+#> → RunDigest: 134517d057d2008d01c9dbc418247ae3
 ```
 
 We will create a new scenario based on the parameters from the
@@ -267,7 +267,7 @@ example_run
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
 #> → RunName: ExampleRun
-#> → RunDigest: 3cd6aa785ea8f2373107295d5b6e6d44
+#> → RunDigest: 204a176d2c10350a58d7b3ba9cca235b
 ```
 
 We can now extract an output table from the `Tables` field in the model
@@ -299,7 +299,7 @@ rp_runs
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
 #> → RunNames: [RiskPaths_Default, ExampleRun]
-#> → RunDigests: [9a6bf761db1a7f27b91fc1d56c0e6d0e, 3cd6aa785ea8f2373107295d5b6e6d44]
+#> → RunDigests: [134517d057d2008d01c9dbc418247ae3, 204a176d2c10350a58d7b3ba9cca235b]
 ```
 
 We will extract a new table from both models. Note that an extra column,

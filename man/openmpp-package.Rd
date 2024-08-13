@@ -11,9 +11,9 @@ A programmatic interface to the OpenM++ microsimulation platform.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/oncology-outcomes/openmpp}
-  \item \url{https://oncology-outcomes.github.io/openmpp/}
-  \item Report bugs at \url{https://github.com/oncology-outcomes/openmpp/issues}
+  \item \url{https://github.com/mattwarkentin/openmpp}
+  \item \url{https://mattwarkentin.github.io/openmpp/}
+  \item Report bugs at \url{https://github.com/mattwarkentin/openmpp/issues}
 }
 
 }
