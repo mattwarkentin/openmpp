@@ -3,11 +3,16 @@
 #' Functions for performing administrative tasks.
 #'
 #' @param pause Logical. Whether to pause or resume model runs queue processing.
+#' @param path Path to model database file relative to the `models/bin` folder.
+#'   For example, the name of the model with a `".sqlite"` extension.
+#' @param name Model name. Optional for `admin_cleanup_db()`.
+#' @param model Model digest or model name.
+#' @param digest Model digest. Optional for `admin_cleanup_db()`.
 #'
-#' @return Nothing, invisibly.
+#' @return A `list` or nothing, invisibly.
 #'
 #' @export
-admin_refresh_models <- function() {
+admin_models_refresh <- function() {
   api_path <- 'api/admin/all-models/refresh'
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
@@ -16,9 +21,9 @@ admin_refresh_models <- function() {
   invisible()
 }
 
-#' @rdname admin_refresh_models
+#' @rdname admin_models_refresh
 #' @export
-admin_close_models <- function() {
+admin_models_close <- function() {
   api_path <- 'api/admin/all-models/close'
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
@@ -27,9 +32,71 @@ admin_close_models <- function() {
   invisible()
 }
 
-#' @rdname admin_refresh_models
+#' @rdname admin_models_refresh
 #' @export
-admin_pause_models <- function(pause) {
+admin_database_close <- function(model) {
+  api_path <- glue::glue('/api/admin/model/{model}/close')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('POST') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname admin_models_refresh
+#' @export
+admin_database_open <- function(path) {
+  api_path <- glue::glue('api/admin/db-file-open/{path}')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('POST') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname admin_models_refresh
+#' @export
+admin_database_cleanup <- function(path, name = NULL, digest = NULL) {
+  api_path <- glue::glue('api/admin/db-cleanup/{path}')
+
+  if (!rlang::is_null(name) & rlang::is_null(digest)) {
+    api_path <- glue::glue('{api_path}/name/{name}')
+  }
+
+  if (!rlang::is_null(name) & !rlang::is_null(digest)) {
+    api_path <- glue::glue('{api_path}/name/{name}/digest/{digest}')
+  }
+
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('POST') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname admin_models_refresh
+#' @export
+admin_cleanup_logs <- function() {
+  api_path <- '/api/admin/db-cleanup/log-all'
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname admin_models_refresh
+#' @export
+admin_cleanup_log <- function(name) {
+  api_path <- glue::glue('/api/admin/db-cleanup/log/{name}')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname admin_models_refresh
+#' @export
+admin_models_pause <- function(pause) {
   if (!rlang::is_scalar_logical(pause)) {
     rlang::abort('`pause` must be a logical (TRUE or FALSE).')
   }
@@ -41,9 +108,9 @@ admin_pause_models <- function(pause) {
   invisible()
 }
 
-#' @rdname admin_refresh_models
+#' @rdname admin_models_refresh
 #' @export
-admin_pause_all_models <- function(pause) {
+admin_models_pause_all <- function(pause) {
   if (!rlang::is_scalar_logical(pause)) {
     rlang::abort('`pause` must be a logical (TRUE or FALSE).')
   }
@@ -55,9 +122,9 @@ admin_pause_all_models <- function(pause) {
   invisible()
 }
 
-#' @rdname admin_refresh_models
+#' @rdname admin_models_refresh
 #' @export
-admin_shutdown_service <- function() {
+admin_service_shutdown <- function() {
   api_path <- 'api/admin/shutdown'
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
