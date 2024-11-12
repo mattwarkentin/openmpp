@@ -62,7 +62,15 @@ OpenMppWorkset <-
       #' @param ... Not currently used.
       #' @return Self, invisibly.
       print = function(...) {
-        super$print()
+        type <- if (self$ReadOnly) {
+          glue::glue('{self$OpenMppType} (ReadOnly)')
+        } else {
+          self$OpenMppType
+        }
+        cli::cat_rule(glue::glue('OpenM++ {type}'))
+        cli::cli_alert(paste0('ModelName: ', self$ModelName))
+        cli::cli_alert(paste0('ModelVersion: ', self$ModelVersion))
+        cli::cli_alert(paste0('ModelDigest: ', self$ModelDigest))
         cli::cli_alert(paste0('WorksetName: ', self$WorksetName))
         cli::cli_alert(paste0('BaseRunDigest: ', self$BaseRunDigest))
         invisible(self)
@@ -141,6 +149,7 @@ OpenMppWorkset <-
       #' @param names Character vector of parameter names.
       #' @return Self, invisibly.
       delete_params = function(names) {
+        private$.check_any_params()
         private$.check_modifiable()
         purrr::map(names, \(x) private$.check_param_exists(x, rlang::caller_env(3)))
         purrr::walk(
@@ -162,11 +171,9 @@ OpenMppWorkset <-
       #' @param name Parameter name.
       #' @return A `tibble`.
       get_param = function(name) {
-        if (name %in% private$.params) {
-          return(private$.pivot_wide(get_workset_param_csv(self$ModelDigest, self$WorksetName, name)))
-        }
-        abort_msg <- glue::glue('Parameter `{name}` is not available in this workset.')
-        rlang::abort(abort_msg)
+        private$.check_any_params()
+        private$.check_param_exists(name)
+        private$.pivot_wide(get_workset_param_csv(self$ModelDigest, self$WorksetName, name))
       },
 
       #' @description
@@ -175,6 +182,7 @@ OpenMppWorkset <-
       #' @param data New parameter data.
       #' @return Self, invisibly.
       set_param = function(name, data) {
+        private$.check_any_params()
         private$.check_modifiable()
         private$.check_param_exists(name)
 
@@ -230,13 +238,14 @@ OpenMppWorkset <-
         }
 
         if (rlang::is_null(self$BaseRunDigest) | nchar(self$BaseRunDigest) == 0) {
-          rlang::abort('Cannot find base run. Consider setting a base run with `$set_base_digest()`.')
+          rlang::warn('Cannot find base run. Consider setting a base run with `$set_base_digest()`.')
+        } else {
+          opts$Opts$OpenM.BaseRunDigest <- self$BaseRunDigest
         }
 
-        opts$Opts$OpenM.RunName = name
-        opts$ModelDigest = self$ModelDigest
-        opts$Opts$OpenM.BaseRunDigest = self$BaseRunDigest
-        opts$Opts$OpenM.SetName = self$WorksetName
+        opts$Opts$OpenM.RunName <- name
+        opts$ModelDigest <- self$ModelDigest
+        opts$Opts$OpenM.SetName <- self$WorksetName
 
         run_model(opts)
 
@@ -329,7 +338,15 @@ OpenMppWorkset <-
       .check_param_exists = function(param, call = rlang::caller_env()) {
         if (!param %in% private$.params) {
           rlang::abort(
-            message = 'Cannot modify a parameters that does not exit.',
+            message = glue::glue('Parameter `{param}` does not exist in this workset.'),
+            call = call
+          )
+        }
+      },
+      .check_any_params = function(call = rlang::caller_env()) {
+        if (rlang::is_null(private$.params)) {
+          rlang::abort(
+            message = 'There are no parameters available in this workset.',
             call = call
           )
         }
