@@ -5,9 +5,9 @@
 #' @param pause Logical. Whether to pause or resume model runs queue processing.
 #' @param path Path to model database file relative to the `models/bin` folder.
 #'   For example, the name of the model with a `".sqlite"` extension.
-#' @param name Model name. Optional for `admin_cleanup_db()`.
+#' @param name Model name. Optional for `admin_database_cleanup()`.
 #' @param model Model digest or model name.
-#' @param digest Model digest. Optional for `admin_cleanup_db()`.
+#' @param digest Model digest. Optional for `admin_database_cleanup()`.
 #'
 #' @return A `list` or nothing, invisibly.
 #'
@@ -96,7 +96,7 @@ admin_cleanup_log <- function(name) {
 
 #' @rdname admin_models_refresh
 #' @export
-admin_models_pause <- function(pause) {
+admin_jobs_pause <- function(pause) {
   if (!rlang::is_scalar_logical(pause)) {
     rlang::abort('`pause` must be a logical (TRUE or FALSE).')
   }
@@ -110,7 +110,7 @@ admin_models_pause <- function(pause) {
 
 #' @rdname admin_models_refresh
 #' @export
-admin_models_pause_all <- function(pause) {
+admin_jobs_pause_all <- function(pause) {
   if (!rlang::is_scalar_logical(pause)) {
     rlang::abort('`pause` must be a logical (TRUE or FALSE).')
   }
@@ -125,7 +125,7 @@ admin_models_pause_all <- function(pause) {
 #' @rdname admin_models_refresh
 #' @export
 admin_service_shutdown <- function() {
-  api_path <- 'api/admin/shutdown'
+  api_path <- 'shutdown'
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>

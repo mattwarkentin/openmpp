@@ -8,8 +8,8 @@
 \alias{admin_database_cleanup}
 \alias{admin_cleanup_logs}
 \alias{admin_cleanup_log}
-\alias{admin_models_pause}
-\alias{admin_models_pause_all}
+\alias{admin_jobs_pause}
+\alias{admin_jobs_pause_all}
 \alias{admin_service_shutdown}
 \title{OpenM++ Administrative Tasks}
 \usage{
@@ -27,9 +27,9 @@ admin_cleanup_logs()
 
 admin_cleanup_log(name)
 
-admin_models_pause(pause)
+admin_jobs_pause(pause)
 
-admin_models_pause_all(pause)
+admin_jobs_pause_all(pause)
 
 admin_service_shutdown()
 }
@@ -39,9 +39,9 @@ admin_service_shutdown()
 \item{path}{Path to model database file relative to the \code{models/bin} folder.
 For example, the name of the model with a \code{".sqlite"} extension.}
 
-\item{name}{Model name. Optional for \code{admin_cleanup_db()}.}
+\item{name}{Model name. Optional for \code{admin_database_cleanup()}.}
 
-\item{digest}{Model digest. Optional for \code{admin_cleanup_db()}.}
+\item{digest}{Model digest. Optional for \code{admin_database_cleanup()}.}
 
 \item{pause}{Logical. Whether to pause or resume model runs queue processing.}
 }
