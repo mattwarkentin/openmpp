@@ -11,6 +11,14 @@
 #'
 #' @return A `list` or nothing, invisibly.
 #'
+#' @details
+#' To find the relative `path` to a database file for cleanup with
+#'   `admin_database_cleanup(path)` or opening a database file with
+#'   `admin_database_open(path)`, users can run the `get_models_list()`
+#'   function to retrieve the list of model information and find the `DbPath`
+#'   list item. `DbPath` is the relative path to the database file. You
+#'   must replace the forward-slashes in the relative path with asterisks.
+#'
 #' @export
 admin_models_refresh <- function() {
   api_path <- 'api/admin/all-models/refresh'

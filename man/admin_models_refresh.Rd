@@ -51,3 +51,11 @@ A \code{list} or nothing, invisibly.
 \description{
 Functions for performing administrative tasks.
 }
+\details{
+To find the relative \code{path} to a database file for cleanup with
+\code{admin_database_cleanup(path)} or opening a database file with
+\code{admin_database_open(path)}, users can run the \code{get_models_list()}
+function to retrieve the list of model information and find the \code{DbPath}
+list item. \code{DbPath} is the relative path to the database file. You
+must replace the forward-slashes in the relative path with asterisks.
+}
