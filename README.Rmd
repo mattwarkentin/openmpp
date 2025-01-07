@@ -22,7 +22,7 @@ The goal of `openmpp` is to provide a programmatic interface to the OpenM++ API 
 
 ## Installation (R Package)
 
-You can install the development version of `openmpp` from [GitHub](https://github.com/) with:
+You can install the development version of `openmpp` from [GitHub](https://github.com/mattwarkentin/openmpp) with:
 
 ``` r
 # install.packages("remotes")
@@ -31,40 +31,43 @@ remotes::install_github("mattwarkentin/openmpp")
 
 ## Installation (OpenM++)
 
-If you do not have access to an existing OpenM++ server, it is possible to run a server on your workstation, which the `openmpp` package can connect to.
+If you do not have access to an existing OpenM++ server, you can download and install OpenM++ locally and run a local server on your workstation. The `openmpp` package can then connect to this local server instance.
 
 ### Download
 
-To install OpenM++, download and unzip the "source code and binaries" appropriate for your system from [GitHub](https://github.com/openmpp/main/releases/latest)
+For most users, the best way to install OpenM++ locally is to download the pre-compiled binaries. To install OpenM++, download and unzip the "Source code and binaries" appropriate for your operating system. The latest release of OpenM++ can be found here: <https://github.com/openmpp/main/releases/latest>. Pre-compiled binaries are available for Mac (Intel and Arm), Windows, and several common Linux distributions (Debian, Ubuntu, RedHat).
 
-NOTE: Windows may allow you to view the contents of the zip file without extracting, however the files must be extracted for proper function.
+NOTE: Windows may allow you to view the contents of the zip directory without extracting, however, the files must be extracted for the installation to function properly.
 
-### Running on Windows
+### Running OpenM++ on Windows
 
-Enter the OpenM++ directory using File Explorer. Right-click inside the folder and select "Open in Terminal".
+Enter the OpenM++ directory using the File Explorer. Right-click anywhere inside the folder and select "Open in Terminal".
 
-In the new Windows Terminal window, type in the following command:
+In the Windows Terminal, enter the following command:
+
 ``` cmd
 .\bin\oms.exe
 ```
-This will start the process responsible for running the web service and running models. Take note of the address listed after "Listen at:", as this will be the `OPENMPP_LOCAL_URL` to be used with the R package.
 
-### Running on MacOS
+This will start the process responsible for running the web service (OMS). Note that the address listed after __"Listen at:"__ is the local host address that will be used by the `openmpp` R package to communicate with the API. This address will be used as the `OPENMPP_LOCAL_URL`. See the Usage section for more details.
 
-Open a new MacOS Terminal window (either by using Spotlight search or by navigating to "Applications" and then "Utilities" in Finder).
+### Running OpenM++ on MacOS
 
-After unzipping the downloaded file in Finder, drag the folder into the terminal and press Enter. This will change your active directory to the OpenM++ folder.
+Open a new MacOS Terminal window (either by using Spotlight Search or by navigating to "Applications" and then "Utilities" in Finder).
 
-Type the following command into the terminal:
+After unzipping the downloaded directory in Finder, drag the folder into the terminal and press Enter. This will change your active directory to the OpenM++ folder.
+
+Enter the following command into the terminal:
+
 ``` bash
 bin/oms
 ```
-Like the Windows installation, the web service will begin running and present the "Listen at:" address for use in the R package.
 
+Similar to the Windows installation, the web service (OMS) will initiate and the local host address will be shared with the R package for API communication.
 
 ## Usage
 
-The `openmpp` package contains many functions that provide access to nearly every OpenM++ API endpoint. However, users will typically only use a smaller set of functions for most common tasks.
+The `openmpp` package contains many functions that provide access to nearly every OpenM++ API endpoint. However, users of this package will typically only use a smaller set of functions for most common tasks.
 
 ### User Authentication
 
@@ -76,9 +79,9 @@ For an API running locally, set the following environment variable in your `.Ren
 OPENMPP_LOCAL_URL=http://localhost:XXXX
 ```
 
-Where `XXXX` is the four digits corresponding to your specific local host address. If you aren't sure of your host address, you may contact the OpenM++ administrator to retrieve this information.
+Where `XXXX` is the four digits corresponding to your specific local host address (typically 4040 is used). The local host address is shown when starting the OpenM++ web service in the terminal
 
-For an API running remotely, set the following environment variables in your `.Renviron` file:
+This package also provides the ability to remotely connect to OpenM++ using JWT tokens. For an API running remotely, set the following environment variables in your `.Renviron` file:
 
 ```
 OPENMPP_REMOTE_URL=...
@@ -86,7 +89,7 @@ OPENMPP_REMOTE_USER=...
 OPENMPP_REMOTE_PWD=...
 ```
 
-Note that the URL, user name, and password should be kept confidential and not committed into version control (e.g., git).
+If you aren't sure of your remote URL or your username/password, you may contact your OpenM++ administrator to retrieve this information. Note that the URL, user name, and password should be kept confidential and not committed into version control (e.g., git).
 
 Once the environment variables are set, users may register a local or remote API connection in their R scripts.
 
@@ -140,16 +143,28 @@ There are 4 main classes you will work with when using the `openmpp` package: `O
 
 Instances of each of these 4 classes have methods and fields associated with them. You can access public methods and fields using the standard `$` subset operator (e.g., `obj$action()` or `obj$field`)
 
+### Developing New Models
+
+Developing new microsimulation or agent-based models in OpenM++ is beyond the scope of this package. In-depth information on model development can be found here: <https://github.com/openmpp/openmpp.github.io/wiki/Model-Development-Topics>.
+
 ### Example
 
-Here we will work through a very simple example of creating a new scenario, extracting parameters to change, changing parameters, running the model, and extracting results.
+Next, we will work through a very simple example of creating a new scenario, extracting parameters to change, changing parameters, running the model, and extracting results. This example will use the __RiskPaths__ model that comes with the OpenM++ software. RiskPaths is a simple, competing risk, case-based continuous time miscrosimulation model ([More Information](https://www.statcan.gc.ca/en/microsimulation/modgen/new/chap3/chap3-2)).
+
+To run this example, you must have installed OpenM++, initiated the OpenM++ web service (OMS) in the shell, and configured the R package using the instructions above.
+
+```{r echo=FALSE, message=FALSE}
+oms_path <- source(here::here('tests/testthat/setup.R'))
+
+local_initiate_oms <- source(here::here('tests/testthat/helper-oms.R'))
+
+pid <- local_initiate_oms$value(oms_path$value)
+```
 
 ```{r message=FALSE}
 library(openmpp)
-library(dplyr)
-library(ggplot2)
 
-use_OpenMpp_remote()
+use_OpenMpp_local()
 ```
 
 Let's see what models are available:
@@ -208,14 +223,16 @@ Let's reduce the fertility rate by 10% across all age groups...
 my_scenario$copy_params('AgeBaselinePreg1')
 ```
 
-```{r}
-half_rate <- my_scenario$Parameters$AgeBaselinePreg1
+```{r message=FALSE}
+library(dplyr)
 
-half_rate <-
-  half_rate |> 
+current_rates <- my_scenario$Parameters$AgeBaselinePreg1
+
+reduced_rates <-
+  current_rates |> 
   mutate(across(-sub_id, \(x) x * 0.9))
 
-my_scenario$Parameters$AgeBaselinePreg1 <- half_rate
+my_scenario$Parameters$AgeBaselinePreg1 <- reduced_rates
 ```
 
 We will now run the model and give it the name `'ExampleRun'`. We use the `wait = TRUE` flag to make sure we want for the model run to finish before returning to our R session. We use `progress = FALSE` to avoid printing progress bars in this document. Note that model runs may take a long time when the number of simulation cases is large.
@@ -257,6 +274,8 @@ births
 We can even plot this using `ggplot2`! Note that the number of simulation cases for `ExampleRun` is **low** so the results are not to be trusted! This is only for demonstration purposes.
 
 ```{r warning=FALSE}
+library(ggplot2)
+
 births |> 
   ggplot(aes(Dim0, expr_value, fill = RunName)) +
   geom_col(position = position_dodge()) +
@@ -272,7 +291,12 @@ When we are sure we no longer need a scenario or model run, we can use `delete_s
 my_scenario$ReadOnly <- FALSE
 delete_scenario('RiskPaths', 'MyNewScenario')
 delete_model_run('RiskPaths', 'ExampleRun')
+unlink(oms_path, recursive = TRUE)
 ```
+
+## Contributor Guidelines
+
+Contributions to this package are welcome. The preferred method of contribution is through a GitHub pull request. Before contributing, please file an issue to discuss the idea with the project team. More details on contributing can be found in the [CONTRIBUTING](https://github.com/mattwarkentin/openmpp/blob/main/CONTRIBUTING.md) document.
 
 ## Code of Conduct
 

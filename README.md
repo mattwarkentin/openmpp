@@ -14,7 +14,8 @@ models, and gathering results for further processing.
 
 ## Installation (R Package)
 
-You can install the development version of `openmpp` from [GitHub](https://github.com/) with:
+You can install the development version of `openmpp` from
+[GitHub](https://github.com/mattwarkentin/openmpp) with:
 
 ``` r
 # install.packages("remotes")
@@ -23,43 +24,66 @@ remotes::install_github("mattwarkentin/openmpp")
 
 ## Installation (OpenM++)
 
-If you do not have access to an existing OpenM++ server, it is possible to run a server on your workstation, which the `openmpp` package can connect to.
+If you do not have access to an existing OpenM++ server, you can
+download and install OpenM++ locally and run a local server on your
+workstation. The `openmpp` package can then connect to this local server
+instance.
 
 ### Download
 
-To install OpenM++, download and unzip the "source code and binaries" appropriate for your system from [GitHub](https://github.com/openmpp/main/releases/latest)
+For most users, the best way to install OpenM++ locally is to download
+the pre-compiled binaries. To install OpenM++, download and unzip the
+“Source code and binaries” appropriate for your operating system. The
+latest release of OpenM++ can be found here:
+<https://github.com/openmpp/main/releases/latest>. Pre-compiled binaries
+are available for Mac (Intel and Arm), Windows, and several common Linux
+distributions (Debian, Ubuntu, RedHat).
 
-NOTE: Windows may allow you to view the contents of the zip file without extracting, however the files must be extracted for proper function.
+NOTE: Windows may allow you to view the contents of the zip directory
+without extracting, however, the files must be extracted for the
+installation to function properly.
 
-### Running on Windows
+### Running OpenM++ on Windows
 
-Enter the OpenM++ directory using File Explorer. Right-click inside the folder and select "Open in Terminal".
+Enter the OpenM++ directory using the File Explorer. Right-click
+anywhere inside the folder and select “Open in Terminal”.
 
-In the new Windows Terminal window, type in the following command:
+In the Windows Terminal, enter the following command:
+
 ``` cmd
 .\bin\oms.exe
 ```
-This will start the process responsible for running the web service and running models. Take note of the address listed after "Listen at:", as this will be the `OPENMPP_LOCAL_URL` to be used with the R package.
 
-### Running on MacOS
+This will start the process responsible for running the web service
+(OMS). Note that the address listed after **“Listen at:”** is the local
+host address that will be used by the `openmpp` R package to communicate
+with the API. This address will be used as the `OPENMPP_LOCAL_URL`. See
+the Usage section for more details.
 
-Open a new MacOS Terminal window (either by using Spotlight search or by navigating to "Applications" and then "Utilities" in Finder).
+### Running OpenM++ on MacOS
 
-After unzipping the downloaded file in Finder, drag the folder into the terminal and press Enter. This will change your active directory to the OpenM++ folder.
+Open a new MacOS Terminal window (either by using Spotlight Search or by
+navigating to “Applications” and then “Utilities” in Finder).
 
-Type the following command into the terminal:
+After unzipping the downloaded directory in Finder, drag the folder into
+the terminal and press Enter. This will change your active directory to
+the OpenM++ folder.
+
+Enter the following command into the terminal:
+
 ``` bash
 bin/oms
 ```
-Like the Windows installation, the web service will begin running and present the "Listen at:" address for use in the R package.
 
-
+Similar to the Windows installation, the web service (OMS) will initiate
+and the local host address will be shared with the R package for API
+communication.
 
 ## Usage
 
 The `openmpp` package contains many functions that provide access to
-nearly every OpenM++ API endpoint. However, users will typically only
-use a smaller set of functions for most common tasks.
+nearly every OpenM++ API endpoint. However, users of this package will
+typically only use a smaller set of functions for most common tasks.
 
 ### User Authentication
 
@@ -74,18 +98,21 @@ your `.Renviron` file:
     OPENMPP_LOCAL_URL=http://localhost:XXXX
 
 Where `XXXX` is the four digits corresponding to your specific local
-host address. If you aren’t sure of your host address, you may contact
-the OpenM++ administrator to retrieve this information.
+host address (typically 4040 is used). The local host address is shown
+when starting the OpenM++ web service in the terminal
 
-For an API running remotely, set the following environment variables in
-your `.Renviron` file:
+This package also provides the ability to remotely connect to OpenM++
+using JWT tokens. For an API running remotely, set the following
+environment variables in your `.Renviron` file:
 
     OPENMPP_REMOTE_URL=...
     OPENMPP_REMOTE_USER=...
     OPENMPP_REMOTE_PWD=...
 
-Note that the URL, user name, and password should be kept confidential
-and not committed into version control (e.g., git).
+If you aren’t sure of your remote URL or your username/password, you may
+contact your OpenM++ administrator to retrieve this information. Note
+that the URL, user name, and password should be kept confidential and
+not committed into version control (e.g., git).
 
 Once the environment variables are set, users may register a local or
 remote API connection in their R scripts.
@@ -147,38 +174,48 @@ Instances of each of these 4 classes have methods and fields associated
 with them. You can access public methods and fields using the standard
 `$` subset operator (e.g., `obj$action()` or `obj$field`)
 
+### Developing New Models
+
+Developing new microsimulation or agent-based models in OpenM++ is
+beyond the scope of this package. In-depth information on model
+development can be found here:
+<https://github.com/openmpp/openmpp.github.io/wiki/Model-Development-Topics>.
+
 ### Example
 
-Here we will work through a very simple example of creating a new
+Next, we will work through a very simple example of creating a new
 scenario, extracting parameters to change, changing parameters, running
-the model, and extracting results.
+the model, and extracting results. This example will use the
+**RiskPaths** model that comes with the OpenM++ software. RiskPaths is a
+simple, competing risk, case-based continuous time miscrosimulation
+model ([More
+Information](https://www.statcan.gc.ca/en/microsimulation/modgen/new/chap3/chap3-2)).
+
+To run this example, you must have installed OpenM++, initiated the
+OpenM++ web service (OMS) in the shell, and configured the R package
+using the instructions above.
 
 ``` r
 library(openmpp)
-library(dplyr)
-library(ggplot2)
 
-use_OpenMpp_remote()
+use_OpenMpp_local()
 ```
 
 Let’s see what models are available:
 
 ``` r
 get_models()
-#> # A tibble: 34 × 7
-#>    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode
-#>      <int> <chr>             <chr>  <int> <chr>   <chr>          <chr>          
-#>  1     101 OncoSim-allcance… 24892…     0 3.6.4.4 2024-08-09 16… EN             
-#>  2     101 OncoSim-breast    e1f97…     0 3.6.4.4 2024-08-09 15… EN             
-#>  3     101 OncoSim-cervical  a9583…     0 3.6.4.4 2024-08-09 15… EN             
-#>  4     101 OncoSim-colorect… 0636a…     0 3.6.4.4 2024-08-09 15… EN             
-#>  5     101 OncoSim-gmm       5dc68…     0 3.6.4.4 2024-08-09 15… EN             
-#>  6     101 OncoSim-lung      de02f…     0 3.6.4.4 2024-08-09 16… EN             
-#>  7     101 OncoSim-allcance… a746a…     0 3.6.3.9 2024-03-19 13… EN             
-#>  8     101 OncoSim-breast    4f35e…     0 3.6.3.9 2024-03-19 12… EN             
-#>  9     101 OncoSim-cervical  c851a…     0 3.6.3.9 2024-03-19 13… EN             
-#> 10     101 OncoSim-colorect… 52248…     0 3.6.3.9 2024-03-19 13… EN             
-#> # ℹ 24 more rows
+#> # A tibble: 8 × 7
+#>   ModelId Name               Digest  Type Version CreateDateTime DefaultLangCode
+#>     <int> <chr>              <chr>  <int> <chr>   <chr>          <chr>          
+#> 1     101 IDMM               bd573…     1 2.0.0.0 2024-12-26 07… EN             
+#> 2     101 NewCaseBased       be317…     0 1.0.0.0 2024-12-26 07… EN             
+#> 3     101 NewCaseBased_bili… 2a78a…     0 1.0.0.0 2024-12-26 07… EN             
+#> 4     101 NewTimeBased       49cec…     1 1.0.1.0 2024-12-26 07… EN             
+#> 5     101 OzProjGenX         1da1c…     0 0.22.0… 2024-12-26 07… EN             
+#> 6     101 OzProjX            2e697…     0 0.22.0… 2024-12-26 07… EN             
+#> 7     101 RiskPaths          d976a…     0 3.0.0.0 2024-12-26 07… EN             
+#> 8       1 modelOne           _2012…     0 1.0     2012-08-17 16… EN
 ```
 
 We can now see what worksets and model runs exist for a given model.
@@ -188,7 +225,7 @@ get_worksets('RiskPaths')
 #> # A tibble: 1 × 10
 #>   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest
 #>   <chr>     <chr>           <chr>        <chr>               <chr> <chr>        
-#> 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2024-02-16 20:32:4… Defa… ""           
+#> 1 RiskPaths d976aa2fb999f0… 3.0.0.0      2024-12-26 07:24:5… Defa… ""           
 #> # ℹ 4 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
 #> #   IsCleanBaseRun <lgl>, Txt <list>
 ```
@@ -198,7 +235,7 @@ get_runs('RiskPaths')
 #> # A tibble: 1 × 15
 #>   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount
 #>   <chr>     <chr>                <chr>        <chr>               <chr>    <int>
-#> 1 RiskPaths d90e1e9a49a06d972ec… 3.0.0.0      2024-02-16 20:32:4… Risk…        1
+#> 1 RiskPaths d976aa2fb999f097468… 3.0.0.0      2024-12-26 07:24:5… Risk…        1
 #> # ℹ 9 more variables: SubStarted <int>, SubCompleted <int>,
 #> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunId <int>,
 #> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>
@@ -212,7 +249,7 @@ rp
 #> ── OpenM++ Model ───────────────────────────────────────────────────────────────
 #> → ModelName: RiskPaths
 #> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
+#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 ```
 
 We will now load the `Default` set of input parameters for the RiskPaths
@@ -221,10 +258,10 @@ model.
 ``` r
 rp_default <- load_scenario('RiskPaths', 'Default')
 rp_default
-#> ── OpenM++ Workset ─────────────────────────────────────────────────────────────
+#> ── OpenM++ Workset (ReadOnly) ──────────────────────────────────────────────────
 #> → ModelName: RiskPaths
 #> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
+#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → WorksetName: Default
 #> → BaseRunDigest:
 ```
@@ -238,9 +275,9 @@ rp_baserun
 #> ── OpenM++ ModelRun ────────────────────────────────────────────────────────────
 #> → ModelName: RiskPaths
 #> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
+#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunName: RiskPaths_Default
-#> → RunDigest: 134517d057d2008d01c9dbc418247ae3
+#> → RunDigest: c02d49bfda2e2ff05262ac0f0e30d830
 ```
 
 We will create a new scenario based on the parameters from the
@@ -264,13 +301,15 @@ my_scenario$copy_params('AgeBaselinePreg1')
 ```
 
 ``` r
-half_rate <- my_scenario$Parameters$AgeBaselinePreg1
+library(dplyr)
 
-half_rate <-
-  half_rate |> 
+current_rates <- my_scenario$Parameters$AgeBaselinePreg1
+
+reduced_rates <-
+  current_rates |> 
   mutate(across(-sub_id, \(x) x * 0.9))
 
-my_scenario$Parameters$AgeBaselinePreg1 <- half_rate
+my_scenario$Parameters$AgeBaselinePreg1 <- reduced_rates
 ```
 
 We will now run the model and give it the name `'ExampleRun'`. We use
@@ -298,9 +337,9 @@ example_run
 #> ── OpenM++ ModelRun ────────────────────────────────────────────────────────────
 #> → ModelName: RiskPaths
 #> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
+#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunName: ExampleRun
-#> → RunDigest: 204a176d2c10350a58d7b3ba9cca235b
+#> → RunDigest: 391a8cb878934f883dce0d769ae3634c
 ```
 
 We can now extract an output table from the `Tables` field in the model
@@ -330,9 +369,9 @@ rp_runs
 #> ── OpenM++ ModelRunSet ─────────────────────────────────────────────────────────
 #> → ModelName: RiskPaths
 #> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b
+#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunNames: [RiskPaths_Default, ExampleRun]
-#> → RunDigests: [134517d057d2008d01c9dbc418247ae3, 204a176d2c10350a58d7b3ba9cca235b]
+#> → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 391a8cb878934f883dce0d769ae3634c]
 ```
 
 We will extract a new table from both models. Note that an extra column,
@@ -366,6 +405,8 @@ simulation cases for `ExampleRun` is **low** so the results are not to
 be trusted! This is only for demonstration purposes.
 
 ``` r
+library(ggplot2)
+
 births |> 
   ggplot(aes(Dim0, expr_value, fill = RunName)) +
   geom_col(position = position_dodge()) +
@@ -375,10 +416,19 @@ births |>
   theme(legend.position = 'bottom')
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
 
 When we are sure we no longer need a scenario or model run, we can use
 `delete_scenario()` or `delete_run()` to clean things up!
+
+## Contributor Guidelines
+
+Contributions to this package are welcome. The preferred method of
+contribution is through a GitHub pull request. Before contributing,
+please file an issue to discuss the idea with the project team. More
+details on contributing can be found in the
+[CONTRIBUTING](https://github.com/mattwarkentin/openmpp/blob/main/CONTRIBUTING.md)
+document.
 
 ## Code of Conduct
 
