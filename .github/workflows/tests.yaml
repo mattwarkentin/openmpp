@@ -6,10 +6,10 @@ on:
   pull_request:
     branches: [main, master]
 
-name: R-CMD-check
+name: Testing
 
 jobs:
-  R-CMD-check:
+  Testing:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -47,5 +47,5 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v2
         with:
-          args: 'c("--no-manual", "--as-cran", "--no-tests")'
+          args: 'c("--no-manual", "--as-cran")'
           upload-snapshots: true
