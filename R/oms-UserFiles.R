@@ -1,6 +1,7 @@
 #' Manage OpenM++ User Files
 #'
-#' Functions for getting, setting, and deleting user file.
+#' Functions for getting, setting, and deleting user file. More information
+#'   about these API endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#download-and-upload-user-files).
 #'
 #' @param ext Comma-separated string of file extensions. Default is `"*"` which
 #'   returns all files.

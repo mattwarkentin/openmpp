@@ -1,6 +1,8 @@
-#' OpenM++ Model Profile
+#' Update Model Profile
 #'
 #' Functions for creating, modifying, and deleting profiles and profile options.
+#'   More information about these API endpoints can be found at
+#'   [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#update-model-profile-set-of-key-value-options).
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param

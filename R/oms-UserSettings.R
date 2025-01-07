@@ -1,6 +1,7 @@
 #' Manage OpenM++ User Settings
 #'
-#' Functions for getting, setting, and deleting user settings.
+#' Functions for getting, setting, and deleting user settings. More information
+#'   about these API endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#user-manage-user-settings).
 #'
 #' @param data Data used for the body of the request.
 #' @inheritParams get_model

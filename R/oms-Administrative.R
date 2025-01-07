@@ -1,6 +1,7 @@
 #' OpenM++ Administrative Tasks
 #'
-#' Functions for performing administrative tasks.
+#' Functions for performing administrative tasks. More information about the
+#'   administrative API endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#administrative-manage-web-service-state).
 #'
 #' @param pause Logical. Whether to pause or resume model runs queue processing.
 #' @param path Path to model database file relative to the `models/bin` folder.

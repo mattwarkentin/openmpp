@@ -1,6 +1,7 @@
-#' OpenM++ Model Runs
+#' Model Run Results Metadata
 #'
-#' Functions to retrieve model run metadata and delete model runs.
+#' Functions to retrieve model run metadata and delete model runs. More
+#'   information about these API endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-model-run-results-metadata).
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
@@ -96,18 +97,3 @@ get_model_run_status_compl <- function(model) {
     httr2::req_perform() |>
     httr2::resp_body_json()
 }
-
-#' @rdname get_model_run
-#' @export
-delete_model_run <- function(model, run) {
-  api_path <- glue::glue('/api/model/{model}/run/{run}')
-  OpenMpp$API$build_request() |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_method('DELETE') |>
-    httr2::req_perform()
-  invisible()
-}
-
-#' @rdname get_model_run
-#' @export
-delete_run <- delete_model_run

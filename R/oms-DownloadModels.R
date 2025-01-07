@@ -1,6 +1,8 @@
-#' Download model, model run results, or input parameters
+#' Download Model, Model Run Results, or Input Parameters
 #'
-#' Functions to download model, model run results, or input parameters.
+#' Functions to download model, model run results, or input parameters. More
+#'   information about these API endpoints can be found at
+#'   [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#download-model-model-run-results-or-input-parameters).
 #'
 #' @inheritParams get_model
 #' @inheritParams get_workset_param

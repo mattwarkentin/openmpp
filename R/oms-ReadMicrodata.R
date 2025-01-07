@@ -1,6 +1,7 @@
-#' OpenM++ Run Microdata
+#' Read Run Microdata
 #'
-#' Functions for retrieving microdata from model runs.
+#' Functions for retrieving microdata from model runs. More information about
+#'   these API endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#read-parameters-output-tables-or-microdata-values).
 #'
 #' @inheritParams get_model
 #' @param run Model run digest, run stamp or run name, modeling task run

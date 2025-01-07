@@ -1,6 +1,6 @@
-#' OpenM++ Service State
+#' OpenM++ Model Run Jobs and Service State
 #'
-#' Functions for retrieving or deleting service information.
+#' Functions for retrieving or deleting service information. More information about these API endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#model-run-jobs-and-service-state).
 #'
 #' @param job Model run submission time stamp.
 #' @param pos Position.

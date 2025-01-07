@@ -1,7 +1,8 @@
-#' OpenM++ Model Worksets
+#' Update Workset Metadata
 #'
 #' Functions for creating, copying, merging, retrieving, and deleting
-#'   worksets.
+#'   worksets. More information about these API endpoints can be found at
+#'   [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#update-model-workset-set-of-input-parameters).
 #'
 #' @param from Source workset name.
 #' @param readonly Boolean. Should workset be read-only?
@@ -15,59 +16,6 @@
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @export
-get_workset <- function(model, set) {
-  api_path <- glue::glue('api/model/{model}/workset/{set}/text')
-  OpenMpp$API$build_request() |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
-}
-
-#' @rdname get_workset
-#' @export
-get_worksets_list <- function(model) {
-  api_path <- glue::glue('api/model/{model}/workset-list/text')
-  OpenMpp$API$build_request() |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
-}
-
-#' @rdname get_workset
-#' @export
-get_worksets <- function(model) {
-  get_worksets_list(model) |>
-    purrr::map(purrr::compact) |>
-    purrr::map(tibble::as_tibble) |>
-    purrr::list_rbind()
-}
-
-#' @rdname get_workset
-#' @export
-get_scenarios <- get_worksets
-
-#' @rdname get_workset
-#' @export
-get_workset_status <- function(model, set) {
-  api_path <- glue::glue('api/model/{model}/workset/{set}/status')
-  OpenMpp$API$build_request() |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
-}
-
-#' @rdname get_workset
-#' @export
-get_workset_status_default <- function(model) {
-  api_path <- glue::glue('api/model/{model}/workset/status/default')
-  OpenMpp$API$build_request() |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
-}
-
-#' @rdname get_workset
-#' @export
 set_workset_readonly <- function(model, set, readonly) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/readonly/{readonly}')
   OpenMpp$API$build_request() |>
@@ -76,7 +24,7 @@ set_workset_readonly <- function(model, set, readonly) {
     httr2::req_perform()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 create_workset <- function(data) {
   api_path <- glue::glue('/api/workset-create')
@@ -88,7 +36,7 @@ create_workset <- function(data) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 merge_workset <- function(workset) {
   api_path <- glue::glue('/api/workset-merge')
@@ -102,7 +50,7 @@ merge_workset <- function(workset) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 update_workset_param_csv <- function(workset, csv) {
   api_path <- glue::glue('/api/workset-merge')
@@ -117,7 +65,7 @@ update_workset_param_csv <- function(workset, csv) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 replace_workset <- function(workset) {
   api_path <- glue::glue('/api/workset-replace')
@@ -131,7 +79,7 @@ replace_workset <- function(workset) {
     httr2::resp_body_json()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 delete_workset <- function(model, set) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}')
@@ -142,7 +90,11 @@ delete_workset <- function(model, set) {
   invisible()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
+#' @export
+delete_scenario <- delete_workset
+
+#' @rdname set_workset_readonly
 #' @export
 delete_workset_param <- function(model, set, name) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/parameter/{name}')
@@ -153,7 +105,7 @@ delete_workset_param <- function(model, set, name) {
   invisible()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 update_workset_param <- function(model, set, name, data) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/parameter/{name}/new/value')
@@ -165,7 +117,7 @@ update_workset_param <- function(model, set, name, data) {
   invisible()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 copy_param_run_to_workset <- function(model, set, name, run) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/copy/parameter/{name}/from-run/{run}')
@@ -176,7 +128,7 @@ copy_param_run_to_workset <- function(model, set, name, run) {
   invisible()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 merge_param_run_to_workset <- function(model, set, name, run) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/merge/parameter/{name}/from-run/{run}')
@@ -187,7 +139,7 @@ merge_param_run_to_workset <- function(model, set, name, run) {
   invisible()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 copy_param_workset_to_workset <- function(model, set, name, from) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/copy/parameter/{name}/from-workset/{from}')
@@ -198,7 +150,7 @@ copy_param_workset_to_workset <- function(model, set, name, from) {
   invisible()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 merge_param_workset_to_workset <- function(model, set, name, from) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/merge/parameter/{name}/from-workset/{from}')
@@ -209,7 +161,7 @@ merge_param_workset_to_workset <- function(model, set, name, from) {
   invisible()
 }
 
-#' @rdname get_workset
+#' @rdname set_workset_readonly
 #' @export
 upload_workset_params <- function(model, set, data) {
   api_path <- glue::glue('/api/upload/model/{model}/workset')

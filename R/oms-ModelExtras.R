@@ -1,7 +1,8 @@
-#' OpenM++ Model Extras
+#' Model Extras
 #'
 #' Functions for retrieving extra model information, including language lists,
-#'   word lists, profiles, and profile lists.
+#'   word lists, profiles, and profile lists. More information about these API
+#'   endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-model-extras).
 #'
 #' @inheritParams get_model
 #' @inheritParams touch_model_profile

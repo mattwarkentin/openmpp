@@ -3,7 +3,7 @@ local_install_openmpp <- function() {
   file <- basename(url)
   dir <- tempdir()
   path <- paste0(dir, '/', file)
-  download.file(url, path)
+  download.file(url, path, quiet = TRUE)
   untar(path, exdir = dir)
   unlink(path)
   new_path <- tools::file_path_sans_ext(path, compression = TRUE)

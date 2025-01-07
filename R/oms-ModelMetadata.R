@@ -1,6 +1,8 @@
-#' OpenM++ Model Metadata
+#' Model Metadata
 #'
 #' Functions to get the list of models and load a specific model definition.
+#'   More information about these API endpoints can be found at
+#'   [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-model-metadata).
 #'
 #' @param model Model digest or model name.
 #'

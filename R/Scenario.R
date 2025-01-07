@@ -34,7 +34,3 @@ get_digest_model <- function(digest) {
   models <- get_models()
   models[models$Digest == digest, , drop = FALSE]$Name
 }
-
-#' @rdname get_workset
-#' @export
-delete_scenario <- delete_workset

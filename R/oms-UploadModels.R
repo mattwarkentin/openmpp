@@ -1,6 +1,6 @@
-#' Upload model runs or worksets
+#' Upload Model Runs or Worksets
 #'
-#' Functions to upload model run results or input parameters (worksets).
+#' Functions to upload model run results or input parameters (worksets). More information about these API endpoints can be found at [here](https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#upload-model-runs-or-worksets).
 #'
 #' @param folder Upload folder file name.
 #' @param data Data used for the body of the request.
