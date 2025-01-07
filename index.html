@@ -76,7 +76,7 @@
 <p>Enter the OpenM++ directory using the File Explorer. Right-click anywhere inside the folder and select “Open in Terminal”.</p>
 <p>In the Windows Terminal, enter the following command:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>.\bin\oms.exe</span></code></pre></div>
-<p>This will start the process responsible for running the web service (OMS). Note that the address listed after <strong>“Listen at:”</strong> is the local host address that will be used by the <code>openmpp</code> R package to communicate with the API. This address will be used as the <code>OPENMPP_LOCAL_URL</code>. See the Usage section for more details.</p>
+<p>This will start the process responsible for running the OpenM++ web service (OMS). Note that the local host address (e.g., <a href="http://localhost:4040" class="external-link uri">http://localhost:4040</a>) will be printed in the console and is the address used by the <code>openmpp</code> R package to communicate with the API. This local host address will be set as the <code>OPENMPP_LOCAL_URL</code>. See the Usage section for more details.</p>
 </div>
 <div class="section level3">
 <h3 id="running-openm-on-macos">Running OpenM++ on MacOS<a class="anchor" aria-label="anchor" href="#running-openm-on-macos"></a>
@@ -96,9 +96,10 @@
 <h3 id="user-authentication">User Authentication<a class="anchor" aria-label="anchor" href="#user-authentication"></a>
 </h3>
 <p>Each user is required to set their local or remote host address (i.e., URL) for the OpenM++ API in their global or project-specific <code>.Renviron</code> file in order for the <code>openmpp</code> package to authenticate and communicate with the API on behalf of the user.</p>
+<p>If you are working in an IDE (e.g., Positron, RStudio), you may consider using the following function <code>usethis::edit_r_environ()</code> to open your <code>.Renviron</code> file for editing. Note that you will need to restart your R session after editing the file for the effect to take place.</p>
 <p>For an API running locally, set the following environment variable in your <code>.Renviron</code> file:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>OPENMPP_LOCAL_URL<span class="ot">=</span>http<span class="sc">:</span><span class="er">//</span>localhost<span class="sc">:</span>XXXX</span></code></pre></div>
-<p>Where <code>XXXX</code> is the four digits corresponding to your specific local host address (typically 4040 is used). The local host address is shown when starting the OpenM++ web service in the terminal</p>
+<p>Where <code>XXXX</code> is the four digits corresponding to your specific local host address (typically 4040 is used). The local host address is printed to the console when starting the OpenM++ web service in the terminal.</p>
 <p>This package also provides the ability to remotely connect to OpenM++ using JWT tokens. For an API running remotely, set the following environment variables in your <code>.Renviron</code> file:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>OPENMPP_REMOTE_URL<span class="ot">=</span>...</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>OPENMPP_REMOTE_USER<span class="ot">=</span>...</span>
@@ -266,7 +267,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d976aa2fb999f097468bb2ea098c4daf</span></span>
 <span><span class="co">#&gt; → RunName: ExampleRun</span></span>
-<span><span class="co">#&gt; → RunDigest: 391a8cb878934f883dce0d769ae3634c</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: 75414f902f6c7d20018ae857833b33fa</span></span></code></pre></div>
 <p>We can now extract an output table from the <code>Tables</code> field in the model run object (<code>example_run$Tables</code>).</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
@@ -289,7 +290,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d976aa2fb999f097468bb2ea098c4daf</span></span>
 <span><span class="co">#&gt; → RunNames: [RiskPaths_Default, ExampleRun]</span></span>
-<span><span class="co">#&gt; → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 391a8cb878934f883dce0d769ae3634c]</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 75414f902f6c7d20018ae857833b33fa]</span></span></code></pre></div>
 <p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">births</span> <span class="op">&lt;-</span> <span class="va">rp_runs</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
