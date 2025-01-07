@@ -54,11 +54,12 @@ In the Windows Terminal, enter the following command:
 .\bin\oms.exe
 ```
 
-This will start the process responsible for running the web service
-(OMS). Note that the address listed after **“Listen at:”** is the local
-host address that will be used by the `openmpp` R package to communicate
-with the API. This address will be used as the `OPENMPP_LOCAL_URL`. See
-the Usage section for more details.
+This will start the process responsible for running the OpenM++ web
+service (OMS). Note that the local host address (e.g.,
+<http://localhost:4040>) will be printed in the console and is the
+address used by the `openmpp` R package to communicate with the API.
+This local host address will be set as the `OPENMPP_LOCAL_URL`. See the
+Usage section for more details.
 
 ### Running OpenM++ on MacOS
 
@@ -92,14 +93,19 @@ URL) for the OpenM++ API in their global or project-specific `.Renviron`
 file in order for the `openmpp` package to authenticate and communicate
 with the API on behalf of the user.
 
+If you are working in an IDE (e.g., Positron, RStudio), you may consider
+using the following function `usethis::edit_r_environ()` to open your
+`.Renviron` file for editing. Note that you will need to restart your R
+session after editing the file for the effect to take place.
+
 For an API running locally, set the following environment variable in
 your `.Renviron` file:
 
     OPENMPP_LOCAL_URL=http://localhost:XXXX
 
 Where `XXXX` is the four digits corresponding to your specific local
-host address (typically 4040 is used). The local host address is shown
-when starting the OpenM++ web service in the terminal
+host address (typically 4040 is used). The local host address is printed
+to the console when starting the OpenM++ web service in the terminal.
 
 This package also provides the ability to remotely connect to OpenM++
 using JWT tokens. For an API running remotely, set the following
@@ -339,7 +345,7 @@ example_run
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunName: ExampleRun
-#> → RunDigest: 391a8cb878934f883dce0d769ae3634c
+#> → RunDigest: 75414f902f6c7d20018ae857833b33fa
 ```
 
 We can now extract an output table from the `Tables` field in the model
@@ -371,7 +377,7 @@ rp_runs
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunNames: [RiskPaths_Default, ExampleRun]
-#> → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 391a8cb878934f883dce0d769ae3634c]
+#> → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 75414f902f6c7d20018ae857833b33fa]
 ```
 
 We will extract a new table from both models. Note that an extra column,
