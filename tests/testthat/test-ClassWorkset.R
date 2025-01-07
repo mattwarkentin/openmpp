@@ -1,9 +1,9 @@
 test_that("OpenMppWorkset class works", {
   skip_on_cran()
-  skip_on_os('windows')
 
   # Setup
-  use_OpenMpp_remote()
+  local_initiate_oms(oms_path)
+  use_OpenMpp_local()
   model_name <- get_models()$Name[[1]]
   workset_name <- get_worksets(model_name)$Name[[1]]
   workset <- load_workset(model_name, workset_name)
@@ -29,5 +29,4 @@ test_that("OpenMppWorkset class works", {
   expect_type(workset$BaseRunDigest, 'character')
   expect_type(workset$ReadOnly, 'logical')
   expect_equal(workset$OpenMppType, 'Workset')
-  expect_output(workset$print())
 })

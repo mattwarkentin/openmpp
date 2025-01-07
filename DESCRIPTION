@@ -54,5 +54,7 @@ Collate:
     'openmpp-package.R'
     'zzz.R'
 Suggests: 
-    testthat (>= 3.0.0)
+    sys,
+    testthat (>= 3.0.0),
+    withr
 Config/testthat/edition: 3

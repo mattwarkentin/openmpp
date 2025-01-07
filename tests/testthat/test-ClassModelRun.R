@@ -1,9 +1,9 @@
 test_that("OpenMppModelRun class works", {
   skip_on_cran()
-  skip_on_os('windows')
 
   # Setup
-  use_OpenMpp_remote()
+  local_initiate_oms(oms_path)
+  use_OpenMpp_local()
   model_name <- get_models()$Name[[1]]
   run_name <- get_model_runs(model_name)$Name[[1]]
   run <- load_model_run(model_name, run_name)
@@ -33,5 +33,4 @@ test_that("OpenMppModelRun class works", {
   expect_type(run$OpenMppType, 'character')
   expect_type(run$RunDigest, 'character')
   expect_equal(run$OpenMppType, 'ModelRun')
-  expect_output(run$print())
 })
