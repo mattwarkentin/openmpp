@@ -53,12 +53,40 @@
 
 <p>The goal of <code>openmpp</code> is to provide a programmatic interface to the OpenM++ API directly from R to simplify creating scenarios, running models, and gathering results for further processing.</p>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="installation-r-package">Installation (R Package)<a class="anchor" aria-label="anchor" href="#installation-r-package"></a>
 </h2>
 <p>You can install the development version of <code>openmpp</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"mattwarkentin/openmpp"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="installation-openm">Installation (OpenM++)<a class="anchor" aria-label="anchor" href="#installation-openm"></a>
+</h2>
+<p>If you do not have access to an existing OpenM++ server, it is possible to run a server on your workstation, which the <code>openmpp</code> package can connect to.</p>
+<div class="section level3">
+<h3 id="download">Download<a class="anchor" aria-label="anchor" href="#download"></a>
+</h3>
+<p>To install OpenM++, download and unzip the “source code and binaries” appropriate for your system from <a href="https://github.com/openmpp/main/releases/latest" class="external-link">GitHub</a></p>
+<p>NOTE: Windows may allow you to view the contents of the zip file without extracting, however the files must be extracted for proper function.</p>
+</div>
+<div class="section level3">
+<h3 id="running-on-windows">Running on Windows<a class="anchor" aria-label="anchor" href="#running-on-windows"></a>
+</h3>
+<p>Enter the OpenM++ directory using File Explorer. Right-click inside the folder and select “Open in Terminal”.</p>
+<p>In the new Windows Terminal window, type in the following command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>.\bin\oms.exe</span></code></pre></div>
+<p>This will start the process responsible for running the web service and running models. Take note of the address listed after “Listen at:”, as this will be the <code>OPENMPP_LOCAL_URL</code> to be used with the R package.</p>
+</div>
+<div class="section level3">
+<h3 id="running-on-macos">Running on MacOS<a class="anchor" aria-label="anchor" href="#running-on-macos"></a>
+</h3>
+<p>Open a new MacOS Terminal window (either by using Spotlight search or by navigating to “Applications” and then “Utilities” in Finder).</p>
+<p>After unzipping the downloaded file in Finder, drag the folder into the terminal and press Enter. This will change your active directory to the OpenM++ folder.</p>
+<p>Type the following command into the terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">bin/oms</span></span></code></pre></div>
+<p>Like the Windows installation, the web service will begin running and present the “Listen at:” address for use in the R package.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -69,19 +97,19 @@
 </h3>
 <p>Each user is required to set their local or remote host address (i.e., URL) for the OpenM++ API in their global or project-specific <code>.Renviron</code> file in order for the <code>openmpp</code> package to authenticate and communicate with the API on behalf of the user.</p>
 <p>For an API running locally, set the following environment variable in your <code>.Renviron</code> file:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>OPENMPP_LOCAL_URL<span class="ot">=</span>http<span class="sc">:</span><span class="er">//</span>localhost<span class="sc">:</span>XXXX</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>OPENMPP_LOCAL_URL<span class="ot">=</span>http<span class="sc">:</span><span class="er">//</span>localhost<span class="sc">:</span>XXXX</span></code></pre></div>
 <p>Where <code>XXXX</code> is the four digits corresponding to your specific local host address. If you aren’t sure of your host address, you may contact the OpenM++ administrator to retrieve this information.</p>
 <p>For an API running remotely, set the following environment variables in your <code>.Renviron</code> file:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>OPENMPP_REMOTE_URL<span class="ot">=</span>...</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>OPENMPP_REMOTE_USER<span class="ot">=</span>...</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>OPENMPP_REMOTE_PWD<span class="ot">=</span>...</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>OPENMPP_REMOTE_URL<span class="ot">=</span>...</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>OPENMPP_REMOTE_USER<span class="ot">=</span>...</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>OPENMPP_REMOTE_PWD<span class="ot">=</span>...</span></code></pre></div>
 <p>Note that the URL, user name, and password should be kept confidential and not committed into version control (e.g., git).</p>
 <p>Once the environment variables are set, users may register a local or remote API connection in their R scripts.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mattwarkentin/openmpp" class="external-link">openmpp</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/use_OpenMpp_local.html">use_OpenMpp_local</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Or,</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mattwarkentin/openmpp" class="external-link">openmpp</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/use_OpenMpp_local.html">use_OpenMpp_remote</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>see <code><a href="reference/use_OpenMpp_local.html">?use_OpenMpp_local</a></code> or <code><a href="reference/use_OpenMpp_local.html">?use_OpenMpp_remote</a></code> for more information.</p>
@@ -134,14 +162,14 @@
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
 <p>Here we will work through a very simple example of creating a new scenario, extracting parameters to change, changing parameters, running the model, and extracting results.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mattwarkentin/openmpp" class="external-link">openmpp</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/use_OpenMpp_local.html">use_OpenMpp_remote</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s see what models are available:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_model.html">get_models</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 34 × 7</span></span>
 <span><span class="co">#&gt;    ModelId Name              Digest  Type Version CreateDateTime DefaultLangCode</span></span>
@@ -158,7 +186,7 @@
 <span><span class="co">#&gt; 10     101 OncoSim-colorect… 52248…     0 3.6.3.9 2024-03-19 13… EN             </span></span>
 <span><span class="co">#&gt; # ℹ 24 more rows</span></span></code></pre></div>
 <p>We can now see what worksets and model runs exist for a given model.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_workset.html">get_worksets</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 10</span></span>
 <span><span class="co">#&gt;   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest</span></span>
@@ -166,7 +194,7 @@
 <span><span class="co">#&gt; 1 RiskPaths d90e1e9a49a06d… 3.0.0.0      2024-02-16 20:32:4… Defa… ""           </span></span>
 <span><span class="co">#&gt; # ℹ 4 more variables: IsReadonly &lt;lgl&gt;, UpdateDateTime &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   IsCleanBaseRun &lt;lgl&gt;, Txt &lt;list&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_model_run.html">get_runs</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 15</span></span>
 <span><span class="co">#&gt;   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount</span></span>
@@ -176,7 +204,7 @@
 <span><span class="co">#&gt; #   CreateDateTime &lt;chr&gt;, Status &lt;chr&gt;, UpdateDateTime &lt;chr&gt;, RunId &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   RunDigest &lt;chr&gt;, ValueDigest &lt;chr&gt;, RunStamp &lt;chr&gt;</span></span></code></pre></div>
 <p>Now we can load the <code>RiskPaths</code> model to inspect.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
 <span><span class="va">rp</span></span>
 <span><span class="co">#&gt; ── OpenM++ Model ───────────────────────────────────────────────────────────────</span></span>
@@ -184,7 +212,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d90e1e9a49a06d972ecf1d50e684c62b</span></span></code></pre></div>
 <p>We will now load the <code>Default</code> set of input parameters for the RiskPaths model.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rp_default</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'Default'</span><span class="op">)</span></span>
 <span><span class="va">rp_default</span></span>
 <span><span class="co">#&gt; ── OpenM++ Workset ─────────────────────────────────────────────────────────────</span></span>
@@ -194,7 +222,7 @@
 <span><span class="co">#&gt; → WorksetName: Default</span></span>
 <span><span class="co">#&gt; → BaseRunDigest:</span></span></code></pre></div>
 <p>Finally, we will load the base run for the RiskPaths model.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">baserun_digest</span> <span class="op">&lt;-</span> <span class="va">rp</span><span class="op">$</span><span class="va">ModelRuns</span><span class="op">$</span><span class="va">RunDigest</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">rp_baserun</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_run.html">load_run</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span>
 <span><span class="va">rp_baserun</span></span>
@@ -205,15 +233,15 @@
 <span><span class="co">#&gt; → RunName: RiskPaths_Default</span></span>
 <span><span class="co">#&gt; → RunDigest: 134517d057d2008d01c9dbc418247ae3</span></span></code></pre></div>
 <p>We will create a new scenario based on the parameters from the <code>RiskPaths_Default</code> model run.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/create_scenario.html">create_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'MyNewScenario'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span></code></pre></div>
 <p>We will load the new scenario, copy over the <code>AgeBaselinePreg1</code> parameter from the base run.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_scenario</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_workset.html">load_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'MyNewScenario'</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s reduce the fertility rate by 10% across all age groups…</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_scenario</span><span class="op">$</span><span class="fu">copy_params</span><span class="op">(</span><span class="st">'AgeBaselinePreg1'</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">half_rate</span> <span class="op">&lt;-</span> <span class="va">my_scenario</span><span class="op">$</span><span class="va">Parameters</span><span class="op">$</span><span class="va">AgeBaselinePreg1</span></span>
 <span></span>
 <span><span class="va">half_rate</span> <span class="op">&lt;-</span></span>
@@ -222,12 +250,12 @@
 <span></span>
 <span><span class="va">my_scenario</span><span class="op">$</span><span class="va">Parameters</span><span class="op">$</span><span class="va">AgeBaselinePreg1</span> <span class="op">&lt;-</span> <span class="va">half_rate</span></span></code></pre></div>
 <p>We will now run the model and give it the name <code>'ExampleRun'</code>. We use the <code>wait = TRUE</code> flag to make sure we want for the model run to finish before returning to our R session. We use <code>progress = FALSE</code> to avoid printing progress bars in this document. Note that model runs may take a long time when the number of simulation cases is large.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_scenario</span><span class="op">$</span><span class="va">ReadOnly</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
 <span><span class="va">my_scenario</span><span class="op">$</span><span class="fu">run</span><span class="op">(</span><span class="st">'ExampleRun'</span>, wait <span class="op">=</span> <span class="cn">TRUE</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Note that we can use the <code>opts</code> argument and the <code><a href="reference/opts_run.html">opts_run()</a></code> function to configure our run. By default, models are run with 5,000 simulation cases and 12 SubValues. This allows for quick model runs and faster iteration, but users will want to increase the number of simulation cases when performing a full model run.</p>
 <p>Now that our model run is complete, let’s load it into memory.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_run</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_run.html">load_run</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'ExampleRun'</span><span class="op">)</span></span>
 <span><span class="va">example_run</span></span>
 <span><span class="co">#&gt; ── OpenM++ ModelRun ────────────────────────────────────────────────────────────</span></span>
@@ -237,7 +265,7 @@
 <span><span class="co">#&gt; → RunName: ExampleRun</span></span>
 <span><span class="co">#&gt; → RunDigest: 204a176d2c10350a58d7b3ba9cca235b</span></span></code></pre></div>
 <p>We can now extract an output table from the <code>Tables</code> field in the model run object (<code>example_run$Tables</code>).</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
 <span><span class="co">#&gt; # A tibble: 7 × 3</span></span>
 <span><span class="co">#&gt;   expr_name Dim0                   expr_value</span></span>
@@ -250,7 +278,7 @@
 <span><span class="co">#&gt; 6 Expr0     US_AFTER_SECOND_UNION        1.00</span></span>
 <span><span class="co">#&gt; 7 Expr0     all                       4565.</span></span></code></pre></div>
 <p>Great, we have created a new scenario, modified some parameters, ran the model, and extracted output tables. In this last step, we will load multiple model runs into memory to compare them.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rp_runs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_model_runs.html">load_runs</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="va">rp</span><span class="op">$</span><span class="va">ModelRuns</span><span class="op">$</span><span class="va">RunDigest</span><span class="op">)</span></span>
 <span><span class="va">rp_runs</span></span>
 <span><span class="co">#&gt; ── OpenM++ ModelRunSet ─────────────────────────────────────────────────────────</span></span>
@@ -260,7 +288,7 @@
 <span><span class="co">#&gt; → RunNames: [RiskPaths_Default, ExampleRun]</span></span>
 <span><span class="co">#&gt; → RunDigests: [134517d057d2008d01c9dbc418247ae3, 204a176d2c10350a58d7b3ba9cca235b]</span></span></code></pre></div>
 <p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">births</span> <span class="op">&lt;-</span> <span class="va">rp_runs</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
 <span><span class="va">births</span></span>
 <span><span class="co">#&gt; # A tibble: 14 × 4</span></span>
@@ -281,7 +309,7 @@
 <span><span class="co">#&gt; 13 ExampleRun        Expr0     US_AFTER_SECOND_UNION        1.00</span></span>
 <span><span class="co">#&gt; 14 ExampleRun        Expr0     all                       4565.</span></span></code></pre></div>
 <p>We can even plot this using <code>ggplot2</code>! Note that the number of simulation cases for <code>ExampleRun</code> is <strong>low</strong> so the results are not to be trusted! This is only for demonstration purposes.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">births</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Dim0</span>, <span class="va">expr_value</span>, fill <span class="op">=</span> <span class="va">RunName</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_col</span><span class="op">(</span>position <span class="op">=</span> <span class="fu">position_dodge</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
