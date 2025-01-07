@@ -53,6 +53,17 @@ admin_database_close <- function(model) {
 
 #' @rdname admin_models_refresh
 #' @export
+admin_model_delete <- function(model) {
+  api_path <- glue::glue('/api/admin/model/{model}/delete')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('POST') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname admin_models_refresh
+#' @export
 admin_database_open <- function(path) {
   api_path <- glue::glue('api/admin/db-file-open/{path}')
   OpenMpp$API$build_request() |>

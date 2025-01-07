@@ -15,7 +15,7 @@ use_OpenMpp_remote(
 )
 }
 \arguments{
-\item{url}{URl for making API requests. See \code{Details} for more
+\item{url}{URL for making API requests. See \code{Details} for more
 instructions.}
 
 \item{...}{Not currently used.}
@@ -33,13 +33,14 @@ objects should not be accessed directly by the user, instead, the package
 internally uses these connections to communicate with the OpenM++ API.
 }
 \description{
-Register a connection to the OpenM++ Application Programming Interface (API).
-Currently, two different API connections "local" and "remote" are
-available. Note that "local" and "remote" describe where the API is running
-relative to the machine running the R session. For example, users logged
-into the cloud-hosted RStudio Server sessions will acceess the API running
-locally. Those who use a machine running on their local network may use
-a remote connection to connect with the cloud-based API.
+Register a connection to the OpenM++ Web Services (OMS) Application
+Programming Interface (API). Currently, two different API connections
+"local" and "remote" are available. Note that "local" and "remote"
+describe where the API is running relative to the machine running the R
+session. Those who use a machine running on their local network may use
+a remote connection to connect with a cloud-based API. Users running
+OpenM++ locally or who are logged into a remote virtual machine running
+OpenM++ will use the local API connection.
 }
 \details{
 A \code{user} name and password (\code{pwd}) are sensitive information and

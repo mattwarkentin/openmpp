@@ -28,6 +28,27 @@ get_service_state <- function() {
 
 #' @rdname get_service_config
 #' @export
+get_disk_use <- function() {
+  api_path <- 'api/service/disk-use'
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json()
+}
+
+#' @rdname get_service_config
+#' @export
+refresh_disk_use <- function() {
+  api_path <- 'api/service/disk-use/refresh'
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_method('POST') |>
+    httr2::req_perform()
+  invisible()
+}
+
+#' @rdname get_service_config
+#' @export
 get_active_job_state <- function(job) {
   api_path <- glue::glue('api/service/job/active/{job}')
   OpenMpp$API$build_request() |>
@@ -76,14 +97,4 @@ delete_job_hist <- function(job) {
     httr2::req_method('DELETE') |>
     httr2::req_perform()
   invisible()
-}
-
-#' @rdname get_service_config
-#' @export
-get_archive_state <- function() {
-  api_path <- glue::glue('api/archive/state')
-  OpenMpp$API$build_request() |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
 }

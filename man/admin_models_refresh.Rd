@@ -4,6 +4,7 @@
 \alias{admin_models_refresh}
 \alias{admin_models_close}
 \alias{admin_database_close}
+\alias{admin_model_delete}
 \alias{admin_database_open}
 \alias{admin_database_cleanup}
 \alias{admin_cleanup_logs}
@@ -18,6 +19,8 @@ admin_models_refresh()
 admin_models_close()
 
 admin_database_close(model)
+
+admin_model_delete(model)
 
 admin_database_open(path)
 

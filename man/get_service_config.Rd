@@ -3,17 +3,22 @@
 \name{get_service_config}
 \alias{get_service_config}
 \alias{get_service_state}
+\alias{get_disk_use}
+\alias{refresh_disk_use}
 \alias{get_active_job_state}
 \alias{get_queue_job_state}
 \alias{get_hist_job_state}
 \alias{set_queue_job_pos}
 \alias{delete_job_hist}
-\alias{get_archive_state}
 \title{OpenM++ Service State}
 \usage{
 get_service_config()
 
 get_service_state()
+
+get_disk_use()
+
+refresh_disk_use()
 
 get_active_job_state(job)
 
@@ -24,8 +29,6 @@ get_hist_job_state(job)
 set_queue_job_pos(pos, job)
 
 delete_job_hist(job)
-
-get_archive_state()
 }
 \arguments{
 \item{job}{Model run submission time stamp.}

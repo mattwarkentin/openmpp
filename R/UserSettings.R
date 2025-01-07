@@ -1,12 +1,8 @@
-#' Manage OpenM++ User Files or Settings
+#' Manage OpenM++ User Settings
 #'
-#' Functions for getting, setting, and deleting user configuration settings.
+#' Functions for getting, setting, and deleting user settings.
 #'
 #' @param data Data used for the body of the request.
-#' @param ext Comma-separated string of file extensions. Default is `"*"` which
-#'   returns all files.
-#' @param path Optional file path. Default is `""` (empty) and returns the
-#'   entire tree of user files.
 #' @inheritParams get_model
 #' @inheritParams get_workset_param
 #' @inheritParams get_run_microdata
@@ -43,14 +39,4 @@ delete_user_views <- function(model) {
     httr2::req_method('DELETE') |>
     httr2::req_perform()
   invisible()
-}
-
-#' @rdname get_user_views
-#' @export
-get_user_files <- function(ext = "*", path = "") {
-  api_path <- glue::glue('/api/files/file-tree/{ext}/path/{path}')
-  OpenMpp$API$build_request() |>
-    httr2::req_url_path(api_path) |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
 }

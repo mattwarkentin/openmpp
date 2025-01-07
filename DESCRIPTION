@@ -50,7 +50,8 @@ Collate:
     'Scenario.R'
     'Service.R'
     'Uploads.R'
-    'User.R'
+    'UserFiles.R'
+    'UserSettings.R'
     'openmpp-package.R'
     'zzz.R'
 Suggests: 
