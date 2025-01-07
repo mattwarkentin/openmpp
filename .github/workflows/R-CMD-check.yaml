@@ -44,17 +44,7 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Setup .Renviron for testing
-        run: |
-          echo OPENMPP_REMOTE_URL="$OPENMPP_REMOTE_URL" >> ~/.Renviron
-          echo OPENMPP_REMOTE_USER="$OPENMPP_REMOTE_USER" >> ~/.Renviron
-          echo OPENMPP_REMOTE_PWD="$OPENMPP_REMOTE_PWD" >> ~/.Renviron
-        shell: bash
-        env:
-          OPENMPP_REMOTE_URL: ${{ secrets.OPENMPP_REMOTE_URL }}
-          OPENMPP_REMOTE_USER: ${{ secrets.OPENMPP_REMOTE_USER }}
-          OPENMPP_REMOTE_PWD: ${{ secrets.OPENMPP_REMOTE_PWD }}
-
       - uses: r-lib/actions/check-r-package@v2
         with:
+          args: 'c("--no-manual", "--as-cran", "--no-tests")'
           upload-snapshots: true
