@@ -12,15 +12,48 @@ The goal of `openmpp` is to provide a programmatic interface to the
 OpenM++ API directly from R to simplify creating scenarios, running
 models, and gathering results for further processing.
 
-## Installation
+## Installation (R Package)
 
-You can install the development version of `openmpp` from
-[GitHub](https://github.com/) with:
+You can install the development version of `openmpp` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("mattwarkentin/openmpp")
 ```
+
+## Installation (OpenM++)
+
+If you do not have access to an existing OpenM++ server, it is possible to run a server on your workstation, which the `openmpp` package can connect to.
+
+### Download
+
+To install OpenM++, download and unzip the "source code and binaries" appropriate for your system from [GitHub](https://github.com/openmpp/main/releases/latest)
+
+NOTE: Windows may allow you to view the contents of the zip file without extracting, however the files must be extracted for proper function.
+
+### Running on Windows
+
+Enter the OpenM++ directory using File Explorer. Right-click inside the folder and select "Open in Terminal".
+
+In the new Windows Terminal window, type in the following command:
+``` cmd
+.\bin\oms.exe
+```
+This will start the process responsible for running the web service and running models. Take note of the address listed after "Listen at:", as this will be the `OPENMPP_LOCAL_URL` to be used with the R package.
+
+### Running on MacOS
+
+Open a new MacOS Terminal window (either by using Spotlight search or by navigating to "Applications" and then "Utilities" in Finder).
+
+After unzipping the downloaded file in Finder, drag the folder into the terminal and press Enter. This will change your active directory to the OpenM++ folder.
+
+Type the following command into the terminal:
+``` bash
+bin/oms
+```
+Like the Windows installation, the web service will begin running and present the "Listen at:" address for use in the R package.
+
+
 
 ## Usage
 
