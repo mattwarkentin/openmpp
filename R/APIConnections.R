@@ -26,7 +26,8 @@
 #'   sense for consistency. For local and remote API connections, set the
 #'   following environment variables in your `.Renviron` files:
 #'
-#'   - `OPENMPP_LOCAL_URL`: URL for a local API connection.
+#'   - `OPENMPP_LOCAL_URL`: URL for a local API connection. Default is to use
+#'     http://localhost:4040.
 #'   - `OPENMPP_REMOTE_URL`: URL for a remote API connection.
 #'   - `OPENMPP_REMOTE_USER`: User name for logging into a remote API
 #'     connection.
@@ -42,6 +43,7 @@
 #' @export
 use_OpenMpp_local <- function(url = Sys.getenv('OPENMPP_LOCAL_URL'), ...) {
   rlang::check_dots_empty()
+  if (nchar(url) == 0L) url <- 'http://localhost:4040'
   con <- OpenMppLocal$new(url)
   assign('API', con, OpenMpp)
   invisible()
