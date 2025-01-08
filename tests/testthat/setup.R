@@ -5,7 +5,7 @@ local_install_openmpp <- function() {
 
   if (os == 'Darwin' & type == 'arm64') {
     url <- 'https://github.com/openmpp/main/releases/latest/download/openmpp_mac_arm64_20241226.tar.gz'
-  } else if (os == 'Darwin' & type == 'intel') {
+  } else if (os == 'Darwin' & type == 'x86_64') {
     url <- 'https://github.com/openmpp/main/releases/latest/download/openmpp_mac_x86_64_20241226.tar.gz'
   } else if (os == 'Linux') {
     url <- 'https://github.com/openmpp/main/releases/latest/download/openmpp_debian-11_20241226.tar.gz'
@@ -14,9 +14,14 @@ local_install_openmpp <- function() {
   } else {
     rlang::abort('No compatible OS detected.')
   }
+
   file <- basename(url)
+
   dir <- tempdir()
+
   path <- paste0(dir, '/', file)
+  withr::defer(unlink(path))
+
   download.file(url, path, quiet = TRUE)
 
   if (os == 'Windows') {
@@ -25,7 +30,6 @@ local_install_openmpp <- function() {
     untar(path, exdir = dir)
   }
 
-  unlink(path)
   new_path <- tools::file_path_sans_ext(path, compression = TRUE)
   new_path
 }
