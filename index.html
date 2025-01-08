@@ -156,8 +156,9 @@
 <div class="section level3">
 <h3 id="models-scenarios-runs-and-runsets">Models, Scenarios, Runs, and RunSets<a class="anchor" aria-label="anchor" href="#models-scenarios-runs-and-runsets"></a>
 </h3>
-<p>There are 4 main classes you will work with when using the <code>openmpp</code> package: <code>OpenMppModel</code>, <code>OpenMppWorkset</code>, <code>OpenMppModelRun</code>, and <code>OpenMppModelRunSet</code>. Each of these are <code>R6</code> classes. <code>R6</code> is an encapsulated object-oriented programming system for R. Use the <code>load_*()</code> set of functions to load a model, workset/scenario, model run, or set of model runs into memory.</p>
-<p>Instances of each of these 4 classes have methods and fields associated with them. You can access public methods and fields using the standard <code>$</code> subset operator (e.g., <code>obj$action()</code> or <code>obj$field</code>)</p>
+<p>There are 4 main classes you will work with when using the <code>openmpp</code> package: <code>OpenMppModel</code>, <code>OpenMppWorkset</code>, <code>OpenMppModelRun</code>, and <code>OpenMppModelRunSet</code>. Each of these are <code>R6</code> classes. <code>R6</code> is an encapsulated object-oriented programming (OOP) system for R. Use the <code>load_*()</code> set of functions to load a model, workset/scenario, model run, or set of model runs into memory.</p>
+<p>Instances of each of these 4 classes have methods (i.e., functions) and fields (i.e., data) associated with them. You can access these functions and data using the standard <code>$</code> subset operator (e.g., <code>obj$function()</code> or <code>obj$data</code>).</p>
+<p><strong>Why use R6?</strong> We chose to use the R6 OOP as we believe it can simplify the ability for the R package to communicate with OpenM++ to ensure that all changes made to the microsimulation objects in the R session are propagated and synchronized with the OpenM++ database. Encapsulated OOP allows the internal state of the object (i.e., the connection to the actual object in the OpenM++ database) to be accessed and modified through well-defined and high-level methods, rather than directly manipulating the data with low-level function calls. This approach enforces data integrity, improves code readability, and simplifies maintenance by abstracting away the implementation details of an object and preventing unintended modifications to its state. More information about <code>R6</code> can be found <a href="https://r6.r-lib.org/articles/Introduction.html" class="external-link">here</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="developing-new-models">Developing New Models<a class="anchor" aria-label="anchor" href="#developing-new-models"></a>
@@ -267,7 +268,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d976aa2fb999f097468bb2ea098c4daf</span></span>
 <span><span class="co">#&gt; → RunName: ExampleRun</span></span>
-<span><span class="co">#&gt; → RunDigest: 75414f902f6c7d20018ae857833b33fa</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: 9438650b653768c4befaca9d6c36b413</span></span></code></pre></div>
 <p>We can now extract an output table from the <code>Tables</code> field in the model run object (<code>example_run$Tables</code>).</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
@@ -290,7 +291,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d976aa2fb999f097468bb2ea098c4daf</span></span>
 <span><span class="co">#&gt; → RunNames: [RiskPaths_Default, ExampleRun]</span></span>
-<span><span class="co">#&gt; → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 75414f902f6c7d20018ae857833b33fa]</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 9438650b653768c4befaca9d6c36b413]</span></span></code></pre></div>
 <p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">births</span> <span class="op">&lt;-</span> <span class="va">rp_runs</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
