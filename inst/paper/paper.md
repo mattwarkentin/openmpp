@@ -9,11 +9,11 @@ authors:
   orcid: 0000-0001-8730-3511
   email: matthew.warkentin@ucalgary.ca
   affiliation: 1
-- name: Yibing Ruan
-  email: Yibing.Ruan@albertahealthservices.ca
-  affiliation: 1
 - name: John M. Hutchinson
   email: john.hutchinson@ucalgary.ca
+  affiliation: 1
+- name: Yibing Ruan
+  email: Yibing.Ruan@albertahealthservices.ca
   affiliation: 1
 - name: Darren R. Brenner
   email: darren.brenner@ucalgary.ca
