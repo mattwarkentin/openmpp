@@ -8,7 +8,7 @@ local_install_openmpp <- function() {
   } else if (os == 'Darwin' & type == 'intel') {
     url <- 'https://github.com/openmpp/main/releases/latest/download/openmpp_mac_x86_64_20241226.tar.gz'
   } else if (os == 'Linux') {
-    url <- 'https://github.com/openmpp/main/releases/latest/download/openmpp_debian_20241226.tar.gz'
+    url <- 'https://github.com/openmpp/main/releases/latest/download/openmpp_debian-11_20241226.tar.gz'
   } else if (os == 'Windows') {
     url <- 'https://github.com/openmpp/main/releases/latest/download/openmpp_win_20241226.zip'
   } else {
