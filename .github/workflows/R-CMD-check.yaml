@@ -44,11 +44,6 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - name: Setup .Renviron for testing
-        run: |
-          echo OPENMPP_LOCAL_URL=http://localhost:4040 >> ~/.Renviron
-        shell: bash
-
       - uses: r-lib/actions/check-r-package@v2
         with:
           args: 'c("--no-manual", "--as-cran")'
