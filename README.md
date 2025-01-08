@@ -172,13 +172,28 @@ see `?use_OpenMpp_local` or `?use_OpenMpp_remote` for more information.
 There are 4 main classes you will work with when using the `openmpp`
 package: `OpenMppModel`, `OpenMppWorkset`, `OpenMppModelRun`, and
 `OpenMppModelRunSet`. Each of these are `R6` classes. `R6` is an
-encapsulated object-oriented programming system for R. Use the
+encapsulated object-oriented programming (OOP) system for R. Use the
 `load_*()` set of functions to load a model, workset/scenario, model
 run, or set of model runs into memory.
 
-Instances of each of these 4 classes have methods and fields associated
-with them. You can access public methods and fields using the standard
-`$` subset operator (e.g., `obj$action()` or `obj$field`)
+Instances of each of these 4 classes have methods (i.e., functions) and
+fields (i.e., data) associated with them. You can access these functions
+and data using the standard `$` subset operator (e.g., `obj$function()`
+or `obj$data`).
+
+**Why use R6?** We chose to use the R6 OOP as we believe it can simplify
+the ability for the R package to communicate with OpenM++ to ensure that
+all changes made to the microsimulation objects in the R session are
+propagated and synchronized with the OpenM++ database. Encapsulated OOP
+allows the internal state of the object (i.e., the connection to the
+actual object in the OpenM++ database) to be accessed and modified
+through well-defined and high-level methods, rather than directly
+manipulating the data with low-level function calls. This approach
+enforces data integrity, improves code readability, and simplifies
+maintenance by abstracting away the implementation details of an object
+and preventing unintended modifications to its state. More information
+about `R6` can be found
+[here](https://r6.r-lib.org/articles/Introduction.html).
 
 ### Developing New Models
 
@@ -345,7 +360,7 @@ example_run
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunName: ExampleRun
-#> → RunDigest: 75414f902f6c7d20018ae857833b33fa
+#> → RunDigest: 9438650b653768c4befaca9d6c36b413
 ```
 
 We can now extract an output table from the `Tables` field in the model
@@ -377,7 +392,7 @@ rp_runs
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunNames: [RiskPaths_Default, ExampleRun]
-#> → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 75414f902f6c7d20018ae857833b33fa]
+#> → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 9438650b653768c4befaca9d6c36b413]
 ```
 
 We will extract a new table from both models. Note that an extra column,

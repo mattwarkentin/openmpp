@@ -141,9 +141,11 @@ see `?use_OpenMpp_local` or `?use_OpenMpp_remote` for more information.
 
 ### Models, Scenarios, Runs, and RunSets
 
-There are 4 main classes you will work with when using the `openmpp` package: `OpenMppModel`, `OpenMppWorkset`, `OpenMppModelRun`, and `OpenMppModelRunSet`. Each of these are `R6` classes. `R6` is an encapsulated object-oriented programming system for R. Use the `load_*()` set of functions to load a model, workset/scenario, model run, or set of model runs into memory.
+There are 4 main classes you will work with when using the `openmpp` package: `OpenMppModel`, `OpenMppWorkset`, `OpenMppModelRun`, and `OpenMppModelRunSet`. Each of these are `R6` classes. `R6` is an encapsulated object-oriented programming (OOP) system for R. Use the `load_*()` set of functions to load a model, workset/scenario, model run, or set of model runs into memory.
 
-Instances of each of these 4 classes have methods and fields associated with them. You can access public methods and fields using the standard `$` subset operator (e.g., `obj$action()` or `obj$field`)
+Instances of each of these 4 classes have methods (i.e., functions) and fields (i.e., data) associated with them. You can access these functions and data using the standard `$` subset operator (e.g., `obj$function()` or `obj$data`).
+
+__Why use R6?__ We chose to use the R6 OOP as we believe it can simplify the ability for the R package to communicate with OpenM++ to ensure that all changes made to the microsimulation objects in the R session are propagated and synchronized with the OpenM++ database. Encapsulated OOP allows the internal state of the object (i.e., the connection to the actual object in the OpenM++ database) to be accessed and modified through well-defined and high-level methods, rather than directly manipulating the data with low-level function calls. This approach enforces data integrity, improves code readability, and simplifies maintenance by abstracting away the implementation details of an object and preventing unintended modifications to its state. More information about `R6` can be found [here](https://r6.r-lib.org/articles/Introduction.html).
 
 ### Developing New Models
 
