@@ -30,7 +30,12 @@ local_install_openmpp <- function() {
     untar(path, exdir = dir)
   }
 
-  new_path <- tools::file_path_sans_ext(path, compression = TRUE)
+  if (os == 'Windows') {
+    new_path <- dirname(path)
+  } else {
+    new_path <- tools::file_path_sans_ext(path, compression = TRUE)
+  }
+
   new_path
 }
 
