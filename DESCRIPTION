@@ -60,6 +60,8 @@ Collate:
     'openmpp-package.R'
     'zzz.R'
 Suggests: 
+    gh,
+    pingr,
     sys,
     testthat (>= 3.0.0),
     withr
