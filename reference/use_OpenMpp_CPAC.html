@@ -81,7 +81,7 @@ instructions.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Nothing, invisibly. Behind-the-scenes, an instance of the
-<code>OpenMppCPAC</code> R6 classe is created. This objects should not be accessed
+<code>OpenMppCPAC</code> R6 class is created. This objects should not be accessed
 directly by the user, instead, the package internally uses these
 connections to communicate with the OpenM++ API.</p>
     </div>
@@ -94,8 +94,8 @@ project-specific <code>.Renviron</code> file. The same approach may be used to d
 your URLs for making API requests. While these URLs are typically not
 sensitive information, keeping all of this information in one place makes
 sense for consistency. For remote API connections to CPAC, set the
-following environment variables in your <code>.Renviron</code> files:</p><ul><li><p><code>OPENMPP_CPAC_URL</code>: URL for a local API connection.</p></li>
-<li><p><code>OPENMPP_CPAC_API</code>: URL for a remote API connection.</p></li>
+following environment variables in your <code>.Renviron</code> files:</p><ul><li><p><code>OPENMPP_CPAC_URL</code>: URL for logging into a remote API connection.</p></li>
+<li><p><code>OPENMPP_CPAC_API</code>: URL for making remote API requests.</p></li>
 <li><p><code>OPENMPP_CPAC_USER</code>: User name for logging into the remote API
 connection.</p></li>
 <li><p><code>OPENMPP_CPAC_PWD</code>: Password for logging into the remote API connection.</p></li>
