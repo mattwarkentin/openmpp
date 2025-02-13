@@ -5,6 +5,7 @@ reference:
 - title: API Connections
   contents:
     - use_OpenMpp_local
+    - use_OpenMpp_CPAC
     - use_OpenMpp_remote
 - title: Class Accessors
   contents:
