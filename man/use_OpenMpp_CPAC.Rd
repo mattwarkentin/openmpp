@@ -28,7 +28,7 @@ instructions.}
 }
 \value{
 Nothing, invisibly. Behind-the-scenes, an instance of the
-\code{OpenMppCPAC} R6 classe is created. This objects should not be accessed
+\code{OpenMppCPAC} R6 class is created. This objects should not be accessed
 directly by the user, instead, the package internally uses these
 connections to communicate with the OpenM++ API.
 }
@@ -46,8 +46,8 @@ sensitive information, keeping all of this information in one place makes
 sense for consistency. For remote API connections to CPAC, set the
 following environment variables in your \code{.Renviron} files:
 \itemize{
-\item \code{OPENMPP_CPAC_URL}: URL for a local API connection.
-\item \code{OPENMPP_CPAC_API}: URL for a remote API connection.
+\item \code{OPENMPP_CPAC_URL}: URL for logging into a remote API connection.
+\item \code{OPENMPP_CPAC_API}: URL for making remote API requests.
 \item \code{OPENMPP_CPAC_USER}: User name for logging into the remote API
 connection.
 \item \code{OPENMPP_CPAC_PWD}: Password for logging into the remote API connection.
