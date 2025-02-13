@@ -30,7 +30,9 @@ URL: https://github.com/mattwarkentin/openmpp,
     https://mattwarkentin.github.io/openmpp/
 BugReports: https://github.com/mattwarkentin/openmpp/issues
 Collate: 
-    'APIConnections.R'
+    'API-CPAC.R'
+    'API-Local.R'
+    'API-Remote.R'
     'Utils.R'
     'ClassModel.R'
     'ClassModelRun.R'
