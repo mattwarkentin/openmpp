@@ -9,7 +9,7 @@ local_install_openmpp <- function() {
   url <- search_releases(all_releases, os, type)
 
   if (is.null(url)) {
-    rlang::abort('No compatible binary found.')
+    rlang::abort('No compatible openmpp binary found.')
   }
 
   file <- basename(url)
