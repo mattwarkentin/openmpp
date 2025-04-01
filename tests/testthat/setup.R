@@ -1,10 +1,16 @@
 local_install_openmpp <- function() {
-  latest <- gh::gh("https://api.github.com/repos/openmpp/main/releases/latest")
+  all_releases <- gh::gh("https://api.github.com/repos/openmpp/main/releases")
+  all_releases <- all_releases[order(sapply(all_releases, \(x) x$published_at), decreasing = TRUE)]
+
   info <- Sys.info()
   os <- info['sysname']
   type <- info['machine']
 
-  url <- find_latest_binary(latest$assets, os, type)
+  url <- search_releases(all_releases, os, type)
+
+  if (is.null(url)) {
+    rlang::abort('No compatible openmpp binary found.')
+  }
 
   file <- basename(url)
 
@@ -46,6 +52,21 @@ find_latest_binary <- function(assets, os, type) {
   }
 
   url
+}
+
+search_releases <- function(releases, os, type) {
+  binary <- NULL
+  for (release in releases) {
+    tryCatch({
+      binary <- find_latest_binary(release$assets, os, type)
+    },
+    error = function(e) {
+    })
+    if (!is.null(binary)) {
+      break
+    }
+  }
+  binary
 }
 
 oms_path <- local_install_openmpp()
