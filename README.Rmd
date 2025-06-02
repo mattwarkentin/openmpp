@@ -50,7 +50,7 @@ In the Windows Terminal, enter the following command:
 .\bin\oms.exe
 ```
 
-This will start the process responsible for running the OpenM++ web service (OMS). Note that the local host address (e.g., http://localhost:4040) will be printed in the console and is the address used by the `openmpp` R package to communicate with the API. This local host address will be set as the `OPENMPP_LOCAL_URL`. See the Usage section for more details.
+This will start the process responsible for running the OpenM++ web service (OMS). Note that the local host address will be printed in the console and is the address used by the `openmpp` R package to communicate with the API. This local host address will be set as the `OPENMPP_LOCAL_URL`. See the Usage section for more details.
 
 ### Running OpenM++ on MacOS
 

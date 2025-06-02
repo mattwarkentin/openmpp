@@ -56,11 +56,10 @@ In the Windows Terminal, enter the following command:
 ```
 
 This will start the process responsible for running the OpenM++ web
-service (OMS). Note that the local host address (e.g.,
-<http://localhost:4040>) will be printed in the console and is the
-address used by the `openmpp` R package to communicate with the API.
-This local host address will be set as the `OPENMPP_LOCAL_URL`. See the
-Usage section for more details.
+service (OMS). Note that the local host address will be printed in the
+console and is the address used by the `openmpp` R package to
+communicate with the API. This local host address will be set as the
+`OPENMPP_LOCAL_URL`. See the Usage section for more details.
 
 ### Running OpenM++ on MacOS
 
@@ -362,7 +361,7 @@ example_run
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunName: ExampleRun
-#> → RunDigest: 41802abc241da17b0603f9296dff80d6
+#> → RunDigest: e2c64228dbbaeef02e074013aaeebf38
 ```
 
 We can now extract an output table from the `Tables` field in the model
@@ -394,7 +393,7 @@ rp_runs
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunNames: [RiskPaths_Default, ExampleRun]
-#> → RunDigests: [40669534e0f7ecc1d5ed55652e2e07e3, 41802abc241da17b0603f9296dff80d6]
+#> → RunDigests: [40669534e0f7ecc1d5ed55652e2e07e3, e2c64228dbbaeef02e074013aaeebf38]
 ```
 
 We will extract a new table from both models. Note that an extra column,
