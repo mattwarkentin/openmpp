@@ -34,6 +34,11 @@
 #'
 #' @md
 #'
+#' @examples
+#' if (FALSE) {
+#'   use_OpenMpp_CPAC()
+#' }
+#'
 #' @export
 #' @rdname use_OpenMpp_CPAC
 #' @export

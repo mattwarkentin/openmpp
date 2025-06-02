@@ -6,6 +6,12 @@
 #'
 #' @return Nothing, invisibly.
 #'
+#' @examples
+#' if (FALSE) {
+#'   create_scenario("RiskPaths", "NewScenario")
+#' }
+#'
+#'
 #' @export
 create_scenario <- function(model, name, base = NULL) {
   existing_scenarios <- get_worksets(model)$Name
@@ -21,9 +27,13 @@ create_scenario <- function(model, name, base = NULL) {
     Name = name
   )
   if (!rlang::is_null(base)) body$BaseRunDigest <- base
-  create_workset(body)
+  new_workset(body)
   invisible()
 }
+
+#' @rdname create_scenario
+#' @export
+create_workset <- create_scenario
 
 get_model_digests <- function(name) {
   models <- get_models()

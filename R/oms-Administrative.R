@@ -20,6 +20,12 @@
 #'   list item. `DbPath` is the relative path to the database file. You
 #'   must replace the forward-slashes in the relative path with asterisks.
 #'
+#' @examples
+#' if (FALSE) {
+#'   admin_models_refresh()
+#' }
+#'
+#'
 #' @export
 admin_models_refresh <- function() {
   api_path <- 'api/admin/all-models/refresh'

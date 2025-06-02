@@ -10,6 +10,12 @@
 #'
 #' @return Nothing, invisibly.
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_download_logs_model('RiskPaths')
+#' }
+#'
+#'
 #' @export
 initiate_model_download <- function(model) {
   api_path <- glue::glue('api/download/model/{model}')
@@ -111,7 +117,7 @@ get_download_logs_model <- function(model) {
 #' @rdname initiate_model_download
 #' @export
 get_download_logs_all <- function() {
-  api_path <- glue::glue('/api/download/log/all')
+  api_path <- glue::glue('/api/download/log-all')
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

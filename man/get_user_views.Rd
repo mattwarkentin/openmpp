@@ -24,3 +24,9 @@ A \code{list} from JSON response object or nothing (invisibly).
 Functions for getting, setting, and deleting user settings. More information
 about these API endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#user-manage-user-settings}{here}.
 }
+\examples{
+if (FALSE) {
+  get_user_views("RiskPaths")
+}
+
+}

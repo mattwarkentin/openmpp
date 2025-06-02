@@ -34,3 +34,12 @@ Functions for creating, copying, merging, retrieving, and deleting
 worksets. More information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-model-workset-metadata-set-of-input-parameters}{here}.
 }
+\examples{
+if (FALSE) {
+  get_worksets("RiskPaths")
+  get_scenarios("RiskPaths")
+  get_workset("RiskPaths", "Default")
+}
+
+
+}

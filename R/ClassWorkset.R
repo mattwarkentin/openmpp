@@ -11,6 +11,13 @@
 #'
 #' @include Utils.R
 #'
+#' @examples
+#' if (FALSE) {
+#'   load_workset("RiskPaths", "Default")
+#'   load_scenario("RiskPaths", "Default")
+#' }
+#'
+#'
 #' @export
 load_workset <- function(model, set) {
   if (!(set %in% get_worksets(model)$Name)) {

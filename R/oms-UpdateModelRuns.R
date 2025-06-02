@@ -8,6 +8,11 @@
 #'
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   delete_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#' }
+#'
 #' @export
 delete_model_run <- function(model, run) {
   api_path <- glue::glue('/api/model/{model}/run/{run}')

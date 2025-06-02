@@ -55,3 +55,9 @@ connection.
 \item \code{OPENMPP_REMOTE_PWD}: Password for logging into a remote API connection.
 }
 }
+\examples{
+if (FALSE) {
+  use_OpenMpp_remote()
+}
+
+}

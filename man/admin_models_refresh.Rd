@@ -63,3 +63,10 @@ function to retrieve the list of model information and find the \code{DbPath}
 list item. \code{DbPath} is the relative path to the database file. You
 must replace the forward-slashes in the relative path with asterisks.
 }
+\examples{
+if (FALSE) {
+  admin_models_refresh()
+}
+
+
+}

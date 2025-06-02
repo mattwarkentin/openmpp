@@ -24,6 +24,14 @@ OpenM++ Workset Class
 \details{
 \code{load_scenario()} is an alias for \code{load_workset()}.
 }
+\examples{
+if (FALSE) {
+  load_workset("RiskPaths", "Default")
+  load_scenario("RiskPaths", "Default")
+}
+
+
+}
 \section{Super class}{
 \code{\link[openmpp:OpenMppModel]{openmpp::OpenMppModel}} -> \code{OpenMppWorkset}
 }

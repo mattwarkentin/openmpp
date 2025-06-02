@@ -9,6 +9,11 @@
 #'
 #' @return A `list` or nothing, invisibly.
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_model_run_state("RiskPaths", "2025_01_28_21_00_48_385")
+#' }
+#'
 #' @export
 run_model <- function(data) {
   api_path <- '/api/run'

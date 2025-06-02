@@ -53,3 +53,9 @@ connection.
 \item \code{OPENMPP_CPAC_PWD}: Password for logging into the remote API connection.
 }
 }
+\examples{
+if (FALSE) {
+  use_OpenMpp_CPAC()
+}
+
+}

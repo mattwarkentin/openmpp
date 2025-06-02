@@ -37,3 +37,9 @@ set the following environment variable in your \code{.Renviron} files:
 http://localhost:4040.
 }
 }
+\examples{
+if (FALSE) {
+  use_OpenMpp_local()
+}
+
+}

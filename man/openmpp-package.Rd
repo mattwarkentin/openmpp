@@ -6,7 +6,7 @@
 \alias{openmpp-package}
 \title{openmpp: Programmatic Interface to OpenM++}
 \description{
-A programmatic interface to the OpenM++ microsimulation platform. The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to provide existing OpenM++ users a programmatic interface for the R language.
+A programmatic interface to the OpenM++ microsimulation platform. The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to provide OpenM++ users a programmatic interface for the R language.
 }
 \seealso{
 Useful links:
@@ -18,7 +18,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Matthew T. Warkentin \email{matthew.warkentin@ucalgary.ca} (\href{https://orcid.org/0000-0001-8730-3511}{ORCID})
+\strong{Maintainer}: Matthew T. Warkentin \email{matthew.warkentin@ucalgary.ca} (\href{https://orcid.org/0000-0001-8730-3511}{ORCID}) [copyright holder]
+
+Other contributors:
+\itemize{
+  \item John M. Hutchinson \email{john.hutchinson@ucalgary.ca} [contributor]
+}
 
 }
 \keyword{internal}

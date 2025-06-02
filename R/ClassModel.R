@@ -9,6 +9,11 @@
 #'
 #' @include Utils.R
 #'
+#' @examples
+#' if (FALSE) {
+#'   load_model("RiskPaths")
+#' }
+#'
 #' @export
 load_model <- function(model) {
   models <- get_models()

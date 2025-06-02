@@ -10,6 +10,11 @@
 #'
 #' @return A `list` from JSON response object or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_user_views("RiskPaths")
+#' }
+#'
 #' @export
 get_user_views <- function(model) {
   api_path <- glue::glue('/api/user/view/model/{model}')

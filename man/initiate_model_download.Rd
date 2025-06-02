@@ -50,3 +50,10 @@ Functions to download model, model run results, or input parameters. More
 information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#download-model-model-run-results-or-input-parameters}{here}.
 }
+\examples{
+if (FALSE) {
+  get_download_logs_model('RiskPaths')
+}
+
+
+}

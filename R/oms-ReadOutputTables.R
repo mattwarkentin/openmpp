@@ -17,6 +17,11 @@
 #'
 #' @return A `list` or `tibble`.
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_run_table_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "T01_LifeExpectancy")
+#' }
+#'
 #' @export
 get_run_table <- function(model, run, name) {
   api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/exprstart/0/count/0')

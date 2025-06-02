@@ -10,6 +10,14 @@
 #'
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_worksets("RiskPaths")
+#'   get_scenarios("RiskPaths")
+#'   get_workset("RiskPaths", "Default")
+#' }
+#'
+#'
 #' @export
 get_workset <- function(model, set) {
   api_path <- glue::glue('api/model/{model}/workset/{set}/text')

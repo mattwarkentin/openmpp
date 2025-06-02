@@ -16,6 +16,12 @@ An \code{OpenMppModel} instance.
 \description{
 OpenM++ Model Class
 }
+\examples{
+if (FALSE) {
+  load_model("RiskPaths")
+}
+
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

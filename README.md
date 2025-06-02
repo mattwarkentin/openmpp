@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.07435/status.svg)](https://doi.org/10.21105/joss.07435)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml)
@@ -226,17 +227,18 @@ Let’s see what models are available:
 
 ``` r
 get_models()
-#> # A tibble: 8 × 7
+#> # A tibble: 9 × 7
 #>   ModelId Name               Digest  Type Version CreateDateTime DefaultLangCode
 #>     <int> <chr>              <chr>  <int> <chr>   <chr>          <chr>          
-#> 1     101 IDMM               bd573…     1 2.0.0.0 2024-12-26 07… EN             
-#> 2     101 NewCaseBased       be317…     0 1.0.0.0 2024-12-26 07… EN             
-#> 3     101 NewCaseBased_bili… 2a78a…     0 1.0.0.0 2024-12-26 07… EN             
-#> 4     101 NewTimeBased       49cec…     1 1.0.1.0 2024-12-26 07… EN             
-#> 5     101 OzProjGenX         1da1c…     0 0.22.0… 2024-12-26 07… EN             
-#> 6     101 OzProjX            2e697…     0 0.22.0… 2024-12-26 07… EN             
-#> 7     101 RiskPaths          d976a…     0 3.0.0.0 2024-12-26 07… EN             
-#> 8       1 modelOne           _2012…     0 1.0     2012-08-17 16… EN
+#> 1     101 IDMM               bd573…     1 2.0.0.0 2025-06-01 17… EN             
+#> 2     101 NewCaseBased       be317…     0 1.0.0.0 2025-06-01 17… EN             
+#> 3     101 NewCaseBased_bili… 2a78a…     0 1.0.0.0 2025-06-01 17… EN             
+#> 4     101 NewTimeBased       49cec…     1 1.0.1.0 2025-06-01 17… EN             
+#> 5     101 OzProjGenX         1da1c…     0 0.22.0… 2025-06-01 17… EN             
+#> 6     101 OzProjX            2e697…     0 0.22.0… 2025-06-01 17… EN             
+#> 7     101 RiskPaths          d976a…     0 3.0.0.0 2025-06-01 17… EN             
+#> 8     101 SM1                db37c…     0 1.0.0.0 2025-06-01 17… EN             
+#> 9       1 modelOne           _2012…     0 1.0     2012-08-17 16… EN
 ```
 
 We can now see what worksets and model runs exist for a given model.
@@ -246,7 +248,7 @@ get_worksets('RiskPaths')
 #> # A tibble: 1 × 10
 #>   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest
 #>   <chr>     <chr>           <chr>        <chr>               <chr> <chr>        
-#> 1 RiskPaths d976aa2fb999f0… 3.0.0.0      2024-12-26 07:24:5… Defa… ""           
+#> 1 RiskPaths d976aa2fb999f0… 3.0.0.0      2025-06-01 17:27:0… Defa… ""           
 #> # ℹ 4 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
 #> #   IsCleanBaseRun <lgl>, Txt <list>
 ```
@@ -256,7 +258,7 @@ get_runs('RiskPaths')
 #> # A tibble: 1 × 15
 #>   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount
 #>   <chr>     <chr>                <chr>        <chr>               <chr>    <int>
-#> 1 RiskPaths d976aa2fb999f097468… 3.0.0.0      2024-12-26 07:24:5… Risk…        1
+#> 1 RiskPaths d976aa2fb999f097468… 3.0.0.0      2025-06-01 17:27:0… Risk…        1
 #> # ℹ 9 more variables: SubStarted <int>, SubCompleted <int>,
 #> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunId <int>,
 #> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>
@@ -298,7 +300,7 @@ rp_baserun
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunName: RiskPaths_Default
-#> → RunDigest: c02d49bfda2e2ff05262ac0f0e30d830
+#> → RunDigest: 40669534e0f7ecc1d5ed55652e2e07e3
 ```
 
 We will create a new scenario based on the parameters from the
@@ -360,7 +362,7 @@ example_run
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunName: ExampleRun
-#> → RunDigest: 9438650b653768c4befaca9d6c36b413
+#> → RunDigest: 41802abc241da17b0603f9296dff80d6
 ```
 
 We can now extract an output table from the `Tables` field in the model
@@ -392,7 +394,7 @@ rp_runs
 #> → ModelVersion: 3.0.0.0
 #> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
 #> → RunNames: [RiskPaths_Default, ExampleRun]
-#> → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 9438650b653768c4befaca9d6c36b413]
+#> → RunDigests: [40669534e0f7ecc1d5ed55652e2e07e3, 41802abc241da17b0603f9296dff80d6]
 ```
 
 We will extract a new table from both models. Note that an extra column,

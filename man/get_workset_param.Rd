@@ -33,3 +33,9 @@ Functions for retrieving parameters from worksets or model runs. More
 information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#read-parameters-output-tables-or-microdata-values}{here}.
 }
+\examples{
+if (FALSE) {
+  get_workset_param("RiskPaths", "Default", "AgeBaselinePreg1")
+}
+
+}

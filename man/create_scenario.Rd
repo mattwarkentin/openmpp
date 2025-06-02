@@ -2,9 +2,12 @@
 % Please edit documentation in R/Scenario.R
 \name{create_scenario}
 \alias{create_scenario}
+\alias{create_workset}
 \title{Manage Model Scenarios}
 \usage{
 create_scenario(model, name, base = NULL)
+
+create_workset(model, name, base = NULL)
 }
 \arguments{
 \item{model}{Model name or digest.}
@@ -18,4 +21,11 @@ Nothing, invisibly.
 }
 \description{
 Manage Model Scenarios
+}
+\examples{
+if (FALSE) {
+  create_scenario("RiskPaths", "NewScenario")
+}
+
+
 }

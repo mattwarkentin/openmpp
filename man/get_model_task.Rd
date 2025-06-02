@@ -49,3 +49,11 @@ Functions for getting creating, updating, retrieving, and deleting
 model tasks. More information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-modeling-task-metadata-and-task-run-history}{here}.
 }
+\examples{
+if (FALSE) {
+  get_model_tasks_list("RiskPaths")
+  get_model_tasks("RiskPaths")
+}
+
+
+}

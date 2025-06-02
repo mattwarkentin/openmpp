@@ -10,6 +10,14 @@
 #'
 #' @md
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_models()
+#'   get_models_list()
+#'   get_model("RiskPaths")
+#' }
+#'
+#'
 #' @export
 get_model <- function(model) {
   if (!rlang::is_scalar_character(model)) {

@@ -47,3 +47,9 @@ Nothing, invisibly.
 \description{
 Functions to upload model run results or input parameters (worksets). More information about these API endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#upload-model-runs-or-worksets}{here}.
 }
+\examples{
+if (FALSE) {
+  get_upload_logs_all()
+}
+
+}

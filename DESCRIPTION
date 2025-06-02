@@ -2,11 +2,12 @@ Package: openmpp
 Title: Programmatic Interface to OpenM++
 Version: 0.0.1
 Authors@R: 
-    person("Matthew T.", "Warkentin", , "matthew.warkentin@ucalgary.ca", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0001-8730-3511"))
+    c(person("Matthew T.", "Warkentin", , "matthew.warkentin@ucalgary.ca", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0001-8730-3511")),
+     person("John M.", "Hutchinson", , "john.hutchinson@ucalgary.ca", role = c("ctb")))
 Description: A programmatic interface to the OpenM++ microsimulation platform.
     The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to
-    provide existing OpenM++ users a programmatic interface for the R language.
+    provide OpenM++ users a programmatic interface for the R language.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

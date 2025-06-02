@@ -27,6 +27,11 @@
 #'
 #' @md
 #'
+#' @examples
+#' if (FALSE) {
+#'   use_OpenMpp_local()
+#' }
+#'
 #' @export
 use_OpenMpp_local <- function(url = Sys.getenv('OPENMPP_LOCAL_URL'), ...) {
   rlang::check_dots_empty()

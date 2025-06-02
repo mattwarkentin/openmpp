@@ -9,6 +9,11 @@
 #'
 #' @return A `list` from a JSON response object.
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_model_lang_list('RiskPaths')
+#' }
+#'
 #' @export
 get_model_lang_list <- function(model) {
   api_path <- glue::glue('api/model/{model}/lang-list')

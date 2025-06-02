@@ -9,6 +9,15 @@
 #'
 #' @include Utils.R
 #'
+#' @examples
+#' if (FALSE) {
+#'   load_model_runs("RiskPaths", c("53300e8b56eabdf5e5fb112059e8c137",
+#'                                  "53300e8b56eabdf5e5fb112059e8c137"))
+#'
+#'   load_runs("RiskPaths", c("53300e8b56eabdf5e5fb112059e8c137",
+#'                            "53300e8b56eabdf5e5fb112059e8c137"))
+#' }
+#'
 #' @export
 load_model_runs <- function(model, runs) {
   OpenMppModelRunSet$new(model, runs)

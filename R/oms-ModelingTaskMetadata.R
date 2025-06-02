@@ -11,6 +11,13 @@
 #'
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_model_tasks_list("RiskPaths")
+#'   get_model_tasks("RiskPaths")
+#' }
+#'
+#'
 #' @export
 get_model_task <- function(model, task) {
   api_path <- glue::glue('/api/model/{model}/task/{task}/text')

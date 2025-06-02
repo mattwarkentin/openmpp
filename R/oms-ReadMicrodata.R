@@ -6,9 +6,14 @@
 #' @inheritParams get_model
 #' @param run Model run digest, run stamp or run name, modeling task run
 #'   stamp, or task run name.
-#' @param name Output table name.
+#' @param name Microdata entity name.
 #'
 #' @return A `list` or `tibble`.
+#'
+#' @examples
+#' if (FALSE) {
+#'   get_run_microdata_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "Person")
+#' }
 #'
 #' @export
 get_run_microdata <- function(model, run, name) {

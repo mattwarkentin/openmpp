@@ -14,6 +14,15 @@
 #'
 #' @return A `list` from a JSON response object or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   touch_model_profile(
+#'     "RiskPaths",
+#'     list(Name = "profile1", Opts = list(Parameter.StartingSeed = "192"))
+#'   )
+#'   delete_model_profile("RiskPaths", "profile1")
+#' }
+#'
 #' @export
 touch_model_profile <- function(model, data) {
   api_path <- glue::glue('api/model/{model}/profile')
@@ -21,8 +30,8 @@ touch_model_profile <- function(model, data) {
     httr2::req_url_path(api_path) |>
     httr2::req_body_json(data, auto_unbox = TRUE) |>
     httr2::req_method('PATCH') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
+  invisible()
 }
 
 #' @rdname touch_model_profile
@@ -32,8 +41,8 @@ delete_model_profile <- function(model, profile) {
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>
-    httr2::req_perform() |>
-    httr2::resp_body_json()
+    httr2::req_perform()
+  invisible()
 }
 
 #' @rdname touch_model_profile

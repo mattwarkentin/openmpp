@@ -28,3 +28,9 @@ A \code{list}, \code{tibble}, or nothing (invisibly).
 Functions to update model runs. More information about these API endpoints
 can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#update-model-runs}{here}.
 }
+\examples{
+if (FALSE) {
+  delete_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+}
+
+}

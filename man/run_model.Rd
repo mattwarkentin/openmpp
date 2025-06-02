@@ -32,3 +32,9 @@ A \code{list} or nothing, invisibly.
 More information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#run-models-run-models-and-monitor-progress}{here}.
 }
+\examples{
+if (FALSE) {
+  get_model_run_state("RiskPaths", "2025_01_28_21_00_48_385")
+}
+
+}

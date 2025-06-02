@@ -2,7 +2,7 @@
 % Please edit documentation in R/oms-UpdateModelWorkset.R
 \name{set_workset_readonly}
 \alias{set_workset_readonly}
-\alias{create_workset}
+\alias{new_workset}
 \alias{merge_workset}
 \alias{update_workset_param_csv}
 \alias{replace_workset}
@@ -19,7 +19,7 @@
 \usage{
 set_workset_readonly(model, set, readonly)
 
-create_workset(data)
+new_workset(data)
 
 merge_workset(workset)
 
@@ -72,4 +72,10 @@ A \code{list}, \code{tibble}, or nothing (invisibly).
 Functions for creating, copying, merging, retrieving, and deleting
 worksets. More information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#update-model-workset-set-of-input-parameters}{here}.
+}
+\examples{
+if (FALSE) {
+  set_workset_readonly("RiskPaths", "Default", TRUE)
+}
+
 }

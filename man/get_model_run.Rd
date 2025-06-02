@@ -49,3 +49,13 @@ A \code{list}, \code{tibble}, or nothing (invisibly).
 Functions to retrieve model run metadata and delete model runs. More
 information about these API endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-model-run-results-metadata}{here}.
 }
+\examples{
+if (FALSE) {
+  get_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+  get_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+  get_model_runs_list("RiskPaths")
+  get_model_runs("RiskPaths")
+}
+
+
+}

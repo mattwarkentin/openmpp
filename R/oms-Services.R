@@ -7,6 +7,13 @@
 #'
 #' @return A `list` from a JSON response object, or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_service_config()
+#'   get_service_state()
+#'   get_disk_use()
+#' }
+#'
 #' @export
 get_service_config <- function() {
   api_path <- 'api/service/config'

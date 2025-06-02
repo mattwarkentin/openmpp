@@ -9,6 +9,12 @@
 #'
 #' @include Utils.R
 #'
+#' @examples
+#' if (FALSE) {
+#'   load_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#'   load_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#' }
+#'
 #' @export
 load_model_run <- function(model, run) {
   runs <- get_runs(model)

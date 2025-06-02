@@ -36,6 +36,11 @@
 #'   directly by the user, instead, the package internally uses these
 #'   connections to communicate with the OpenM++ API.
 #'
+#' @examples
+#' if (FALSE) {
+#'   use_OpenMpp_remote()
+#' }
+#'
 #' @md
 #'
 #' @export

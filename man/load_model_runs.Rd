@@ -24,6 +24,16 @@ OpenM++ ModelRunSet Class
 \details{
 \code{load_runs()} is an alias for \code{load_model_runs()}.
 }
+\examples{
+if (FALSE) {
+  load_model_runs("RiskPaths", c("53300e8b56eabdf5e5fb112059e8c137",
+                                 "53300e8b56eabdf5e5fb112059e8c137"))
+
+  load_runs("RiskPaths", c("53300e8b56eabdf5e5fb112059e8c137",
+                           "53300e8b56eabdf5e5fb112059e8c137"))
+}
+
+}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

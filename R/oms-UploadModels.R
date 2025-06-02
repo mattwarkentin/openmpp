@@ -9,6 +9,11 @@
 #'
 #' @return Nothing, invisibly.
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_upload_logs_all()
+#' }
+#'
 #' @export
 initiate_run_upload <- function(model, run, data) {
   api_path <- glue::glue('/api/upload/model/{model}/run/{run}')
@@ -77,7 +82,7 @@ get_upload_logs_model <- function(model) {
 #' @rdname initiate_run_upload
 #' @export
 get_upload_logs_all <- function() {
-  api_path <- glue::glue('/api/upload/log/all')
+  api_path <- glue::glue('/api/upload/log-all')
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

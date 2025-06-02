@@ -11,6 +11,17 @@
 #'
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   create_task(list(
+#'     ModelName = "RiskPaths",
+#'     ModelDigest = "d976aa2fb999f097468bb2ea098c4daf",
+#'     Name = "NewTask",
+#'     Set = list("Default")
+#'   ))
+#'   delete_task("RiskPaths", "NewTask")
+#' }
+#'
 #' @export
 create_task <- function(data) {
   api_path <- glue::glue('/api/task-new')
@@ -37,7 +48,7 @@ update_task <- function(data) {
 #' @rdname create_task
 #' @export
 delete_task <- function(model, task) {
-  api_path <- glue::glue(' /api/model/{model}/task/{task}')
+  api_path <- glue::glue('/api/model/{model}/task/{task}')
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('DELETE') |>

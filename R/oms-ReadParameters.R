@@ -12,6 +12,11 @@
 #'
 #' @return A `list` or `tibble`.
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_workset_param("RiskPaths", "Default", "AgeBaselinePreg1")
+#' }
+#'
 #' @export
 get_workset_param <- function(model, set, name) {
   api_path <- glue::glue('api/model/{model}/workset/{set}/parameter/{name}/value/start/0/count/0')

@@ -32,3 +32,10 @@ A \code{list} from JSON response object or nothing (invisibly).
 Functions for getting, setting, and deleting user file. More information
 about these API endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#download-and-upload-user-files}{here}.
 }
+\examples{
+if (FALSE) {
+  get_user_files()
+}
+
+
+}

@@ -10,6 +10,10 @@
 #'   iteration but should be increased when running a model where the results
 #'   are expected to be robust.
 #'
+#' @examples
+#' opts <- opts_run()
+#' print(opts)
+#'
 #' @export
 opts_run <- function(
   SimulationCases = 5000,

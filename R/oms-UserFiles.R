@@ -10,6 +10,12 @@
 #'
 #' @return A `list` from JSON response object or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   get_user_files()
+#' }
+#'
+#'
 #' @export
 get_user_files <- function(ext = "*", path = "") {
   api_path <- glue::glue('/api/files/file-tree/{ext}/path/{path}')

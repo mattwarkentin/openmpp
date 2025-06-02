@@ -15,6 +15,11 @@
 #'
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
+#' @examples
+#' if (FALSE) {
+#'   set_workset_readonly("RiskPaths", "Default", TRUE)
+#' }
+#'
 #' @export
 set_workset_readonly <- function(model, set, readonly) {
   api_path <- glue::glue('/api/model/{model}/workset/{set}/readonly/{readonly}')
@@ -22,11 +27,12 @@ set_workset_readonly <- function(model, set, readonly) {
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>
     httr2::req_perform()
+  invisible()
 }
 
 #' @rdname set_workset_readonly
 #' @export
-create_workset <- function(data) {
+new_workset <- function(data) {
   api_path <- glue::glue('/api/workset-create')
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>

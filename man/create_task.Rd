@@ -26,3 +26,15 @@ A \code{list}, \code{tibble}, or nothing (invisibly).
 Functions for updating modeling tasks. More information about these API
 endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#update-modeling-tasks}{here}.
 }
+\examples{
+if (FALSE) {
+  create_task(list(
+    ModelName = "RiskPaths",
+    ModelDigest = "d976aa2fb999f097468bb2ea098c4daf",
+    Name = "NewTask",
+    Set = list("Default")
+  ))
+  delete_task("RiskPaths", "NewTask")
+}
+
+}
