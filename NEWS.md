@@ -1,3 +1,3 @@
-# openmpp (development version)
+# openmpp 0.0.1
 
-* Package under active development.
+* Initial public release.
