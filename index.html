@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Programmatic Interface to OpenM++">
-<meta name="description" content="A programmatic interface to the OpenM++ microsimulation platform. The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to provide existing OpenM++ users a programmatic interface for the R language.">
-<meta property="og:description" content="A programmatic interface to the OpenM++ microsimulation platform. The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to provide existing OpenM++ users a programmatic interface for the R language.">
+<meta name="description" content="A programmatic interface to the OpenM++ microsimulation platform. The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to provide OpenM++ users a programmatic interface for the R language.">
+<meta property="og:description" content="A programmatic interface to the OpenM++ microsimulation platform. The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to provide OpenM++ users a programmatic interface for the R language.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -131,7 +131,7 @@
 <p>Functions for creating new worksets or scenarios</p>
 <ul>
 <li>
-<code><a href="reference/create_scenario.html">create_scenario()</a></code> / <code><a href="reference/set_workset_readonly.html">create_workset()</a></code>
+<code><a href="reference/create_scenario.html">create_scenario()</a></code> / <code><a href="reference/create_scenario.html">create_workset()</a></code>
 </li>
 </ul>
 </li>
@@ -177,24 +177,25 @@
 <p>Let’s see what models are available:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_model.html">get_models</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 8 × 7</span></span>
+<span><span class="co">#&gt; # A tibble: 9 × 7</span></span>
 <span><span class="co">#&gt;   ModelId Name               Digest  Type Version CreateDateTime DefaultLangCode</span></span>
 <span><span class="co">#&gt;     &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;          </span></span>
-<span><span class="co">#&gt; 1     101 IDMM               bd573…     1 2.0.0.0 2024-12-26 07… EN             </span></span>
-<span><span class="co">#&gt; 2     101 NewCaseBased       be317…     0 1.0.0.0 2024-12-26 07… EN             </span></span>
-<span><span class="co">#&gt; 3     101 NewCaseBased_bili… 2a78a…     0 1.0.0.0 2024-12-26 07… EN             </span></span>
-<span><span class="co">#&gt; 4     101 NewTimeBased       49cec…     1 1.0.1.0 2024-12-26 07… EN             </span></span>
-<span><span class="co">#&gt; 5     101 OzProjGenX         1da1c…     0 0.22.0… 2024-12-26 07… EN             </span></span>
-<span><span class="co">#&gt; 6     101 OzProjX            2e697…     0 0.22.0… 2024-12-26 07… EN             </span></span>
-<span><span class="co">#&gt; 7     101 RiskPaths          d976a…     0 3.0.0.0 2024-12-26 07… EN             </span></span>
-<span><span class="co">#&gt; 8       1 modelOne           _2012…     0 1.0     2012-08-17 16… EN</span></span></code></pre></div>
+<span><span class="co">#&gt; 1     101 IDMM               bd573…     1 2.0.0.0 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 2     101 NewCaseBased       be317…     0 1.0.0.0 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 3     101 NewCaseBased_bili… 2a78a…     0 1.0.0.0 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 4     101 NewTimeBased       49cec…     1 1.0.1.0 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 5     101 OzProjGenX         1da1c…     0 0.22.0… 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 6     101 OzProjX            2e697…     0 0.22.0… 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 7     101 RiskPaths          d976a…     0 3.0.0.0 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 8     101 SM1                db37c…     0 1.0.0.0 2025-06-01 17… EN             </span></span>
+<span><span class="co">#&gt; 9       1 modelOne           _2012…     0 1.0     2012-08-17 16… EN</span></span></code></pre></div>
 <p>We can now see what worksets and model runs exist for a given model.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_workset.html">get_worksets</a></span><span class="op">(</span><span class="st">'RiskPaths'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1 × 10</span></span>
 <span><span class="co">#&gt;   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;        </span></span>
-<span><span class="co">#&gt; 1 RiskPaths d976aa2fb999f0… 3.0.0.0      2024-12-26 07:24:5… Defa… ""           </span></span>
+<span><span class="co">#&gt; 1 RiskPaths d976aa2fb999f0… 3.0.0.0      2025-06-01 17:27:0… Defa… ""           </span></span>
 <span><span class="co">#&gt; # ℹ 4 more variables: IsReadonly &lt;lgl&gt;, UpdateDateTime &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   IsCleanBaseRun &lt;lgl&gt;, Txt &lt;list&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -202,7 +203,7 @@
 <span><span class="co">#&gt; # A tibble: 1 × 15</span></span>
 <span><span class="co">#&gt;   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;                &lt;chr&gt;        &lt;chr&gt;               &lt;chr&gt;    &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 RiskPaths d976aa2fb999f097468… 3.0.0.0      2024-12-26 07:24:5… Risk…        1</span></span>
+<span><span class="co">#&gt; 1 RiskPaths d976aa2fb999f097468… 3.0.0.0      2025-06-01 17:27:0… Risk…        1</span></span>
 <span><span class="co">#&gt; # ℹ 9 more variables: SubStarted &lt;int&gt;, SubCompleted &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   CreateDateTime &lt;chr&gt;, Status &lt;chr&gt;, UpdateDateTime &lt;chr&gt;, RunId &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   RunDigest &lt;chr&gt;, ValueDigest &lt;chr&gt;, RunStamp &lt;chr&gt;</span></span></code></pre></div>
@@ -234,7 +235,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d976aa2fb999f097468bb2ea098c4daf</span></span>
 <span><span class="co">#&gt; → RunName: RiskPaths_Default</span></span>
-<span><span class="co">#&gt; → RunDigest: c02d49bfda2e2ff05262ac0f0e30d830</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: 40669534e0f7ecc1d5ed55652e2e07e3</span></span></code></pre></div>
 <p>We will create a new scenario based on the parameters from the <code>RiskPaths_Default</code> model run.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/create_scenario.html">create_scenario</a></span><span class="op">(</span><span class="st">'RiskPaths'</span>, <span class="st">'MyNewScenario'</span>, <span class="va">baserun_digest</span><span class="op">)</span></span></code></pre></div>
@@ -268,7 +269,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d976aa2fb999f097468bb2ea098c4daf</span></span>
 <span><span class="co">#&gt; → RunName: ExampleRun</span></span>
-<span><span class="co">#&gt; → RunDigest: 9438650b653768c4befaca9d6c36b413</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigest: 41802abc241da17b0603f9296dff80d6</span></span></code></pre></div>
 <p>We can now extract an output table from the <code>Tables</code> field in the model run object (<code>example_run$Tables</code>).</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example_run</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
@@ -291,7 +292,7 @@
 <span><span class="co">#&gt; → ModelVersion: 3.0.0.0</span></span>
 <span><span class="co">#&gt; → ModelDigest: d976aa2fb999f097468bb2ea098c4daf</span></span>
 <span><span class="co">#&gt; → RunNames: [RiskPaths_Default, ExampleRun]</span></span>
-<span><span class="co">#&gt; → RunDigests: [c02d49bfda2e2ff05262ac0f0e30d830, 9438650b653768c4befaca9d6c36b413]</span></span></code></pre></div>
+<span><span class="co">#&gt; → RunDigests: [40669534e0f7ecc1d5ed55652e2e07e3, 41802abc241da17b0603f9296dff80d6]</span></span></code></pre></div>
 <p>We will extract a new table from both models. Note that an extra column, <code>RunName</code> is added to indicate which model run the output table data corresponds to.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">births</span> <span class="op">&lt;-</span> <span class="va">rp_runs</span><span class="op">$</span><span class="va">Tables</span><span class="op">$</span><span class="va">T06_BirthsByUnion</span></span>
@@ -373,13 +374,15 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Matthew T. Warkentin <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8730-3511" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Matthew T. Warkentin <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0001-8730-3511" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://doi.org/10.21105/joss.07435" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.07435/status.svg" alt="DOI"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
@@ -394,7 +397,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
