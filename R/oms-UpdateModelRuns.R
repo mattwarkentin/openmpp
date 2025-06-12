@@ -9,8 +9,9 @@
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   delete_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' delete_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
 #' }
 #'
 #' @export

@@ -29,8 +29,9 @@ word lists, profiles, and profile lists. More information about these API
 endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-model-extras}{here}.
 }
 \examples{
-if (FALSE) {
-  get_model_lang_list('RiskPaths')
+\dontrun{
+use_OpenMpp_local()
+get_model_lang_list('RiskPaths')
 }
 
 }

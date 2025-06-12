@@ -10,9 +10,10 @@
 #' @include Utils.R
 #'
 #' @examples
-#' if (FALSE) {
-#'   load_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
-#'   load_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' load_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#' load_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
 #' }
 #'
 #' @export
@@ -20,7 +21,9 @@ load_model_run <- function(model, run) {
   runs <- get_runs(model)
   valid_runs <- c(runs$Name, runs$RunDigest)
   if (!(run %in% valid_runs)) {
-    rlang::abort(glue::glue('Model run "{run}" does not exist for model "{model}".'))
+    rlang::abort(glue::glue(
+      'Model run "{run}" does not exist for model "{model}".'
+    ))
   }
   OpenMppModelRun$new(model, run)
 }
@@ -39,7 +42,6 @@ OpenMppModelRun <-
     portable = FALSE,
     lock_objects = FALSE,
     public = list(
-
       #' @field RunName Run name.
       RunName = NULL,
 
@@ -95,7 +97,9 @@ OpenMppModelRun <-
           suppressWarnings(tbl$expr_value <- as.numeric(tbl$expr_value))
           return(tbl)
         }
-        abort_msg <- glue::glue('Table `{name}` is not available for model run.')
+        abort_msg <- glue::glue(
+          'Table `{name}` is not available for model run.'
+        )
         rlang::abort(abort_msg)
       },
 
@@ -107,11 +111,18 @@ OpenMppModelRun <-
       #' @return A `tibble`.
       get_table_calc = function(name, calc) {
         if (name %in% private$.tables) {
-          tbl <- get_run_table_calc_csv(self$ModelDigest, self$RunDigest, name, calc)
+          tbl <- get_run_table_calc_csv(
+            self$ModelDigest,
+            self$RunDigest,
+            name,
+            calc
+          )
           suppressWarnings(tbl$calc_value <- as.numeric(tbl$calc_value))
           return(tbl)
         }
-        abort_msg <- glue::glue('Table `{name}` is not available for model run.')
+        abort_msg <- glue::glue(
+          'Table `{name}` is not available for model run.'
+        )
         rlang::abort(abort_msg)
       },
 
@@ -124,11 +135,19 @@ OpenMppModelRun <-
       #' @return A `tibble`.
       get_table_comparison = function(name, compare, variant) {
         if (name %in% private$.tables) {
-          tbl <- get_run_table_comparison_csv(self$ModelDigest, self$RunDigest, name, compare, variant)
+          tbl <- get_run_table_comparison_csv(
+            self$ModelDigest,
+            self$RunDigest,
+            name,
+            compare,
+            variant
+          )
           suppressWarnings(tbl$calc_value <- as.numeric(tbl$calc_value))
           return(tbl)
         }
-        abort_msg <- glue::glue('Table `{name}` is not available for model run.')
+        abort_msg <- glue::glue(
+          'Table `{name}` is not available for model run.'
+        )
         rlang::abort(abort_msg)
       },
 
@@ -173,7 +192,10 @@ OpenMppModelRun <-
       #' @return  Self, invisibly.
       write_log = function(dir) {
         if (dir.exists(dir)) {
-          file_name <- get_model_run_state(self$ModelDigest, self$RunStamp)$LogFileName
+          file_name <- get_model_run_state(
+            self$ModelDigest,
+            self$RunStamp
+          )$LogFileName
           file_path <- glue::glue('{dir}/{file_name}')
           writeLines(self$get_log(), file_path)
         }

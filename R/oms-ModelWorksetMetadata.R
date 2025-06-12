@@ -11,10 +11,11 @@
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_worksets("RiskPaths")
-#'   get_scenarios("RiskPaths")
-#'   get_workset("RiskPaths", "Default")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_worksets("RiskPaths")
+#' get_scenarios("RiskPaths")
+#' get_workset("RiskPaths", "Default")
 #' }
 #'
 #'

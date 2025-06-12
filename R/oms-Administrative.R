@@ -21,8 +21,9 @@
 #'   must replace the forward-slashes in the relative path with asterisks.
 #'
 #' @examples
-#' if (FALSE) {
-#'   admin_models_refresh()
+#' \dontrun{
+#' use_OpenMpp_local()
+#' admin_models_refresh()
 #' }
 #'
 #'

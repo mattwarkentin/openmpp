@@ -35,12 +35,15 @@ opts_run <- function(
   structure(
     list(
       RunStamp = RunStamp,
-      Opts = c(list(
-        Parameter.SimulationCases = SimulationCases,
-        OpenM.SubValues = as.character(SubValues),
-        OpenM.RunStamp = RunStamp,
-        OpenM.LogToConsole = 'true'
-      ), Opts),
+      Opts = c(
+        list(
+          Parameter.SimulationCases = SimulationCases,
+          OpenM.SubValues = as.character(SubValues),
+          OpenM.RunStamp = RunStamp,
+          OpenM.LogToConsole = 'true'
+        ),
+        Opts
+      ),
       ...
     ),
     class = c('OpenMppRunOpts', 'list')
@@ -56,5 +59,5 @@ print.OpenMppRunOpts = function(x, ...) {
 }
 
 TimeStamp <- function() {
-  sub('.' , '_', fixed = TRUE, format(Sys.time(),"%Y_%m_%d_%H_%M_%OS3"))
+  sub('.', '_', fixed = TRUE, format(Sys.time(), "%Y_%m_%d_%H_%M_%OS3"))
 }

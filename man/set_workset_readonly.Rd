@@ -74,8 +74,9 @@ worksets. More information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#update-model-workset-set-of-input-parameters}{here}.
 }
 \examples{
-if (FALSE) {
-  set_workset_readonly("RiskPaths", "Default", TRUE)
+\dontrun{
+use_OpenMpp_local()
+set_workset_readonly("RiskPaths", "Default", TRUE)
 }
 
 }

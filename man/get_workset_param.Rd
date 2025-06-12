@@ -34,8 +34,9 @@ information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#read-parameters-output-tables-or-microdata-values}{here}.
 }
 \examples{
-if (FALSE) {
-  get_workset_param("RiskPaths", "Default", "AgeBaselinePreg1")
+\dontrun{
+use_OpenMpp_local()
+get_workset_param("RiskPaths", "Default", "AgeBaselinePreg1")
 }
 
 }

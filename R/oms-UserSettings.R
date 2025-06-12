@@ -11,8 +11,9 @@
 #' @return A `list` from JSON response object or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_user_views("RiskPaths")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_user_views("RiskPaths")
 #' }
 #'
 #' @export

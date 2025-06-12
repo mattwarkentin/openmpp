@@ -38,8 +38,8 @@ http://localhost:4040.
 }
 }
 \examples{
-if (FALSE) {
-  use_OpenMpp_local()
+\dontrun{
+use_OpenMpp_local()
 }
 
 }

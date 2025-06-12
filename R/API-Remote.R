@@ -37,18 +37,18 @@
 #'   connections to communicate with the OpenM++ API.
 #'
 #' @examples
-#' if (FALSE) {
-#'   use_OpenMpp_remote()
+#' \dontrun{
+#' use_OpenMpp_remote()
 #' }
 #'
 #' @md
 #'
 #' @export
 use_OpenMpp_remote <- function(
-    url = Sys.getenv('OPENMPP_REMOTE_URL'),
-    user = Sys.getenv('OPENMPP_REMOTE_USER'),
-    pwd = Sys.getenv('OPENMPP_REMOTE_PWD'),
-    ...
+  url = Sys.getenv('OPENMPP_REMOTE_URL'),
+  user = Sys.getenv('OPENMPP_REMOTE_USER'),
+  pwd = Sys.getenv('OPENMPP_REMOTE_PWD'),
+  ...
 ) {
   rlang::check_dots_empty()
   con <- OpenMppRemote$new(url, user, pwd)

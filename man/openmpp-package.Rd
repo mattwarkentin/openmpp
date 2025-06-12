@@ -4,9 +4,9 @@
 \name{openmpp-package}
 \alias{openmpp}
 \alias{openmpp-package}
-\title{openmpp: Programmatic Interface to OpenM++}
+\title{openmpp: Programmatic Interface to 'OpenM++'}
 \description{
-A programmatic interface to the OpenM++ microsimulation platform. The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to provide OpenM++ users a programmatic interface for the R language.
+A programmatic interface to the 'OpenM++' microsimulation platform (\url{https://openmpp.org}). The primary goal of this package is to wrap the 'OpenM++' Web Service (OMS) to provide 'OpenM++' users a programmatic interface for the R language.
 }
 \seealso{
 Useful links:

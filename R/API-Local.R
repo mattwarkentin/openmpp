@@ -28,14 +28,16 @@
 #' @md
 #'
 #' @examples
-#' if (FALSE) {
-#'   use_OpenMpp_local()
+#' \dontrun{
+#' use_OpenMpp_local()
 #' }
 #'
 #' @export
 use_OpenMpp_local <- function(url = Sys.getenv('OPENMPP_LOCAL_URL'), ...) {
   rlang::check_dots_empty()
-  if (nchar(url) == 0L) url <- 'http://localhost:4040'
+  if (nchar(url) == 0L) {
+    url <- 'http://localhost:4040'
+  }
   con <- OpenMppLocal$new(url)
   assign('API', con, OpenMpp)
   invisible()
@@ -63,7 +65,9 @@ OpenMppConnection <-
     classname = 'OpenMppConnection',
     public = list(
       build_request = function() {
-        rlang::abort('Please register an API connection using `openmpp::use_OpenMpp_local()` or `openmpp::use_OpenMpp_remote()`.')
+        rlang::abort(
+          'Please register an API connection using `openmpp::use_OpenMpp_local()` or `openmpp::use_OpenMpp_remote()`.'
+        )
       }
     )
   )

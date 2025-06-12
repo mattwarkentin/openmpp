@@ -12,9 +12,10 @@
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_model_tasks_list("RiskPaths")
-#'   get_model_tasks("RiskPaths")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_model_tasks_list("RiskPaths")
+#' get_model_tasks("RiskPaths")
 #' }
 #'
 #'
@@ -108,7 +109,9 @@ get_model_task_run_last <- function(model, task) {
 #' @rdname get_model_task
 #' @export
 get_model_task_run_compl <- function(model, task) {
-  api_path <- glue::glue('api/model/{model}/task/{task}/run-status/last-completed')
+  api_path <- glue::glue(
+    'api/model/{model}/task/{task}/run-status/last-completed'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

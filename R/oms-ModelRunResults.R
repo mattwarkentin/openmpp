@@ -9,11 +9,12 @@
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
-#'   get_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
-#'   get_model_runs_list("RiskPaths")
-#'   get_model_runs("RiskPaths")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#' get_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+#' get_model_runs_list("RiskPaths")
+#' get_model_runs("RiskPaths")
 #' }
 #'
 #'

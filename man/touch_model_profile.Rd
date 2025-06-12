@@ -35,12 +35,13 @@ More information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#update-model-profile-set-of-key-value-options}{here}.
 }
 \examples{
-if (FALSE) {
-  touch_model_profile(
-    "RiskPaths",
-    list(Name = "profile1", Opts = list(Parameter.StartingSeed = "192"))
-  )
-  delete_model_profile("RiskPaths", "profile1")
+\dontrun{
+use_OpenMpp_local()
+touch_model_profile(
+  "RiskPaths",
+  list(Name = "profile1", Opts = list(Parameter.StartingSeed = "192"))
+)
+delete_model_profile("RiskPaths", "profile1")
 }
 
 }

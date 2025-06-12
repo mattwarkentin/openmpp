@@ -24,11 +24,11 @@ More information about these API endpoints can be found at
 \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#get-model-metadata}{here}.
 }
 \examples{
-if (FALSE) {
-  get_models()
-  get_models_list()
-  get_model("RiskPaths")
+\dontrun{
+use_OpenMpp_local()
+get_models()
+get_models_list()
+get_model("RiskPaths")
 }
-
 
 }

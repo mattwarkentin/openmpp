@@ -15,12 +15,13 @@
 #' @return A `list` from a JSON response object or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   touch_model_profile(
-#'     "RiskPaths",
-#'     list(Name = "profile1", Opts = list(Parameter.StartingSeed = "192"))
-#'   )
-#'   delete_model_profile("RiskPaths", "profile1")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' touch_model_profile(
+#'   "RiskPaths",
+#'   list(Name = "profile1", Opts = list(Parameter.StartingSeed = "192"))
+#' )
+#' delete_model_profile("RiskPaths", "profile1")
 #' }
 #'
 #' @export
@@ -48,7 +49,9 @@ delete_model_profile <- function(model, profile) {
 #' @rdname touch_model_profile
 #' @export
 set_model_profile_opt <- function(model, profile, key, value) {
-  api_path <- glue::glue('api/model/{model}/profile/{profile}/key/{key}/value/{value}')
+  api_path <- glue::glue(
+    'api/model/{model}/profile/{profile}/key/{key}/value/{value}'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('POST') |>

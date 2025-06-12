@@ -10,8 +10,9 @@
 #' @return A `list` from a JSON response object.
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_model_lang_list('RiskPaths')
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_model_lang_list('RiskPaths')
 #' }
 #'
 #' @export

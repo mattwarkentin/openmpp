@@ -10,8 +10,9 @@
 #' @return Nothing, invisibly.
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_upload_logs_all()
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_upload_logs_all()
 #' }
 #'
 #' @export

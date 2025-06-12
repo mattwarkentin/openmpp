@@ -56,8 +56,8 @@ connection.
 }
 }
 \examples{
-if (FALSE) {
-  use_OpenMpp_remote()
+\dontrun{
+use_OpenMpp_remote()
 }
 
 }

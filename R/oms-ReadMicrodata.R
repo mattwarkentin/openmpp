@@ -11,13 +11,16 @@
 #' @return A `list` or `tibble`.
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_run_microdata_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "Person")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_run_microdata_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "Person")
 #' }
 #'
 #' @export
 get_run_microdata <- function(model, run, name) {
-  api_path <- glue::glue('api/model/{model}/run/{run}/microdata/{name}/value/start/0/count/0')
+  api_path <- glue::glue(
+    'api/model/{model}/run/{run}/microdata/{name}/value/start/0/count/0'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

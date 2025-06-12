@@ -10,8 +10,9 @@
 #' @return A `list` or nothing, invisibly.
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_model_run_state("RiskPaths", "2025_01_28_21_00_48_385")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_model_run_state("RiskPaths", "2025_01_28_21_00_48_385")
 #' }
 #'
 #' @export
@@ -28,7 +29,9 @@ run_model <- function(data) {
 #' @rdname run_model
 #' @export
 get_model_run_state <- function(model, stamp) {
-  api_path <- glue::glue('/api/run/log/model/{model}/stamp/{stamp}/start/0/count/0')
+  api_path <- glue::glue(
+    '/api/run/log/model/{model}/stamp/{stamp}/start/0/count/0'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

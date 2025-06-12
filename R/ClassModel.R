@@ -10,8 +10,9 @@
 #' @include Utils.R
 #'
 #' @examples
-#' if (FALSE) {
-#'   load_model("RiskPaths")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' load_model("RiskPaths")
 #' }
 #'
 #' @export
@@ -93,7 +94,10 @@ OpenMppModel <-
       .set_table_info = function() {
         self$TablesInfo <-
           purrr::map(private$.model$TableTxt, \(x) {
-            purrr::discard_at(x,  c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')) |>
+            purrr::discard_at(
+              x,
+              c('TableDimsTxt', 'TableAccTxt', 'TableExprTxt')
+            ) |>
               purrr::list_flatten(name_spec = '{inner}')
           }) |>
           purrr::map(tibble::as_tibble) |>

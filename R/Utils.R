@@ -6,19 +6,29 @@ is_compatible <- function(x, y) {
     rlang::abort('New and old parameters must both be data frames')
   }
   if (!nrow(x) == nrow(y)) {
-    rlang::abort('New parameters must have the same number of rows as old parameters')
+    rlang::abort(
+      'New parameters must have the same number of rows as old parameters'
+    )
   }
   if (!dim(x)[[2]] == dim(y)[[2]]) {
-    rlang::abort('New parameters must have the same number of columns as old parameters')
+    rlang::abort(
+      'New parameters must have the same number of columns as old parameters'
+    )
   }
   if (!all(colnames(x) == colnames(y))) {
-    rlang::abort('New parameters must have the same column names as old parameters, and in the same order')
+    rlang::abort(
+      'New parameters must have the same column names as old parameters, and in the same order'
+    )
   }
 }
 
 pivot_wide_impl <- function(param) {
   pivot_col <- tidyselect::eval_select(tidyselect::last_col(1), param)
-  non_pivot_cols <- tidyselect::eval_select(tidyselect::everything(), param, exclude = c('param_value', names(pivot_col)))
+  non_pivot_cols <- tidyselect::eval_select(
+    tidyselect::everything(),
+    param,
+    exclude = c('param_value', names(pivot_col))
+  )
   pwide <-
     param |>
     tidyr::pivot_wider(

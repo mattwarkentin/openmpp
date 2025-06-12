@@ -17,8 +17,9 @@ An \code{OpenMppModel} instance.
 OpenM++ Model Class
 }
 \examples{
-if (FALSE) {
-  load_model("RiskPaths")
+\dontrun{
+use_OpenMpp_local()
+load_model("RiskPaths")
 }
 
 }

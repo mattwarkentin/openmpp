@@ -25,8 +25,9 @@ Functions for retrieving microdata from model runs. More information about
 these API endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#read-parameters-output-tables-or-microdata-values}{here}.
 }
 \examples{
-if (FALSE) {
-  get_run_microdata_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "Person")
+\dontrun{
+use_OpenMpp_local()
+get_run_microdata_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "Person")
 }
 
 }

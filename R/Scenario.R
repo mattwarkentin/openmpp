@@ -7,8 +7,9 @@
 #' @return Nothing, invisibly.
 #'
 #' @examples
-#' if (FALSE) {
-#'   create_scenario("RiskPaths", "NewScenario")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' create_scenario("RiskPaths", "NewScenario")
 #' }
 #'
 #'
@@ -26,7 +27,9 @@ create_scenario <- function(model, name, base = NULL) {
     ModelDigest = if (!is_model_name) model else get_model_digests(model)[[1]],
     Name = name
   )
-  if (!rlang::is_null(base)) body$BaseRunDigest <- base
+  if (!rlang::is_null(base)) {
+    body$BaseRunDigest <- base
+  }
   new_workset(body)
   invisible()
 }

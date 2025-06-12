@@ -16,8 +16,9 @@
 #' @return A `list`, `tibble`, or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   set_workset_readonly("RiskPaths", "Default", TRUE)
+#' \dontrun{
+#' use_OpenMpp_local()
+#' set_workset_readonly("RiskPaths", "Default", TRUE)
 #' }
 #'
 #' @export
@@ -114,7 +115,9 @@ delete_workset_param <- function(model, set, name) {
 #' @rdname set_workset_readonly
 #' @export
 update_workset_param <- function(model, set, name, data) {
-  api_path <- glue::glue('/api/model/{model}/workset/{set}/parameter/{name}/new/value')
+  api_path <- glue::glue(
+    '/api/model/{model}/workset/{set}/parameter/{name}/new/value'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_body_json(data, auto_unbox = TRUE) |>
@@ -126,7 +129,9 @@ update_workset_param <- function(model, set, name, data) {
 #' @rdname set_workset_readonly
 #' @export
 copy_param_run_to_workset <- function(model, set, name, run) {
-  api_path <- glue::glue('/api/model/{model}/workset/{set}/copy/parameter/{name}/from-run/{run}')
+  api_path <- glue::glue(
+    '/api/model/{model}/workset/{set}/copy/parameter/{name}/from-run/{run}'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>
@@ -137,7 +142,9 @@ copy_param_run_to_workset <- function(model, set, name, run) {
 #' @rdname set_workset_readonly
 #' @export
 merge_param_run_to_workset <- function(model, set, name, run) {
-  api_path <- glue::glue('/api/model/{model}/workset/{set}/merge/parameter/{name}/from-run/{run}')
+  api_path <- glue::glue(
+    '/api/model/{model}/workset/{set}/merge/parameter/{name}/from-run/{run}'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PATCH') |>
@@ -148,7 +155,9 @@ merge_param_run_to_workset <- function(model, set, name, run) {
 #' @rdname set_workset_readonly
 #' @export
 copy_param_workset_to_workset <- function(model, set, name, from) {
-  api_path <- glue::glue('/api/model/{model}/workset/{set}/copy/parameter/{name}/from-workset/{from}')
+  api_path <- glue::glue(
+    '/api/model/{model}/workset/{set}/copy/parameter/{name}/from-workset/{from}'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PUT') |>
@@ -159,7 +168,9 @@ copy_param_workset_to_workset <- function(model, set, name, from) {
 #' @rdname set_workset_readonly
 #' @export
 merge_param_workset_to_workset <- function(model, set, name, from) {
-  api_path <- glue::glue('/api/model/{model}/workset/{set}/merge/parameter/{name}/from-workset/{from}')
+  api_path <- glue::glue(
+    '/api/model/{model}/workset/{set}/merge/parameter/{name}/from-workset/{from}'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_method('PATCH') |>

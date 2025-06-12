@@ -1,19 +1,20 @@
 Package: openmpp
-Title: Programmatic Interface to OpenM++
+Title: Programmatic Interface to 'OpenM++'
 Version: 0.0.1
-Authors@R: 
-    c(person("Matthew T.", "Warkentin", , "matthew.warkentin@ucalgary.ca", role = c("aut", "cre", "cph"),
+Authors@R: c(
+    person("Matthew T.", "Warkentin", , "matthew.warkentin@ucalgary.ca", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-8730-3511")),
-     person("John M.", "Hutchinson", , "john.hutchinson@ucalgary.ca", role = c("ctb")))
-Description: A programmatic interface to the OpenM++ microsimulation platform.
-    The primary goal of this package is to wrap the OpenM++ Web Service (OMS) to
-    provide OpenM++ users a programmatic interface for the R language.
+    person("John M.", "Hutchinson", , "john.hutchinson@ucalgary.ca", role = c("ctb"))
+  )
+Description: A programmatic interface to the 'OpenM++' microsimulation platform (<https://openmpp.org>).
+    The primary goal of this package is to wrap the 'OpenM++' Web Service (OMS) to
+    provide 'OpenM++' users a programmatic interface for the R language.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2.9000
 Depends:
-  R (>= 4.1.0)
+    R (>= 4.1.0)
 Imports: 
     cli,
     curl,
@@ -27,8 +28,7 @@ Imports:
     tibble,
     tidyr,
     tidyselect
-URL: https://github.com/mattwarkentin/openmpp,
-    https://mattwarkentin.github.io/openmpp/
+URL: https://github.com/mattwarkentin/openmpp, https://mattwarkentin.github.io/openmpp/
 BugReports: https://github.com/mattwarkentin/openmpp/issues
 Collate: 
     'API-CPAC.R'

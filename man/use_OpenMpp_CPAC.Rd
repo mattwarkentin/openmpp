@@ -54,8 +54,8 @@ connection.
 }
 }
 \examples{
-if (FALSE) {
-  use_OpenMpp_CPAC()
+\dontrun{
+use_OpenMpp_CPAC()
 }
 
 }

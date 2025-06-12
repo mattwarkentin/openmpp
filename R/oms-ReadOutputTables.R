@@ -18,13 +18,16 @@
 #' @return A `list` or `tibble`.
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_run_table_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "T01_LifeExpectancy")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_run_table_csv("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137", "T01_LifeExpectancy")
 #' }
 #'
 #' @export
 get_run_table <- function(model, run, name) {
-  api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/exprstart/0/count/0')
+  api_path <- glue::glue(
+    'api/model/{model}/run/{run}/table/{name}/exprstart/0/count/0'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
@@ -45,10 +48,14 @@ get_run_table_csv <- function(model, run, name) {
 #' @rdname get_run_table
 #' @export
 get_run_table_calc_csv <- function(model, run, name, calc) {
-  rlang::arg_match(calc, c('avg', 'sum', 'count', 'max', 'min', 'var',
-                           'sd', 'se', 'cv'))
+  rlang::arg_match(
+    calc,
+    c('avg', 'sum', 'count', 'max', 'min', 'var', 'sd', 'se', 'cv')
+  )
 
-  api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/calc/{calc}/csv')
+  api_path <- glue::glue(
+    'api/model/{model}/run/{run}/table/{name}/calc/{calc}/csv'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>
@@ -61,7 +68,9 @@ get_run_table_calc_csv <- function(model, run, name, calc) {
 get_run_table_comparison_csv <- function(model, run, name, compare, variant) {
   rlang::arg_match(compare, c('diff', 'ratio', 'percent'))
 
-  api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/compare/{compare}/variant/{variant}/csv')
+  api_path <- glue::glue(
+    'api/model/{model}/run/{run}/table/{name}/compare/{compare}/variant/{variant}/csv'
+  )
   OpenMpp$API$build_request() |>
     httr2::req_url_path(api_path) |>
     httr2::req_perform() |>

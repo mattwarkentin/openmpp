@@ -12,16 +12,19 @@
 #' @include Utils.R
 #'
 #' @examples
-#' if (FALSE) {
-#'   load_workset("RiskPaths", "Default")
-#'   load_scenario("RiskPaths", "Default")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' load_workset("RiskPaths", "Default")
+#' load_scenario("RiskPaths", "Default")
 #' }
 #'
 #'
 #' @export
 load_workset <- function(model, set) {
   if (!(set %in% get_worksets(model)$Name)) {
-    rlang::abort(glue::glue('Workset "{set}" does not exist for model "{model}".'))
+    rlang::abort(glue::glue(
+      'Workset "{set}" does not exist for model "{model}".'
+    ))
   }
   OpenMppWorkset$new(model, set)
 }
@@ -112,7 +115,7 @@ OpenMppWorkset <-
           ModelName = self$ModelName,
           ModelDigest = self$ModelDigest,
           Name = self$WorksetName,
-          BaseRunDigest =  "",
+          BaseRunDigest = "",
           IsCleanBaseRun = TRUE
         )
         merge_workset(json)
@@ -127,9 +130,13 @@ OpenMppWorkset <-
       #' @return Self, invisibly.
       copy_params = function(names) {
         private$.check_modifiable()
-        if (rlang::is_null(self$BaseRunDigest) |
-            nchar(self$BaseRunDigest) == 0) {
-          rlang::abort('Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.')
+        if (
+          rlang::is_null(self$BaseRunDigest) |
+            nchar(self$BaseRunDigest) == 0
+        ) {
+          rlang::abort(
+            'Cannot copy parameters without a base scenario. Consider setting a base scenario with `$set_base_digest()`.'
+          )
         }
 
         if (any(names %in% private$.params)) {
@@ -138,12 +145,14 @@ OpenMppWorkset <-
 
         purrr::walk(
           .x = names,
-          .f = \(name) copy_param_run_to_workset(
-            model = self$ModelDigest,
-            set = self$WorksetName,
-            name = name,
-            run = self$BaseRunDigest
-          )
+          .f = \(name) {
+            copy_param_run_to_workset(
+              model = self$ModelDigest,
+              set = self$WorksetName,
+              name = name,
+              run = self$BaseRunDigest
+            )
+          }
         )
 
         private$.set_workset(self$ModelDigest, self$WorksetName)
@@ -158,7 +167,9 @@ OpenMppWorkset <-
       delete_params = function(names) {
         private$.check_any_params()
         private$.check_modifiable()
-        purrr::map(names, \(x) private$.check_param_exists(x, rlang::caller_env(3)))
+        purrr::map(names, \(x) {
+          private$.check_param_exists(x, rlang::caller_env(3))
+        })
         purrr::walk(
           .x = names,
           .f = \(name) {
@@ -180,7 +191,11 @@ OpenMppWorkset <-
       get_param = function(name) {
         private$.check_any_params()
         private$.check_param_exists(name)
-        private$.pivot_wide(get_workset_param_csv(self$ModelDigest, self$WorksetName, name))
+        private$.pivot_wide(get_workset_param_csv(
+          self$ModelDigest,
+          self$WorksetName,
+          name
+        ))
       },
 
       #' @description
@@ -228,8 +243,13 @@ OpenMppWorkset <-
       #' @param wait_time Number of seconds to wait between status checks.
       #' @param progress Logical. Should a progress bar be shown?
       #' @return Self, invisibly.
-      run = function(name, opts = opts_run(), wait = FALSE, wait_time = 0.2,
-                     progress = TRUE) {
+      run = function(
+        name,
+        opts = opts_run(),
+        wait = FALSE,
+        wait_time = 0.2,
+        progress = TRUE
+      ) {
         if (rlang::is_false(self$ReadOnly)) {
           rlang::abort('Workset must be read-only to initiate a run.')
         }
@@ -241,11 +261,17 @@ OpenMppWorkset <-
         }
 
         if (!inherits(opts, 'OpenMppRunOpts')) {
-          rlang::abort('`opts` argument must be an `openmpp::opts_run()` object')
+          rlang::abort(
+            '`opts` argument must be an `openmpp::opts_run()` object'
+          )
         }
 
-        if (rlang::is_null(self$BaseRunDigest) | nchar(self$BaseRunDigest) == 0) {
-          rlang::warn('Cannot find base run. Consider setting a base run with `$set_base_digest()`.')
+        if (
+          rlang::is_null(self$BaseRunDigest) | nchar(self$BaseRunDigest) == 0
+        ) {
+          rlang::warn(
+            'Cannot find base run. Consider setting a base run with `$set_base_digest()`.'
+          )
         } else {
           opts$Opts$OpenM.BaseRunDigest <- self$BaseRunDigest
         }
@@ -260,7 +286,6 @@ OpenMppWorkset <-
         max_sim <- as.integer(opts$Opts$Parameter.SimulationCases)
 
         if (wait) {
-
           if (progress) {
             cli::cli_progress_bar(
               total = max_sim,
@@ -314,7 +339,9 @@ OpenMppWorkset <-
           private$.add_params(param$Name)
           f <- function(data) {
             param_name <- param$Name
-            if (missing(data)) return(self$get_param(param_name))
+            if (missing(data)) {
+              return(self$get_param(param_name))
+            }
             self$set_param(param_name, data)
             invisible(self)
           }
@@ -324,11 +351,14 @@ OpenMppWorkset <-
       .pivot_wide = pivot_wide_impl,
       .pivot_long = pivot_long_impl,
       .get_run_progress = function(model, run) {
-        safe_status <- purrr::possibly(\(m, r) {
-          get_model_run_status(m, r)$Progress |>
-            purrr::map_int(\(x) x$Value) |>
-            sum()
-        }, otherwise = 0L)
+        safe_status <- purrr::possibly(
+          \(m, r) {
+            get_model_run_status(m, r)$Progress |>
+              purrr::map_int(\(x) x$Value) |>
+              sum()
+          },
+          otherwise = 0L
+        )
         safe_status(model, run)
       },
       .get_run_done = function(model, run) {
@@ -345,7 +375,9 @@ OpenMppWorkset <-
       .check_param_exists = function(param, call = rlang::caller_env()) {
         if (!param %in% private$.params) {
           rlang::abort(
-            message = glue::glue('Parameter `{param}` does not exist in this workset.'),
+            message = glue::glue(
+              'Parameter `{param}` does not exist in this workset.'
+            ),
             call = call
           )
         }
@@ -374,7 +406,9 @@ OpenMppWorkset <-
 
       #' @field BaseRunDigest Base run digest for input parameters.
       BaseRunDigest = function(base) {
-        if (missing(base)) return(private$.workset$BaseRunDigest)
+        if (missing(base)) {
+          return(private$.workset$BaseRunDigest)
+        }
         if (nchar(base) == 0) {
           delete_base_digest()
           return(invisible(self))

@@ -35,19 +35,19 @@
 #' @md
 #'
 #' @examples
-#' if (FALSE) {
-#'   use_OpenMpp_CPAC()
+#' \dontrun{
+#' use_OpenMpp_CPAC()
 #' }
 #'
 #' @export
 #' @rdname use_OpenMpp_CPAC
 #' @export
 use_OpenMpp_CPAC <- function(
-    url = Sys.getenv('OPENMPP_CPAC_URL'),
-    api = Sys.getenv('OPENMPP_CPAC_API'),
-    user = Sys.getenv('OPENMPP_CPAC_USER'),
-    pwd = Sys.getenv('OPENMPP_CPAC_PWD'),
-    ...
+  url = Sys.getenv('OPENMPP_CPAC_URL'),
+  api = Sys.getenv('OPENMPP_CPAC_API'),
+  user = Sys.getenv('OPENMPP_CPAC_USER'),
+  pwd = Sys.getenv('OPENMPP_CPAC_PWD'),
+  ...
 ) {
   rlang::check_dots_empty()
   con <- OpenMppCPAC$new(url, api, user, pwd)

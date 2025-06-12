@@ -42,10 +42,11 @@ A \code{list} from a JSON response object, or nothing (invisibly).
 Functions for retrieving or deleting service information. More information about these API endpoints can be found at \href{https://github.com/openmpp/openmpp.github.io/wiki/Oms-web-service-API#model-run-jobs-and-service-state}{here}.
 }
 \examples{
-if (FALSE) {
-  get_service_config()
-  get_service_state()
-  get_disk_use()
+\dontrun{
+use_OpenMpp_local()
+get_service_config()
+get_service_state()
+get_disk_use()
 }
 
 }

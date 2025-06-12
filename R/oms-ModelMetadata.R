@@ -11,12 +11,12 @@
 #' @md
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_models()
-#'   get_models_list()
-#'   get_model("RiskPaths")
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_models()
+#' get_models_list()
+#' get_model("RiskPaths")
 #' }
-#'
 #'
 #' @export
 get_model <- function(model) {

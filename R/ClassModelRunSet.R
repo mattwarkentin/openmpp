@@ -10,12 +10,10 @@
 #' @include Utils.R
 #'
 #' @examples
-#' if (FALSE) {
-#'   load_model_runs("RiskPaths", c("53300e8b56eabdf5e5fb112059e8c137",
-#'                                  "53300e8b56eabdf5e5fb112059e8c137"))
-#'
-#'   load_runs("RiskPaths", c("53300e8b56eabdf5e5fb112059e8c137",
-#'                            "53300e8b56eabdf5e5fb112059e8c137"))
+#' \dontrun{
+#' use_OpenMpp_local()
+#' load_model_runs("RiskPaths", rep("53300e8b56eabdf5e5fb112059e8c137", 2))
+#' load_runs("RiskPaths", rep("53300e8b56eabdf5e5fb112059e8c137", 2))
 #' }
 #'
 #' @export
@@ -36,7 +34,6 @@ OpenMppModelRunSet <-
     portable = FALSE,
     lock_objects = FALSE,
     public = list(
-
       #' @field ModelDigest Model digest.
       ModelDigest = NULL,
 

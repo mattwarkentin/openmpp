@@ -23,8 +23,9 @@ Nothing, invisibly.
 Manage Model Scenarios
 }
 \examples{
-if (FALSE) {
-  create_scenario("RiskPaths", "NewScenario")
+\dontrun{
+use_OpenMpp_local()
+create_scenario("RiskPaths", "NewScenario")
 }
 
 

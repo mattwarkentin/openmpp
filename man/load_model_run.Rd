@@ -26,9 +26,10 @@ OpenM++ ModelRun Class
 \code{load_run()} is an alias for \code{load_model_run()}.
 }
 \examples{
-if (FALSE) {
-  load_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
-  load_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+\dontrun{
+use_OpenMpp_local()
+load_model_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
+load_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
 }
 
 }

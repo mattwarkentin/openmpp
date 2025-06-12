@@ -8,10 +8,11 @@
 #' @return A `list` from a JSON response object, or nothing (invisibly).
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_service_config()
-#'   get_service_state()
-#'   get_disk_use()
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_service_config()
+#' get_service_state()
+#' get_disk_use()
 #' }
 #'
 #' @export

@@ -25,9 +25,10 @@ OpenM++ Workset Class
 \code{load_scenario()} is an alias for \code{load_workset()}.
 }
 \examples{
-if (FALSE) {
-  load_workset("RiskPaths", "Default")
-  load_scenario("RiskPaths", "Default")
+\dontrun{
+use_OpenMpp_local()
+load_workset("RiskPaths", "Default")
+load_scenario("RiskPaths", "Default")
 }
 
 

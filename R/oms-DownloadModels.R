@@ -11,8 +11,9 @@
 #' @return Nothing, invisibly.
 #'
 #' @examples
-#' if (FALSE) {
-#'   get_download_logs_model('RiskPaths')
+#' \dontrun{
+#' use_OpenMpp_local()
+#' get_download_logs_model('RiskPaths')
 #' }
 #'
 #'
