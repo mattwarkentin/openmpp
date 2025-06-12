@@ -10,3 +10,4 @@
 ^pkgdown$
 ^inst/paper/*.docx$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
