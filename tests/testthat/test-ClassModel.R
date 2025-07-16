@@ -1,8 +1,6 @@
 test_that("OpenMppModel class works", {
-  skip_on_cran()
+  skip_if_not(test_connection())
 
-  # Setup
-  local_initiate_oms(oms_path)
   use_OpenMpp_local()
   model_name <- get_models()$Name[[1]]
   model <- load_model(model_name)

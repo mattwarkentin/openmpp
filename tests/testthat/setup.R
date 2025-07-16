@@ -1,6 +1,9 @@
 local_install_openmpp <- function() {
   all_releases <- gh::gh("https://api.github.com/repos/openmpp/main/releases")
-  all_releases <- all_releases[order(sapply(all_releases, \(x) x$published_at), decreasing = TRUE)]
+  all_releases <- all_releases[order(
+    sapply(all_releases, \(x) x$published_at),
+    decreasing = TRUE
+  )]
 
   info <- Sys.info()
   os <- info['sysname']
@@ -28,6 +31,8 @@ local_install_openmpp <- function() {
     untar(path, exdir = dir)
     new_path <- tools::file_path_sans_ext(path, compression = TRUE)
   }
+
+  withr::defer(unlink(new_path, recursive = TRUE), testthat::teardown_env())
 
   new_path
 }
@@ -57,11 +62,12 @@ find_latest_binary <- function(assets, os, type) {
 search_releases <- function(releases, os, type) {
   binary <- NULL
   for (release in releases) {
-    tryCatch({
-      binary <- find_latest_binary(release$assets, os, type)
-    },
-    error = function(e) {
-    })
+    tryCatch(
+      {
+        binary <- find_latest_binary(release$assets, os, type)
+      },
+      error = function(e) {}
+    )
     if (!is.null(binary)) {
       break
     }
@@ -69,4 +75,28 @@ search_releases <- function(releases, os, type) {
   binary
 }
 
-oms_path <- local_install_openmpp()
+local_initiate_oms <- function(oms_path, env = testthat::teardown_env()) {
+  cmd <- if (Sys.info()['sysname'] == 'Windows') {
+    '.\\bin\\oms.exe'
+  } else {
+    'bin/oms'
+  }
+  pid <-
+    withr::with_dir(
+      new = oms_path,
+      code = sys::exec_background(cmd = cmd, std_out = FALSE)
+    )
+  withr::defer(tools::pskill(pid), env)
+  ensure_oms_running()
+  pid
+}
+
+tryCatch(
+  {
+    oms_path <- local_install_openmpp()
+    local_initiate_oms(oms_path)
+  },
+  error = function(e) {
+    return(invisible())
+  }
+)
