@@ -283,7 +283,7 @@ OpenMppWorkset <-
         run_model(opts)
 
         run_stamp <- opts$RunStamp
-        max_sim <- as.integer(opts$Opts$Parameter.SimulationCases)
+        max_sim <- opts$Opts$Parameter.SimulationCases
 
         if (wait) {
           if (progress) {
