@@ -39,7 +39,7 @@ use_OpenMpp_local <- function(url = Sys.getenv('OPENMPP_LOCAL_URL'), ...) {
     url <- 'http://localhost:4040'
   }
   con <- OpenMppLocal$new(url)
-  assign('API', con, OpenMpp)
+  assign(x = 'API', value = con, envir = OpenMpp)
   invisible()
 }
 
@@ -54,8 +54,7 @@ OpenMppLocal <-
         invisible(self)
       },
       build_request = function() {
-        httr2::request(self$url) |>
-          httr2::req_url_path_append('api')
+        httr2::request(self$url)
       }
     )
   )
@@ -66,7 +65,7 @@ OpenMppConnection <-
     public = list(
       build_request = function() {
         rlang::abort(
-          'Please register an API connection using `openmpp::use_OpenMpp_local()` or `openmpp::use_OpenMpp_remote()`.'
+          'Please register an API connection using `openmpp::use_OpenMpp_local()` or `openmpp::use_OpenMpp_custom()`.'
         )
       }
     )

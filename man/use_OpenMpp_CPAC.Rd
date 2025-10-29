@@ -6,23 +6,15 @@
 \usage{
 use_OpenMpp_CPAC(
   url = Sys.getenv("OPENMPP_CPAC_URL"),
-  api = Sys.getenv("OPENMPP_CPAC_API"),
-  user = Sys.getenv("OPENMPP_CPAC_USER"),
-  pwd = Sys.getenv("OPENMPP_CPAC_PWD"),
+  key = Sys.getenv("OPENMPP_CPAC_KEY"),
   ...
 )
 }
 \arguments{
-\item{url}{URL for making login requests. See \code{Details} for more
+\item{url}{URL for making API requests. See \code{Details} for more
 instructions.}
 
-\item{api}{URL for making API requests. See \code{Details} for more instructions.}
-
-\item{user}{User name for logging into remote API. See \code{Details} for more
-instructions.}
-
-\item{pwd}{Password for logging into remote API. See \code{Details} for more
-instructions.}
+\item{key}{API Key for making requests.}
 
 \item{...}{Not currently used.}
 }
@@ -37,20 +29,17 @@ Register a connection to the OpenM++ Web Services (OMS) Application
 Programming Interface (API) running on the CPAC cloud-based server.
 }
 \details{
-A \code{user} name and password (\code{pwd}) are sensitive information and
-should not be shared. To avoid hard-coding your user name and password into
-your R scripts, we recommend declaring this information in your global or
-project-specific \code{.Renviron} file. The same approach may be used to declare
-your URLs for making API requests. While these URLs are typically not
+An API key is sensitive information and should not be shared.
+To avoid hard-coding your user name and password into your R scripts, we
+recommend declaring this information in your global or project-specific
+\code{.Renviron} file. The same approach may be used to declare
+your URL for making API requests. While the URL us typically not
 sensitive information, keeping all of this information in one place makes
 sense for consistency. For remote API connections to CPAC, set the
 following environment variables in your \code{.Renviron} files:
 \itemize{
-\item \code{OPENMPP_CPAC_URL}: URL for logging into a remote API connection.
-\item \code{OPENMPP_CPAC_API}: URL for making remote API requests.
-\item \code{OPENMPP_CPAC_USER}: User name for logging into the remote API
-connection.
-\item \code{OPENMPP_CPAC_PWD}: Password for logging into the remote API connection.
+\item \code{OPENMPP_CPAC_URL}: URL for making remote API requests.
+\item \code{OPENMPP_CPAC_KEY}: API key for making remote API requests.
 }
 }
 \examples{

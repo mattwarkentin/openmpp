@@ -32,7 +32,13 @@ local_install_openmpp <- function() {
     new_path <- tools::file_path_sans_ext(path, compression = TRUE)
   }
 
-  withr::defer(unlink(new_path, recursive = TRUE), testthat::teardown_env())
+  if (testthat::is_testing()) {
+    env <- testthat::teardown_env()
+  } else {
+    env <- parent.frame()
+  }
+
+  withr::defer(unlink(new_path, recursive = TRUE), env)
 
   new_path
 }
@@ -75,7 +81,7 @@ search_releases <- function(releases, os, type) {
   binary
 }
 
-local_initiate_oms <- function(oms_path, env = testthat::teardown_env()) {
+local_initiate_oms <- function(oms_path) {
   cmd <- if (Sys.info()['sysname'] == 'Windows') {
     '.\\bin\\oms.exe'
   } else {
@@ -86,6 +92,13 @@ local_initiate_oms <- function(oms_path, env = testthat::teardown_env()) {
       new = oms_path,
       code = sys::exec_background(cmd = cmd, std_out = FALSE)
     )
+
+  if (testthat::is_testing()) {
+    env <- testthat::teardown_env()
+  } else {
+    env <- parent.frame()
+  }
+
   withr::defer(tools::pskill(pid), env)
   ensure_oms_running()
   pid
@@ -94,7 +107,8 @@ local_initiate_oms <- function(oms_path, env = testthat::teardown_env()) {
 tryCatch(
   {
     oms_path <- local_install_openmpp()
-    local_initiate_oms(oms_path)
+    pid <- local_initiate_oms(oms_path)
+    list(path = oms_path, pid = pid)
   },
   error = function(e) {
     return(invisible())
