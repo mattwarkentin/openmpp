@@ -104,6 +104,21 @@ OpenMppModelRun <-
       },
 
       #' @description
+      #' Retrieve a table with all accumulator values.
+      #' @param name Table name.
+      #' @return A `tibble`.
+      get_table_acc = function(name) {
+        if (name %in% private$.tables) {
+          tbl <- get_run_table_acc_csv(self$ModelDigest, self$RunDigest, name)
+          return(tbl)
+        }
+        abort_msg <- glue::glue(
+          'Table `{name}` is not available for model run.'
+        )
+        rlang::abort(abort_msg)
+      },
+
+      #' @description
       #' Retrieve a table calculation.
       #' @param name Table name.
       #' @param calc Name of calculation. One of `"avg"`, `"sum"`, `"count"`,

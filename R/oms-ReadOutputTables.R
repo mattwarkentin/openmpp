@@ -47,6 +47,17 @@ get_run_table_csv <- function(model, run, name) {
 
 #' @rdname get_run_table
 #' @export
+get_run_table_acc_csv <- function(model, run, name) {
+  api_path <- glue::glue('api/model/{model}/run/{run}/table/{name}/all-acc/csv')
+  OpenMpp$API$build_request() |>
+    httr2::req_url_path(api_path) |>
+    httr2::req_perform() |>
+    httr2::resp_body_string() |>
+    readr::read_csv(show_col_types = FALSE, progress = FALSE)
+}
+
+#' @rdname get_run_table
+#' @export
 get_run_table_calc_csv <- function(model, run, name, calc) {
   rlang::arg_match(
     calc,

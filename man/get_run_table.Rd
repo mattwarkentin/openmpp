@@ -3,6 +3,7 @@
 \name{get_run_table}
 \alias{get_run_table}
 \alias{get_run_table_csv}
+\alias{get_run_table_acc_csv}
 \alias{get_run_table_calc_csv}
 \alias{get_run_table_comparison_csv}
 \title{Read Output Tables}
@@ -10,6 +11,8 @@
 get_run_table(model, run, name)
 
 get_run_table_csv(model, run, name)
+
+get_run_table_acc_csv(model, run, name)
 
 get_run_table_calc_csv(model, run, name, calc)
 

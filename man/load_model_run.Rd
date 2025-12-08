@@ -70,6 +70,7 @@ load_run("RiskPaths", "53300e8b56eabdf5e5fb112059e8c137")
 \item \href{#method-OpenMppModelRun-new}{\code{OpenMppModelRun$new()}}
 \item \href{#method-OpenMppModelRun-print}{\code{OpenMppModelRun$print()}}
 \item \href{#method-OpenMppModelRun-get_table}{\code{OpenMppModelRun$get_table()}}
+\item \href{#method-OpenMppModelRun-get_table_acc}{\code{OpenMppModelRun$get_table_acc()}}
 \item \href{#method-OpenMppModelRun-get_table_calc}{\code{OpenMppModelRun$get_table_calc()}}
 \item \href{#method-OpenMppModelRun-get_table_comparison}{\code{OpenMppModelRun$get_table_comparison()}}
 \item \href{#method-OpenMppModelRun-write_table}{\code{OpenMppModelRun$write_table()}}
@@ -127,6 +128,26 @@ Self, invisibly.
 Retrieve a table.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$get_table(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{Table name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A \code{tibble}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OpenMppModelRun-get_table_acc"></a>}}
+\if{latex}{\out{\hypertarget{method-OpenMppModelRun-get_table_acc}{}}}
+\subsection{Method \code{get_table_acc()}}{
+Retrieve a table with all accumulator values.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OpenMppModelRun$get_table_acc(name)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
