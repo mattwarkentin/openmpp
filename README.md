@@ -4,6 +4,8 @@
 <!-- badges: start -->
 
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.07435/status.svg)](https://doi.org/10.21105/joss.07435)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/openmpp)](https://CRAN.R-project.org/package=openmpp)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mattwarkentin/openmpp/actions/workflows/R-CMD-check.yaml)
@@ -15,7 +17,13 @@ models, and gathering results for further processing.
 
 ## Installation (R Package)
 
-You can install the development version of `openmpp` from
+You can install the CRAN version of `openmpp` with:
+
+``` r
+install.packages("openmpp")
+```
+
+Or, you can install the development version of `openmpp` from
 [GitHub](https://github.com/mattwarkentin/openmpp) with:
 
 ``` r
@@ -83,20 +91,26 @@ communication.
 ## Usage
 
 The `openmpp` package contains many functions that provide access to
-nearly every OpenM++ API endpoint. However, users of this package will
-typically only use a smaller set of functions for most common tasks.
+nearly every OpenM++ REST API endpoint. However, users of this package
+will typically only use a smaller set of functions for most common
+tasks.
 
 ### User Authentication
 
-Each user is required to set their local or remote host address (i.e.,
+Each user is suggested to set their local or remote host address (i.e.,
 URL) for the OpenM++ API in their global or project-specific `.Renviron`
 file in order for the `openmpp` package to authenticate and communicate
-with the API on behalf of the user.
+with the API on behalf of the user. You can pass the URL directly to the
+functions that create the connections but it is our suggestion to
+declare the URL in the `.Renviron` file alongside other credentials
+described below.
 
 If you are working in an IDE (e.g., Positron, RStudio), you may consider
 using the following function `usethis::edit_r_environ()` to open your
 `.Renviron` file for editing. Note that you will need to restart your R
 session after editing the file for the effect to take place.
+
+#### Local API
 
 For an API running locally, set the following environment variable in
 your `.Renviron` file:
@@ -104,38 +118,50 @@ your `.Renviron` file:
     OPENMPP_LOCAL_URL=http://localhost:XXXX
 
 Where `XXXX` is the four digits corresponding to your specific local
-host address (typically 4040 is used). The local host address is printed
-to the console when starting the OpenM++ web service in the terminal.
+host address for this service (typically 4040 is used by default). The
+local host address is printed to the console when starting the OpenM++
+web service in the terminal.
 
-This package also provides the ability to remotely connect to OpenM++
-using JWT tokens. For an API running remotely, set the following
-environment variables in your `.Renviron` file:
-
-    OPENMPP_REMOTE_URL=...
-    OPENMPP_REMOTE_USER=...
-    OPENMPP_REMOTE_PWD=...
-
-If you aren’t sure of your remote URL or your username/password, you may
-contact your OpenM++ administrator to retrieve this information. Note
-that the URL, user name, and password should be kept confidential and
-not committed into version control (e.g., git).
-
-Once the environment variables are set, users may register a local or
-remote API connection in their R scripts.
+Once the environment variable is set, users may register a local API
+connection in their R scripts with:
 
 ``` r
 library(openmpp)
 use_OpenMpp_local()
 ```
 
-Or,
+#### Custom API
+
+The methods for building a connection to a remote or custom API has
+changed as of version `0.0.2` of this package. This internal rewrite was
+done to enable more flexibility to define custom connections where the
+user provides the tooling to build requests and authenticate (if
+required).
+
+This new interface for custom API connections is through the use of
+`use_OpenMpp_custom()`. This function has a single argument, `req`,
+which should be a function that, when called, returns a `httr2_request`
+object. At a minimum, this function should build the start of the
+request (with `httr2::request()`).
+
+Once a user defines this custom function, they can provide it to
+`use_OpenMpp_custom()`. For example, the following code would replicate
+the local API connection:
 
 ``` r
 library(openmpp)
-use_OpenMpp_remote()
+
+custom_req <- function(url = Sys.getenv('OPENMPP_LOCAL_URL')) {
+  httr2::request(url)
+}
+
+use_OpenMpp_custom(custom_req)
 ```
 
-see `?use_OpenMpp_local` or `?use_OpenMpp_remote` for more information.
+The simple example presented above could be extended to handle user
+authentication or to add headers, cookies, or other data to the request.
+
+See `?use_OpenMpp_custom` for more information.
 
 ### Main Functions
 
@@ -202,247 +228,6 @@ beyond the scope of this package. In-depth information on model
 development can be found here:
 <https://github.com/openmpp/openmpp.github.io/wiki/Model-Development-Topics>.
 
-### Example
-
-Next, we will work through a very simple example of creating a new
-scenario, extracting parameters to change, changing parameters, running
-the model, and extracting results. This example will use the
-**RiskPaths** model that comes with the OpenM++ software. RiskPaths is a
-simple, competing risk, case-based continuous time miscrosimulation
-model ([More
-Information](https://www.statcan.gc.ca/en/microsimulation/modgen/new/chap3/chap3-2)).
-
-To run this example, you must have installed OpenM++, initiated the
-OpenM++ web service (OMS) in the shell, and configured the R package
-using the instructions above.
-
-``` r
-library(openmpp)
-
-use_OpenMpp_local()
-```
-
-Let’s see what models are available:
-
-``` r
-get_models()
-#> # A tibble: 9 × 7
-#>   ModelId Name               Digest  Type Version CreateDateTime DefaultLangCode
-#>     <int> <chr>              <chr>  <int> <chr>   <chr>          <chr>          
-#> 1     101 IDMM               bd573…     1 2.0.0.0 2025-06-01 17… EN             
-#> 2     101 NewCaseBased       be317…     0 1.0.0.0 2025-06-01 17… EN             
-#> 3     101 NewCaseBased_bili… 2a78a…     0 1.0.0.0 2025-06-01 17… EN             
-#> 4     101 NewTimeBased       49cec…     1 1.0.1.0 2025-06-01 17… EN             
-#> 5     101 OzProjGenX         1da1c…     0 0.22.0… 2025-06-01 17… EN             
-#> 6     101 OzProjX            2e697…     0 0.22.0… 2025-06-01 17… EN             
-#> 7     101 RiskPaths          d976a…     0 3.0.0.0 2025-06-01 17… EN             
-#> 8     101 SM1                db37c…     0 1.0.0.0 2025-06-01 17… EN             
-#> 9       1 modelOne           _2012…     0 1.0     2012-08-17 16… EN
-```
-
-We can now see what worksets and model runs exist for a given model.
-
-``` r
-get_worksets('RiskPaths')
-#> # A tibble: 1 × 10
-#>   ModelName ModelDigest     ModelVersion ModelCreateDateTime Name  BaseRunDigest
-#>   <chr>     <chr>           <chr>        <chr>               <chr> <chr>        
-#> 1 RiskPaths d976aa2fb999f0… 3.0.0.0      2025-06-01 17:27:0… Defa… ""           
-#> # ℹ 4 more variables: IsReadonly <lgl>, UpdateDateTime <chr>,
-#> #   IsCleanBaseRun <lgl>, Txt <list>
-```
-
-``` r
-get_runs('RiskPaths')
-#> # A tibble: 1 × 15
-#>   ModelName ModelDigest          ModelVersion ModelCreateDateTime Name  SubCount
-#>   <chr>     <chr>                <chr>        <chr>               <chr>    <int>
-#> 1 RiskPaths d976aa2fb999f097468… 3.0.0.0      2025-06-01 17:27:0… Risk…        1
-#> # ℹ 9 more variables: SubStarted <int>, SubCompleted <int>,
-#> #   CreateDateTime <chr>, Status <chr>, UpdateDateTime <chr>, RunId <int>,
-#> #   RunDigest <chr>, ValueDigest <chr>, RunStamp <chr>
-```
-
-Now we can load the `RiskPaths` model to inspect.
-
-``` r
-rp <- load_model('RiskPaths')
-rp
-#> ── OpenM++ Model ───────────────────────────────────────────────────────────────
-#> → ModelName: RiskPaths
-#> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
-```
-
-We will now load the `Default` set of input parameters for the RiskPaths
-model.
-
-``` r
-rp_default <- load_scenario('RiskPaths', 'Default')
-rp_default
-#> ── OpenM++ Workset (ReadOnly) ──────────────────────────────────────────────────
-#> → ModelName: RiskPaths
-#> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
-#> → WorksetName: Default
-#> → BaseRunDigest:
-```
-
-Finally, we will load the base run for the RiskPaths model.
-
-``` r
-baserun_digest <- rp$ModelRuns$RunDigest[[1]]
-rp_baserun <- load_run('RiskPaths', baserun_digest)
-rp_baserun
-#> ── OpenM++ ModelRun ────────────────────────────────────────────────────────────
-#> → ModelName: RiskPaths
-#> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
-#> → RunName: RiskPaths_Default
-#> → RunDigest: 40669534e0f7ecc1d5ed55652e2e07e3
-```
-
-We will create a new scenario based on the parameters from the
-`RiskPaths_Default` model run.
-
-``` r
-create_scenario('RiskPaths', 'MyNewScenario', baserun_digest)
-```
-
-We will load the new scenario, copy over the `AgeBaselinePreg1`
-parameter from the base run.
-
-``` r
-my_scenario <- load_scenario('RiskPaths', 'MyNewScenario')
-```
-
-Let’s reduce the fertility rate by 10% across all age groups…
-
-``` r
-my_scenario$copy_params('AgeBaselinePreg1')
-```
-
-``` r
-library(dplyr)
-
-current_rates <- my_scenario$Parameters$AgeBaselinePreg1
-
-reduced_rates <-
-  current_rates |> 
-  mutate(across(-sub_id, \(x) x * 0.9))
-
-my_scenario$Parameters$AgeBaselinePreg1 <- reduced_rates
-```
-
-We will now run the model and give it the name `'ExampleRun'`. We use
-the `wait = TRUE` flag to make sure we want for the model run to finish
-before returning to our R session. We use `progress = FALSE` to avoid
-printing progress bars in this document. Note that model runs may take a
-long time when the number of simulation cases is large.
-
-``` r
-my_scenario$ReadOnly <- TRUE
-my_scenario$run('ExampleRun', wait = TRUE, progress = FALSE)
-```
-
-Note that we can use the `opts` argument and the `opts_run()` function
-to configure our run. By default, models are run with 5,000 simulation
-cases and 12 SubValues. This allows for quick model runs and faster
-iteration, but users will want to increase the number of simulation
-cases when performing a full model run.
-
-Now that our model run is complete, let’s load it into memory.
-
-``` r
-example_run <- load_run('RiskPaths', 'ExampleRun')
-example_run
-#> ── OpenM++ ModelRun ────────────────────────────────────────────────────────────
-#> → ModelName: RiskPaths
-#> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
-#> → RunName: ExampleRun
-#> → RunDigest: e2c64228dbbaeef02e074013aaeebf38
-```
-
-We can now extract an output table from the `Tables` field in the model
-run object (`example_run$Tables`).
-
-``` r
-example_run$Tables$T06_BirthsByUnion
-#> # A tibble: 7 × 3
-#>   expr_name Dim0                   expr_value
-#>   <chr>     <chr>                       <dbl>
-#> 1 Expr0     US_NEVER_IN_UNION         1205.  
-#> 2 Expr0     US_FIRST_UNION_PERIOD1    2944.  
-#> 3 Expr0     US_FIRST_UNION_PERIOD2     333.  
-#> 4 Expr0     US_AFTER_FIRST_UNION        10.0 
-#> 5 Expr0     US_SECOND_UNION             72.0 
-#> 6 Expr0     US_AFTER_SECOND_UNION        1.00
-#> 7 Expr0     all                       4565.
-```
-
-Great, we have created a new scenario, modified some parameters, ran the
-model, and extracted output tables. In this last step, we will load
-multiple model runs into memory to compare them.
-
-``` r
-rp_runs <- load_runs('RiskPaths', rp$ModelRuns$RunDigest)
-rp_runs
-#> ── OpenM++ ModelRunSet ─────────────────────────────────────────────────────────
-#> → ModelName: RiskPaths
-#> → ModelVersion: 3.0.0.0
-#> → ModelDigest: d976aa2fb999f097468bb2ea098c4daf
-#> → RunNames: [RiskPaths_Default, ExampleRun]
-#> → RunDigests: [40669534e0f7ecc1d5ed55652e2e07e3, e2c64228dbbaeef02e074013aaeebf38]
-```
-
-We will extract a new table from both models. Note that an extra column,
-`RunName` is added to indicate which model run the output table data
-corresponds to.
-
-``` r
-births <- rp_runs$Tables$T06_BirthsByUnion
-births
-#> # A tibble: 14 × 4
-#>    RunName           expr_name Dim0                   expr_value
-#>    <chr>             <chr>     <chr>                       <dbl>
-#>  1 RiskPaths_Default Expr0     US_NEVER_IN_UNION         1285   
-#>  2 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD1    2986   
-#>  3 RiskPaths_Default Expr0     US_FIRST_UNION_PERIOD2     293   
-#>  4 RiskPaths_Default Expr0     US_AFTER_FIRST_UNION        11   
-#>  5 RiskPaths_Default Expr0     US_SECOND_UNION             57   
-#>  6 RiskPaths_Default Expr0     US_AFTER_SECOND_UNION        1   
-#>  7 RiskPaths_Default Expr0     all                       4633   
-#>  8 ExampleRun        Expr0     US_NEVER_IN_UNION         1205.  
-#>  9 ExampleRun        Expr0     US_FIRST_UNION_PERIOD1    2944.  
-#> 10 ExampleRun        Expr0     US_FIRST_UNION_PERIOD2     333.  
-#> 11 ExampleRun        Expr0     US_AFTER_FIRST_UNION        10.0 
-#> 12 ExampleRun        Expr0     US_SECOND_UNION             72.0 
-#> 13 ExampleRun        Expr0     US_AFTER_SECOND_UNION        1.00
-#> 14 ExampleRun        Expr0     all                       4565.
-```
-
-We can even plot this using `ggplot2`! Note that the number of
-simulation cases for `ExampleRun` is **low** so the results are not to
-be trusted! This is only for demonstration purposes.
-
-``` r
-library(ggplot2)
-
-births |> 
-  ggplot(aes(Dim0, expr_value, fill = RunName)) +
-  geom_col(position = position_dodge()) +
-  labs(x = NULL, y = 'Number of births by union') +
-  coord_flip() +
-  theme_minimal() +
-  theme(legend.position = 'bottom')
-```
-
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
-
-When we are sure we no longer need a scenario or model run, we can use
-`delete_scenario()` or `delete_run()` to clean things up!
-
 ## Contributor Guidelines
 
 Contributions to this package are welcome. The preferred method of
@@ -451,6 +236,14 @@ please file an issue to discuss the idea with the project team. More
 details on contributing can be found in the
 [CONTRIBUTING](https://github.com/mattwarkentin/openmpp/blob/main/CONTRIBUTING.md)
 document.
+
+## Acknowledgments
+
+We gratefully acknowledge the authors and maintainers of OpenM++ for
+developing and sustaining the open-source modeling platform that makes
+this work possible. Their efforts to build, document, and support
+OpenM++ have provided a robust foundation for microsimulation research
+and for the development of tools such as this package.
 
 ## Code of Conduct
 

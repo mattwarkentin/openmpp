@@ -49,7 +49,7 @@ use_OpenMpp_CPAC <- function(
 
 
 CPAC_API_request <- function(url, key) {
-  function(auth) {
+  function() {
     httr2::request(url) |>
       httr2::req_headers_redacted("X-Api-Key" = key)
   }
