@@ -1,8 +1,8 @@
-# openmpp 0.0.1
+# openmpp 0.0.2
 
 ## Test environements
 
-+ local macOS install, R 4.2.1
++ local macOS install, R 4.5.2
 
 + macOS (on github actions), release
 
@@ -12,9 +12,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 note
 
 ## Reverse dependencies
 
