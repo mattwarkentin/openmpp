@@ -14,7 +14,7 @@
   ([`get_run_table_acc_csv()`](https://mattwarkentin.github.io/openmpp/reference/get_run_table.md))
   and new method (`$get_table_acc()`) for the `OpenMppModelRun` class
   have been added to access output tables with accumulator values for a
-  model run
+  model run.
 
 ## openmpp 0.0.1
 

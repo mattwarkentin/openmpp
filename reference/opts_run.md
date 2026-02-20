@@ -56,11 +56,11 @@ opts <- opts_run()
 print(opts)
 #> OpenM++ Run Options
 #> {
-#>   "RunStamp": "2026_02_20_20_44_55_844",
+#>   "RunStamp": "2026_02_20_20_50_52_844",
 #>   "Opts": {
 #>     "Parameter.SimulationCases": "5000",
 #>     "OpenM.SubValues": "12",
-#>     "OpenM.RunStamp": "2026_02_20_20_44_55_844",
+#>     "OpenM.RunStamp": "2026_02_20_20_50_52_844",
 #>     "OpenM.LogToConsole": "true"
 #>   }
 #> } 
