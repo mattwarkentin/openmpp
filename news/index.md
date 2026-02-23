@@ -2,6 +2,8 @@
 
 ## openmpp 0.0.2
 
+CRAN release: 2026-02-20
+
 - New functionality has been added to allow users to specify their own
   custom connections to an OpenM++ OMS API
   ([`use_OpenMpp_custom()`](https://mattwarkentin.github.io/openmpp/reference/use_OpenMpp_custom.md)).
