@@ -1,3 +1,5 @@
+# openmpp (development version)
+
 # openmpp 0.0.2
 
 * New functionality has been added to allow users to specify their own custom connections to an OpenM++ OMS API (`use_OpenMpp_custom()`). This change should make the package more flexible and extensible to support different types of connections and user authentication methods. A consequence of this change is the removal of the `use_OpenMpp_remote()` function.
