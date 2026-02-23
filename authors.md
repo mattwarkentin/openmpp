@@ -10,15 +10,15 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/mattwarkentin/openmpp/blob/v0.0.2/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/mattwarkentin/openmpp/blob/main/DESCRIPTION)
 
 Warkentin M (2026). *openmpp: Programmatic Interface to 'OpenM++'*. R
-package version 0.0.2, <https://github.com/mattwarkentin/openmpp>.
+package version 0.0.2.9000, <https://github.com/mattwarkentin/openmpp>.
 
     @Manual{,
       title = {openmpp: Programmatic Interface to 'OpenM++'},
       author = {Matthew T. Warkentin},
       year = {2026},
-      note = {R package version 0.0.2},
+      note = {R package version 0.0.2.9000},
       url = {https://github.com/mattwarkentin/openmpp},
     }

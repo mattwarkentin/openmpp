@@ -1,5 +1,7 @@
 # Changelog
 
+## openmpp (development version)
+
 ## openmpp 0.0.2
 
 CRAN release: 2026-02-20
