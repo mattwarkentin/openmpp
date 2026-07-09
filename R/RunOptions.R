@@ -53,7 +53,7 @@ opts_run <- function(
 #' @rdname opts_run
 #' @param x Object to print.
 #' @export
-print.OpenMppRunOpts = function(x, ...) {
+print.OpenMppRunOpts <- function(x, ...) {
   cli::cat_line('OpenM++ Run Options')
   print(jsonlite::toJSON(x, pretty = TRUE, auto_unbox = TRUE))
 }

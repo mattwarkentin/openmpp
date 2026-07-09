@@ -283,7 +283,7 @@ OpenMppWorkset <-
         run_model(opts)
 
         run_stamp <- opts$RunStamp
-        max_sim <- opts$Opts$Parameter.SimulationCases
+        max_sim <- as.integer(opts$Opts$Parameter.SimulationCases)
 
         if (wait) {
           if (progress) {
@@ -320,11 +320,11 @@ OpenMppWorkset <-
       .workset = NULL,
       .params = NULL,
       .set_workset_metadata = function() {
-        self$WorksetName = private$.workset$Name
-        self$WorksetMetadata = purrr::discard_at(private$.workset, 'Param')
+        self$WorksetName <- private$.workset$Name
+        self$WorksetMetadata <- purrr::discard_at(private$.workset, 'Param')
       },
       .set_workset = function(model, set) {
-        private$.workset = get_workset(model, set)
+        private$.workset <- get_workset(model, set)
       },
       .add_params = function(names) {
         current <- private$.params
