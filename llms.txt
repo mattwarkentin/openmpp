@@ -9,6 +9,7 @@ models, and gathering results for further processing.
 You can install the CRAN version of `openmpp` with:
 
 ``` r
+
 install.packages("openmpp")
 ```
 
@@ -16,6 +17,7 @@ Or, you can install the development version of `openmpp` from
 [GitHub](https://github.com/mattwarkentin/openmpp) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("mattwarkentin/openmpp")
 ```
@@ -117,6 +119,7 @@ Once the environment variable is set, users may register a local API
 connection in their R scripts with:
 
 ``` r
+
 library(openmpp)
 use_OpenMpp_local()
 ```
@@ -142,6 +145,7 @@ For example, the following code would replicate the local API
 connection:
 
 ``` r
+
 library(openmpp)
 
 custom_req <- function(url = Sys.getenv('OPENMPP_LOCAL_URL')) {
